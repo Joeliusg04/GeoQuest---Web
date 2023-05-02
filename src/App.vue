@@ -1,20 +1,41 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <img alt="GeoQuest logo" src="assets/icons/logo.png">
+  <h1>GeoQuest</h1>
+  <MainNavbar/>
+ <router-view/>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+
+
+import MainNavbar from "@/components/HomeNavbar.vue";
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    MainNavbar
+
   }
 }
 </script>
 
 <style>
+
+
+img {
+  width: 150px;
+}
+
+
+h1 {
+  color: #000000;
+}
+
+body {
+  background-color: #84b893;
+  /*background: linear-gradient(to bottom,#3d5443,#97d1a7);*/
+}
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
