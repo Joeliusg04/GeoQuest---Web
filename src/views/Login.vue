@@ -1,4 +1,5 @@
 <template>
+  <navbar-guest/>
   <div class="login">
     <h1 class="title">Login</h1>
     <form action class="form" @submit.prevent="login">
@@ -29,9 +30,11 @@
 
 <script>
 import auth from "@/logic/auth";
+import NavbarGuest from "@/components/NavbarGuest.vue";
 
 export default {
   name: "LoginView",
+  components: {NavbarGuest},
   data: () => ({
     email: "",
     password: "",
@@ -43,7 +46,8 @@ export default {
       auth.login(this.email, this.password)
           .then(response => {
                 response
-                this.$router.push({name: 'Map', params: {username: this.email}});
+                localStorage.setItem("logged","true")
+                this.$router.push({name: 'Map'});
               }
           ).catch(error => {
         console.log(error)

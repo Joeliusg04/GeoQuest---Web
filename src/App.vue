@@ -1,31 +1,17 @@
 <template>
- <router-view/>
+  <router-view/>
 </template>
+
 
 <script>
 
-
-
 export default {
   name: 'App',
-  components: {
-
-
-  }
+  components: {},
 }
 </script>
 
 <style>
-
-
-img {
-  width: 150px;
-}
-
-
-h1 {
-  color: #000000;
-}
 
 body {
   margin: 0;

@@ -15,8 +15,11 @@
 </template>
 
 <script>
+
+
 export default {
   name: 'TreasureMap',
+  components: {},
   props: {
     treasure: Object
   }

@@ -1,4 +1,5 @@
 <template>
+  <nav-bar/>
   <div id="container">
   <treasure-info v-bind:treasure="currentTreasure"/>
   <map-component v-bind:treasures="[currentTreasure]"/>
@@ -8,10 +9,11 @@
 <script>
 import MapComponent from "@/components/MapComponent.vue";
 import TreasureInfo from "@/components/TreasureInfo.vue";
+import NavBar from "@/components/Navbar.vue";
 
 export default {
   name: "TreasureView",
-  components: {TreasureInfo, MapComponent},
+  components: {NavBar, TreasureInfo, MapComponent},
   data(){
     return {
       treasures:[],

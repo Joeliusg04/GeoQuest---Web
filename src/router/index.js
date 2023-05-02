@@ -34,7 +34,7 @@ const routes = [
         component: Treasure,
         props: true
     },{
-    path: "/error",
+    path: "/error/:msg",
         name:"ErrorPage",
         component: ErrorPage,
         props: true

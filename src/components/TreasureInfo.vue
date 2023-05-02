@@ -1,5 +1,5 @@
 <template>
-  <h1>Treasure {{treasure.id}}</h1>
+  <h1>Treasure {{ treasure.id }}</h1>
   <div class="treasure">
     <img src="../assets/icons/logo.png"/>
     <div class="treasure-wrap">
@@ -22,8 +22,11 @@
 </template>
 
 <script>
+
+
 export default {
   name: 'TreasureInfo',
+  components: {},
   props: {
     treasure: Object
   }
