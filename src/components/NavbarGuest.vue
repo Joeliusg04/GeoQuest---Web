@@ -1,0 +1,50 @@
+<template>
+  <nav>
+    <img class="logo" src="../assets/icons/logo.png">
+    <h1>GeoQuest</h1>
+    <div class="navegacio">
+      <router-link to="/login">Log In</router-link>
+      <router-link to="/register">Register</router-link>
+    </div>
+
+  </nav>
+</template>
+
+<script>
+export default {
+  name: 'NavbarGuest'
+}
+</script>
+
+<style scoped>
+nav {
+  background-color: #A0DEB1;
+  display: flex;
+  justify-content: space-between;
+}
+
+.logo {
+  display: flex;
+  height: 100px;
+  width: 100px;
+  padding: 10px;
+}
+
+.navegacio, a {
+  color: black;
+  text-decoration: none;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.navegacio {
+  padding-right: 20px;
+}
+
+h1 {
+  display: flex;
+  align-items: center;
+  color: black;
+}
+</style>

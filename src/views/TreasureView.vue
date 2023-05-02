@@ -1,36 +1,36 @@
 <template>
-<h1>Tresor {{id}}</h1>
-  <map-component v-bind:treasures="[treasure[id-1]]"/>
+  <div id="container">
+  <treasure-info v-bind:treasure="currentTreasure"/>
+  <map-component v-bind:treasures="[currentTreasure]"/>
+  </div>
 </template>
 
 <script>
 import MapComponent from "@/components/MapComponent.vue";
+import TreasureInfo from "@/components/TreasureInfo.vue";
 
 export default {
   name: "TreasureView",
-  components: {MapComponent},
+  components: {TreasureInfo, MapComponent},
   data(){
     return {
-      treasure: [{
+      treasures:[],
+      treasure: {
         id: 1,
         name: "Tresor super guai",
         latitude: 0,
         longitude: 0
-      },
-        {
-          id:2,
-          name: "AAAA",
-          latitude: 40,
-          longitude: 15
-        }]
+      }
     }
   },
   props: {
     id: Number
   },
 
-  computed(){
-
+  computed: {
+      currentTreasure(){
+      return this.treasure;
+    }
   }
 
 
@@ -39,5 +39,8 @@ export default {
 </script>
 
 <style scoped>
-
+#container{
+  display: flex;
+  flex-direction: row;
+}
 </style>

@@ -1,16 +1,17 @@
 import {createWebHistory, createRouter} from 'vue-router';
-import Home from "@/views/Home.vue";
 import Login from "@/views/Login.vue";
 import Register from "@/views/Register.vue";
 import MapView from "@/views/MapView.vue";
 import Treasure from "@/views/TreasureView.vue";
+import HomePage from "@/views/HomePage.vue";
+import ErrorPage from "@/views/ErrorPage.vue";
 
 
 const routes = [
     {
-        path: "/home",
+        path: "/",
         name: "Home",
-        component: Home
+        component: HomePage
     },
     {
         path: "/login",
@@ -31,6 +32,11 @@ const routes = [
         path: "/treasure/:id",
         name: "TreasureView",
         component: Treasure,
+        props: true
+    },{
+    path: "/error",
+        name:"ErrorPage",
+        component: ErrorPage,
         props: true
     },
 ];

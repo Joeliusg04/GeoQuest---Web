@@ -1,19 +1,15 @@
 <template>
-  <img alt="GeoQuest logo" src="assets/icons/logo.png">
-  <h1>GeoQuest</h1>
-  <MainNavbar/>
  <router-view/>
 </template>
 
 <script>
 
 
-import MainNavbar from "@/components/HomeNavbar.vue";
 
 export default {
   name: 'App',
   components: {
-    MainNavbar
+
 
   }
 }
@@ -32,7 +28,9 @@ h1 {
 }
 
 body {
-  background-color: #84b893;
+  margin: 0;
+  padding: 0;
+  /*background-color: #84b893;*/
   /*background: linear-gradient(to bottom,#3d5443,#97d1a7);*/
 }
 
@@ -42,6 +40,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+
 }
 </style>

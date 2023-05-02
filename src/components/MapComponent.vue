@@ -25,10 +25,9 @@ export default {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
       }).addTo(map);
 
-      for (let treasure of this.treasures){
+      for (let treasure of this.treasures) {
 
         let link = `<a href='${window.location.origin}/treasure/${treasure.id}'>${treasure["name"]}</a>`
-        console.log(link)
         L.marker([treasure["latitude"], treasure["longitude"]]).bindPopup(link).addTo(map)
       }
     },

@@ -1,16 +1,21 @@
 <template>
   <div id="container">
+    <div id="treasure-info">
+      <TreasureMap v-for="(treasure, index) of treasures" v-bind:key="index" v-bind:treasure="treasure"/>
+    </div>
     <MapComponent v-bind:treasures="treasures"/>
+
   </div>
 </template>
 
 <script>
 import "leaflet/dist/leaflet.css";
 import MapComponent from "@/components/MapComponent.vue";
+import TreasureMap from "@/components/TreasureMap.vue";
 
 export default {
   name: "BigMap",
-  components: {MapComponent},
+  components: {TreasureMap, MapComponent},
 
   data() {
     return {
@@ -38,5 +43,12 @@ export default {
 </script>
 
 <style scoped>
+#container {
+  display: flex;
+}
 
+#treasure-info {
+  display: flex;
+  flex-direction: column;
+}
 </style>
