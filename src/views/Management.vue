@@ -10,7 +10,7 @@ import Footer from "@/components/Footer.vue";
 import NavBar from "@/components/Navbar.vue";
 
 export default {
-  name: "ProfileView",
+  name: "ManagemenT",
   components: { NavBar, Footer, FormulariTreasure },
 }
 
