@@ -5,6 +5,7 @@ import MapView from "@/views/MapView.vue";
 import Treasure from "@/views/TreasureView.vue";
 import HomePage from "@/views/HomePage.vue";
 import ErrorPage from "@/views/ErrorPage.vue";
+import Profile from "@/views/Profile.vue";
 
 
 const routes = [
@@ -27,6 +28,10 @@ const routes = [
       path: "/map",
         name: "Map",
         component: MapView
+    },{
+        path: "/profile",
+        name: "Profile",
+        component: Profile
     },
     {
         path: "/treasure/:id",
@@ -59,7 +64,7 @@ const router = createRouter({
 //
 //     // trying to access a restricted page + not logged in
 //     // redirect to login page
-//     if (authRequired && loggedIn!==true) {
+//     if (authRequired && loggedIn!=="true") {
 //         next('/login');
 //     } else {
 //         next();
