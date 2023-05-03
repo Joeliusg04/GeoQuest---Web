@@ -2,7 +2,7 @@
       <div class="treasure2">
         <div class="image-rating">
           <h3>Treasure</h3>
-          <img src="../assets/icons/logo.png"/>
+          <img class="rating" src="../assets/icons/rating.png"/>
           <b> Difficulty: </b>
           <b>Location: </b>
         </div>
@@ -44,12 +44,9 @@ export default {
   text-align: left;
 }
 
-.treasure2 img {
-  width: 200px;
-  height: 200px;
-  object-fit: cover;
-  border-radius: 50%;
-  margin-right: 20px;
+.rating{
+  height: 50px;
+  width: 40%;
 }
 
 

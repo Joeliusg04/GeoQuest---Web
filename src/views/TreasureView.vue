@@ -2,7 +2,7 @@
   <nav-bar />
   <div class="pagew">
     <div id="container">
-      <img src="../assets/icons/agregar.png">
+      <img src="../assets/dummy.png">
       <map-component v-bind:treasures="[currentTreasure]" v-bind:size="size" />
     </div>
     <treasure-info v-bind:treasure="currentTreasure" />
