@@ -1,7 +1,13 @@
 <template>
-  <h1>Create Treasure</h1>
   <div class="flex">
-    <img src="../assets/icons/logo.png"/>
+    <div class="image-treasure">
+      <img src="../assets/icons/add.png" />
+      <div class="treasure-image">
+        <img src="../assets/icons/subir.png">
+        <p>Upload treasure image</p>
+      </div>
+    </div>
+
     <div class="form">
       <form>
         <div>
@@ -40,12 +46,14 @@
           <label for="score">Score </label>
           <input type="text" id="score" name="score" required>
         </div>
-        <input type="submit" value="Create">
+        <div class="image-container">
+          <img src="../assets/icons/add.png">
+          <img src="../assets/icons/edit.png">
+          <img src="../assets/icons/borrar.png">
+        </div>
       </form>
     </div>
   </div>
-
-
 </template>
 
 <script>
@@ -60,10 +68,13 @@ export default {
 .flex {
   display: flex;
   justify-content: space-around;
+  margin-bottom: 2.7rem;
 }
 
 .form {
+  margin-top: 3rem;
   margin-left: -500px;
+  align-items: center;
 }
 
 div {
@@ -89,6 +100,12 @@ textarea {
   font-size: 16px;
 }
 
+textarea {
+  width: 215px;
+  height: 30px;
+  resize: none;
+}
+
 input {
   padding: 10px;
   border-radius: 5px;
@@ -101,6 +118,28 @@ input {
 
 input:hover {
   background-color: #84b893;
+}
+
+.treasure-image {
+  display: flex;
+}
+
+.treasure-image img {
+  width: 30px;
+  height: 30px;
+}
+
+.image-treasure {
+  display: flex;
+  flex-direction: column;
+}
+.image-container img{
+  width: 50px;
+  height: 50px; 
+  margin: auto;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  margin-left: 4rem;
 }
 </style>
   
