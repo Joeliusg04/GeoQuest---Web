@@ -1,32 +1,29 @@
 <template>
   <nav-bar/>
   <div id="container">
-  <img v-bind:treasures="[currentTreasure]">
-  <map-component v-bind:treasures="[currentTreasure]"/>
+    <treasure-info v-bind:treasure="currentTreasure"/>
+    <map-component v-bind:treasures="[currentTreasure]" v-bind:size="size"/>
   </div>
-  <treasure-info v-bind:treasure="currentTreasure"/>
-
-  <Footer/>
 </template>
 
 <script>
 import MapComponent from "@/components/MapComponent.vue";
 import TreasureInfo from "@/components/TreasureInfo.vue";
 import NavBar from "@/components/Navbar.vue";
-import Footer from "@/components/Footer.vue";
 
 export default {
   name: "TreasureView",
-  components: {NavBar, TreasureInfo, MapComponent, Footer},
-  data(){
+  components: {NavBar, TreasureInfo, MapComponent},
+  data() {
     return {
-      treasures:[],
+      treasures: [],
       treasure: {
         id: 1,
         name: "Tresor super guai",
         latitude: 0,
         longitude: 0
-      }
+      },
+      size: ["60%","500px"]
     }
   },
   props: {
@@ -34,26 +31,18 @@ export default {
   },
 
   computed: {
-      currentTreasure(){
+    currentTreasure() {
       return this.treasure;
     }
   }
-
 
 
 }
 </script>
 
 <style scoped>
-
-#container{
-  margin: auto;
+#container {
   display: flex;
+  flex-direction: row;
 }
-
-#container img{
-  width: 30%;
-  height: 300px;
-}
-
 </style>

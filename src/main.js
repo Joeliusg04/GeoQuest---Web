@@ -9,6 +9,7 @@ delete L.Icon.Default.prototype._getIconUrl;
 L.Icon.Default.mergeOptions({
     iconRetinaUrl: require('./assets/icons/pin-de-ubicacion.png'),
     iconUrl: require('./assets/icons/pin-de-ubicacion.png'),
+    shadowUrl: require('./assets/icons/pin-de-ubicacion.png'),
     shadowSize: 0
 });
 
