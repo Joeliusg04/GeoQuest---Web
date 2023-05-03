@@ -6,6 +6,9 @@
       <router-link to="/">Home</router-link>
       <router-link to="/map">Map</router-link>
       <router-link to="/profile">Profile</router-link>
+      <router-link to="/management">Management</router-link>
+      <router-link to="/treasure/1">Treasure</router-link>
+      <router-link to="/error/404">Error</router-link>
       <button @click="logout">Log Out</button>
       <!--      -->
     </div>
