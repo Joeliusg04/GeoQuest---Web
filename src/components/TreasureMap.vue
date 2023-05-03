@@ -1,18 +1,15 @@
 <template>
-  <h1>Treasure Info</h1>
   <div class="treasure">
-    <img src="../assets/icons/logo.png"/>
-    <div class="treasure-wrap">
-      <h3>Treasure</h3>
-      <div class="treasure2">
-        <div class="username-rating">
-          <img src="../assets/icons/logo.png"/>
-          <h4> Dificulty</h4>
-
-        </div>
+    <img class="image" src="../assets/dummy.png"/>
+    <div class="flex-direction:column">
+      <h3>TREASURE NAME</h3>
+      <div class="flex">
+          <img class="rating" src="../assets/icons/rating.png"/>
+          <h4 class="difficulty">Dificulty: Hard</h4>
+      </div>
+      <div class="buttons">
         <button @click="centerMap">View on map</button>
-        <a v-bind:href="link">View details</a>
-
+        <a v-bind:href="link">Treasure info</a>
       </div>
     </div>
   </div>
@@ -44,55 +41,39 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
-.treasure-wrap h3 {
+.treasure h3 {
   font-size: 30px;
-  margin-left: 20%;
+  margin-left: 0;
+  margin-top: 0;
+  text-align: center;
 }
-
-.treasure-wrap {
-  flex-wrap: wrap;
-  text-align: left;
+.flex{
+  display: flex;
+  justify-content: space-around;
+  margin-top: 0;
+  align-items: center;
+}
+.buttons{
+  display: flex;
+  justify-content: space-around;
+  margin-top: 1rem;
 }
 
 .treasure {
   display: flex;
   align-items: center;
-  margin: 20px 0;
   background: #a0deb1;
   border: 4px solid #84b893;
-  width: 80%;
-  margin: auto;
+  margin-left: 2rem;
+  margin-right: 2rem;
 }
-
-.treasure img {
-  width: 200px;
-  height: 200px;
-  object-fit: cover;
-  border-radius: 50%;
-  margin-right: 20px;
+.image{
+  height: 100%;
+  width: 30%;
 }
-
-.treasure2 {
-  width: 100%;
-}
-
-.username-rating {
-  display: flex;
-}
-
-.username-rating h4 {
-  margin-right: 10px;
-  font-weight: bold;
-  width: 200px;
-  text-align: left;
-
-}
-
-.username-rating img {
-  width: 300px;
-  height: 20px;
-  margin-top: 2.5%;
+.rating{
+  height: 100%;
+  width: 40%;
 }
 
 
