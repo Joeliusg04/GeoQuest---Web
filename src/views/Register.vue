@@ -3,12 +3,10 @@
   <div class="register">
     <h1 class="title">Sign Up</h1>
     <form action class="form" @submit.prevent="register">
-      <label class="form-label" for="#username">Username:</label>
       <div class="input">
       <img src="../assets/icons/user.png">
-      <input class="form-input" type="text" id="username" required placeholder="username">
+      <input class="form-input" type="text" id="username" required placeholder="Username">
       </div>
-      <label class="form-label" for="#email">Email:</label>
       <div class="input">
         <img src="../assets/icons/email.png">
       <input
@@ -20,7 +18,6 @@
           placeholder="Email"
       />
       </div>
-      <label class="form-label" for="#password">Password:</label>
       <div class="input">
       <img src="../assets/icons/candado.png">
       <input
@@ -31,9 +28,6 @@
           placeholder="Password"
       />
       </div>
-      <label class="form-label" for="#password-repeat"
-      >Please repeat your password:</label
-      >
       <div class="input">
       <img src="../assets/icons/candado.png">
       <input
@@ -41,7 +35,7 @@
           class="form-input"
           type="password"
           id="password-repeat"
-          placeholder="Password"
+          placeholder="Repeat your password"
       />
       </div>
       <div class="check">
