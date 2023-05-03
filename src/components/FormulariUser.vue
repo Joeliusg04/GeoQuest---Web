@@ -14,16 +14,16 @@
         <div>
           <label for="nombre">Username </label>
           <div class="input-icon-container">
-            <input type="text" id="nombre" name="nombre" required>
+            <input type="text" id="nombre" name="nombre" placeholder="Username" required>
             <span class="icon-container">
                 <img class="icon" src="../assets/icons/edit.png"/>
               </span>
           </div>
         </div>
         <div>
-          <label for="email">Email </label>
+          <label for="email">Mail </label>
           <div class="input-icon-container">
-            <input type="text" id="email" name="email" required/>
+            <input type="text" id="email" name="email" placeholder="Mail" required/>
             <span class="icon-container">
                 <img class="icon" src="../assets/icons/edit.png"/>
               </span>
@@ -32,7 +32,7 @@
         <div>
           <label for="password">Password </label>
           <div class="input-icon-container">
-            <input type="password" id="password" name="password" required>
+            <input type="password" id="password" name="password" placeholder="Password" required>
             <span class="icon-container">
                 <img class="icon" src="../assets/icons/edit.png"/>
               </span>
@@ -119,6 +119,7 @@ input {
 
 
 .input-icon-container {
+  margin-bottom: 5%;
   position: relative;
 }
 
