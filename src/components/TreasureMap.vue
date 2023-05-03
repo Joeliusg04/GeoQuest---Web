@@ -2,10 +2,10 @@
   <div class="treasure">
     <img class="image" src="../assets/dummy.png"/>
     <div class="flex-direction:column">
-      <h3>TREASURE NAME</h3>
+      <h3>{{ treasure.name }}</h3>
       <div class="flex">
           <img class="rating" src="../assets/icons/rating.png"/>
-          <h4 class="difficulty">Dificulty: Hard</h4>
+          <h4 class="difficulty">Dificulty: {{ treasure.difficulty }}</h4>
       </div>
       <div class="buttons">
         <button @click="centerMap">View on map</button>
@@ -33,7 +33,7 @@ export default {
   computed:
       {
         link(){
-          return `${window.location.origin}/treasure/${this.treasure.id}`;
+          return `${window.location.origin}/treasure/${this.treasure.idTreasure}`;
         }
       }
 }

@@ -32,7 +32,9 @@ export default {
       for (let treasure of this.treasures) {
 
         let link = `<a href='${window.location.origin}/treasure/${treasure.id}'>${treasure["name"]}</a>`
-        L.marker([treasure["latitude"], treasure["longitude"]]).bindPopup(link).addTo(this.map)
+
+
+        L.marker([treasure.latitude, treasure.longitude]).bindPopup(link).addTo(this.map)
       }
     },
     centerMap(center) {

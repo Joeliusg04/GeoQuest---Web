@@ -16,6 +16,7 @@ import MapComponent from "@/components/MapComponent.vue";
 import TreasureMap from "@/components/TreasureMap.vue";
 import NavBar from "@/components/Navbar.vue";
 import Footer from "@/components/Footer.vue";
+import TreasureService from "@/services/treasure.service";
 
 export default {
   name: "BigMap",
@@ -24,7 +25,8 @@ export default {
   data() {
     return {
       size: ["1500px","1000px"],
-      treasures: [
+      treasures: []
+      /*treasures: [
         {
           id: 1,
           name: "Tresor super guai",
@@ -36,7 +38,7 @@ export default {
           latitude: 20,
           longitude: 10
         }
-      ]
+      ]*/
     }
   },
   methods: {
@@ -44,6 +46,21 @@ export default {
       console.log("center 2")
       this.$refs.mapa.centerMap([treasure.latitude, treasure.longitude])
     }
+  },
+  mounted() {
+    TreasureService.getAll().then(
+        (response) => {
+          console.log(response.data)
+          this.treasures = response.data;
+
+        },
+        (error) => {
+          console.log(error.code)
+          var code = error.code
+          this.$route.push(`/error/${code}`);
+        }
+    )
+
   }
 }
 
