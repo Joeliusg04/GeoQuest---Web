@@ -1,7 +1,7 @@
 <template>
   <h1>Create Treasure</h1>
   <div class="flex">
-    <img src="../assets/logo.png"/>
+    <img src="../assets/icons/logo.png"/>
     <div class="form">
       <form>
         <div>
