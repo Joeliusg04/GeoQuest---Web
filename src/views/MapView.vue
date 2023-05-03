@@ -2,9 +2,9 @@
   <nav-bar/>
   <div id="container">
     <div id="treasure-info">
-      <TreasureMap v-for="(treasure, index) of treasures" v-bind:key="index" v-bind:treasure="treasure"/>
+      <TreasureMap v-on:centerMap="centerMap" v-for="(treasure, index) of treasures" v-bind:key="index" v-bind:treasure="treasure"/>
     </div>
-    <MapComponent v-bind:treasures="treasures"/>
+    <MapComponent v-bind:treasures="treasures" ref="mapa"/>
 
   </div>
 </template>
@@ -21,8 +21,6 @@ export default {
 
   data() {
     return {
-      latitudeInit: 0,
-      longitudeInit: 0,
       treasures: [
         {
           id: 1,
@@ -39,7 +37,10 @@ export default {
     }
   },
   methods: {
-
+    centerMap(treasure){
+      console.log("center 2")
+      this.$refs.mapa.centerMap([treasure.latitude, treasure.longitude])
+    }
   }
 }
 

@@ -10,31 +10,38 @@ export default {
   name: "MapComponent",
 
   props: {
-    treasures: Array[Object]
+    treasures: Array[Object],
   },
   data() {
     return {
       latitudeInit: 0,
       longitudeInit: 0,
+      map: ""
     }
   },
   methods: {
     setupMap() {
-      var map = L.map('map').setView([this.latitudeInit, this.longitudeInit], 6);
+      this.map = L.map('map').setView([this.latitudeInit, this.longitudeInit], 6);
       L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-      }).addTo(map);
+      }).addTo(this.map);
 
       for (let treasure of this.treasures) {
 
         let link = `<a href='${window.location.origin}/treasure/${treasure.id}'>${treasure["name"]}</a>`
-        L.marker([treasure["latitude"], treasure["longitude"]]).bindPopup(link).addTo(map)
+        L.marker([treasure["latitude"], treasure["longitude"]]).bindPopup(link).addTo(this.map)
       }
     },
+    centerMap(center){
+      this.map.setView(center,6);
+
+    }
   },
   mounted() {
     this.setupMap()
-  }
+  },
+
+
 }
 
 

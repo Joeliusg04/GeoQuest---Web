@@ -8,7 +8,9 @@
         <div class="username-rating">
           <img src="../assets/icons/logo.png"/>
           <h4> Dificulty</h4>
+
         </div>
+        <button @click="centerMap">View</button>
       </div>
     </div>
   </div>
@@ -22,6 +24,12 @@ export default {
   components: {},
   props: {
     treasure: Object
+  },
+  methods: {
+    centerMap(){
+      console.log("center 1")
+      this.$emit('centerMap',this.treasure)
+    }
   }
 }
 </script>
