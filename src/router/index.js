@@ -35,7 +35,7 @@ const routes = [
         component: Profile
     },
     {
-        path: "/treasure/:id",
+        path: "/treasure/:idTreasure",
         name: "TreasureView",
         component: Treasure,
         props: true

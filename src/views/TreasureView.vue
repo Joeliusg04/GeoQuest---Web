@@ -27,32 +27,35 @@ import TreasureInfo from "@/components/TreasureInfo.vue";
 import NavBar from "@/components/Navbar.vue";
 import Footer from "@/components/Footer.vue";
 import ReviewInfo from "@/components/ReviewInfo.vue";
+// import TreasureService from "@/services/treasure.service";
 
 export default {
   name: "TreasureView",
   components: { NavBar, TreasureInfo, MapComponent, Footer, ReviewInfo },
   data() {
     return {
-      treasures: [],
-      treasure: {
-        id: 1,
-        name: "Tresor super guai",
-        latitude: 0,
-        longitude: 0
-      },
-      size: ["70%", "300px"]
+      size: ["70%", "300px"],
     }
   },
   props: {
-    id: Number
+    idTreasure: String
+  // },
+  // computed: {
+  //   async currentTreasure(){
+  //     TreasureService.getById(this.$route.params.idTreasure).then(
+  //         (response) => {
+  //           console.log(response.data)
+  //           console.log("eiii")
+  //           return  response.data;
+  //         }).catch(
+  //         (error) => {
+  //           console.log(error.code)
+  //           var code = error.code
+  //           this.$route.push(`/error/${code}`);
+  //         }
+  //     );
+  //   },
   },
-
-  computed: {
-    currentTreasure() {
-      return this.treasure;
-    }
-  }
-
 
 }
 </script>
