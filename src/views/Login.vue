@@ -3,16 +3,19 @@
   <div class="login">
     <h1 class="title">Login</h1>
     <form action class="form" @submit.prevent="login">
-      <label class="form-label" for="#email">Email:</label>
+      <div class="input">
+        <img src="../assets/icons/user.png">
       <input
           v-model="email"
           class="form-input"
-          type="email"
-          id="email"
+          type="text"
+          id="username"
           required
-          placeholder="Email"
-      /><br>
-      <label class="form-label" for="password">Password:</label>
+          placeholder="Username"
+      />
+    </div>
+    <div class="input">
+      <img src="../assets/icons/candado.png">
       <input
           v-model="password"
           class="form-input"
@@ -20,21 +23,24 @@
           id="password"
           placeholder="Password"
       />
+    </div>
       <p v-if="error" class="error">
         {{ errorMsg }}
       </p><br>
       <input class="form-submit" type="submit" value="Login"/>
     </form>
   </div>
+  <Footer/>
 </template>
 
 <script>
 import auth from "@/logic/auth";
 import NavbarGuest from "@/components/NavbarGuest.vue";
+import Footer from "@/components/Footer.vue";
 
 export default {
   name: "LoginView",
-  components: {NavbarGuest},
+  components: {NavbarGuest, Footer},
   data: () => ({
     email: "",
     password: "",
@@ -61,8 +67,20 @@ export default {
 </script>
 
 <style scoped>
+
 .error {
   margin: 1rem 0 0;
   color: #ff0000;
 }
+.login{
+  width: 15%;
+  margin: auto;
+  padding: 5rem;
+  border: black solid 2px;
+}
+img{
+  height: 20px;
+  width: 20px;
+}
+
 </style>
