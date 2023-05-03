@@ -1,8 +1,16 @@
 <template>
+  <NavbarGuest/>
   <div class="register">
     <h1 class="title">Sign Up</h1>
     <form action class="form" @submit.prevent="register">
+      <label class="form-label" for="#username">Username:</label>
+      <div class="input">
+      <img src="../assets/icons/user.png">
+      <input class="form-input" type="text" id="username" required placeholder="username">
+      </div>
       <label class="form-label" for="#email">Email:</label>
+      <div class="input">
+        <img src="../assets/icons/email.png">
       <input
           v-model="email"
           class="form-input"
@@ -11,7 +19,10 @@
           required
           placeholder="Email"
       />
+      </div>
       <label class="form-label" for="#password">Password:</label>
+      <div class="input">
+      <img src="../assets/icons/candado.png">
       <input
           v-model="password"
           class="form-input"
@@ -19,9 +30,12 @@
           id="password"
           placeholder="Password"
       />
+      </div>
       <label class="form-label" for="#password-repeat"
       >Please repeat your password:</label
       >
+      <div class="input">
+      <img src="../assets/icons/candado.png">
       <input
           v-model="passwordRepeat"
           class="form-input"
@@ -29,18 +43,30 @@
           id="password-repeat"
           placeholder="Password"
       />
+      </div>
+      <div class="check">
+        <input type="radio" name="policy" id="terms" value="true" required title="You must accept in order to register in GeoQuest!"><label for="#terms">I have read and accept the privacy policy</label>
+      </div>
+      <div class="check">
+      <input type="checkbox" name="promotion" id="promotion" value="true"><label for="#promotion">I accept receiving promotional emails</label>
+    </div>
+    <p class="error" v-if="error">{{errorMsg}}</p>
       <input class="form-submit" type="submit" value="Sign Up" />
-      <p class="error" v-if="error">{{errorMsg}}</p>
+      <p>Already have an account. <a href="localhost:8080/login">Sign in</a></p>
     </form>
   </div>
+  <Footer/>
 </template>
 
 <script>
 
 import auth from "@/logic/auth";
+import NavbarGuest from "@/components/NavbarGuest.vue";
+import Footer from "@/components/Footer.vue";
 
 export default {
   name: "RegisterView",
+  components: {NavbarGuest, Footer},
   data: () => ({
     email: "",
     password: "",
@@ -75,4 +101,63 @@ export default {
   margin: 1rem 0 0;
   color: #ff0000;
 }
+.input {
+  margin: 1rem 0;
+  display: flex;
+  align-items: center;
+  border: 1px solid gray;
+  border-radius: 5px;
+  padding: 0.5rem;
+  background-color: white;
+}
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.register {
+  width: 25%;
+  margin: auto;
+  padding: 5rem;
+  border: black solid 2px;
+  margin-bottom: 7rem;
+  margin-top: 7rem;
+  background-color: #f2f2f2;
+}
+.check {
+  display: flex;
+}
+.form-input {
+  flex: 1;
+  margin-left: 0.5rem;
+  border: none;
+}
+
+.title {
+  text-align: center;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+img{
+  height: 20px;
+  width: 20px;
+}
+.form-submit:hover {
+  background-color: #3e8e41;
+}
+
+.form-submit {
+  margin-top: 1rem;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+}
+
 </style>
