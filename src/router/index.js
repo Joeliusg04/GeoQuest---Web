@@ -39,6 +39,10 @@ const routes = [
         component: ErrorPage,
         props: true
     },
+    {
+        path: "/:catchAll(.*)",
+        component: ErrorPage,
+    },
 ];
 
 
