@@ -3,13 +3,8 @@
   <div id="container">
     <div id="treasure-info">
       <TreasureMap v-on:centerMap="centerMap" v-for="(treasure, index) of treasures" v-bind:key="index" v-bind:treasure="treasure"/>
-      <TreasureMap v-on:centerMap="centerMap" v-for="(treasure, index) of treasures" v-bind:key="index" v-bind:treasure="treasure"/>
-      <TreasureMap v-on:centerMap="centerMap" v-for="(treasure, index) of treasures" v-bind:key="index" v-bind:treasure="treasure"/>
-      <TreasureMap v-on:centerMap="centerMap" v-for="(treasure, index) of treasures" v-bind:key="index" v-bind:treasure="treasure"/>
-      <TreasureMap v-on:centerMap="centerMap" v-for="(treasure, index) of treasures" v-bind:key="index" v-bind:treasure="treasure"/>
-      <TreasureMap v-on:centerMap="centerMap" v-for="(treasure, index) of treasures" v-bind:key="index" v-bind:treasure="treasure"/>
     </div>
-    <MapComponent v-bind:treasures="treasures" ref="mapa"/>
+    <MapComponent class="map" v-bind:treasures="treasures" ref="mapa" v-bind:size="size"/>
 
   </div>
   <Footer/>
@@ -28,6 +23,7 @@ export default {
 
   data() {
     return {
+      size: ["1500px","1000px"],
       treasures: [
         {
           id: 1,
@@ -54,9 +50,14 @@ export default {
 </script>
 
 <style scoped>
+.map{
+  border: black solid 1px;
+}
 #container {
   display: flex;
-  margin-top: 2em;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  margin-right: 1rem;
 }
 
 #treasure-info {
