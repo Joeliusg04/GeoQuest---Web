@@ -49,7 +49,7 @@ export default {
 
 <style scoped>
 #map {
-  width: 500px;
-  height: 500px;
+  width: 800px;
+  height: 700px;
 }
 </style>
