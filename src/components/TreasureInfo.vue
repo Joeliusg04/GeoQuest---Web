@@ -1,7 +1,5 @@
 <template>
   <h1>Treasure {{ treasure.id }}</h1>
-    <div class="treasure">
-
       <div class="treasure2">
         <div class="image-rating">
           <h3>Treasure</h3>
@@ -17,7 +15,6 @@
           de las hojas "Letraset", las cuales contenian pasajes de Lorem Ipsum, y más recientemente con software de
           autoedición, como por ejemplo Aldus PageMaker, el cual incluye versiones de Lorem Ipsum.</p>
       </div>
-    </div>
 </template>
 
 <script>
@@ -50,7 +47,7 @@ export default {
   text-align: left;
 }
 
-.treasure img {
+.treasure2 img {
   width: 200px;
   height: 200px;
   object-fit: cover;
