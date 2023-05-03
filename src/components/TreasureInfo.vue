@@ -1,13 +1,11 @@
 <template>
   <h1>Treasure {{ treasure.id }}</h1>
-  <div class="treasure">
-    <img src="../assets/icons/logo.png"/>
-    <div class="treasure-wrap">
-      <h3>Treasure</h3>
       <div class="treasure2">
-        <div class="username-rating">
+        <div class="image-rating">
+          <h3>Treasure</h3>
           <img src="../assets/icons/logo.png"/>
-          <h4> Dificulty</h4>
+          <b> Difficulty: </b>
+          <b>Location: </b>
         </div>
         <p> Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el
           texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se
@@ -17,8 +15,6 @@
           de las hojas "Letraset", las cuales contenian pasajes de Lorem Ipsum, y más recientemente con software de
           autoedición, como por ejemplo Aldus PageMaker, el cual incluye versiones de Lorem Ipsum.</p>
       </div>
-    </div>
-  </div>
 </template>
 
 <script>
@@ -36,26 +32,22 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 
-.treasure-wrap h3 {
+.treasure h3 {
   font-size: 30px;
-}
-
-.treasure-wrap {
-  flex-wrap: wrap;
   text-align: left;
 }
 
-.treasure {
+.treasure2 {
   display: flex;
-  align-items: center;
-  margin: 20px 0;
+  flex-direction: column;
   background: #a0deb1;
   border: 4px solid #84b893;
-  width: 80%;
+  width: 50%;
   margin: auto;
+  text-align: left;
 }
 
-.treasure img {
+.treasure2 img {
   width: 200px;
   height: 200px;
   object-fit: cover;
@@ -63,15 +55,14 @@ export default {
   margin-right: 20px;
 }
 
-.treasure2 {
-  width: 100%;
-}
 
-.username-rating {
+.image-rating {
   display: flex;
+  justify-content: space-evenly;
+  align-items: center;
 }
 
-.username-rating h4 {
+.image-rating h4 {
   margin-right: 10px;
   font-weight: bold;
   width: 200px;
@@ -79,15 +70,13 @@ export default {
 
 }
 
-.username-rating img {
+.image-rating img {
   width: 300px;
   height: 20px;
   margin-top: 2.5%;
 }
 
-.treasure2 p {
-  text-align: left;
-}
+
 
 
 </style>

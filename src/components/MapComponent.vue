@@ -1,5 +1,5 @@
 <template>
-  <div id="map"></div>
+  <div id="map" :style="{width:mapWidth, height:mapHeight}"></div>
 </template>
 
 <script>
@@ -11,12 +11,13 @@ export default {
 
   props: {
     treasures: Array[Object],
+    size:Array
   },
   data() {
     return {
       latitudeInit: 0,
       longitudeInit: 0,
-      map: ""
+      map: "",
     }
   },
   methods: {
@@ -42,6 +43,14 @@ export default {
   mounted() {
     this.setupMap()
   },
+  computed: {
+    mapWidth(){
+      return this.size[0]
+    },
+    mapHeight(){
+      return this.size[1]
+    }
+  }
 
 
 }
@@ -50,8 +59,8 @@ export default {
 </script>
 
 <style scoped>
-#map {
-  width: 800px;
-  height: 700px;
-}
+/*#map {*/
+/*  width: 800px;*/
+/*  height: 700px;*/
+/*}*/
 </style>

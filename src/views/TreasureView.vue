@@ -1,8 +1,8 @@
 <template>
   <nav-bar/>
   <div id="container">
-  <treasure-info v-bind:treasure="currentTreasure"/>
-  <map-component v-bind:treasures="[currentTreasure]"/>
+    <treasure-info v-bind:treasure="currentTreasure"/>
+    <map-component v-bind:treasures="[currentTreasure]" v-bind:size="size"/>
   </div>
 </template>
 
@@ -14,15 +14,16 @@ import NavBar from "@/components/Navbar.vue";
 export default {
   name: "TreasureView",
   components: {NavBar, TreasureInfo, MapComponent},
-  data(){
+  data() {
     return {
-      treasures:[],
+      treasures: [],
       treasure: {
         id: 1,
         name: "Tresor super guai",
         latitude: 0,
         longitude: 0
-      }
+      },
+      size: ["60%","500px"]
     }
   },
   props: {
@@ -30,18 +31,17 @@ export default {
   },
 
   computed: {
-      currentTreasure(){
+    currentTreasure() {
       return this.treasure;
     }
   }
-
 
 
 }
 </script>
 
 <style scoped>
-#container{
+#container {
   display: flex;
   flex-direction: row;
 }
