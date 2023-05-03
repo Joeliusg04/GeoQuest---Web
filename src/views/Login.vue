@@ -47,7 +47,7 @@ export default {
           .then(response => {
                 response
                 localStorage.setItem("logged","true")
-                this.$router.push({name: 'Map'});
+                this.$router.push("/map");
               }
           ).catch(error => {
         console.log(error)
