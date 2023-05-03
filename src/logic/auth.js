@@ -2,6 +2,7 @@ import axios from "axios";
 
 const ENDPOINT_PATH = "https://reqres.in/api/"
 
+
 export default {
     register(email, password) {
         const user = {email, password};
@@ -12,3 +13,4 @@ export default {
         return axios.post(ENDPOINT_PATH + "login", user)
     }
 };
+
