@@ -21,7 +21,14 @@ export default {
   },
   methods: {
     setupMap() {
-      this.map = L.map('map').setView([this.latitudeInit, this.longitudeInit], 6);
+      this.map = L.map('map',{minZoom:2, maxBounds: [
+          //south west
+          [90, 180],
+          //north east
+          [-90, -180]
+        ],}).setView([this.latitudeInit, this.longitudeInit], 6);
+      //this.map.setMaxBounds(this.map.maxBounds)
+
       L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
       }).addTo(this.map);
