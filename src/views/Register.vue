@@ -4,49 +4,54 @@
     <h1 class="title">Sign Up</h1>
     <form action class="form" @submit.prevent="register">
       <div class="input">
-      <img src="../assets/icons/user.png">
-      <input class="form-input" type="text" id="username" required placeholder="Username">
+        <img src="../assets/icons/user.png">
+        <input class="form-input" type="text" id="username" required placeholder="Username">
       </div>
       <div class="input">
         <img src="../assets/icons/email.png">
-      <input
-          v-model="email"
-          class="form-input"
-          type="email"
-          id="email"
-          required
-          placeholder="Email"
-      />
+        <input
+            v-model="email"
+            class="form-input"
+            type="email"
+            id="email"
+            required
+            placeholder="Email"
+        />
       </div>
       <div class="input">
-      <img src="../assets/icons/candado.png">
-      <input
-          v-model="password"
-          class="form-input"
-          type="password"
-          id="password"
-          placeholder="Password"
-      />
+        <img src="../assets/icons/candado.png">
+        <input
+            v-model="password"
+            class="form-input"
+            type="password"
+            id="password"
+            placeholder="Password"
+        />
       </div>
       <div class="input">
-      <img src="../assets/icons/candado.png">
-      <input
-          v-model="passwordRepeat"
-          class="form-input"
-          type="password"
-          id="password-repeat"
-          placeholder="Repeat your password"
-      />
+        <img src="../assets/icons/candado.png">
+        <input
+            v-model="passwordRepeat"
+            class="form-input"
+            type="password"
+            id="password-repeat"
+            placeholder="Repeat your password"
+        />
       </div>
       <div class="check">
-        <input type="radio" name="policy" id="terms" value="true" required title="You must accept in order to register in GeoQuest!"><label for="#terms">I have read and accept the privacy policy</label>
+        <input type="radio" name="policy" id="terms" value="true" required
+               title="You must accept in order to register in GeoQuest!"><label for="#terms">I have read and accept the
+        privacy policy</label>
       </div>
       <div class="check">
-      <input type="checkbox" name="promotion" id="promotion" value="true"><label for="#promotion">I accept receiving promotional emails</label>
-    </div>
-    <p class="error" v-if="error">{{errorMsg}}</p>
-      <input class="form-submit" type="submit" value="Sign Up" />
-      <p>Already have an account. <a href="localhost:8080/login">Sign in</a></p>
+        <input type="checkbox" name="promotion" id="promotion" value="true"><label for="#promotion">I accept receiving
+        promotional emails</label>
+      </div>
+      <p class="error" v-if="error">{{ errorMsg }}</p>
+      <input class="form-submit" type="submit" value="Sign Up"/>
+      <p>Already have an account.
+        <router-link to="/login">Sign in</router-link>
+      </p>
     </form>
   </div>
   <Footer/>
@@ -62,39 +67,70 @@ export default {
   name: "RegisterView",
   components: {NavbarGuest, Footer},
   data: () => ({
+    nickname: "",
     email: "",
     password: "",
     passwordRepeat: "",
-    error : false,
+    error: false,
     errorMsg: ""
   }),
+  computed: {
+    loggedIn() {
+      return this.$store.state.auth.status.loggedIn;
+    }
+  },
+  mounted() {
+    if (this.loggedIn) {
+      this.$router.push("/map");
+    }
+  },
   methods: {
     register() {
 
-      if (this.password!==this.passwordRepeat){
+      if (this.password !== this.passwordRepeat) {
         this.error = true
         this.errorMsg = "Passwords do not match!";
       } else {
 
-      auth.register(this.email, this.password).then(response => {
-        this.$router.push("/login");
-        response
-        this.error = false
-      }).catch(error=>{
+        auth.register(this.email, this.password).then(response => {
+          this.$router.push("/login");
+          response
+          this.error = false
+        }).catch(error => {
           this.error = true
           this.errorMsg = error.response.data.error
           console.log(error)
-      })
-    }},
+        })
+      }
+    },
+    handleRegister() {
+      var user = {nickname: this.nickname, email: this.email, password: this.password}
+
+      if (this.password !== this.passwordRepeat) {
+        this.error = true
+        this.errorMsg = "Passwords do not match!";
+      } else {
+        this.$store.dispatch("auth/register", user).then(
+            (data) => {
+              this.errorMsg = "" //TODO
+              data
+            },
+            (error) => {
+              this.errorMsg = error.response.data.error
+            }
+        );
+      }
+    },
   },
 }
 </script>
 
 <style scoped>
-.error{
+.error {
   margin: 1rem 0 0;
   color: #ff0000;
 }
+
 .input {
   margin: 1rem 0;
   display: flex;
@@ -104,11 +140,13 @@ export default {
   padding: 0.5rem;
   background-color: white;
 }
+
 .form {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
+
 .register {
   width: 25%;
   margin: auto;
@@ -118,9 +156,11 @@ export default {
   margin-top: 7rem;
   background-color: #f2f2f2;
 }
+
 .check {
   display: flex;
 }
+
 .form-input {
   flex: 1;
   margin-left: 0.5rem;
@@ -136,10 +176,12 @@ export default {
   flex-direction: column;
   align-items: center;
 }
-img{
+
+img {
   height: 20px;
   width: 20px;
 }
+
 .form-submit:hover {
   background-color: #3e8e41;
 }
