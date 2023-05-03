@@ -2,11 +2,11 @@
   <h1>Create Treasure</h1>
   <div class="flex">
     <div class="image-username">
-      <img src="../assets/logo.png"/>
+      <img src="../assets/icons/logo.png"/>
       <h2>Username</h2>
       <p>Level</p>
       <div class="button">
-        <img src="../assets/logo.png">
+        <img src="../assets/icons/logo.png">
         <p>Change your profile picture</p>
       </div>
     </div>

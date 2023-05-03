@@ -31,7 +31,7 @@ export default {
 
 .treasure-wrap h3 {
   font-size: 30px;
-  margin-left: 40%;
+  margin-left: 20%;
 }
 
 .treasure-wrap {
