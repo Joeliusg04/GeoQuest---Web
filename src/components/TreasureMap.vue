@@ -10,7 +10,9 @@
           <h4> Dificulty</h4>
 
         </div>
-        <button @click="centerMap">View</button>
+        <button @click="centerMap">View on map</button>
+        <a v-bind:href="link">View details</a>
+
       </div>
     </div>
   </div>
@@ -30,7 +32,13 @@ export default {
       console.log("center 1")
       this.$emit('centerMap',this.treasure)
     }
-  }
+  },
+  computed:
+      {
+        link(){
+          return `${window.location.origin}/treasure/${this.treasure.id}`;
+        }
+      }
 }
 </script>
 

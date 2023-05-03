@@ -1,31 +1,44 @@
 <template>
-  <h1>Create Treasure</h1>
   <div class="flex">
     <div class="image-username">
-      <img src="../assets/icons/logo.png"/>
+      <img class="user" src="../assets/icons/user.png"/>
       <h2>Username</h2>
-      <p>Level</p>
+      <b>Level: X</b>
       <div class="button">
-        <img src="../assets/icons/logo.png">
+        <img src="../assets/icons/subir.png">
         <p>Change your profile picture</p>
       </div>
     </div>
-
     <div class="form">
       <form>
         <div>
           <label for="nombre">Username </label>
-          <input type="text" id="nombre" name="nombre" required>
+          <div class="input-icon-container">
+            <input type="text" id="nombre" name="nombre" placeholder="Username" required>
+            <span class="icon-container">
+                <img class="icon" src="../assets/icons/edit.png"/>
+              </span>
+          </div>
         </div>
         <div>
-          <label for="email">Email </label>
-          <input type="text" id="email" name="email" required/>
+          <label for="email">Mail </label>
+          <div class="input-icon-container">
+            <input type="text" id="email" name="email" placeholder="Mail" required/>
+            <span class="icon-container">
+                <img class="icon" src="../assets/icons/edit.png"/>
+              </span>
+          </div>
         </div>
         <div>
           <label for="password">Password </label>
-          <input type="password" id="password" name="password" required>
+          <div class="input-icon-container">
+            <input type="password" id="password" name="password" placeholder="Password" required>
+            <span class="icon-container">
+                <img class="icon" src="../assets/icons/edit.png"/>
+              </span>
+          </div>
         </div>
-        <input type="submit" value="Create">
+        <input class="create" type="submit" value="Create">
       </form>
     </div>
   </div>
@@ -44,16 +57,29 @@ export default {
 <style scoped>
 .flex {
   display: flex;
-  justify-content: space-around;
+  margin-bottom: 8rem;
 }
 
 .image-username {
-  flex-wrap: wrap;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: auto;
+  margin-top: 5%;
+  margin-left: 25%;
+}
+
+.user {
+  border: 4px solid #84b893;
+  border-radius: 50%;
 }
 
 .form {
-  margin-top: 5%;
+  align-items: center;
   margin-left: -500px;
+  margin: auto;
+  margin-top: 10rem;
+  margin-right: 30%;
 }
 
 .button {
@@ -66,13 +92,13 @@ export default {
 }
 
 label {
-  margin-top: 20px;
+  margin-top: 30px;
+  margin-bottom: 30px;
   display: flex;
   font-weight: bold;
   margin: auto;
 }
 
-input,
 input,
 textarea {
   margin-top: 5px;
@@ -85,15 +111,38 @@ textarea {
 input {
   padding: 10px;
   border-radius: 5px;
-  background-color: #a0deb1;
   color: black;
   font-size: 16px;
-  border: none;
   cursor: pointer;
+  border: 1px solid #84b893;
 }
 
-input:hover {
+
+.input-icon-container {
+  margin-bottom: 5%;
+  position: relative;
+}
+
+.input-icon-container .icon-container {
+  position: absolute;
+  right: 10px;
+  top: 55%;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
+}
+
+.create{
+  background-color: #a0deb1;
+}
+
+.create:hover{
   background-color: #84b893;
 }
+
 </style>
   

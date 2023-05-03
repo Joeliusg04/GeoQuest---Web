@@ -6,6 +6,7 @@ import Treasure from "@/views/TreasureView.vue";
 import HomePage from "@/views/HomePage.vue";
 import ErrorPage from "@/views/ErrorPage.vue";
 import Profile from "@/views/Profile.vue";
+import Management from "@/views/Management.vue";
 
 
 const routes = [
@@ -25,10 +26,10 @@ const routes = [
         component: Register
     },
     {
-      path: "/map",
+        path: "/map",
         name: "Map",
         component: MapView
-    },{
+    }, {
         path: "/profile",
         name: "Profile",
         component: Profile
@@ -38,11 +39,15 @@ const routes = [
         name: "TreasureView",
         component: Treasure,
         props: true
-    },{
-    path: "/error/:msg",
-        name:"ErrorPage",
+    }, {
+        path: "/error/:msg",
+        name: "ErrorPage",
         component: ErrorPage,
         props: true
+    }, {
+        path: "/management",
+        name: "Management",
+        component: Management
     },
     {
         path: "/:catchAll(.*)",
@@ -70,7 +75,6 @@ const router = createRouter({
 //         next();
 //     }
 // });
-
 
 
 export default router;
