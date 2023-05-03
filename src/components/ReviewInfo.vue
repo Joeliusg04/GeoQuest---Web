@@ -29,15 +29,15 @@ export default {
 
 .review {
   display: flex;
-  align-items: center;
   margin: 20px 0;
   background: #a0deb1;
   border: 4px solid #84b893;
-  width: 99.7%;
-  margin: auto;
+  width: 40%;
+margin: auto;
 }
 
 .review img {
+  margin: auto;
   margin-right: 20px;
 }
 

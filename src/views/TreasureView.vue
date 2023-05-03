@@ -1,16 +1,22 @@
 <template>
   <nav-bar />
   <div class="pagew">
-    <div id="container">
-      <img src="../assets/dummy.png">
-      <map-component v-bind:treasures="[currentTreasure]" v-bind:size="size" />
+    <div class="border">
+      <div id="container">
+        <img src="../assets/dummy.png">
+        <map-component v-bind:treasures="[currentTreasure]" v-bind:size="size" />
+      </div>
+      <treasure-info v-bind:treasure="currentTreasure" />
     </div>
-    <treasure-info v-bind:treasure="currentTreasure" />
     <h1>REVIEWS</h1>
-    <ReviewInfo /><br>
-    <ReviewInfo /><br>
-    <ReviewInfo /><br>
-    <ReviewInfo /><br>
+    <div class="flex">
+      <ReviewInfo />
+      <ReviewInfo />
+    </div>
+    <div class="flex">
+      <ReviewInfo />
+      <ReviewInfo />
+    </div>
   </div>
   <Footer />
 </template>
@@ -61,8 +67,13 @@ export default {
   width: 30%;
 }
 
-.pagew{
-  margin-left: 1%;
-  margin-right: 1%;
+.pagew {
+
+}
+
+.flex{
+  display: flex;
+  margin-top: 2%;
+  margin-left: 0%;
 }
 </style>
