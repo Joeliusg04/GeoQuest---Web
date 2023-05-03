@@ -1,5 +1,4 @@
 <template>
-  <h1>Treasure {{ treasure.id }}</h1>
       <div class="treasure2">
         <div class="image-rating">
           <h3>Treasure</h3>
@@ -31,10 +30,8 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
-.treasure h3 {
-  font-size: 30px;
-  text-align: left;
+.treasure2 h3 {
+  font-size: 50px;
 }
 
 .treasure2 {
@@ -42,7 +39,7 @@ export default {
   flex-direction: column;
   background: #a0deb1;
   border: 4px solid #84b893;
-  width: 50%;
+  width: 99.59%;
   margin: auto;
   text-align: left;
 }
@@ -60,20 +57,6 @@ export default {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-}
-
-.image-rating h4 {
-  margin-right: 10px;
-  font-weight: bold;
-  width: 200px;
-  text-align: left;
-
-}
-
-.image-rating img {
-  width: 300px;
-  height: 20px;
-  margin-top: 2.5%;
 }
 
 

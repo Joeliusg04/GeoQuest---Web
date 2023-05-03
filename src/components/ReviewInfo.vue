@@ -1,11 +1,10 @@
 <template>
-  <h1>Reviews</h1>
   <div class="review">
-    <img src="../assets/logo.png"/>
+    <img src="../assets/icons/logo.png"/>
     <div class="review2">
       <div class="username-rating">
         <h4> Username</h4>
-        <img src="../assets/logo.png"/>
+        <img src="../assets/icons/logo.png"/>
       </div>
       <p> Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el
         texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se
@@ -34,7 +33,7 @@ export default {
   margin: 20px 0;
   background: #a0deb1;
   border: 4px solid #84b893;
-  width: 80%;
+  width: 99.7%;
   margin: auto;
 }
 

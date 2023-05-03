@@ -1,19 +1,30 @@
 <template>
-  <nav-bar/>
-  <div id="container">
-    <treasure-info v-bind:treasure="currentTreasure"/>
-    <map-component v-bind:treasures="[currentTreasure]" v-bind:size="size"/>
+  <nav-bar />
+  <div class="pagew">
+    <div id="container">
+      <img src="../assets/icons/agregar.png">
+      <map-component v-bind:treasures="[currentTreasure]" v-bind:size="size" />
+    </div>
+    <treasure-info v-bind:treasure="currentTreasure" />
+    <h1>REVIEWS</h1>
+    <ReviewInfo /><br>
+    <ReviewInfo /><br>
+    <ReviewInfo /><br>
+    <ReviewInfo /><br>
   </div>
+  <Footer />
 </template>
 
 <script>
 import MapComponent from "@/components/MapComponent.vue";
 import TreasureInfo from "@/components/TreasureInfo.vue";
 import NavBar from "@/components/Navbar.vue";
+import Footer from "@/components/Footer.vue";
+import ReviewInfo from "@/components/ReviewInfo.vue";
 
 export default {
   name: "TreasureView",
-  components: {NavBar, TreasureInfo, MapComponent},
+  components: { NavBar, TreasureInfo, MapComponent, Footer, ReviewInfo },
   data() {
     return {
       treasures: [],
@@ -23,7 +34,7 @@ export default {
         latitude: 0,
         longitude: 0
       },
-      size: ["60%","500px"]
+      size: ["70%", "300px"]
     }
   },
   props: {
@@ -44,5 +55,14 @@ export default {
 #container {
   display: flex;
   flex-direction: row;
+}
+
+#container img {
+  width: 30%;
+}
+
+.pagew{
+  margin-left: 1%;
+  margin-right: 1%;
 }
 </style>
