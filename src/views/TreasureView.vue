@@ -1,19 +1,23 @@
 <template>
   <nav-bar/>
   <div id="container">
-  <treasure-info v-bind:treasure="currentTreasure"/>
+  <img v-bind:treasures="[currentTreasure]">
   <map-component v-bind:treasures="[currentTreasure]"/>
   </div>
+  <treasure-info v-bind:treasure="currentTreasure"/>
+
+  <Footer/>
 </template>
 
 <script>
 import MapComponent from "@/components/MapComponent.vue";
 import TreasureInfo from "@/components/TreasureInfo.vue";
 import NavBar from "@/components/Navbar.vue";
+import Footer from "@/components/Footer.vue";
 
 export default {
   name: "TreasureView",
-  components: {NavBar, TreasureInfo, MapComponent},
+  components: {NavBar, TreasureInfo, MapComponent, Footer},
   data(){
     return {
       treasures:[],
@@ -41,8 +45,15 @@ export default {
 </script>
 
 <style scoped>
+
 #container{
+  margin: auto;
   display: flex;
-  flex-direction: row;
 }
+
+#container img{
+  width: 30%;
+  height: 300px;
+}
+
 </style>
