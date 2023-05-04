@@ -3,7 +3,7 @@
     <img :src="path" alt="image"/>
     <div class="review2">
       <div class="username-rating">
-        <h4> Username</h4>
+        <h4> Username: </h4>
         <img class="rating" src="../assets/icons/rating.png"/>
       </div>
       <p> {{ review.text }}</p>
@@ -47,8 +47,15 @@ border-radius: 25px;
   width: 100%;
 }
 
+.review2 p{
+  margin: 2rem;
+  align-items: center;
+  text-align: left;
+}
+
 .username-rating {
   display: flex;
+  justify-content: space-around;
 }
 
 .username-rating h4 {
