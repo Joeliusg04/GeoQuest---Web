@@ -9,9 +9,9 @@ import L from 'leaflet';
 delete L.Icon.Default.prototype._getIconUrl;
 
 L.Icon.Default.mergeOptions({
-    iconRetinaUrl: require('./assets/icons/pin-de-ubicacion.png'),
-    iconUrl: require('./assets/icons/pin-de-ubicacion.png'),
-    shadowUrl: require('./assets/icons/pin-de-ubicacion.png'),
+    iconRetinaUrl: require('./assets/icons/pin-mapa.png'),
+    iconUrl: require('./assets/icons/pin-mapa.png'),
+    shadowUrl: require('./assets/icons/pin-mapa.png'),
     shadowSize: 0
 });
 

@@ -12,7 +12,6 @@ class TreasureService {
 
     getById(id){
         var url = API_URL + `/treasure/${id}`
-        console.log(url)
         return axios.get(url)
     }
 

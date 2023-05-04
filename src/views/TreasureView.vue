@@ -4,7 +4,7 @@
     <div class="border">
       <div id="container">
         <img src="../assets/dummy.png">
-        <map-component v-bind:treasures="[currentTreasure]" v-bind:size="size" />
+        <map-component v-bind:treasures="[currentTreasure]" v-bind:id="this.$route.params.idTreasure" v-bind:size="size" />
       </div>
       <treasure-info v-bind:treasure="currentTreasure" />
     </div>
