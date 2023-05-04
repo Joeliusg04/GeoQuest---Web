@@ -1,7 +1,8 @@
 import axios from "axios";
+import authHeader from "@/services/auth-header";
 
 
-const API_URL = 'http://localhost:8080';
+const API_URL = 'http://127.0.0.1:8090';
 
 
 class AuthService {
@@ -26,11 +27,11 @@ class AuthService {
 
     register(user) {
         return axios
-            .post(API_URL + 'register', {
-                nickname: user.nickname,
+            .post(API_URL + '/user', {
+                nickName: user.nickname,
                 email: user.email,
                 password: user.password
-            });
+            }, {headers: authHeader()});
     }
 }
 
