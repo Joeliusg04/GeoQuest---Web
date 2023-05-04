@@ -1,24 +1,24 @@
 <template>
-  <nav-bar />
+  <nav-bar/>
   <div class="pagew">
     <div class="border">
       <div id="container">
         <img src="../assets/dummy.png">
-        <map-component v-bind:treasures="[currentTreasure]" v-bind:size="size" />
+        <map-component :ref="map_" v-bind:treasures="[currentTreasure]" v-bind:size="size"/>
       </div>
-      <treasure-info v-bind:treasure="currentTreasure" />
+      <treasure-info :ref="treasure_info" v-bind:treasure="currentTreasure"/>
     </div>
     <h1>REVIEWS</h1>
     <div class="flex">
-      <ReviewInfo />
-      <ReviewInfo />
+      <ReviewInfo/>
+      <ReviewInfo/>
     </div>
     <div class="flex">
-      <ReviewInfo />
-      <ReviewInfo />
+      <ReviewInfo/>
+      <ReviewInfo/>
     </div>
   </div>
-  <Footer />
+  <Footer/>
 </template>
 
 <script>
@@ -27,19 +27,21 @@ import TreasureInfo from "@/components/TreasureInfo.vue";
 import NavBar from "@/components/Navbar.vue";
 import Footer from "@/components/Footer.vue";
 import ReviewInfo from "@/components/ReviewInfo.vue";
+import TreasureService from "@/services/treasure.service";
 // import TreasureService from "@/services/treasure.service";
 
 export default {
   name: "TreasureView",
-  components: { NavBar, TreasureInfo, MapComponent, Footer, ReviewInfo },
+  components: {NavBar, TreasureInfo, MapComponent, Footer, ReviewInfo},
   data() {
     return {
       size: ["70%", "300px"],
+      currentTreasure: ""
     }
   },
   props: {
     idTreasure: String
-  // },
+  },
   // computed: {
   //   async currentTreasure(){
   //     TreasureService.getById(this.$route.params.idTreasure).then(
@@ -55,8 +57,22 @@ export default {
   //         }
   //     );
   //   },
-  },
+  mounted() {
+    TreasureService.getById(this.idTreasure).then(
+        (response) => {
+          console.log(response.data)
+          this.currentTreasure = response.data
+          this.$refs.map_.setTreasures([response.data])
+          this.$refs.treasure_info.setTreasure(response.data)
 
+        }).catch(
+        (error) => {
+          console.log(error.code)
+          var code = error.code
+          this.$route.push(`/error/${code}`);
+        }
+    );
+  }
 }
 </script>
 
@@ -74,7 +90,7 @@ export default {
 
 }
 
-.flex{
+.flex {
   display: flex;
   margin-top: 2%;
   margin-left: 0%;
