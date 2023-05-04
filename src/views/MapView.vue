@@ -70,6 +70,9 @@ export default {
 <style scoped>
 .map {
   border: black solid 1px;
+  position: sticky;
+  top: 0;
+  z-index: 1;
 }
 
 #container {
