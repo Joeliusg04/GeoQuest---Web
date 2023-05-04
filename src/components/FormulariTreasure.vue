@@ -84,7 +84,7 @@ export default {
     sendTreasure(){
 
 
-      var treasure = {
+      var treasure = Object({
         name: this.name,
         description: this.description,
         latitude: this.latitude,
@@ -95,12 +95,12 @@ export default {
         difficulty: this.difficulty,
         score: this.score,
         //image: image
-      }
-
+      })
+      // console.log(JSON.stringify(treasure))
 
       const formData = new FormData()
       formData.append('image',this.FILE)
-      formData.append('body',treasure)
+      formData.append('body',JSON.stringify(treasure))
 
       TreasureService.createNew(formData).then((response) => {
         console.log(response)

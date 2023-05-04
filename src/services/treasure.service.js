@@ -37,8 +37,11 @@ class TreasureService {
 
     createNew(formData) {
 
-        console.log(formData.values())
-        return axios.post(API_URL + "/treasure", formData.values(), {
+        console.log(formData.get('image'))
+        console.log(formData.get('body'))
+        console.log(...formData)
+
+        return axios.post(API_URL + "/treasure", formData, {
             headers: {
                 'Content-Type': 'multipart/form-data',
                 'Authorization': authHeader().Authorization
