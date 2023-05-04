@@ -87,7 +87,7 @@ export default {
             let link = `<a href='${window.location.origin}/treasure/${treasure.id}'>${treasure["name"]}</a>`
             // console.log(treasure)
             L.marker([treasure.latitude, treasure.longitude]).bindPopup(link).addTo(this.map)
-
+            this.map.setView([treasure.latitude, treasure.longitude],8)
           },
           (error) => {
             console.log(error)
