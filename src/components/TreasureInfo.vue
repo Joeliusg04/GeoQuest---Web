@@ -16,11 +16,28 @@
 <script>
 
 
+import TreasureService from "@/services/treasure.service";
+
 export default {
   name: 'TreasureInfo',
   components: {},
   props: {
-    treasure: Object
+    id: String
+  },
+  data(){
+    return{
+      treasure: ""
+    }
+
+  },
+  mounted() {
+    TreasureService.getById(this.id).then((response) => {
+          this.treasure = response.data
+        }
+    ).catch((error)=>{
+      console.log("Ha fallat get de tresor amb id" + this.id)
+      console.log(error)
+    })
   }
 }
 </script>

@@ -6,7 +6,7 @@
         <img :src="path">
         <map-component v-bind:treasures="[currentTreasure]" v-bind:id="this.$route.params.idTreasure" v-bind:size="size" />
       </div>
-      <treasure-info v-bind:treasure="currentTreasure" />
+      <treasure-info v-bind:id="this.$route.params.idTreasure" />
     </div>
     <h1>REVIEWS</h1>
     <div class="flex">

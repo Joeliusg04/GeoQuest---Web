@@ -25,7 +25,7 @@ export default {
 
   data() {
     return {
-      size: ["1500px", "1000px"],
+      size: ["1000px", "560px"],
       treasures: []
       /*treasures: [
         {
@@ -71,8 +71,8 @@ export default {
 .map {
   border: black solid 1px;
   position: sticky;
-  top: 0;
-  z-index: 1;
+  top: 150px;
+  z-index: 0;
 }
 
 #container {
