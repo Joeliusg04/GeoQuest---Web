@@ -40,12 +40,13 @@ export default {
 
   props: {
     //treasures: Array[Object],
-    size: Array
+    size: Array,
+    id: String
   },
   data() {
     return {
-      latitudeInit: 0,
-      longitudeInit: 0,
+      latitudeInit: 41.45,
+      longitudeInit: 2.18,
       map: "",
       treasures: []
     }
@@ -54,45 +55,68 @@ export default {
     setupMap() {
 
       this.map = L.map('map', {minZoom: 2, maxBounds: [[90, 180], [-90, -180]],})
-          .setView([this.latitudeInit, this.longitudeInit], 6);
+          .setView([this.latitudeInit, this.longitudeInit], 8);
 
 
       L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
       }).addTo(this.map);
 
-       for (let treasure of this.treasures) {
+      /*for (let treasure of this.treasures) {
 
-           let link = `<a href='${window.location.origin}/treasure/${treasure.id}'>${treasure["name"]}</a>`
-           console.log(treasure)
-           console.log("aaaaaaa")
-           L.marker([treasure.latitude, treasure.longitude]).bindPopup(link).addTo(this.map)
-       }
+          let link = `<a href='${window.location.origin}/treasure/${treasure.id}'>${treasure["name"]}</a>`
+          console.log(treasure)
+          console.log("aaaaaaa")
+          L.marker([treasure.latitude, treasure.longitude]).bindPopup(link).addTo(this.map)
+      }*/
     },
     centerMap(center) {
-      this.map.setView(center, 10);
+      this.map.setView(center, 15);
     }
     ,
   },
   mounted() {
-    TreasureService.getAll().then(
-        (response) => {
-          console.log(response.data)
-          this.treasures = response.data;
-          for (let treasure of this.treasures) {
 
+    if (this.id !== undefined) {
+      TreasureService.getById(this.id).then(
+          (response) => {
+            console.log(response.data)
+            var treasure = response.data;
+
+            console.log("Un tresor?")
             let link = `<a href='${window.location.origin}/treasure/${treasure.id}'>${treasure["name"]}</a>`
-            console.log(treasure)
-            console.log("aaaaaaa")
+            // console.log(treasure)
             L.marker([treasure.latitude, treasure.longitude]).bindPopup(link).addTo(this.map)
+
+          },
+          (error) => {
+            console.log(error)
+            var code = error.message
+            console.log("code: " + code)
+            this.$router.push(`/error/${code}`);
           }
-        },
-        (error) => {
-          console.log(error)
-          var code = error.code
-          this.$router.push(`/error/${code}`);
-        }
-    );
+      );
+    } else {
+      TreasureService.getAll().then(
+          (response) => {
+            console.log(response.data)
+            this.treasures = response.data;
+
+            for (let treasure of this.treasures) {
+              console.log("Tots els tresors!")
+              let link = `<a href='${window.location.origin}/treasure/${treasure.idTreasure}'>${treasure["name"]}</a>`
+              // console.log(treasure)
+              L.marker([treasure.latitude, treasure.longitude]).bindPopup(link).addTo(this.map)
+            }
+          },
+          (error) => {
+            console.log(error)
+            var code = error.code
+            this.$router.push(`/error/${code}`);
+          }
+      );
+    }
+
 
     this.setupMap()
 
