@@ -28,7 +28,7 @@
         {{ errorMsg }}
       </p><br>
       <input class="form-submit" type="submit" value="Login"/>
-      <p>Do not have an account yet? <a href="localhost:8080/register">Sign up</a></p>
+      <p>Do not have an account yet?         <router-link to="/register">Sign in</router-link></p>
     </form>
   </div>
   <Footer/>
