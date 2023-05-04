@@ -49,7 +49,7 @@
       </div>
       <p class="error" v-if="error">{{ errorMsg }}</p>
       <input class="form-submit" type="submit" value="Sign Up"/>
-      <p>Already have an account.
+      <p>Already have an account?
         <router-link to="/login">Sign in</router-link>
       </p>
     </form>
