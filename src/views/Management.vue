@@ -1,6 +1,6 @@
 <template>
   <nav-bar/>
-  <FormulariTreasure/>
+  <FormulariTreasure v-bind:id="this.$route.params.idTreasure"/>
   <Footer/>
 </template>
 
@@ -10,8 +10,11 @@ import Footer from "@/components/Footer.vue";
 import NavBar from "@/components/Navbar.vue";
 
 export default {
-  name: "ManagemenT",
-  components: { NavBar, Footer, FormulariTreasure },
+  name: "ManagementView",
+  components: {NavBar, Footer, FormulariTreasure},
+  props: {
+    id: String
+  }
 }
 
 </script>

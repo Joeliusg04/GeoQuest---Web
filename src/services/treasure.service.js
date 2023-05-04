@@ -15,24 +15,32 @@ class TreasureService {
         return axios.get(url, {headers: authHeader()})
     }
 
+
+    getPicture(id) {
+        var url = API_URL + `/treasure/${id}/picture`
+        return axios.get(url, {headers: authHeader()})
+    }
+
     delete(id) {
         var url = API_URL + `/treasure/${id}`
         return axios.delete(url, {headers: authHeader()})
     }
 
 
-    update(treasure, image) {
-        var url = API_URL + `/treasure/${treasure.idTreasure}`
-        return axios.put(url,
-            {
-                body: treasure,
-                image: image
-            }, {
-                headers: {
-                    'Content-Type': 'multipart/form-data',
-                    'Authorization': authHeader().Authorization
-                },
-            });
+    update(formData, id) {
+
+        console.log(formData.get('image'))
+        console.log(formData.get('body'))
+        console.log(...formData)
+
+
+        var url = API_URL + `/treasure/${id}`
+        return axios.put(url, formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+                'Authorization': authHeader().Authorization
+            },
+        });
     }
 
     createNew(formData) {

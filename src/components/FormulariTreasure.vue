@@ -7,48 +7,48 @@
       </div>
     </div>
 
-    <div  class="form">
+    <div class="form">
       <form id="form">
         <div>
           <label for="name">Name </label>
-          <input type="text" id="name" name="name" required v-model="name">
+          <input type="text" id="name" name="name" required v-model="treasure.name">
         </div>
         <div>
           <label for="description">Description </label>
-          <textarea id="description" name="description" required v-model="description"></textarea>
+          <textarea id="description" name="description" required v-model="treasure.description"></textarea>
         </div>
         <div>
           <label for="latitude">Latitude </label>
-          <input type="number" step="0.00001" id="latitude" name="latitude" required v-model="latitude">
+          <input type="number" step="0.00001" id="latitude" name="latitude" required v-model="treasure.latitude">
         </div>
         <div>
           <label for="longitude">Longitude </label>
-          <input type="number" step="0.00001" id="longitude" name="longitude" required v-model="longitude">
+          <input type="number" step="0.00001" id="longitude" name="longitude" required v-model="treasure.longitude">
         </div>
         <div>
           <label for="location">Location </label>
-          <input type="text" id="location" name="location" required v-model="location">
+          <input type="text" id="location" name="location" required v-model="treasure.location">
         </div>
         <div>
           <label for="clue">Clue </label>
-          <input type="text" id="clue" name="clue" required v-model="clue">
+          <input type="text" id="clue" name="clue" required v-model="treasure.clue">
         </div>
         <div>
           <label for="status">Status </label>
-          <input type="text" id="status" name="status" required v-model="status">
+          <input type="text" id="status" name="status" required v-model="treasure.status">
         </div>
         <div>
           <label for="difficulty">Difficulty </label>
-          <input type="text" id="difficulty" name="difficulty" required v-model="difficulty">
+          <input type="text" id="difficulty" name="difficulty" required v-model="treasure.difficulty">
         </div>
         <div>
           <label for="score">Score </label>
-          <input type="text" id="score" name="score" required v-model="score">
+          <input type="text" id="score" name="score" required v-model="treasure.score">
         </div>
         <div class="image-container">
-          <button @click.prevent="sendTreasure"><img src="../assets/icons/add.png"/></button>
-          <button><img src="../assets/icons/edit.png"/></button>
-          <button><img src="../assets/icons/borrar.png"/></button>
+          <button v-if="id===''" @click.prevent="sendTreasure"><img src="../assets/icons/add.png"/></button>
+          <button v-if="id!==''" @click.prevent="updateTreasure"><img src="../assets/icons/edit.png"/></button>
+          <button v-if="id!==''"><img src="../assets/icons/borrar.png"/></button>
         </div>
       </form>
     </div>
@@ -60,59 +60,90 @@ import TreasureService from "@/services/treasure.service";
 
 export default {
   name: 'FormulariTreasure',
-  props: {},
+  props: {
+    id: String
+  },
   data() {
     return {
-      name: "",
-      description: "",
-      latitude: "",
-      longitude: "",
-      location: "",
-      clue: "",
-      status: "",
-      difficulty: "",
-      score: "",
-      FILE: null
+
+      FILE: null,
+      treasure: {
+        name: "",
+        description: "",
+        latitude: "",
+        longitude: "",
+        location: "",
+        clue: "",
+        status: "",
+        difficulty: "",
+        score: "",
+      }
     }
   },
   methods: {
 
-    onFileUpload(event){
+    onFileUpload(event) {
       this.FILE = event.target.files[0]
     },
 
-    sendTreasure(){
+    sendTreasure() {
 
-
-      var treasure = Object({
-        name: this.name,
-        description: this.description,
-        latitude: this.latitude,
-        location: this.location,
-        image: "",
-        clue: this.clue,
-        status: this.status,
-        difficulty: this.difficulty,
-        score: this.score,
-        //image: image
-      })
-      // console.log(JSON.stringify(treasure))
 
       const formData = new FormData()
-      formData.append('image',this.FILE)
-      formData.append('body',JSON.stringify(treasure))
+      formData.append('image', this.FILE, this.FILE.name)
+      formData.append('body', JSON.stringify(this.treasure))
 
       TreasureService.createNew(formData).then((response) => {
         console.log(response)
         console.log("ha funcionat")
       }).catch(
-          (error)=> {
+          (error) => {
             console.log("Ha fallat! Hahaha ajuda")
             console.log(error)
           }
       )
 
+    },
+
+    updateTreasure() {
+
+
+      const formData = new FormData()
+      formData.append('image', this.FILE, this.FILE.name)
+      formData.append('body', JSON.stringify(this.treasure))
+      console.log(this.treasure)
+      TreasureService.update(formData, this.id).then((response) => {
+        console.log(response)
+      }).catch(
+          (error) => {
+            console.log("Ha fallat! Hahaha ajuda2")
+            console.log(error)
+          }
+      )
+
     }
+  },
+  mounted() {
+
+
+    if (this.id!==""){
+      console.log("hola")
+      TreasureService.getById(this.id).then((response) => {
+            this.treasure = response.data
+          }
+      ).catch((error) => {
+        console.log(error)
+      });
+
+      TreasureService.getPicture(this.id).then((response)=> {
+        console.log(response)
+        this.FILE = response.data
+        console.log("holiwi")
+      }).catch((error) => {
+        console.log(error)
+      });
+    }
+
   }
 }
 

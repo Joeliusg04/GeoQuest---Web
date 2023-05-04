@@ -45,9 +45,10 @@ const routes = [
         component: ErrorPage,
         props: true
     }, {
-        path: "/management",
+        path: "/management/:idTreasure?",
         name: "Management",
-        component: Management
+        component: Management,
+        props: true
     },
     {
         path: "/:catchAll(.*)",
