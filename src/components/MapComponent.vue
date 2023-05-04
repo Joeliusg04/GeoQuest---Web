@@ -62,13 +62,13 @@ export default {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
       }).addTo(this.map);
 
-       /*for (let treasure of this.treasures) {
+      /*for (let treasure of this.treasures) {
 
-           let link = `<a href='${window.location.origin}/treasure/${treasure.id}'>${treasure["name"]}</a>`
-           console.log(treasure)
-           console.log("aaaaaaa")
-           L.marker([treasure.latitude, treasure.longitude]).bindPopup(link).addTo(this.map)
-       }*/
+          let link = `<a href='${window.location.origin}/treasure/${treasure.id}'>${treasure["name"]}</a>`
+          console.log(treasure)
+          console.log("aaaaaaa")
+          L.marker([treasure.latitude, treasure.longitude]).bindPopup(link).addTo(this.map)
+      }*/
     },
     centerMap(center) {
       this.map.setView(center, 15);
@@ -77,16 +77,16 @@ export default {
   },
   mounted() {
 
-    if (this.id!=null){
+    if (this.id !== undefined) {
       TreasureService.getById(this.id).then(
           (response) => {
             console.log(response.data)
             var treasure = response.data;
 
-              console.log("Un tresor?")
-              let link = `<a href='${window.location.origin}/treasure/${treasure.id}'>${treasure["name"]}</a>`
-              // console.log(treasure)
-              L.marker([treasure.latitude, treasure.longitude]).bindPopup(link).addTo(this.map)
+            console.log("Un tresor?")
+            let link = `<a href='${window.location.origin}/treasure/${treasure.id}'>${treasure["name"]}</a>`
+            // console.log(treasure)
+            L.marker([treasure.latitude, treasure.longitude]).bindPopup(link).addTo(this.map)
 
           },
           (error) => {
@@ -101,9 +101,7 @@ export default {
           (response) => {
             console.log(response.data)
             this.treasures = response.data;
-            console.log(this.id)
 
-            this.treasures = this.treasures.filter(x=>x.idTreasure.toString()===this.id.toString())
             for (let treasure of this.treasures) {
               console.log("Tots els tresors!")
               let link = `<a href='${window.location.origin}/treasure/${treasure.id}'>${treasure["name"]}</a>`
@@ -118,8 +116,6 @@ export default {
           }
       );
     }
-
-
 
 
     this.setupMap()
