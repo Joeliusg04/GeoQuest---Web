@@ -7,9 +7,9 @@
       </div>
       <div>
         <h3>Social media</h3>
-        <a href="#"><img src="../assets/icons/twitter.png" alt="twitter"></a>
-        <a href="#"><img src="../assets/icons/instagram.png" alt="instagram"></a>
-        <a href="#"><img src="../assets/icons/facebook.png" alt="facebook"></a>
+        <a @click="redirectToExternalPage('twitter')"><img src="../assets/icons/twitter.png" alt="twitter"></a>
+        <a @click="redirectToExternalPage('instagram')"><img src="../assets/icons/instagram.png" alt="instagram"></a>
+        <a @click="redirectToExternalPage('facebook')" href="#"><img src="../assets/icons/facebook.png" alt="facebook"></a>
       </div>
       <div>
         <h3>Contact</h3>
@@ -27,7 +27,12 @@
 
 <script>
 export default {
-  name: 'FooTer'
+  name: 'FooTer',
+  methods: {
+    redirectToExternalPage(name) {
+      window.location.assign('https://www.'+name+'.com');
+    }
+}
 }
 </script>
 
