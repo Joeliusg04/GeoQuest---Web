@@ -5,7 +5,7 @@
       <TreasureMap v-on:centerMap="centerMap" v-for="(treasure, index) of treasures" v-bind:key="index"
                    v-bind:treasure="treasure"/>
     </div>
-    <MapComponent class="map" v-bind:treasures="treasures" ref="mapa" v-bind:size="size"/>
+    <MapComponent class="map"  ref="mapa" v-bind:treasures="treasures" v-bind:size="size"/>
 
   </div>
   <Footer/>
@@ -54,11 +54,11 @@ export default {
           console.log(response.data)
           this.treasures = response.data;
 
-        }).catch(
+        },
         (error) => {
-          console.log(error.code)
+          console.log(error)
           var code = error.code
-          this.$route.push(`/error/${code}`);
+          this.$router.push(`/error/${code}`);
         }
     );
 
