@@ -3,6 +3,7 @@
     <img class="logo" src="../assets/icons/logo.png">
     <h1>GeoQuest</h1>
     <div class="navegacio">
+      <!--    <router-link v-if="this.$route.name!=='Home'" :to="{name: 'Home'}">Home</router-link>-->
       <router-link to="/">Home</router-link>
       <router-link to="/login">Log In</router-link>
       <router-link to="/register">Register</router-link>

@@ -1,35 +1,35 @@
 <template>
   <navbar-guest/>
   <div class="login">
-  <h1 class="title">Login</h1>
-  <form action class="form" @submit.prevent="login">
-    <div class="input">
-      <img src="../assets/icons/user.png">
-      <input
-        v-model="email"
-        class="form-input"
-        type="text"
-        id="username"
-        required
-        placeholder="Username"
-      />
-    </div>
-    <div class="input">
-      <img src="../assets/icons/candado.png">
-      <input
-        v-model="password"
-        class="form-input"
-        type="password"
-        id="password"
-        placeholder="Password"
-      />
-    </div>
-    <p v-if="error" class="error">
-      {{ errorMsg }}
-    </p><br>
-    <input class="form-submit" type="submit" value="Login"/>
-    <p>Do not have an account yet? <a href="localhost:8080/login">Sign up</a></p>
-  </form>
+    <h1 class="title">Login</h1>
+    <form action class="form" @submit.prevent="login">
+      <div class="input">
+        <img src="../assets/icons/user.png">
+        <input
+            v-model="nickname"
+            class="form-input"
+            type="text"
+            id="username"
+            required
+            placeholder="Username"
+        />
+      </div>
+      <div class="input">
+        <img src="../assets/icons/candado.png">
+        <input
+            v-model="password"
+            class="form-input"
+            type="password"
+            id="password"
+            placeholder="Password"
+        />
+      </div>
+      <p v-if="error" class="error">
+        {{ errorMsg }}
+      </p><br>
+      <input class="form-submit" type="submit" value="Login"/>
+      <p>Do not have an account yet? <a href="localhost:8080/login">Sign up</a></p>
+    </form>
   </div>
   <Footer/>
 </template>
@@ -43,26 +43,46 @@ export default {
   name: "LoginView",
   components: {NavbarGuest, Footer},
   data: () => ({
-    email: "",
+    nickname: "",
     password: "",
     error: false,
     errorMsg: ""
   }),
+  computed: {
+    loggedIn() {
+      return this.$store.state.auth.status.loggedIn;
+    },
+  },
+  created() {
+    if (this.loggedIn) {
+      this.$router.push("/map");
+    }
+  },
   methods: {
     login() {
-      auth.login(this.email, this.password)
+      auth.login(this.nickname, this.password)
           .then(response => {
                 response
-                localStorage.setItem("logged","true")
+                localStorage.setItem("logged", "true")
                 this.$router.push("/map");
               }
           ).catch(error => {
-        console.log(error)
+            console.log(error)
             this.error = true;
             this.errorMsg = error.response.data.error
           }
       );
-    }
+    },
+    handleLogin() {
+      this.$store.dispatch("auth/login", this.nickname, this.password).the(
+          () => {
+            this.$router.push("/map");
+          },
+          (error) => {
+            this.errorMsg = error.response.data.error
+          }
+      );
+    },
   }
 }
 </script>
@@ -123,7 +143,8 @@ export default {
   color: #ff0000;
   text-align: center;
 }
-img{
+
+img {
   height: 20px;
   width: 20px;
 }

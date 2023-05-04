@@ -2,7 +2,8 @@
   <nav-bar/>
   <div id="container">
     <div id="treasure-info">
-      <TreasureMap v-on:centerMap="centerMap" v-for="(treasure, index) of treasures" v-bind:key="index" v-bind:treasure="treasure"/>
+      <TreasureMap v-on:centerMap="centerMap" v-for="(treasure, index) of treasures" v-bind:key="index"
+                   v-bind:treasure="treasure"/>
     </div>
     <MapComponent class="map" v-bind:treasures="treasures" ref="mapa" v-bind:size="size"/>
 
@@ -16,6 +17,7 @@ import MapComponent from "@/components/MapComponent.vue";
 import TreasureMap from "@/components/TreasureMap.vue";
 import NavBar from "@/components/Navbar.vue";
 import Footer from "@/components/Footer.vue";
+import TreasureService from "@/services/treasure.service";
 
 export default {
   name: "BigMap",
@@ -23,8 +25,9 @@ export default {
 
   data() {
     return {
-      size: ["1500px","1000px"],
-      treasures: [
+      size: ["1500px", "1000px"],
+      treasures: []
+      /*treasures: [
         {
           id: 1,
           name: "Tresor super guai",
@@ -36,23 +39,39 @@ export default {
           latitude: 20,
           longitude: 10
         }
-      ]
+      ]*/
     }
   },
   methods: {
-    centerMap(treasure){
+    centerMap(treasure) {
       console.log("center 2")
       this.$refs.mapa.centerMap([treasure.latitude, treasure.longitude])
     }
+  },
+  mounted() {
+    TreasureService.getAll().then(
+        (response) => {
+          console.log(response.data)
+          this.treasures = response.data;
+
+        }).catch(
+        (error) => {
+          console.log(error.code)
+          var code = error.code
+          this.$route.push(`/error/${code}`);
+        }
+    );
+
   }
 }
 
 </script>
 
 <style scoped>
-.map{
+.map {
   border: black solid 1px;
 }
+
 #container {
   display: flex;
   margin-top: 2rem;

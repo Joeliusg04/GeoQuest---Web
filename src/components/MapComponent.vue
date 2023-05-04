@@ -28,11 +28,11 @@ export default {
       L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
       }).addTo(this.map);
-
+      console.log(this.treasures)
       for (let treasure of this.treasures) {
 
         let link = `<a href='${window.location.origin}/treasure/${treasure.id}'>${treasure["name"]}</a>`
-        L.marker([treasure["latitude"], treasure["longitude"]]).bindPopup(link).addTo(this.map)
+        L.marker([treasure.latitude, treasure.longitude]).bindPopup(link).addTo(this.map)
       }
     },
     centerMap(center) {

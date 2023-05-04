@@ -35,7 +35,7 @@ const routes = [
         component: Profile
     },
     {
-        path: "/treasure/:id",
+        path: "/treasure/:idTreasure",
         name: "TreasureView",
         component: Treasure,
         props: true
@@ -62,19 +62,21 @@ const router = createRouter({
 });
 
 
-// router.beforeEach((to, from, next) => {
-//     const publicPages = ['/login', '/register', '/'];
-//     const authRequired = !publicPages.includes(to.path);
-//     const loggedIn = localStorage.getItem('logged');
-//
-//     // trying to access a restricted page + not logged in
-//     // redirect to login page
-//     if (authRequired && loggedIn!=="true") {
-//         next('/login');
-//     } else {
-//         next();
-//     }
-// });
+/*
+router.beforeEach((to, from, next) => {
+    const publicPages = ['/login', '/register', '/', '/error'];
+    const authRequired = routes.filter(x => !publicPages.includes(x.path)).map(x => x.path).includes(to.path);
+    const loggedIn = localStorage.getItem('logged');
+
+    // trying to access a restricted page + not logged in
+    // redirect to login page
+    if (authRequired && loggedIn !== "true") {
+        next('/login');
+    } else {
+        next();
+    }
+});
+*/
 
 
 export default router;
