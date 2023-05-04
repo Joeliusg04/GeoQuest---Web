@@ -1,14 +1,14 @@
 <template>
   <div class="flex">
     <div class="image-treasure">
-      <img src="../assets/icons/add.png" />
+      <img src="../assets/icons/add.png"/>
       <div class="treasure-image">
-        <input type="file">
+        <input id="image" type="file">
       </div>
     </div>
 
-    <div class="form">
-      <form>
+    <div  class="form">
+      <form id="form">
         <div>
           <label for="name">Name </label>
           <input type="text" id="name" name="name" required v-model="name">
@@ -19,11 +19,11 @@
         </div>
         <div>
           <label for="latitude">Latitude </label>
-          <input type="number" id="latitude" name="latitude" required v-model="latitude">
+          <input type="number" step="0.00001" id="latitude" name="latitude" required v-model="latitude">
         </div>
         <div>
           <label for="longitude">Longitude </label>
-          <input type="number" id="longitude" name="longitude" required v-model="longitude">
+          <input type="number" step="0.00001" id="longitude" name="longitude" required v-model="longitude">
         </div>
         <div>
           <label for="location">Location </label>
@@ -43,10 +43,10 @@
         </div>
         <div>
           <label for="score">Score </label>
-          <input type="text" id="score" name="score" required v-model="score"> 
+          <input type="text" id="score" name="score" required v-model="score">
         </div>
         <div class="image-container">
-          <button><img src="../assets/icons/add.png"/></button>
+          <button @click.prevent="sendTreasure"><img src="../assets/icons/add.png"/></button>
           <button><img src="../assets/icons/edit.png"/></button>
           <button><img src="../assets/icons/borrar.png"/></button>
         </div>
@@ -56,21 +56,61 @@
 </template>
 
 <script>
+import TreasureService from "@/services/treasure.service";
+
 export default {
   name: 'FormulariTreasure',
   props: {},
-  data: () => ({
-    name: "",
-    description: "",
-    latitude: "",
-    longitude: "",
-    location: "",
-    clue: "",
-    status: "",
-    difficulty: "",
-    score: ""
-  })
+  data() {
+    return {
+      name: "",
+      description: "",
+      latitude: "",
+      longitude: "",
+      location: "",
+      clue: "",
+      status: "",
+      difficulty: "",
+      score: ""
+    }
+  },
+  methods: {
+    sendTreasure(){
+
+
+
+      var image = document.querySelector('#image').files[0];
+      var treasure = {
+        name: this.name,
+        description: this.description,
+        latitude: this.latitude,
+        location: this.location,
+        image: "",
+        clue: this.clue,
+        status: this.status,
+        difficulty: this.difficulty,
+        score: this.score,
+        //image: image
+      }
+      console.log(typeof image)
+      var formData = new FormData()
+      formData.append("file",image)
+      formData.append("body",treasure)
+
+      TreasureService.createNew(treasure,image).then((response) => {
+        console.log(response)
+        console.log("ha funcionat")
+      }).catch(
+          (error)=> {
+            console.log("Ha fallat! Hahaha ajuda")
+            console.log(error)
+          }
+      )
+
+    }
+  }
 }
+
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
@@ -143,9 +183,10 @@ input:hover {
   display: flex;
   flex-direction: column;
 }
-.image-container img{
+
+.image-container img {
   width: 50px;
-  height: 50px; 
+  height: 50px;
   margin: auto;
   margin-top: 1rem;
   margin-bottom: 1rem;

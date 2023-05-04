@@ -2,7 +2,7 @@
   <NavbarGuest />
   <div class="register">
     <h1 class="title">Sign Up</h1>
-    <form action class="form" @submit.prevent="register">
+    <form action class="form" @submit.prevent="register2">
       <div class="input">
         <img src="../assets/icons/user.png">
         <input class="form-input" type="text" id="username" required placeholder="Username">
@@ -42,6 +42,7 @@
 <script>
 
 import auth from "@/logic/auth";
+import authService from "@/services/auth.service";
 import NavbarGuest from "@/components/NavbarGuest.vue";
 import Footer from "@/components/Footer.vue";
 
@@ -67,6 +68,27 @@ export default {
     }
   },
   methods: {
+    register2(){
+
+      var user = {
+        email: this.email,
+        password: this.password,
+        nickname: this.nickname
+      }
+
+      authService.register(user).then(
+          (response) => {
+            console.log(response)
+          }
+      ).catch(
+          (error) =>
+          {
+            console.log("ha petat")
+            console.log(error)
+          }
+      )
+    },
+
     register() {
       if (this.checkPasswordSecurity()) {
         if (this.password !== this.passwordRepeat) {
