@@ -3,7 +3,7 @@
     <div class="image-treasure">
       <img src="../assets/icons/add.png"/>
       <div class="treasure-image">
-        <input id="image" type="file">
+        <input id="image" type="file" @change="onFileUpload">
       </div>
     </div>
 
@@ -71,15 +71,19 @@ export default {
       clue: "",
       status: "",
       difficulty: "",
-      score: ""
+      score: "",
+      FILE: null
     }
   },
   methods: {
+
+    onFileUpload(event){
+      this.FILE = event.target.files[0]
+    },
+
     sendTreasure(){
 
 
-
-      var image = document.querySelector('#image').files[0];
       var treasure = {
         name: this.name,
         description: this.description,
@@ -92,12 +96,13 @@ export default {
         score: this.score,
         //image: image
       }
-      console.log(typeof image)
-      var formData = new FormData()
-      formData.append("file",image)
-      formData.append("body",treasure)
 
-      TreasureService.createNew(treasure,image).then((response) => {
+
+      const formData = new FormData()
+      formData.append('image',this.FILE)
+      formData.append('body',treasure)
+
+      TreasureService.createNew(formData).then((response) => {
         console.log(response)
         console.log("ha funcionat")
       }).catch(

@@ -35,10 +35,10 @@ class TreasureService {
             });
     }
 
-    createNew(treasure, image) {
-        console.log(treasure)
-        image
-        return axios.post(API_URL + "/treasure", treasure, {
+    createNew(formData) {
+
+        console.log(formData.values())
+        return axios.post(API_URL + "/treasure", formData.values(), {
             headers: {
                 'Content-Type': 'multipart/form-data',
                 'Authorization': authHeader().Authorization
