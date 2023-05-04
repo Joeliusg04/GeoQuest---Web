@@ -1,5 +1,6 @@
 import axios from "axios";
 import authHeader from "@/services/auth-header";
+// import authHeader from "@/services/auth-header";
 
 
 const API_URL = 'http://127.0.0.1:8090';
@@ -14,14 +15,14 @@ class AuthService {
             })
             .then(response => {
                 if (response.data.accessToken) {
-                    localStorage.setItem('user',JSON.stringify(response.data));
+                    localStorage.setItem('user', JSON.stringify(response.data));
                 }
 
                 return response.data;
             })
     }
 
-    logout(){
+    logout() {
         localStorage.removeItem('user');
     }
 
@@ -30,8 +31,13 @@ class AuthService {
             .post(API_URL + '/user', {
                 nickName: user.nickname,
                 email: user.email,
-                password: user.password
-            }, {headers: authHeader()});
+                password: user.password,
+                idUser: 0,
+                photo: "",
+                userLevel: "Noob",
+                userRole: "user",
+                favs: []
+            }, {headers: {"Content-Type": "application/json",'Access-Control-Allow-Origin': '*', 'Authorization':authHeader().Authorization}});
     }
 }
 

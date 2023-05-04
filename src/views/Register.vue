@@ -5,7 +5,7 @@
     <form action class="form" @submit.prevent="register2">
       <div class="input">
         <img src="../assets/icons/user.png">
-        <input class="form-input" type="text" id="username" required placeholder="Username">
+        <input v-model="nickname" class="form-input" type="text" id="username" required placeholder="Username">
       </div>
       <div class="input">
         <img src="../assets/icons/email.png">
