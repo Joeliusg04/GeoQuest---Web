@@ -1,7 +1,9 @@
 <template>
   <nav>
-    <img class="logo" src="../assets/icons/logo.png">
-    <h1>GeoQuest</h1>
+    <div class="empresa">
+      <img class="logo" src="../assets/icons/logo.png">
+      <h1>GeoQuest</h1>
+    </div>
     <div class="navegacio">
       <router-link to="/">Home</router-link>
       <router-link to="/map">Map</router-link>
@@ -29,7 +31,6 @@ export default {
 </script>
 
 <style scoped>
-
 nav {
   background-color: #A0DEB1;
   display: flex;
@@ -50,15 +51,16 @@ nav {
   display: flex;
   align-items: center;
 }
-
-.navegacio {
-  padding-right: 20px;
-}
-
 h1 {
+  float:left;
   display: flex;
   align-items: center;
   color: black;
+  margin: 0;
+  font-size: 50px;
+}
+.empresa{
+  display: flex;
 }
 
 
