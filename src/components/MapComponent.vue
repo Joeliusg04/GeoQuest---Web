@@ -104,7 +104,7 @@ export default {
 
             for (let treasure of this.treasures) {
               console.log("Tots els tresors!")
-              let link = `<a href='${window.location.origin}/treasure/${treasure.id}'>${treasure["name"]}</a>`
+              let link = `<a href='${window.location.origin}/treasure/${treasure.idTreasure}'>${treasure["name"]}</a>`
               // console.log(treasure)
               L.marker([treasure.latitude, treasure.longitude]).bindPopup(link).addTo(this.map)
             }
