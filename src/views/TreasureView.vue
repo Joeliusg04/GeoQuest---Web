@@ -3,7 +3,7 @@
   <div class="pagew">
     <div class="border">
       <div id="container">
-        <img src="../assets/dummy.png">
+        <img :src="path">
         <map-component v-bind:treasures="[currentTreasure]" v-bind:id="this.$route.params.idTreasure" v-bind:size="size" />
       </div>
       <treasure-info v-bind:treasure="currentTreasure" />
@@ -40,7 +40,7 @@ export default {
         { id: 1, text: "This treasure was amazing!" },
         { id: 2, text: "I didn't find anything here..." },
         { id: 3, text: "This treasure was amazing!" },
-        { id: 4, text: "I didn't find anything here..."}
+        { id: 4, text: "I didn't find anything here...", path:"../assets/dummy.png"}
       ]
     }
   },

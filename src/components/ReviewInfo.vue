@@ -1,6 +1,6 @@
 <template>
   <div class="review">
-    <img :src="path" alt="image"/>
+    <img :src="review.path" alt="image"/>
     <div class="review2">
       <div class="username-rating">
         <h4> Username: </h4>
@@ -17,7 +17,6 @@ export default {
   name: 'ReviewInfo',
   props: {
     review: Object,
-    path: String
   },
 
 }
