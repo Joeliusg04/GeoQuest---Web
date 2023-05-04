@@ -1,24 +1,19 @@
 <template>
-  <nav-bar/>
+  <nav-bar />
   <div class="pagew">
     <div class="border">
       <div id="container">
         <img src="../assets/dummy.png">
-        <map-component :ref="map_" v-bind:treasures="[currentTreasure]" v-bind:size="size"/>
+        <map-component v-bind:treasures="[currentTreasure]" v-bind:size="size" />
       </div>
-      <treasure-info :ref="treasure_info" v-bind:treasure="currentTreasure"/>
+      <treasure-info v-bind:treasure="currentTreasure" />
     </div>
     <h1>REVIEWS</h1>
     <div class="flex">
-      <ReviewInfo/>
-      <ReviewInfo/>
-    </div>
-    <div class="flex">
-      <ReviewInfo/>
-      <ReviewInfo/>
+        <review-info class="review" v-bind:review="review" v-for="(review, index) in reviews" v-bind:key="index" />
     </div>
   </div>
-  <Footer/>
+  <Footer />
 </template>
 
 <script>
@@ -27,56 +22,43 @@ import TreasureInfo from "@/components/TreasureInfo.vue";
 import NavBar from "@/components/Navbar.vue";
 import Footer from "@/components/Footer.vue";
 import ReviewInfo from "@/components/ReviewInfo.vue";
-import TreasureService from "@/services/treasure.service";
-// import TreasureService from "@/services/treasure.service";
 
 export default {
   name: "TreasureView",
-  components: {NavBar, TreasureInfo, MapComponent, Footer, ReviewInfo},
+  components: { NavBar, TreasureInfo, MapComponent, Footer, ReviewInfo },
   data() {
     return {
+      treasures: [],
+      treasure: {
+        id: 1,
+        name: "Tresor super guai",
+        latitude: 0,
+        longitude: 0
+      },
       size: ["70%", "300px"],
-      currentTreasure: ""
+      reviews:  [
+        { id: 1, text: "This treasure was amazing!" },
+        { id: 2, text: "I didn't find anything here..." },
+        { id: 3, text: "This treasure was amazing!" },
+        { id: 4, text: "I didn't find anything here..."}
+      ]
     }
   },
   props: {
-    idTreasure: String
+    id: Number
   },
-  // computed: {
-  //   async currentTreasure(){
-  //     TreasureService.getById(this.$route.params.idTreasure).then(
-  //         (response) => {
-  //           console.log(response.data)
-  //           console.log("eiii")
-  //           return  response.data;
-  //         }).catch(
-  //         (error) => {
-  //           console.log(error.code)
-  //           var code = error.code
-  //           this.$route.push(`/error/${code}`);
-  //         }
-  //     );
-  //   },
-  mounted() {
-    TreasureService.getById(this.idTreasure).then(
-        (response) => {
-          console.log(response.data)
-          this.currentTreasure = response.data
-          this.$refs.map_.setTreasures([response.data])
-          this.$refs.treasure_info.setTreasure(response.data)
 
-        }).catch(
-        (error) => {
-          console.log(error.code)
-          var code = error.code
-          this.$route.push(`/error/${code}`);
-        }
-    );
-  }
+  computed: {
+    currentTreasure() {
+      return this.treasure;
+    }
+  },
+
 }
 </script>
 
 <style scoped>
+
 #container {
   display: flex;
   flex-direction: row;
@@ -87,12 +69,21 @@ export default {
 }
 
 .pagew {
-
+  margin-left: 1%;
+  margin-right: 1%;
+  margin-bottom: 1%;
 }
 
-.flex {
-  display: flex;
+.flex{
   margin-top: 2%;
   margin-left: 0%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.review{
+  margin-top: 1rem;
+  margin-bottom: 2rem;
 }
 </style>

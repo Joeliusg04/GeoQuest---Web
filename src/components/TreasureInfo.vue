@@ -43,6 +43,7 @@ export default {
   width: 99.59%;
   margin: auto;
   text-align: left;
+  border-radius: 25px;
 }
 
 .rating{
