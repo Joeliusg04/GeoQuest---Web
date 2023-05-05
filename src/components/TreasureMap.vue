@@ -76,6 +76,25 @@ export default {
   width: 40%;
 }
 
+.buttons button, 
+.buttons a {
+  background-color: #3e8e41;
+  color: white;
+  border: none;
+  padding: 1rem;
+  font-size: 1rem;
+  text-decoration: none;
+  margin-right: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  border-radius: 20px;
+}
+
+.buttons button:hover,
+.buttons a:hover {
+  background-color: #84b893;
+}
+
 
 </style>
   
