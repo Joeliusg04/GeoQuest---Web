@@ -3,6 +3,8 @@
   <div class="treasure2">
     <div class="image-rating">
       <h3>{{ treasure.name }}</h3>
+      <p>{{ ratingPath }}</p>
+
       <b> Difficulty: {{ treasure.difficulty }} </b>
       <b>Location: {{ treasure.location }} </b>
     </div>
@@ -36,7 +38,14 @@ export default {
       console.log("Ha fallat get de tresor amb id" + this.id)
       console.log(error)
     })
+  },
+  computed: {
+    ratingPath(){
+      return "../assets/rating/rating_"+this.treasure.score+".png"
+    }
   }
+
+
 }
 </script>
 
