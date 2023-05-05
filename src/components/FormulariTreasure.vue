@@ -33,7 +33,7 @@
           <label for="clue">Clue </label>
           <input type="text" id="clue" name="clue" required v-model="treasure.clue">
         </div>
-        <div>
+        <div class="select">
           <label for="status">Status:</label>
           <select id="status" name="status" form="form" required v-model="treasure.status">
             <option value="Good conditions">Excellent</option>
@@ -41,7 +41,7 @@
             <option value="Poor conditions">Poor</option>
           </select>
         </div>
-        <div>
+        <div class="select">
           <label for="difficulty">Difficulty:</label>
           <select id="difficulty" name="difficulty" form="form" required v-model="treasure.difficulty">
             <option value="Noob">Noob</option>
@@ -196,8 +196,10 @@ textarea {
   height: 30px;
   resize: none;
 }
-
-input {
+.select{
+  margin-top: 1rem;
+}
+input, select {
   padding: 10px;
   border-radius: 5px;
   background-color: #a0deb1;
