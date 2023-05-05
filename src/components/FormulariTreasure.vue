@@ -1,7 +1,7 @@
 <template>
   <div class="flex">
     <div class="image-treasure">
-      <img src="../assets/icons/add.png" />
+      <img id="preview" />
       <div class="treasure-image">
         <input id="image" type="file" @change="onFileUpload">
       </div>
@@ -91,6 +91,11 @@ export default {
     onFileUpload(event) {
       this.FILE = event.target.files[0]
       this.treasure.image = this.FILE.name
+      const reader = new FileReader();
+      reader.onload = () => {
+        document.getElementById("preview").src = reader.result;
+      };
+      reader.readAsDataURL(this.FILE);
     },
 
     sendTreasure() {
@@ -242,6 +247,11 @@ input:hover {
 .image-treasure {
   display: flex;
   flex-direction: column;
+}
+
+.image-treasure img{
+  border:1px solid  #4CAF50;
+  border-radius: 20px;
 }
 .map{
   margin-left: 7rem;
