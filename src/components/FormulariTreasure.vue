@@ -34,7 +34,7 @@
           <input type="text" id="clue" name="clue" required v-model="treasure.clue">
         </div>
         <div class="select">
-          <label for="status">Status:</label>
+          <label for="status">Status</label>
           <select id="status" name="status" form="form" required v-model="treasure.status">
             <option value="Good conditions">Excellent</option>
             <option value="Correct conditions">Correct</option>
@@ -42,7 +42,7 @@
           </select>
         </div>
         <div class="select">
-          <label for="difficulty">Difficulty:</label>
+          <label for="difficulty">Difficulty</label>
           <select id="difficulty" name="difficulty" form="form" required v-model="treasure.difficulty">
             <option value="Noob">Noob</option>
             <option value="Normal">Normal</option>
@@ -50,26 +50,28 @@
           </select>
         </div>
         <div class="image-container">
-          <button v-if="id === ''" @click.prevent="sendTreasure"><img src="../assets/icons/add.png" /></button>
+          <input v-if="id === ''" @click.prevent="sendTreasure" class="form-submit" type="submit" value="Add"/>
           <button v-if="id !== ''" @click.prevent="updateTreasure"><img src="../assets/icons/edit.png" /></button>
           <button v-if="id !== ''"><img src="../assets/icons/borrar.png" /></button>
         </div>
       </form>
+      <MapComponent class="map"  ref="mapa" v-bind:treasures="treasures" v-bind:size="size"/>
     </div>
   </div>
 </template>
 
 <script>
 import TreasureService from "@/services/treasure.service";
-
+import MapComponent from "./MapComponent.vue";
 export default {
   name: 'FormulariTreasure',
+  components: {MapComponent},
   props: {
     id: String
   },
   data() {
     return {
-
+      size: ["450px", "450px"],
       FILE: null,
       treasure: {
         name: "",
@@ -156,17 +158,29 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+/* *{
+  border: solid black 2px;
+} */
 .flex {
   display: flex;
   justify-content: space-around;
-  margin-bottom: 2.7rem;
+  margin-bottom: 3.3rem;
+  margin-top: 3.3rem;
+}
+.form-submit {
+  margin-top: 1rem;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
 }
 
-.form {
-  margin-top: 3rem;
-  margin-left: -500px;
-  align-items: center;
+.form-submit:hover {
+  background-color: #3e8e41;
 }
+
 
 div {
   display: flex;
@@ -176,9 +190,9 @@ div {
 
 label {
   margin-top: 20px;
-  display: flex;
   font-weight: bold;
-  margin: auto;
+  display: flex;
+  align-items: start;
 }
 
 input,
@@ -194,7 +208,10 @@ textarea {
 textarea {
   width: 215px;
   height: 30px;
+  margin-top: 20px;
   resize: none;
+  background-color: #a0deb1;
+  border: none;
 }
 .select{
   margin-top: 1rem;
@@ -226,6 +243,9 @@ input:hover {
   display: flex;
   flex-direction: column;
 }
+.map{
+  margin-left: 7rem;
+}
 
 .image-container img {
   width: 50px;
@@ -248,6 +268,12 @@ input:hover {
 
 .image-container button:not(:last-child) {
   margin-right: 1rem;
+}
+input, select{
+  display: flex;
+  justify-content: end;
+  margin-top: 20px;
+  margin-left: auto;
 }
 </style>
   
