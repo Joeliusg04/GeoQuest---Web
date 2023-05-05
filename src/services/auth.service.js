@@ -37,7 +37,13 @@ class AuthService {
                 userLevel: "Noob",
                 userRole: "user",
                 favs: []
-            }, {headers: {"Content-Type": "application/json",'Access-Control-Allow-Origin': '*', 'Authorization':authHeader().Authorization}});
+            }, {
+                headers: {
+                    "Content-Type": "application/json",
+                    'Access-Control-Allow-Origin': '*',
+                    'Authorization': authHeader().Authorization
+                }
+            });
     }
 }
 

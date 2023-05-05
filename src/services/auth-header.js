@@ -3,7 +3,7 @@ export default function authHeader() {
 
     // En cas de tenir un usuari logged amb un accessToken, retorna l'Authorization Header HTTP
     if (user && user.accessToken) {
-        return { Authorization: 'Bearer ' + user.accessToken};
+        return {Authorization: 'Bearer ' + user.accessToken};
     } else {
         return {};
     }
