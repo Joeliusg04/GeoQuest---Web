@@ -4,7 +4,7 @@
     <div class="border">
       <div id="container">
         <img :src="path">
-        <map-component v-bind:treasures="[currentTreasure]" v-bind:id="this.$route.params.idTreasure" v-bind:size="size" />
+        <map-component class="map-component" v-bind:treasures="[currentTreasure]" v-bind:id="this.$route.params.idTreasure" v-bind:size="size" />
       </div>
       <treasure-info v-bind:id="this.$route.params.idTreasure" />
     </div>
@@ -85,5 +85,9 @@ export default {
 .review{
   margin-top: 1rem;
   margin-bottom: 2rem;
+}
+
+.map-component{
+  z-index: 0;
 }
 </style>
