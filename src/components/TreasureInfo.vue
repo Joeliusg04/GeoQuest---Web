@@ -7,9 +7,7 @@
           <b>Location: {{treasure.location}} </b>
         </div>
         <hr>
-        <p> {{
-            treasure.description
-          }}</p>
+        <p> {{treasure.description}}</p>
       </div>
 </template>
 
