@@ -1,7 +1,7 @@
 <template>
   <div class="flex">
     <div class="image-treasure">
-      <img src="../assets/icons/add.png"/>
+      <img src="../assets/icons/add.png" />
       <div class="treasure-image">
         <input id="image" type="file" @change="onFileUpload">
       </div>
@@ -34,21 +34,25 @@
           <input type="text" id="clue" name="clue" required v-model="treasure.clue">
         </div>
         <div>
-          <label for="status">Status </label>
-          <input type="text" id="status" name="status" required v-model="treasure.status">
+          <label for="status">Status:</label>
+          <select id="status" name="status" form="form" required v-model="treasure.status">
+            <option value="Good conditions">Excellent</option>
+            <option value="Correct conditions">Correct</option>
+            <option value="Poor conditions">Poor</option>
+          </select>
         </div>
         <div>
-          <label for="difficulty">Difficulty </label>
-          <input type="text" id="difficulty" name="difficulty" required v-model="treasure.difficulty">
-        </div>
-        <div>
-          <label for="score">Score </label>
-          <input type="text" id="score" name="score" required v-model="treasure.score">
+          <label for="difficulty">Difficulty:</label>
+          <select id="difficulty" name="difficulty" form="form" required v-model="treasure.difficulty">
+            <option value="Noob">Noob</option>
+            <option value="Normal">Normal</option>
+            <option value="Hard">Hard</option>
+          </select>
         </div>
         <div class="image-container">
-          <button v-if="id===''" @click.prevent="sendTreasure"><img src="../assets/icons/add.png"/></button>
-          <button v-if="id!==''" @click.prevent="updateTreasure"><img src="../assets/icons/edit.png"/></button>
-          <button v-if="id!==''"><img src="../assets/icons/borrar.png"/></button>
+          <button v-if="id === ''" @click.prevent="sendTreasure"><img src="../assets/icons/add.png" /></button>
+          <button v-if="id !== ''" @click.prevent="updateTreasure"><img src="../assets/icons/edit.png" /></button>
+          <button v-if="id !== ''"><img src="../assets/icons/borrar.png" /></button>
         </div>
       </form>
     </div>
@@ -76,7 +80,6 @@ export default {
         clue: "",
         status: "",
         difficulty: "",
-        score: "",
         image: ""
       }
     }
@@ -99,10 +102,10 @@ export default {
         console.log(response)
         console.log("ha funcionat")
       }).catch(
-          (error) => {
-            console.log("Ha fallat! Hahaha ajuda")
-            console.log(error)
-          }
+        (error) => {
+          console.log("Ha fallat! Hahaha ajuda")
+          console.log(error)
+        }
       )
 
     },
@@ -117,10 +120,10 @@ export default {
       TreasureService.update(formData, this.id).then((response) => {
         console.log(response)
       }).catch(
-          (error) => {
-            console.log("Ha fallat! Hahaha ajuda2")
-            console.log(error)
-          }
+        (error) => {
+          console.log("Ha fallat! Hahaha ajuda2")
+          console.log(error)
+        }
       )
 
     }
@@ -128,16 +131,16 @@ export default {
   mounted() {
 
 
-    if (this.id!==""){
+    if (this.id !== "") {
       console.log("hola")
       TreasureService.getById(this.id).then((response) => {
-            this.treasure = response.data
-          }
+        this.treasure = response.data
+      }
       ).catch((error) => {
         console.log(error)
       });
       // TODO Convert received data to File format
-      TreasureService.getPicture(this.id).then((response)=> {
+      TreasureService.getPicture(this.id).then((response) => {
         console.log(response)
         this.FILE = response.data
         console.log("holiwi")
@@ -244,7 +247,5 @@ input:hover {
 .image-container button:not(:last-child) {
   margin-right: 1rem;
 }
-
-
 </style>
   
