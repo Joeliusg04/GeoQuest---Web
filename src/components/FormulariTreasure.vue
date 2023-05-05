@@ -218,6 +218,10 @@ textarea {
   background-color: #a0deb1;
   border: none;
 }
+
+textarea :hover{
+  size: 200px;
+}
 .select{
   margin-top: 1rem;
 }
