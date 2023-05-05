@@ -76,24 +76,24 @@ export default {
   width: 40%;
 }
 
-.buttons button, 
-.buttons a {
-  background-color: #3e8e41;
+button, a {
+  display: inline-block;
+  background-color: #84b893;
   color: white;
-  border: none;
-  padding: 1rem;
   font-size: 1rem;
-  text-decoration: none;
-  margin-right: 1rem;
+  font-weight: bold;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 5px;
   cursor: pointer;
-  transition: all 0.2s ease-in-out;
-  border-radius: 20px;
+  transition: background-color 0.3s ease;
+  text-decoration: none;
 }
 
-.buttons button:hover,
-.buttons a:hover {
-  background-color: #84b893;
+button:hover, a:hover {
+  background-color: #2d6a4f;
 }
+
 
 
 </style>
