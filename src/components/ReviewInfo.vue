@@ -3,7 +3,7 @@
     <img :src="review.path" alt="image"/>
     <div class="review2">
       <div class="username-rating">
-        <h4> Username: </h4>
+        <h4> {{ review.username }} - {{ review.solved }} </h4>
         <img class="rating" src="../assets/icons/rating.png"/>
       </div>
       <p> {{ review.text }}</p>

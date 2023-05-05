@@ -37,10 +37,10 @@ export default {
       },
       size: ["70%", "300px"],
       reviews:  [
-        { id: 1, text: "This treasure was amazing!" },
-        { id: 2, text: "I didn't find anything here..." },
-        { id: 3, text: "This treasure was amazing!" },
-        { id: 4, text: "I didn't find anything here...", path:"../assets/dummy.png"}
+        { id: 1, username: "Asier", solved:"Not Solved", text: "This treasure was amazing!" },
+        { id: 2, username: "Marti", solved:"Not Solved", text: "I didn't find anything here..." },
+        { id: 3, username: "Raúl", solved:"Solved", text: "This treasure was amazing!" },
+        { id: 4, username: "Ivan", solved:"Solved", text: "I didn't find anything here...", path:"../assets/dummy.png"}
       ]
     }
   },
