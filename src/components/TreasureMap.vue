@@ -76,6 +76,25 @@ export default {
   width: 40%;
 }
 
+button, a {
+  display: inline-block;
+  background-color: #84b893;
+  color: white;
+  font-size: 1rem;
+  font-weight: bold;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  text-decoration: none;
+}
+
+button:hover, a:hover {
+  background-color: #2d6a4f;
+}
+
+
 
 </style>
   

@@ -57,6 +57,11 @@ class TreasureService {
         });
     }
 
+
+    getStats(idTreasure) {
+        return axios.get(API_URL + `/treasure/${idTreasure}/stats`, {headers: authHeader()})
+    }
+
 }
 
 
