@@ -77,6 +77,7 @@ export default {
         status: "",
         difficulty: "",
         score: "",
+        image: ""
       }
     }
   },
@@ -84,6 +85,7 @@ export default {
 
     onFileUpload(event) {
       this.FILE = event.target.files[0]
+      this.treasure.image = this.FILE.name
     },
 
     sendTreasure() {
@@ -134,7 +136,7 @@ export default {
       ).catch((error) => {
         console.log(error)
       });
-
+      // TODO Convert received data to File format
       TreasureService.getPicture(this.id).then((response)=> {
         console.log(response)
         this.FILE = response.data
