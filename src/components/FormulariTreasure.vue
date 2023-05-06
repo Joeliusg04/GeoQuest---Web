@@ -55,7 +55,7 @@
           <button v-if="id !== ''" @click.prevent="deleteTreasure"><img src="../assets/icons/borrar.png"/></button>
         </div>
       </form>
-      <MapComponent class="map" ref="mapa" v-bind:treasures="[treasure]" v-bind:id="this.$route.params.idTreasure"
+      <MapComponent class="map" ref="mapa" v-bind:new="newTreasure" v-bind:id="this.$route.params.idTreasure"
                     v-bind:size="size"/>
     </div>
   </div>
@@ -78,8 +78,8 @@ export default {
       treasure: {
         name: "",
         description: "",
-        latitude: "",
-        longitude: "",
+        latitude: 0,
+        longitude: 0,
         location: "",
         clue: "",
         status: "",
@@ -198,16 +198,18 @@ export default {
     'treasure.latitude': {
       handler(){
         // this.$refs.mapa.setupMap()
-        this.$refs.mapa.centerMap([this.treasure.latitude,this.treasure.longitude])
         this.$refs.mapa.addMarker([this.treasure.latitude,this.treasure.longitude])
       }
     },
     'treasure.longitude': {
       handler() {
         // this.$refs.mapa.setupMap()
-        this.$refs.mapa.centerMap([this.treasure.latitude,this.treasure.longitude])
         this.$refs.mapa.addMarker([this.treasure.latitude,this.treasure.longitude])
       }
+    }
+  },computed: {
+    newTreasure(){
+      return (this.$route.params.idTreasure===undefined || this.$route.params.idTreasure==='')
     }
   }
 }

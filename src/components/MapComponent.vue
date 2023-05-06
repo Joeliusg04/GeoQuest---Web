@@ -41,7 +41,8 @@ export default {
   props: {
     //treasures: Array[Object],
     size: Array,
-    id: String
+    id: String,
+    new: Boolean
   },
   data() {
     return {
@@ -49,7 +50,7 @@ export default {
       latitudeInit: 41.45,
       longitudeInit: 2.18,
       map: "",
-      treasures: []
+      treasures: [],
     }
   },
   methods: {
@@ -77,11 +78,13 @@ export default {
     addMarker(center){
 
       this.marker.setLatLng(center)
+      this.map.setView(center,8)
     }
     ,
   },
   mounted() {
 
+    this.setupMap()
     if (this.id !== undefined && this.id!=="") {
       //console.log("ID ES "+this.id)
       TreasureService.getById(this.id).then(
@@ -102,7 +105,7 @@ export default {
             this.$router.push(`/error/${code}`);
           }
       );
-    } else {
+    } else if (!this.new===true) {
       TreasureService.getAll().then(
           (response) => {
             console.log(response.data)
@@ -121,10 +124,13 @@ export default {
             this.$router.push(`/error/${code}`);
           }
       );
+    } else {
+      this.marker = L.marker([0, 0]).addTo(this.map)
+      this.map.setView([0,0],8)
     }
 
 
-    this.setupMap()
+
 
   }
   ,
