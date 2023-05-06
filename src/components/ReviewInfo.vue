@@ -1,25 +1,54 @@
 <template>
   <div class="review">
-    <img :src="review.path" alt="image" />
+<!--    <img :src="review.path" alt="image" />-->
     <div class="review2">
       <div class="username-rating">
-        <h4> {{ review.username }} - {{ review.solved }} </h4>
-        <img class="rating" src="../assets/rating/rating_4.png" />
+<!--        <h4> {{ user.username }} - {{ review.solved }} </h4> -->
+        <h4> {{ user.nickName }} </h4>
+        <img :id="review.idReview" class="rating"/>
       </div>
       <div class="review-text">
-        <p v-if="review.text.length > 300" class="review-text-scroll">{{ review.text }}</p>
-        <p v-else class="review-text-normal">{{ review.text }}</p>
+        <p v-if="review.opinion.length > 300" class="review-text-scroll">{{ review.opinion }}</p>
+        <p v-else class="review-text-normal">{{ review.opinion }}</p>
       </div>
-      <p>{{ review.path }}</p>
+<!--      <p>{{ review.path }}</p>-->
     </div>
   </div>
 </template>
 <script>
+import UserService from "@/services/user.service";
+
 export default {
   name: 'ReviewInfo',
+  data(){
+    return{
+      user: ""
+    }
+  },
   props: {
     review: Object,
   },
+  mounted() {
+
+
+    document.getElementById(`${this.review.idReview}`).setAttribute("src",require(`../assets/rating/rating_${this.review.rating}.png`))
+
+
+    UserService.getById(this.review.idUser).then((response)=>{
+      this.user = response.data
+    }).catch((error)=>{
+      console.log(error)
+    })
+
+    // TODO Acabar de carregar la imatge de la review (cal solucionar el tema imatges a FormulariTreasure tambe)
+/*    ReviewService.getPicture(this.review.idTreasure,this.review.idReview).then((response)=>{
+      console.log(response)
+        }
+    ).catch((error)=>{
+      console.log(error)
+    })*/
+
+  }
 }
 
 </script>

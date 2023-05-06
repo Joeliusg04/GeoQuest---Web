@@ -3,7 +3,7 @@
   <div class="treasure2">
     <div class="image-rating">
       <h3>{{ treasure.name }}</h3>
-      <p>{{ ratingPath }}</p>
+      <img class="rating" id="rating">
 
       <b> Difficulty: {{ treasure.difficulty }} </b>
       <b>Location: {{ treasure.location }} </b>
@@ -32,18 +32,17 @@ export default {
   },
   mounted() {
     TreasureService.getById(this.id).then((response) => {
-      this.treasure = response.data
-    }
+          this.treasure = response.data
+
+          document.getElementById("rating").setAttribute("src", require(`../assets/rating/rating_${this.treasure.score}.png`))
+        }
     ).catch((error) => {
       console.log("Ha fallat get de tresor amb id" + this.id)
       console.log(error)
     })
+
+
   },
-  computed: {
-    ratingPath(){
-      return "../assets/rating/rating_"+this.treasure.score+".png"
-    }
-  }
 
 
 }
