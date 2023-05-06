@@ -45,6 +45,7 @@ export default {
   },
   data() {
     return {
+      marker: "",
       latitudeInit: 41.45,
       longitudeInit: 2.18,
       map: "",
@@ -72,6 +73,10 @@ export default {
     },
     centerMap(center) {
       this.map.setView(center, 15);
+    },
+    addMarker(center){
+
+      this.marker.setLatLng(center)
     }
     ,
   },
@@ -87,7 +92,7 @@ export default {
             console.log("Un tresor?")
             let link = `<a href='${window.location.origin}/treasure/${treasure.id}'>${treasure["name"]}</a>`
             // console.log(treasure)
-            L.marker([treasure.latitude, treasure.longitude]).bindPopup(link).addTo(this.map)
+            this.marker = L.marker([treasure.latitude, treasure.longitude]).bindPopup(link).addTo(this.map)
             this.map.setView([treasure.latitude, treasure.longitude],8)
           },
           (error) => {

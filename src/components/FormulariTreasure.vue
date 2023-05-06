@@ -193,6 +193,22 @@ export default {
     }
 
 
+  },
+  watch: {
+    'treasure.latitude': {
+      handler(){
+        // this.$refs.mapa.setupMap()
+        this.$refs.mapa.centerMap([this.treasure.latitude,this.treasure.longitude])
+        this.$refs.mapa.addMarker([this.treasure.latitude,this.treasure.longitude])
+      }
+    },
+    'treasure.longitude': {
+      handler() {
+        // this.$refs.mapa.setupMap()
+        this.$refs.mapa.centerMap([this.treasure.latitude,this.treasure.longitude])
+        this.$refs.mapa.addMarker([this.treasure.latitude,this.treasure.longitude])
+      }
+    }
   }
 }
 
