@@ -38,7 +38,8 @@ class TreasureService {
         return axios.put(url, formData, {
             headers: {
                 'Content-Type': 'multipart/form-data',
-                'Authorization': authHeader().Authorization
+                'Authorization': authHeader().Authorization,
+                'Access-Control-Allow-Origin':'*'
             },
         });
     }

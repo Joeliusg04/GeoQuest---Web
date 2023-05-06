@@ -1,7 +1,7 @@
 <template>
   <div class="flex">
     <div class="image-treasure">
-      <img id="preview" />
+      <img id="preview"/>
       <div class="treasure-image">
         <input id="image" type="file" @change="onFileUpload">
       </div>
@@ -51,11 +51,12 @@
         </div>
         <div class="image-container">
           <input v-if="id === ''" @click.prevent="sendTreasure" class="form-submit" type="submit" value="Add"/>
-          <button v-if="id !== ''" @click.prevent="updateTreasure"><img src="../assets/icons/edit.png" /></button>
-          <button v-if="id !== ''"><img src="../assets/icons/borrar.png" /></button>
+          <button v-if="id !== ''" @click.prevent="updateTreasure"><img src="../assets/icons/edit.png"/></button>
+          <button v-if="id !== ''"><img src="../assets/icons/borrar.png"/></button>
         </div>
       </form>
-      <MapComponent class="map"  ref="mapa" v-bind:treasures="[treasure]" v-bind:id="this.$route.params.idTreasure" v-bind:size="size"/>
+      <MapComponent class="map" ref="mapa" v-bind:treasures="[treasure]" v-bind:id="this.$route.params.idTreasure"
+                    v-bind:size="size"/>
     </div>
   </div>
 </template>
@@ -63,6 +64,7 @@
 <script>
 import TreasureService from "@/services/treasure.service";
 import MapComponent from "./MapComponent.vue";
+
 export default {
   name: 'FormulariTreasure',
   components: {MapComponent},
@@ -91,11 +93,41 @@ export default {
     onFileUpload(event) {
       this.FILE = event.target.files[0]
       this.treasure.image = this.FILE.name
+      this.loadPreview()
+    },
+
+    loadPreview() {
       const reader = new FileReader();
       reader.onload = () => {
         document.getElementById("preview").src = reader.result;
+        console.log(reader.result)
       };
+      console.log(this.FILE)
       reader.readAsDataURL(this.FILE);
+    },
+
+    // Funció que demana la imatge del tresor, la passa a File i la carrega a this.FILE
+    // TODO Aconseguir que es mostri la imatge (
+    getImage(treasure) {
+      TreasureService.getPicture(treasure.idTreasure).then((response) => {
+
+        console.log(response)
+
+        var bytes = new Uint8Array(response.data.length);
+        for (var i = 0; i < response.data.length; i++) {
+          bytes[i] = response.data.charCodeAt(i);
+        }
+
+        console.log(bytes)
+        const blob = new Blob(bytes, {type: response.headers["content-type"]})
+        console.log(blob)
+        this.FILE = new File([blob], treasure.image, {type: response.headers["content-type"]})
+
+
+        this.loadPreview()
+      }).catch((error) => {
+        console.log(error)
+      });
     },
 
     sendTreasure() {
@@ -109,10 +141,10 @@ export default {
         console.log(response)
         console.log("ha funcionat")
       }).catch(
-        (error) => {
-          console.log("Ha fallat! Hahaha ajuda")
-          console.log(error)
-        }
+          (error) => {
+            console.log("Ha fallat! Hahaha ajuda")
+            console.log(error)
+          }
       )
 
     },
@@ -127,10 +159,10 @@ export default {
       TreasureService.update(formData, this.id).then((response) => {
         console.log(response)
       }).catch(
-        (error) => {
-          console.log("Ha fallat! Hahaha ajuda2")
-          console.log(error)
-        }
+          (error) => {
+            console.log("Ha fallat! Hahaha ajuda2")
+            console.log(error)
+          }
       )
 
     }
@@ -141,20 +173,16 @@ export default {
     if (this.id !== "") {
       console.log("hola")
       TreasureService.getById(this.id).then((response) => {
-        this.treasure = response.data
-      }
+            console.log(response.data)
+            this.treasure = response.data
+            this.getImage(response.data)
+
+          }
       ).catch((error) => {
         console.log(error)
       });
-      // TODO Convert received data to File format
-      TreasureService.getPicture(this.id).then((response) => {
-        console.log(response)
-        this.FILE = response.data
-        console.log("holiwi")
-      }).catch((error) => {
-        console.log(error)
-      });
     }
+
 
   }
 }
@@ -172,6 +200,7 @@ export default {
   margin-bottom: 3.3rem;
   margin-top: 3.3rem;
 }
+
 .form-submit {
   margin-top: 1rem;
   background-color: #4CAF50;
@@ -219,12 +248,14 @@ textarea {
   border: none;
 }
 
-textarea :hover{
+textarea :hover {
   size: 200px;
 }
-.select{
+
+.select {
   margin-top: 1rem;
 }
+
 input, select {
   padding: 10px;
   border-radius: 5px;
@@ -253,11 +284,12 @@ input:hover {
   flex-direction: column;
 }
 
-.image-treasure img{
-  border:1px solid  #4CAF50;
+.image-treasure img {
+  border: 1px solid #4CAF50;
   border-radius: 20px;
 }
-.map{
+
+.map {
   margin-left: 7rem;
   z-index: 0;
 }
@@ -284,7 +316,8 @@ input:hover {
 .image-container button:not(:last-child) {
   margin-right: 1rem;
 }
-input, select{
+
+input, select {
   display: flex;
   justify-content: end;
   margin-top: 20px;
