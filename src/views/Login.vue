@@ -28,14 +28,15 @@
         {{ errorMsg }}
       </p><br>
       <input class="form-submit" type="submit" value="Login"/>
-      <p>Do not have an account yet?         <router-link to="/register">Sign in</router-link></p>
+      <p>Do not have an account yet?
+        <router-link to="/register">Sign in</router-link>
+      </p>
     </form>
   </div>
   <Footer/>
 </template>
 
 <script>
-import auth from "@/logic/auth";
 import NavbarGuest from "@/components/NavbarGuest.vue";
 import Footer from "@/components/Footer.vue";
 
@@ -60,28 +61,16 @@ export default {
   },
   methods: {
     login() {
-      auth.login(this.nickname, this.password)
-          .then(response => {
-                response
-                localStorage.setItem("logged", "true")
-                this.$router.push("/map");
-              }
-          ).catch(error => {
-            console.log(error)
-            this.error = true;
-            this.errorMsg = error.response.data.error
-          }
-      );
-    },
-    handleLogin() {
-      this.$store.dispatch("auth/login", this.nickname, this.password).the(
+      this.$store.dispatch("auth/login", {nickname: this.nickname, password: this.password}).then(
           () => {
             this.$router.push("/map");
           },
           (error) => {
-            this.errorMsg = error.response.data.error
+            console.log(error)
+            this.error = true
+            this.errorMsg = error.response.data
           }
-      );
+      )
     },
   }
 }

@@ -8,14 +8,14 @@ const API_URL = 'http://127.0.0.1:8090';
 
 class AuthService {
     login(username, password) {
+        console.log(username+password)
         return axios
-            .post(API_URL + '/login', {
-                "username": username,
-                "password": password
-            })
+            .post(API_URL + '/user/login',
+                `${username},${password}`
+            )
             .then(response => {
                 if (response.data.accessToken) {
-                    localStorage.setItem('user', JSON.stringify(response.data));
+                    localStorage.setItem('userId', JSON.stringify(response.data));
                 }
 
                 return response.data;
