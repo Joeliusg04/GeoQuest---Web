@@ -52,7 +52,7 @@
         <div class="image-container">
           <input v-if="id === ''" @click.prevent="sendTreasure" class="form-submit" type="submit" value="Add"/>
           <button v-if="id !== ''" @click.prevent="updateTreasure"><img src="../assets/icons/edit.png"/></button>
-          <button v-if="id !== ''"><img src="../assets/icons/borrar.png"/></button>
+          <button v-if="id !== ''" @click.prevent="deleteTreasure"><img src="../assets/icons/borrar.png"/></button>
         </div>
       </form>
       <MapComponent class="map" ref="mapa" v-bind:treasures="[treasure]" v-bind:id="this.$route.params.idTreasure"
@@ -132,7 +132,6 @@ export default {
 
     sendTreasure() {
 
-
       const formData = new FormData()
       formData.append('image', this.FILE, this.FILE.name)
       formData.append('body', JSON.stringify(this.treasure))
@@ -151,7 +150,6 @@ export default {
 
     updateTreasure() {
 
-
       const formData = new FormData()
       formData.append('image', this.FILE, this.FILE.name)
       formData.append('body', JSON.stringify(this.treasure))
@@ -165,6 +163,15 @@ export default {
           }
       )
 
+    },
+
+    deleteTreasure(){
+      TreasureService.delete(this.id).then((response)=>{
+        alert(response.data)
+        this.$router.push("/management")
+      }).catch((error)=>{
+        console.log(error)
+      })
     }
   },
   mounted() {
