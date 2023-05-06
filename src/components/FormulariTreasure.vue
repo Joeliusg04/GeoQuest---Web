@@ -56,7 +56,7 @@
         </div>
       </form>
       <MapComponent class="map" ref="mapa" v-bind:new="newTreasure" v-bind:id="this.$route.params.idTreasure"
-                    v-bind:size="size"/>
+                    v-bind:size="size" v-on:emitCoords="receiveCoords"/>
     </div>
   </div>
 </template>
@@ -94,6 +94,12 @@ export default {
       this.FILE = event.target.files[0]
       this.treasure.image = this.FILE.name
       this.loadPreview()
+    },
+
+    receiveCoords(lat,lng){
+      console.log("eeei")
+      this.treasure.latitude = Math.round(lat * 100000) / 100000
+      this.treasure.longitude = Math.round(lng * 100000) / 100000
     },
 
     loadPreview() {
