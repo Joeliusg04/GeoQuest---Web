@@ -77,7 +77,8 @@ export default {
   },
   mounted() {
 
-    if (this.id !== undefined) {
+    if (this.id !== undefined && this.id!=="") {
+      //console.log("ID ES "+this.id)
       TreasureService.getById(this.id).then(
           (response) => {
             console.log(response.data)

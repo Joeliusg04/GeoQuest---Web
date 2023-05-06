@@ -55,7 +55,7 @@
           <button v-if="id !== ''"><img src="../assets/icons/borrar.png" /></button>
         </div>
       </form>
-      <MapComponent class="map"  ref="mapa" v-bind:treasures="treasures" v-bind:size="size"/>
+      <MapComponent class="map"  ref="mapa" v-bind:treasures="[treasure]" v-bind:id="this.$route.params.idTreasure" v-bind:size="size"/>
     </div>
   </div>
 </template>
@@ -245,6 +245,7 @@ input:hover {
 }
 .map{
   margin-left: 7rem;
+  z-index: 0;
 }
 
 .image-container img {
