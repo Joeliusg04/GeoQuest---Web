@@ -139,6 +139,7 @@ export default {
       TreasureService.createNew(formData).then((response) => {
         console.log(response)
         console.log("ha funcionat")
+        this.$router.push(`/map`)
       }).catch(
           (error) => {
             console.log("Ha fallat! Hahaha ajuda")
@@ -156,6 +157,7 @@ export default {
       console.log(this.treasure)
       TreasureService.update(formData, this.id).then((response) => {
         console.log(response)
+        this.$router.push(`/treasure/${this.id}`)
       }).catch(
           (error) => {
             console.log("Ha fallat! Hahaha ajuda2")

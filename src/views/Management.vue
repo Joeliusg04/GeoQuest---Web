@@ -14,6 +14,13 @@ export default {
   components: {NavBar, Footer, FormulariTreasure},
   props: {
     id: String
+  },
+  watch: {
+    '$route.query': {
+    handler: function (){
+      location.reload()
+    }
+}
   }
 }
 
