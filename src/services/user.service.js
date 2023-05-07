@@ -9,7 +9,7 @@ class UserService {
     }
 
     getByNickname(nickname) {
-        return axios.get(API_URL + `/user/${nickname}`, {headers: authHeader()});
+        return axios.get(API_URL + `/user/username/${nickname}`, {headers: authHeader()});
     }
 
     update(user) {
