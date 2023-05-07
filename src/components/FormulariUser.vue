@@ -2,8 +2,8 @@
   <div class="flex">
     <div class="image-username">
       <img class="user" src="../assets/icons/user.png"/>
-      <h2>Username</h2>
-      <b>Level: X</b>
+      <h2>{{ user.nickName }}</h2>
+      <b>Level: {{ user.userLevel }}</b>
       <div class="button">
         <img src="../assets/icons/subir.png">
         <p>Change your profile picture</p>
@@ -14,7 +14,7 @@
         <div>
           <label for="nombre">Username </label>
           <div class="input-icon-container">
-            <input type="text" id="nombre" name="nombre" placeholder="Username" required>
+            <input type="text" id="nombre" name="nombre" placeholder="Username" v-model="user.nickName" required>
             <span class="icon-container">
                 <img class="icon" src="../assets/icons/edit.png"/>
               </span>
@@ -23,7 +23,7 @@
         <div>
           <label for="email">Mail </label>
           <div class="input-icon-container">
-            <input type="text" id="email" name="email" placeholder="Mail" required/>
+            <input type="text" id="email" name="email" placeholder="Mail" v-model="user.email" required/>
             <span class="icon-container">
                 <img class="icon" src="../assets/icons/edit.png"/>
               </span>
@@ -38,7 +38,7 @@
               </span>
           </div>
         </div>
-        <input class="create" type="submit" value="Create">
+        <input class="create" type="submit" value="Update" @click="updateUser">
       </form>
     </div>
   </div>
@@ -47,9 +47,29 @@
 </template>
 
 <script>
+import UserService from "@/services/user.service";
+
 export default {
   name: 'FormulariUser',
-  props: {}
+  props: {},
+  data() {
+    return {
+      user: ""
+    }
+  },
+  mounted() {
+    UserService.getByNickname(JSON.parse(localStorage.getItem('user'))).then((response) => {
+      console.log(response)
+      this.user = response.data
+    }).catch((error) => {
+      console.log(error)
+    })
+  },
+  methods: {
+    updateUser(){
+
+    }
+  }
 }
 </script>
 
@@ -136,11 +156,11 @@ input {
   height: 20px;
 }
 
-.create{
+.create {
   background-color: #a0deb1;
 }
 
-.create:hover{
+.create:hover {
   background-color: #84b893;
 }
 
