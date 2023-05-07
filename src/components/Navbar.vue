@@ -18,10 +18,13 @@
 </template>
 
 <script>
+import AuthService from "@/services/auth.service";
+
 export default {
   name: "NavBar",
   methods: {
     logout() {
+      AuthService.logout()
       localStorage.setItem("logged", "false");
       this.$forceUpdate()
       this.$router.push({name: 'Home'});
