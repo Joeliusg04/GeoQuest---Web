@@ -8,19 +8,19 @@
       <div class="stats">
         <div class="stat">
           <h3>Solved games:</h3>
-          <p>X</p>
+          <p>{{ userStats.solved }}</p>
         </div>
         <div class="stat">
           <h3>Not solved:</h3>
-          <p>X</p>
+          <p>{{ userStats.notSolved }}</p>
         </div>
         <div class="stat">
           <h3>Report Quantity:</h3>
-          <p>X</p>
+          <p>{{ userStats.reportQuantity }}</p>
         </div>
         <div class="stat">
           <h3>Average time:</h3>
-          <p>X</p>
+          <p>{{ userStats.averageTime }}</p>
         </div>
       </div>
     </div>
@@ -28,9 +28,31 @@
 </template>
 
 <script>
+
+import UserService from "@/services/user.service";
+
 export default {
   name: 'UserStats',
-  props: {}
+  data() {
+    return {
+      userStats: ""
+    }
+  },
+  props: {},
+  mounted() {
+
+    UserService.getByNickname(JSON.parse(localStorage.getItem('user'))).then((response) => {
+      const id = response.data.idUser
+      UserService.getStats(id).then((response) => {
+        console.log(response.data)
+        this.userStats = response.data
+      }).catch((error) => {
+        console.log(error)
+      });
+    }).catch((error) => {
+      console.log(error)
+    });
+  }
 }
 </script>
 

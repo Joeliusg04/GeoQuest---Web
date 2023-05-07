@@ -1,6 +1,7 @@
 <template>
   <nav-bar/>
   <FormulariUser/>
+  <UserStats/>
   <Footer/>
 </template>
 
@@ -8,10 +9,11 @@
 import FormulariUser from "@/components/FormulariUser.vue";
 import Footer from "@/components/Footer.vue";
 import NavBar from "@/components/Navbar.vue";
+import UserStats from "@/components/UserStats.vue";
 
 export default {
   name: "ProfileView",
-  components: {NavBar, FormulariUser, Footer},
+  components: {UserStats, NavBar, FormulariUser, Footer},
 }
 
 </script>
