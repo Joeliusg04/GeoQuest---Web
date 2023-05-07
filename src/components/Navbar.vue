@@ -1,7 +1,7 @@
 <template>
   <nav>
     <div class="empresa">
-      <img class="logo" src="../assets/icons/logo.png">
+      <img class="logo" src="../assets/icons/logo.png" alt="geoquest-logo">
       <h1>GeoQuest</h1>
     </div>
     <div class="navegacio">
@@ -37,7 +37,8 @@ export default {
 nav {
   background-color: #A0DEB1;
   display: flex;
-  justify-content: space-between;  position: sticky;
+  justify-content: space-between;
+  position: sticky;
   top: 0;
   z-index: 1;
 }
@@ -56,15 +57,17 @@ nav {
   display: flex;
   align-items: center;
 }
+
 h1 {
-  float:left;
+  float: left;
   display: flex;
   align-items: center;
   color: black;
   margin: 0;
   font-size: 50px;
 }
-.empresa{
+
+.empresa {
   display: flex;
 }
 

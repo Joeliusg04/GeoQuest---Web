@@ -30,9 +30,9 @@ export default {
   name: 'FooTer',
   methods: {
     redirectToExternalPage(name) {
-      window.location.assign('https://www.'+name+'.com');
+      window.location.assign('https://www.' + name + '.com');
     }
-}
+  }
 }
 </script>
 

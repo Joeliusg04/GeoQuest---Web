@@ -39,7 +39,7 @@ class TreasureService {
             headers: {
                 'Content-Type': 'multipart/form-data',
                 'Authorization': authHeader().Authorization,
-                'Access-Control-Allow-Origin':'*'
+                'Access-Control-Allow-Origin': '*'
             },
         });
     }

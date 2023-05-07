@@ -39,12 +39,12 @@
 
 <script>
 export default {
-  name: 'UserStats',
+  name: 'TreasureStats',
   props: {}
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
+
 <style scoped>
 * {
   color: black;

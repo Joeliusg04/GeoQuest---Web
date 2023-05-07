@@ -3,8 +3,8 @@
   <div>
     <h1>ERROR!</h1>
     <p>{{ msg }}</p>
-    <img class="errImg" src="../assets/icons/phonemap.png">
-    <img class="errImg" src="../assets/icons/robot.png">
+    <img class="errImg" src="../assets/icons/phonemap.png" alt="phonemap-error-icon">
+    <img class="errImg" src="../assets/icons/robot.png" alt="robot-error-icon">
   </div>
   <Footer/>
 </template>

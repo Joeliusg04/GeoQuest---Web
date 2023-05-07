@@ -4,7 +4,7 @@
     <h1 class="title">Login</h1>
     <form action class="form" @submit.prevent="login">
       <div class="input">
-        <img src="../assets/icons/user.png">
+        <img src="../assets/icons/user.png" alt="user-icon">
         <input
             v-model="nickname"
             class="form-input"
@@ -15,7 +15,7 @@
         />
       </div>
       <div class="input">
-        <img src="../assets/icons/candado.png">
+        <img src="../assets/icons/candado.png" alt="lock-icon">
         <input
             v-model="password"
             class="form-input"
@@ -54,11 +54,6 @@ export default {
       return this.$store.state.auth.status.loggedIn;
     },
   },
-  created() {
-    if (this.loggedIn) {
-      this.$router.push("/map");
-    }
-  },
   methods: {
     login() {
       this.$store.dispatch("auth/login", {nickname: this.nickname, password: this.password}).then(
@@ -79,11 +74,9 @@ export default {
 <style scoped>
 .login {
   width: 25%;
-  margin: auto;
   padding: 5rem;
   border: black solid 2px;
-  margin-bottom: 7rem;
-  margin-top: 7rem;
+  margin: 7rem auto;
   background-color: #f2f2f2;
 }
 

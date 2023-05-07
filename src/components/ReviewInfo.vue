@@ -1,17 +1,17 @@
 <template>
   <div class="review">
-<!--    <img :src="review.path" alt="image" />-->
+    <!--    <img :src="review.path" alt="image" />-->
     <div class="review2">
       <div class="username-rating">
-<!--        <h4> {{ user.username }} - {{ review.solved }} </h4> -->
+        <!--        <h4> {{ user.username }} - {{ review.solved }} </h4> -->
         <h4> {{ user.nickName }} </h4>
-        <img :id="review.idReview" class="rating"/>
+        <img :id="review.idReview" class="rating" alt="rating-icon"/>
       </div>
       <div class="review-text">
         <p v-if="review.opinion.length > 300" class="review-text-scroll">{{ review.opinion }}</p>
         <p v-else class="review-text-normal">{{ review.opinion }}</p>
       </div>
-<!--      <p>{{ review.path }}</p>-->
+      <!--      <p>{{ review.path }}</p>-->
     </div>
   </div>
 </template>
@@ -20,8 +20,8 @@ import UserService from "@/services/user.service";
 
 export default {
   name: 'ReviewInfo',
-  data(){
-    return{
+  data() {
+    return {
       user: ""
     }
   },
@@ -31,22 +31,22 @@ export default {
   mounted() {
 
 
-    document.getElementById(`${this.review.idReview}`).setAttribute("src",require(`../assets/rating/rating_${this.review.rating}.png`))
+    document.getElementById(`${this.review.idReview}`).setAttribute("src", require(`../assets/rating/rating_${this.review.rating}.png`))
 
 
-    UserService.getById(this.review.idUser).then((response)=>{
+    UserService.getById(this.review.idUser).then((response) => {
       this.user = response.data
-    }).catch((error)=>{
+    }).catch((error) => {
       console.log(error)
     })
 
     // TODO Acabar de carregar la imatge de la review (cal solucionar el tema imatges a FormulariTreasure tambe)
-/*    ReviewService.getPicture(this.review.idTreasure,this.review.idReview).then((response)=>{
-      console.log(response)
-        }
-    ).catch((error)=>{
-      console.log(error)
-    })*/
+    /*    ReviewService.getPicture(this.review.idTreasure,this.review.idReview).then((response)=>{
+          console.log(response)
+            }
+        ).catch((error)=>{
+          console.log(error)
+        })*/
 
   }
 }
@@ -56,7 +56,6 @@ export default {
 <style scoped>
 .review {
   display: flex;
-  margin: 20px 0;
   background: #a0deb1;
   border: 4px solid #84b893;
   width: 45%;
@@ -65,9 +64,7 @@ export default {
 }
 
 .review img {
-  margin: auto;
-  margin-right: 20px;
-  margin-left: 1%;
+  margin: auto 20px auto 1%;
 }
 
 .review2 {

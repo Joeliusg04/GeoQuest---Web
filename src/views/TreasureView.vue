@@ -72,7 +72,7 @@ export default {
 
 .flex{
   margin-top: 2%;
-  margin-left: 0%;
+  margin-left: 0;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;

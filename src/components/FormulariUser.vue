@@ -1,11 +1,11 @@
 <template>
   <div class="flex">
     <div class="image-username">
-      <img class="user" src="../assets/icons/user.png"/>
+      <img class="user" src="../assets/icons/user.png" alt="user-profile-pic"/>
       <h2>{{ user.nickName }}</h2>
       <b>Level: {{ user.userLevel }}</b>
       <div class="button">
-        <img src="../assets/icons/subir.png">
+        <img src="../assets/icons/subir.png" alt="upload-icon">
         <p>Change your profile picture</p>
       </div>
     </div>
@@ -16,7 +16,7 @@
           <div class="input-icon-container">
             <input type="text" id="nombre" name="nombre" placeholder="Username" v-model="user.nickName" required>
             <span class="icon-container">
-                <img class="icon" src="../assets/icons/edit.png"/>
+                <img class="icon" src="../assets/icons/edit.png" alt="edit-icon"/>
               </span>
           </div>
         </div>
@@ -25,7 +25,7 @@
           <div class="input-icon-container">
             <input type="text" id="email" name="email" placeholder="Mail" v-model="user.email" required/>
             <span class="icon-container">
-                <img class="icon" src="../assets/icons/edit.png"/>
+                <img class="icon" src="../assets/icons/edit.png" alt="edit-icon"/>
               </span>
           </div>
         </div>
@@ -34,7 +34,7 @@
           <div class="input-icon-container">
             <input type="password" id="password" name="password" placeholder="Password" required>
             <span class="icon-container">
-                <img class="icon" src="../assets/icons/edit.png"/>
+                <img class="icon" src="../assets/icons/edit.png" alt="edit-icon"/>
               </span>
           </div>
         </div>
@@ -66,7 +66,7 @@ export default {
     })
   },
   methods: {
-    updateUser(){
+    updateUser() {
 
     }
   }
@@ -84,9 +84,7 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: auto;
-  margin-top: 5%;
-  margin-left: 25%;
+  margin: 5% auto auto 25%;
 }
 
 .user {
@@ -97,7 +95,6 @@ export default {
 .form {
   align-items: center;
   margin-left: -500px;
-  margin: auto;
   margin-top: 10rem;
   margin-right: 30%;
 }
@@ -112,8 +109,6 @@ export default {
 }
 
 label {
-  margin-top: 30px;
-  margin-bottom: 30px;
   display: flex;
   font-weight: bold;
   margin: auto;

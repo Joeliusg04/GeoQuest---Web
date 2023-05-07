@@ -34,6 +34,7 @@ load()
 import "leaflet/dist/leaflet.css";
 import L from 'leaflet';
 import TreasureService from "@/services/treasure.service";
+
 export default {
   name: "MapComponent",
 
@@ -64,23 +65,17 @@ export default {
       }).addTo(this.map);
 
 
-      this.map.on('click',(e) => {
-        if (window.location.pathname==='/management'){
-          this.$emit('emitCoords',e.latlng.lat,e.latlng.lng)
+      this.map.on('click', (e) => {
+        if (window.location.pathname === '/management') {
+          this.$emit('emitCoords', e.latlng.lat, e.latlng.lng)
         }
       })
-      /*for (let treasure of this.treasures) {
 
-          let link = `<a href='${window.location.origin}/treasure/${treasure.id}'>${treasure["name"]}</a>`
-          console.log(treasure)
-          console.log("aaaaaaa")
-          L.marker([treasure.latitude, treasure.longitude]).bindPopup(link).addTo(this.map)
-      }*/
     },
     centerMap(center) {
       this.map.setView(center, 15);
     },
-    addMarker(center){
+    addMarker(center) {
 
       this.marker.setLatLng(center)
       this.map.setView(center)
@@ -90,27 +85,27 @@ export default {
   mounted() {
 
     this.setupMap()
-    if (this.id !== undefined && this.id!=="") {
+    if (this.id !== undefined && this.id !== "") {
       //console.log("ID ES "+this.id)
       TreasureService.getById(this.id).then(
           (response) => {
             console.log(response.data)
-            var treasure = response.data;
+            const treasure = response.data;
 
             console.log("Un tresor?")
             let link = `<a href='${window.location.origin}/treasure/${treasure.id}'>${treasure["name"]}</a>`
             // console.log(treasure)
             this.marker = L.marker([treasure.latitude, treasure.longitude]).bindPopup(link).addTo(this.map)
-            this.map.setView([treasure.latitude, treasure.longitude],8)
+            this.map.setView([treasure.latitude, treasure.longitude], 8)
           },
           (error) => {
             console.log(error)
-            var code = error.message
+            const code = error.message;
             console.log("code: " + code)
             this.$router.push(`/error/${code}`);
           }
       );
-    } else if (!this.new===true) {
+    } else if (!this.new === true) {
       TreasureService.getAll().then(
           (response) => {
             console.log(response.data)
@@ -125,16 +120,14 @@ export default {
           },
           (error) => {
             console.log(error)
-            var code = error.code
+            const code = error.code;
             this.$router.push(`/error/${code}`);
           }
       );
     } else {
       this.marker = L.marker([0, 0]).addTo(this.map)
-      this.map.setView([0,0],8)
+      this.map.setView([0, 0], 8)
     }
-
-
 
 
   }

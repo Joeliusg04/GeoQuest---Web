@@ -5,7 +5,7 @@
       <TreasureMap v-on:centerMap="centerMap" v-for="(treasure, index) of treasures" v-bind:key="index"
                    v-bind:treasure="treasure"/>
     </div>
-    <MapComponent class="map"  ref="mapa" v-bind:treasures="treasures" v-bind:size="size"/>
+    <MapComponent class="map" ref="mapa" v-bind:treasures="treasures" v-bind:size="size"/>
 
   </div>
   <Footer/>
@@ -27,19 +27,6 @@ export default {
     return {
       size: ["1000px", "560px"],
       treasures: []
-      /*treasures: [
-        {
-          id: 1,
-          name: "Tresor super guai",
-          latitude: 0,
-          longitude: 0
-        }, {
-          id: 2,
-          name: "Tresor 2",
-          latitude: 20,
-          longitude: 10
-        }
-      ]*/
     }
   },
   methods: {
@@ -57,7 +44,7 @@ export default {
         },
         (error) => {
           console.log(error)
-          var code = error.code
+          const code = error.code;
           this.$router.push(`/error/${code}`);
         }
     );

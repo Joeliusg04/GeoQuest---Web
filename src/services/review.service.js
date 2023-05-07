@@ -11,7 +11,7 @@ class ReviewService {
     }
 
 
-    getPicture(treasureID,reviewID){
+    getPicture(treasureID, reviewID) {
         return axios.get(API_URL + `/${treasureID}/reviews/${reviewID}/picture`)
     }
 

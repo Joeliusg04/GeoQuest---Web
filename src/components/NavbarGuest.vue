@@ -44,15 +44,17 @@ nav {
   display: flex;
   align-items: center;
 }
+
 h1 {
-  float:left;
+  float: left;
   display: flex;
   align-items: center;
   color: black;
   margin: 0;
   font-size: 50px;
 }
-.empresa{
+
+.empresa {
   display: flex;
 }
 </style>

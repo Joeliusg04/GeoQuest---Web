@@ -42,7 +42,6 @@ export default {
 <style scoped>
 .report {
   display: flex;
-  margin: 20px 0;
   background: #a0deb1;
   border: 4px solid #84b893;
   width: 45%;

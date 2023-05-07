@@ -3,7 +3,6 @@
   <navbar-guest v-if="!logged"/>
   <div class="info">
     <iframe width="3560" height="315" src="https://www.youtube.com/embed/1YTqitVK-Ts" title="What is geocaching"
-            frameborder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             allowfullscreen></iframe>
     <p class="text">Geocaching is a recreational activity that involves using GPS coordinates and clues to find hidden
@@ -44,8 +43,8 @@ export default {
     Step
   },
   computed: {
-    logged(){
-      return localStorage.getItem("logged")==="true";
+    logged() {
+      return localStorage.getItem("logged") === "true";
     }
   }
 }
@@ -57,7 +56,7 @@ export default {
 
 .info {
   display: flex;
-  padding: 5rem 10rem 0rem 10rem;
+  padding: 5rem 10rem 0 10rem;
 }
 
 iframe {

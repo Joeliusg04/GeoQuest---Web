@@ -8,7 +8,7 @@ const API_URL = 'http://127.0.0.1:8090';
 
 class AuthService {
     login(username, password) {
-        console.log(username+password)
+        console.log(username + password)
         return axios
             .post(API_URL + '/user/login',
                 `${username},${password}`

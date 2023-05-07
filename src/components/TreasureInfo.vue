@@ -1,9 +1,8 @@
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
 <template>
   <div class="treasure2">
     <div class="image-rating">
       <h3>{{ treasure.name }}</h3>
-      <img class="rating" id="rating">
+      <img class="rating" id="rating" alt="rating-icon">
 
       <b> Difficulty: {{ treasure.difficulty }} </b>
       <b>Location: {{ treasure.location }} </b>
@@ -61,8 +60,7 @@ export default {
   border: 4px solid #84b893;
   width: 50%;
   height: 100%;
-  margin: auto;
-  margin-top: 1rem;
+  margin: 1rem auto auto;
   text-align: center;
   border-radius: 25px;
 }

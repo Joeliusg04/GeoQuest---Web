@@ -1,7 +1,7 @@
 <template>
   <div class="flex">
     <div class="image-treasure">
-      <img id="preview"/>
+      <img id="preview" alt="preview"/>
       <div class="treasure-image">
         <input id="image" type="file" @change="onFileUpload">
       </div>
@@ -51,8 +51,10 @@
         </div>
         <div class="image-container">
           <input v-if="id === ''" @click.prevent="sendTreasure" class="form-submit" type="submit" value="Add"/>
-          <button v-if="id !== ''" @click.prevent="updateTreasure"><img src="../assets/icons/edit.png"/></button>
-          <button v-if="id !== ''" @click.prevent="deleteTreasure"><img src="../assets/icons/borrar.png"/></button>
+          <button v-if="id !== ''" @click.prevent="updateTreasure"><img src="../assets/icons/edit.png" alt="edit-icon"/>
+          </button>
+          <button v-if="id !== ''" @click.prevent="deleteTreasure"><img src="../assets/icons/borrar.png"
+                                                                        alt="delete-icon"/></button>
         </div>
       </form>
       <MapComponent class="map" ref="mapa" v-bind:new="newTreasure" v-bind:id="this.$route.params.idTreasure"
@@ -96,7 +98,7 @@ export default {
       this.loadPreview()
     },
 
-    receiveCoords(lat,lng){
+    receiveCoords(lat, lng) {
       console.log("eeei")
       this.treasure.latitude = Math.round(lat * 100000) / 100000
       this.treasure.longitude = Math.round(lng * 100000) / 100000
@@ -119,8 +121,8 @@ export default {
 
         console.log(response)
 
-        var bytes = new Uint8Array(response.data.length);
-        for (var i = 0; i < response.data.length; i++) {
+        const bytes = new Uint8Array(response.data.length);
+        for (let i = 0; i < response.data.length; i++) {
           bytes[i] = response.data.charCodeAt(i);
         }
 
@@ -173,11 +175,11 @@ export default {
 
     },
 
-    deleteTreasure(){
-      TreasureService.delete(this.id).then((response)=>{
+    deleteTreasure() {
+      TreasureService.delete(this.id).then((response) => {
         alert(response.data)
         this.$router.push("/management")
-      }).catch((error)=>{
+      }).catch((error) => {
         console.log(error)
       })
     }
@@ -202,20 +204,20 @@ export default {
   },
   watch: {
     'treasure.latitude': {
-      handler(){
+      handler() {
         // this.$refs.mapa.setupMap()
-        this.$refs.mapa.addMarker([this.treasure.latitude,this.treasure.longitude])
+        this.$refs.mapa.addMarker([this.treasure.latitude, this.treasure.longitude])
       }
     },
     'treasure.longitude': {
       handler() {
         // this.$refs.mapa.setupMap()
-        this.$refs.mapa.addMarker([this.treasure.latitude,this.treasure.longitude])
+        this.$refs.mapa.addMarker([this.treasure.latitude, this.treasure.longitude])
       }
     }
-  },computed: {
-    newTreasure(){
-      return (this.$route.params.idTreasure===undefined || this.$route.params.idTreasure==='')
+  }, computed: {
+    newTreasure() {
+      return (this.$route.params.idTreasure === undefined || this.$route.params.idTreasure === '')
     }
   }
 }
@@ -250,7 +252,6 @@ export default {
 
 
 div {
-  display: flex;
   display: flex;
   align-items: center;
 }
