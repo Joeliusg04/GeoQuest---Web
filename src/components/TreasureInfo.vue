@@ -29,18 +29,18 @@ export default {
     }
 
   },
-  mounted() {
+  created() {
     TreasureService.getById(this.id).then((response) => {
           this.treasure = response.data
-
-          document.getElementById("rating").setAttribute("src", require(`../assets/rating/rating_${this.treasure.score}.png`))
+      document.getElementById("rating").setAttribute("src", require(`../assets/rating/rating_${this.treasure.score}.png`))
         }
     ).catch((error) => {
       console.log("Ha fallat get de tresor amb id" + this.id)
       console.log(error)
     })
-
-
+  },
+  mounted() {
+    // document.getElementById("rating").setAttribute("src", require(`../assets/rating/rating_${this.treasure.score}.png`))
   },
 
 

@@ -8,27 +8,27 @@
       <div class="stats">
         <div class="stat">
           <h3>Total played:</h3>
-          <p>X</p>
+          <p>{{stats.totalPlayed}}</p>
         </div>
         <div class="stat">
           <h3>Total found:</h3>
-          <p>X</p>
+          <p>{{ stats.totalFound }}</p>
         </div>
         <div class="stat">
           <h3>Total Favourite:</h3>
-          <p>X</p>
+          <p>{{stats.totalFavourite}}</p>
         </div>
         <div class="stat">
           <h3>Total reviews:</h3>
-          <p>X</p>
+          <p>{{stats.totalReviews}}</p>
         </div>
         <div class="stat">
           <h3>Report Quantity:</h3>
-          <p>X</p>
+          <p>{{stats.reportQuantity}}</p>
         </div>
         <div class="stat">
           <h3>Average time:</h3>
-          <p>X</p>
+          <p>{{ stats.averageTime }}</p>
         </div>
       </div>
     </div>
@@ -38,9 +38,24 @@
 </template>
 
 <script>
+import TreasureService from "@/services/treasure.service";
+
 export default {
   name: 'TreasureStats',
-  props: {}
+  props: {},
+  data(){
+    return {
+      stats: ""
+    }
+  },
+  created() {
+    TreasureService.getStats(this.$route.params.idTreasure).then((response)=>{
+      console.log(response.data)
+      this.stats = response.data
+    }).catch((error)=> {
+      console.log(error)
+    })
+  }
 }
 </script>
 
