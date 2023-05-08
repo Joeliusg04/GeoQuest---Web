@@ -29,7 +29,7 @@
       <TreasureMap v-on:centerMap="centerMap" v-for="(treasure, index) of treasures" v-bind:key="index"
                    v-bind:treasure="treasure"/>
     </div>
-    <MapComponent class="map" ref="mapa" v-bind:treasures="treasures" v-bind:size="size"/>
+    <MapComponent v-if="!emptyFilter" class="map" ref="mapa" v-bind:treasures="treasures" v-bind:size="size"/>
     <p v-if="emptyFilter">Empty Filter</p>
   </div>
   <Footer/>
@@ -84,21 +84,23 @@ export default {
   },
   created() {
     const urlParams = new URLSearchParams(window.location.search);
-
     TreasureService.getAll().then(
         (response) => {
           console.log(response.data)
           this.treasures = response.data;
 
+
           const diff = urlParams.get('difficulty')
           const rating = urlParams.get('rating')
           const loc = urlParams.get('location')
+          console.log(diff)
+          console.log(rating)
           console.log(loc)
-          if (diff !== "none") {
+          if (diff !== "none" && diff !== null) {
             this.treasures = this.treasures.filter((t) => t.difficulty === diff)
             console.log("filtrant diff")
           }
-          if (rating !== "none") {
+          if (rating !== "none" && rating !== null) {
             switch (rating) {
               case "2":
                 this.treasures = this.treasures.filter((t) => t.score <= 2)
@@ -113,7 +115,7 @@ export default {
 
           }
 
-          if (loc !== "") {
+          if (loc !== "" && loc !== null) {
             this.treasures = this.treasures.filter((t) => t.location === loc)
           }
 
@@ -131,9 +133,14 @@ export default {
           this.$router.push(`/error/${code}`);
         }
     )
-
-
-  }
+  },
+  watch: {
+    '$route.query': {
+      handler: function () {
+        location.reload()
+      }
+    }
+  },
 }
 
 </script>
