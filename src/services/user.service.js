@@ -26,6 +26,10 @@ class UserService {
     }
 
     getPicture(id) {
+        return axios.get(API_URL + `/user/${id}/picture`, {headers: authHeader()})
+    }
+
+    getPicturePath(id){
         return API_URL + `/user/${id}/picture`
     }
 
