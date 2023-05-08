@@ -17,8 +17,7 @@ class TreasureService {
 
 
     getPicture(id) {
-        var url = API_URL + `/treasure/${id}/picture`
-        return axios.get(url, {headers: authHeader()})
+        return API_URL + `/treasure/${id}/picture`
     }
 
     delete(id) {

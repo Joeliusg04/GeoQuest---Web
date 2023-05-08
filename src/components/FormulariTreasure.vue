@@ -108,34 +108,16 @@ export default {
       const reader = new FileReader();
       reader.onload = () => {
         document.getElementById("preview").src = reader.result;
-        console.log(reader.result)
+        // console.log(reader.result)
       };
-      console.log(this.FILE)
+      // console.log(this.FILE)
       reader.readAsDataURL(this.FILE);
     },
 
-    // Funció que demana la imatge del tresor, la passa a File i la carrega a this.FILE
-    // TODO Aconseguir que es mostri la imatge (
     getImage(treasure) {
-      TreasureService.getPicture(treasure.idTreasure).then((response) => {
 
-        console.log(response)
+      document.getElementById("preview").src = TreasureService.getPicture(treasure.idTreasure)
 
-        const bytes = new Uint8Array(response.data.length);
-        for (let i = 0; i < response.data.length; i++) {
-          bytes[i] = response.data.charCodeAt(i);
-        }
-
-        console.log(bytes)
-        const blob = new Blob(bytes, {type: response.headers["content-type"]})
-        console.log(blob)
-        this.FILE = new File([blob], treasure.image, {type: response.headers["content-type"]})
-
-
-        this.loadPreview()
-      }).catch((error) => {
-        console.log(error)
-      });
     },
 
     sendTreasure() {
