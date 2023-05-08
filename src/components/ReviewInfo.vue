@@ -1,9 +1,7 @@
 <template>
   <div class="review">
-    <!--    <img :src="review.path" alt="image" />-->
     <div class="review2">
       <div class="username-rating">
-        <!--        <h4> {{ user.username }} - {{ review.solved }} </h4> -->
         <h4> {{ user.nickName }} </h4>
         <img :id="review.idReview" class="rating" alt="rating-icon"/>
       </div>
@@ -11,11 +9,11 @@
         <p v-if="review.opinion.length > 300" class="review-text-scroll">{{ review.opinion }}</p>
         <p v-else class="review-text-normal">{{ review.opinion }}</p>
       </div>
-      <!--      <p>{{ review.path }}</p>-->
     </div>
   </div>
 </template>
 <script>
+
 import UserService from "@/services/user.service";
 
 export default {
@@ -30,8 +28,6 @@ export default {
   },
   mounted() {
 
-
-    document.getElementById(`${this.review.idReview}`).setAttribute("src", require(`../assets/rating/rating_${this.review.rating}.png`))
 
 
     UserService.getById(this.review.idUser).then((response) => {
@@ -97,16 +93,11 @@ export default {
 
 .review-text {
   max-height: 150px;
-  overflow-y: scroll;
+  text-align: center;
 }
 
 .review-text-normal {
   margin: 0;
 }
 
-.review-text-scroll {
-  margin: 0;
-  white-space: pre-line;
-  overflow-wrap: anywhere;
-}
 </style>
