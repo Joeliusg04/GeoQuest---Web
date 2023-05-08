@@ -58,7 +58,7 @@ export default {
   }),
   computed: {
     loggedIn() {
-      return this.$store.state.auth.status.loggedIn;
+      return localStorage.getItem('logged')==="true";
     }
   },
   mounted() {
@@ -84,6 +84,7 @@ export default {
           authService.register(user).then(
               (response) => {
                 console.log(response)
+                this.$router.push("/login")
               }
           ).catch(
               (error) => {
