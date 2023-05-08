@@ -116,13 +116,15 @@ export default {
 
     getImage(treasure) {
 
-      document.getElementById("preview").src = TreasureService.getPicture(treasure.idTreasure)
+      document.getElementById("preview").src = TreasureService.getPicturePath(treasure.idTreasure)
 
     },
 
     sendTreasure() {
 
       const formData = new FormData()
+
+
       formData.append('image', this.FILE, this.FILE.name)
       formData.append('body', JSON.stringify(this.treasure))
 
@@ -140,6 +142,26 @@ export default {
     },
 
     updateTreasure() {
+
+
+      if(this.FILE === null){
+        TreasureService.getPicture(this.treasure.idTreasure).then((response)=>{
+          const bytes = new Uint8Array(response.data.length);
+          for (var i = 0; i < response.data.length; i++) {
+            bytes[i] = response.data.charCodeAt(i);
+          }
+
+          console.log(bytes)
+          const blob = new Blob(bytes, {type: response.headers["content-type"]})
+          console.log(blob)
+          this.FILE = new File([blob], this.treasure.image, {type: response.headers["content-type"]})
+
+        }).catch((error)=>{
+          console.log(error)
+        })
+      }
+
+
 
       const formData = new FormData()
       formData.append('image', this.FILE, this.FILE.name)
@@ -174,7 +196,7 @@ export default {
       TreasureService.getById(this.id).then((response) => {
             this.treasure = response.data
             this.getImage(response.data)
-
+            
           }
       ).catch((error) => {
         localStorage.setItem('error', error.response.data)

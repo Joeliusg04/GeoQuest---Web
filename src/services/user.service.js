@@ -12,8 +12,12 @@ class UserService {
         return axios.get(API_URL + `/user/username/${nickname}`, {headers: authHeader()});
     }
 
-    update(user) {
-        return axios.put(API_URL + `/user/${user.id}`, user, {headers: authHeader()})
+    update(formData,idUser) {
+        return axios.put(API_URL + `/user/${idUser}`, formData, {headers: {
+                'Content-Type': 'multipart/form-data',
+                'Authorization': authHeader().Authorization,
+                'Access-Control-Allow-Origin': '*'
+            },})
     }
 
 
@@ -22,7 +26,7 @@ class UserService {
     }
 
     getPicture(id) {
-        return axios.get(API_URL + `/user/${id}/picture`, {headers: authHeader()})
+        return API_URL + `/user/${id}/picture`
     }
 
 
