@@ -1,5 +1,6 @@
 <template>
   <div class="treasure2">
+    <img id="treasureImage" alt="treasure-image">
     <div class="image-rating">
       <h3>{{ treasure.name }}</h3>
       <img class="rating" id="rating" alt="rating-icon">
@@ -32,7 +33,8 @@ export default {
   created() {
     TreasureService.getById(this.id).then((response) => {
           this.treasure = response.data
-      document.getElementById("rating").setAttribute("src", require(`../assets/rating/rating_${this.treasure.score}.png`))
+          document.getElementById("rating").setAttribute("src", require(`../assets/rating/rating_${this.treasure.score}.png`))
+          document.getElementById("treasureImage").setAttribute("src", TreasureService.getPicture(this.treasure.idTreasure))
         }
     ).catch((error) => {
       console.log("Ha fallat get de tresor amb id" + this.id)
