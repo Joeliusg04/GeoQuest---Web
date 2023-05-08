@@ -172,13 +172,13 @@ export default {
     if (this.id !== "") {
       console.log("hola")
       TreasureService.getById(this.id).then((response) => {
-            console.log(response.data)
             this.treasure = response.data
             this.getImage(response.data)
 
           }
       ).catch((error) => {
-        console.log(error)
+        localStorage.setItem('error', error.response.data)
+        this.$router.push("/error")
       });
     }
 

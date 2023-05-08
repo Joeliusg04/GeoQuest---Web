@@ -2,7 +2,7 @@
   <Navbar/>
   <div>
     <h1>ERROR!</h1>
-    <p>{{ msg }}</p>
+    <p>{{ test }}</p>
     <img class="errImg" src="../assets/icons/phonemap.png" alt="phonemap-error-icon">
     <img class="errImg" src="../assets/icons/robot.png" alt="robot-error-icon">
   </div>
@@ -20,8 +20,22 @@ export default {
     Navbar,
     Footer
   },
+  data() {
+    return {
+      test: ""
+    }
+  },
   props: {
     msg: String
+  },
+  created() {
+    if (localStorage.getItem('error') !== null) {
+      this.test = localStorage.getItem('error')
+      localStorage.removeItem('error')
+    } else {
+      this.test = "There has been an undefined error"
+    }
+
   }
 }
 </script>

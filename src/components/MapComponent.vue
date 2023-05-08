@@ -91,11 +91,7 @@ export default {
           (response) => {
             console.log(response.data)
             const treasure = response.data;
-
-            console.log("Un tresor?")
-            let link = `<a href='${window.location.origin}/treasure/${treasure.id}'>${treasure["name"]}</a>`
-            // console.log(treasure)
-            this.marker = L.marker([treasure.latitude, treasure.longitude]).bindPopup(link).addTo(this.map)
+            this.marker = L.marker([treasure.latitude, treasure.longitude]).addTo(this.map)
             this.map.setView([treasure.latitude, treasure.longitude], 8)
           },
           (error) => {
@@ -112,7 +108,6 @@ export default {
             this.treasures = response.data;
 
             for (let treasure of this.treasures) {
-              console.log("Tots els tresors!")
               let link = `<a href='${window.location.origin}/treasure/${treasure.idTreasure}'>${treasure["name"]}</a>`
               // console.log(treasure)
               L.marker([treasure.latitude, treasure.longitude]).bindPopup(link).addTo(this.map)

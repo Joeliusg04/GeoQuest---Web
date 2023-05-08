@@ -40,10 +40,9 @@ const routes = [
         component: Treasure,
         props: true
     }, {
-        path: "/error/:msg",
+        path: "/error",
         name: "ErrorPage",
         component: ErrorPage,
-        props: true
     }, {
         path: "/management/:idTreasure?",
         name: "Management",
