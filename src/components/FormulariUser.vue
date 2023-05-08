@@ -1,7 +1,7 @@
 <template>
   <div class="flex">
     <div class="image-username">
-      <img class="user" :src="user.profilePicture" alt="user-profile-pic" />
+      <img class="user" id="profile-pic" alt="user-profile-pic" />
       <h2>{{ user.nickName }}</h2>
       <b>Level: {{ user.userLevel }}</b>
       <div class="button">
@@ -40,7 +40,7 @@
             </span>
           </div>
         </div>
-        <input class="create" type="submit" value="Update" @click="updateUser">
+        <input class="create" type="submit" value="Update" @click.prevent="updateUser">
       </form>
     </div>
   </div>
@@ -48,58 +48,55 @@
 
 <script>
 import UserService from "@/services/user.service";
-import TreasureService from "@/services/treasure.service";
 
 export default {
   name: 'FormulariUser',
   props: {},
   data() {
     return {
+      FILE: require("../assets/icons/user.png"),
       user: {
-        nickName: "",
-        email: "",
-        profilePicture: require("../assets/icons/user.png")
       }
     }
   },
   mounted() {
 
-    if (this.id !== "") {
-      console.log("hola")
-      TreasureService.getById(this.id).then((response) => {
-            console.log(response.data)
-            this.treasure = response.data
-            this.getImage(response.data)
-
-          }
-      ).catch((error) => {
-        console.log(error)
-      });
-    }
-
     UserService.getByNickname(JSON.parse(localStorage.getItem('user'))).then((response) => {
       console.log(response)
       this.user = response.data
+      this.getImage(this.user)
     }).catch((error) => {
       console.log(error)
     })
   },
   methods: {
     updateUser() {
+      const formData = new FormData()
+      console.log(this.FILE)
+      formData.append('image', this.FILE, this.FILE.name)
+      formData.append('body', JSON.stringify(this.user))
+      UserService.update(formData,this.user.idUser).then((response)=>{
+        this.user = response.data
+      }).catch((error)=>{
+        console.log(error)
+      })
     },
     previewImage(event) {
       const file = event.target.files[0];
       if (file) {
         const reader = new FileReader();
         reader.onload = (e) => {
-          this.user.profilePicture = e.target.result;
+          this.FILE = e.target.result
+          this.user.photo = this.FILE.name
+          document.getElementById("profile-pic").src = this.FILE
         };
         reader.readAsDataURL(file);
       }
     },
-    getImage(treasure) {
+    getImage(user) {
 
-      document.getElementById("preview").src = TreasureService.getPicture(treasure.idTreasure)
+      this.FILE = UserService.getPicture(user.idUser)
+      document.getElementById("profile-pic").src = UserService.getPicture(user.idUser)
 
     },
   }
