@@ -13,7 +13,6 @@
   </div>
 </template>
 <script>
-
 import UserService from "@/services/user.service";
 
 export default {
@@ -27,8 +26,6 @@ export default {
     review: Object,
   },
   mounted() {
-
-
 
     UserService.getById(this.review.idUser).then((response) => {
       this.user = response.data
@@ -70,7 +67,11 @@ export default {
 .review2 p {
   margin: 2rem;
   align-items: center;
-  text-align: left;
+  text-align: center;
+  display: flex; 
+  justify-content: center; 
+  flex-direction: column; 
+  height: 100%; 
 }
 
 .username-rating {
@@ -91,13 +92,5 @@ export default {
   width: 200px;
 }
 
-.review-text {
-  max-height: 150px;
-  text-align: center;
-}
-
-.review-text-normal {
-  margin: 0;
-}
 
 </style>
