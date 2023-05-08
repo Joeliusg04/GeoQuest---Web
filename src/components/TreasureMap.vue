@@ -1,11 +1,11 @@
 <template>
   <div class="treasure">
-    <img class="image" src="../assets/dummy.png" alt="treasure-image"/>
+    <img class="image" src="../assets/dummy.png" alt="treasure-image" />
     <div class="flex-direction:column">
       <h3>{{ treasure.name }}</h3>
       <div class="flex">
-        <div class="rate">
-          <img :id="this.treasure.idTreasure" class="rating" alt="rating-icon"/>
+        <div class="rating">
+          <span v-for="index in maxStars" :key="index" class="star" :class="{ filled: index <= rating }">&#9733;</span>
         </div>
         <h4 class="difficulty">Dificulty: {{ treasure.difficulty }}</h4>
       </div>
@@ -23,10 +23,16 @@
 export default {
   name: 'TreasureMap',
   components: {},
+  data() {
+    return {
+      rating: 5,
+      maxStars: 5
+    };
+  },
   props: {
     treasure: Object
   },
-  mounted(){
+  mounted() {
     document.getElementById(`${this.treasure.idTreasure}`).setAttribute("src", require(`../assets/rating/rating_${this.treasure.score}.png`))
   },
   methods: {
@@ -36,62 +42,31 @@ export default {
     }
   },
   computed:
-      {
-        link() {
-          return `${window.location.origin}/treasure/${this.treasure.idTreasure}`;
-        }
-      }
+  {
+    link() {
+      return `${window.location.origin}/treasure/${this.treasure.idTreasure}`;
+    }
+  }
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
 * {
   margin: 0;
   padding: 0;
 }
 
-.rate {
-  float: left;
-  height: 46px;
-  padding: 0 10px;
+.rating {
+  color: #ffffff;
 }
 
-.rate:not(:checked) > input {
-  position: absolute;
-  top: -9999px;
+.star {
+  font-size: 45px;
 }
 
-.rate:not(:checked) > label {
-  float: right;
-  width: 1em;
-  overflow: hidden;
-  white-space: nowrap;
-  cursor: pointer;
-  font-size: 30px;
-  color: #ccc;
-}
-
-.rate:not(:checked) > label:before {
-  content: '★ ';
-}
-
-.rate > input:checked ~ label {
-  color: #ffc700;
-}
-
-.rate:not(:checked) > label:hover,
-.rate:not(:checked) > label:hover ~ label {
-  color: #deb217;
-}
-
-.rate > input:checked + label:hover,
-.rate > input:checked + label:hover ~ label,
-.rate > input:checked ~ label:hover,
-.rate > input:checked ~ label:hover ~ label,
-.rate > label:hover ~ input:checked ~ label {
-  color: #c59b08;
+.filled {
+  color: #ffee00;
 }
 
 .treasure h3 {
