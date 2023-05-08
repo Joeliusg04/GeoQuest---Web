@@ -39,7 +39,7 @@ export default {
   name: "MapComponent",
 
   props: {
-    //treasures: Array[Object],
+    //treasuresF: Array[Object],
     size: Array,
     id: String,
     new: Boolean
@@ -51,6 +51,7 @@ export default {
       longitudeInit: 2.18,
       map: "",
       treasures: [],
+      treasuresF: []
     }
   },
   methods: {
@@ -105,7 +106,7 @@ export default {
       TreasureService.getAll().then(
           (response) => {
             console.log(response.data)
-            this.treasures = response.data;
+            this.treasures = this.treasuresF;
 
             for (let treasure of this.treasures) {
               let link = `<a href='${window.location.origin}/treasure/${treasure.idTreasure}'>${treasure["name"]}</a>`

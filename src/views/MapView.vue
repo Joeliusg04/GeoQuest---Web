@@ -3,21 +3,21 @@
   <div id="container">
     <div id="search">
       <img @click="displayFilters('filters')" src="../assets/icons/filter.png" class="filter">
-      <div id="filters"  style="display: none;">
+      <div id="filters" style="display: none;">
         <form>
           <label @click="displayFilters('difficulty')" for="difficulty">Difficulty</label>
           <select id="difficulty" name="difficulty" style="display: none;">
             <option name="select" value="none">--Select difficulty--</option>
-            <option name="easy" value="easy">Easy</option>
-            <option name="medium" value="medium">Medium</option>
-            <option name="hard" value="hard">Hard</option>
+            <option name="easy" value="Noob">Easy</option>
+            <option name="medium" value="Normal">Medium</option>
+            <option name="hard" value="Hard">Hard</option>
           </select>
           <label @click="displayFilters('rating')" for="rating">Rating</label>
           <select name="rating" id="rating" style="display: none;">
             <option name="select" value="none">--Select rating--</option>
-            <option name="low" value="0.2">Low rated (0-2)</option>
-            <option name="average" value="2.4">Average (2-4)</option>
-            <option name="excellent" value="4,1.5">Excellent (5)</option>
+            <option name="low" value="2">Low rated (0-2)</option>
+            <option name="average" value="4">Average (2-4)</option>
+            <option name="excellent" value="5">Excellent (5)</option>
           </select>
           <label @click="displayFilters('location')" for="location">Location</label>
           <input type="text" placeholder="Example: Barcelona" id="location" name="location" style="display: none;">
@@ -30,7 +30,7 @@
                    v-bind:treasure="treasure"/>
     </div>
     <MapComponent class="map" ref="mapa" v-bind:treasures="treasures" v-bind:size="size"/>
-
+    <p v-if="emptyFilter">Empty Filter</p>
   </div>
   <Footer/>
 </template>
@@ -50,7 +50,8 @@ export default {
   data() {
     return {
       size: ["1000px", "560px"],
-      treasures: []
+      treasures: [],
+      emptyFilter: false
     }
   },
   methods: {
@@ -58,9 +59,9 @@ export default {
       console.log("center 2")
       this.$refs.mapa.centerMap([treasure.latitude, treasure.longitude])
     },
-    displayFilters(filter){
+    displayFilters(filter) {
 
-      
+
       /*const filtersDiv = document.getElementById('filters')
       if (filtersDiv.style.display == "block"){
         filtersDiv.style.display = "none"
@@ -74,18 +75,54 @@ export default {
       */
 
       const filterElement = document.getElementById(filter)
-      if (filterElement.style.display == "block"){
+      if (filterElement.style.display == "block") {
         filterElement.style.display = "none"
       } else {
         filterElement.style.display = "block"
       }
     }
   },
-  mounted() {
+  created() {
+    const urlParams = new URLSearchParams(window.location.search);
+
     TreasureService.getAll().then(
         (response) => {
           console.log(response.data)
           this.treasures = response.data;
+
+          const diff = urlParams.get('difficulty')
+          const rating = urlParams.get('rating')
+          const loc = urlParams.get('location')
+          console.log(loc)
+          if (diff !== "none") {
+            this.treasures = this.treasures.filter((t) => t.difficulty === diff)
+            console.log("filtrant diff")
+          }
+          if (rating !== "none") {
+            switch (rating) {
+              case "2":
+                this.treasures = this.treasures.filter((t) => t.score <= 2)
+                break;
+              case "4":
+                this.treasures = this.treasures.filter((t) => t.score <= 4 && t.score > 2)
+                break;
+              case "5":
+                this.treasures = this.treasures.filter((t) => t.score > 4 && t.score <= 5)
+                break;
+            }
+
+          }
+
+          if (loc !== "") {
+            this.treasures = this.treasures.filter((t) => t.location === loc)
+          }
+
+          if (this.treasures.length > 0) {
+            this.$refs.mapa.treasuresF = this.treasures
+          } else {
+            this.emptyFilter = true
+          }
+
 
         },
         (error) => {
@@ -109,10 +146,12 @@ export default {
   top: 150px;
   z-index: 0;
 }
-.filter{
+
+.filter {
   height: 100px;
   width: 100px;
 }
+
 label {
   margin-top: 20px;
   font-weight: bold;
@@ -134,6 +173,7 @@ input, select {
 input:hover {
   background-color: #84b893;
 }
+
 #container {
   display: flex;
   margin: 2rem;
