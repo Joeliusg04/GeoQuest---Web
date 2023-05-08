@@ -1,7 +1,7 @@
 <template>
   <div class="treasure2">
-    <img id="treasureImage" alt="treasure-image">
     <div class="image-rating">
+      <img id="treasureImage" alt="treasure-image">
       <h3>{{ treasure.name }}</h3>
       <img class="rating" id="rating" alt="rating-icon">
 
@@ -10,6 +10,13 @@
     </div>
     <hr>
     <p> {{ treasure.description }}</p>
+
+    <button class="popup-button" @click="showTreasureStats">Show TreasureStats</button>
+        <div v-if="showPopup" class="popup">
+          <button class="close-button" @click="closeTreasureStats">&times;</button>
+          <TreasureStats />
+        </div>
+
   </div>
 </template>
 
@@ -17,18 +24,28 @@
 
 
 import TreasureService from "@/services/treasure.service";
+import TreasureStats from "@/components/TreasureStats.vue";
 
 export default {
   name: 'TreasureInfo',
-  components: {},
+  components: {TreasureStats},
   props: {
     id: String
   },
   data() {
     return {
-      treasure: ""
+      treasure: "",
+      showPopup: false
     }
 
+  },
+  methods: {
+    showTreasureStats() {
+      this.showPopup = true;
+    },
+    closeTreasureStats() {
+      this.showPopup = false;
+    }
   },
   created() {
     TreasureService.getById(this.id).then((response) => {
@@ -51,6 +68,50 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+
+.popup-button {
+  background-color: #a0deb1;
+  color: black;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  margin: 10px;
+  cursor: pointer;
+  border-radius: 4px;
+  border: 1px solid #84b893;
+}
+
+.popup-button:hover{
+  background-color: #84b893;
+}
+.popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 40px;
+  width: 60%;
+  height: 20%; 
+  max-width: 800px;
+  max-height: 600px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 18px;
+  color: #aaa;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
 .treasure2 h3 {
   font-size: 50px;
 }
@@ -60,7 +121,7 @@ export default {
   flex-direction: column;
   background: #a0deb1;
   border: 4px solid #84b893;
-  width: 50%;
+  width: 70%;
   height: 100%;
   margin: 1rem auto auto;
   text-align: center;
