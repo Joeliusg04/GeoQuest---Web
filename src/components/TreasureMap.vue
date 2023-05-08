@@ -5,44 +5,36 @@
       <h3>{{ treasure.name }}</h3>
       <div class="flex">
         <div class="rating">
-          <span v-for="index in maxStars" :key="index" class="star" :class="{ filled: index <= rating }">&#9733;</span>
+          <span v-for="index in maxStars" :key="index" class="star" :class="{ filled: index <= treasure.score }">&#9733;</span>
         </div>
-        <h4 class="difficulty">Dificulty: {{ treasure.difficulty }}</h4>
+        <h4 class="difficulty">Difficulty: {{ treasure.difficulty }}</h4>
       </div>
       <div class="buttons">
         <button @click="centerMap">View on map</button>
-        <a v-bind:href="link">Treasure info</a>
+        <a :href="link">Treasure info</a>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-
-
 export default {
   name: 'TreasureMap',
-  components: {},
   data() {
     return {
-      rating: 5,
       maxStars: 5
     };
   },
   props: {
     treasure: Object
   },
-  mounted() {
-    document.getElementById(`${this.treasure.idTreasure}`).setAttribute("src", require(`../assets/rating/rating_${this.treasure.score}.png`))
-  },
   methods: {
     centerMap() {
-      console.log("center 1")
-      this.$emit('centerMap', this.treasure)
+      console.log("center 1");
+      this.$emit('centerMap', this.treasure);
     }
   },
-  computed:
-  {
+  computed: {
     link() {
       return `${window.location.origin}/treasure/${this.treasure.idTreasure}`;
     }
@@ -50,7 +42,6 @@ export default {
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 * {
   margin: 0;
@@ -128,4 +119,3 @@ a:hover {
   background-color: #2d6a4f;
 }
 </style>
-  
