@@ -1,14 +1,14 @@
 <template>
   <div class="flex">
-    <div class="image-treasure">
-      <img id="preview" alt="preview"/>
-      <div class="treasure-image">
-        <input id="image" type="file" @change="onFileUpload">
-      </div>
-    </div>
-
-    <div class="form">
+    
       <form id="form" @submit.prevent="sendTreasure">
+        <div id="imgDiv" class="image-treasure">
+          <img id="preview" alt="preview"/>
+          <div class="treasure-image">
+            <input id="image" type="file" @change="onFileUpload">
+          </div>
+        </div>
+        <div class="data">
         <div>
           <label for="name">Name </label>
           <input type="text" id="name" name="name" required v-model="treasure.name">
@@ -19,11 +19,11 @@
         </div>
         <div>
           <label for="latitude">Latitude </label>
-          <input type="number" step="0.00001" id="latitude" name="latitude" required v-model="treasure.latitude">
+          <input type="number" step="0.00001" id="latitude" min=-90 max=90 name="latitude" required v-model="treasure.latitude">
         </div>
         <div>
           <label for="longitude">Longitude </label>
-          <input type="number" step="0.00001" id="longitude" name="longitude" required v-model="treasure.longitude">
+          <input type="number" step="0.00001" id="longitude" min=-180 max=180 name="longitude" required v-model="treasure.longitude">
         </div>
         <div>
           <label for="location">Location </label>
@@ -56,10 +56,10 @@
           <button v-if="id !== ''" @click.prevent="deleteTreasure"><img src="../assets/icons/borrar.png"
                                                                         alt="delete-icon"/></button>
         </div>
+      </div>
       </form>
       <MapComponent class="map" ref="mapa" v-bind:new="newTreasure" v-bind:id="this.$route.params.idTreasure"
                     v-bind:size="size" v-on:emitCoords="receiveCoords"/>
-    </div>
   </div>
 </template>
 
@@ -208,16 +208,31 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-/* *{
-  border: solid black 2px;
-} */
 .flex {
   display: flex;
-  justify-content: space-around;
-  margin-bottom: 3.3rem;
-  margin-top: 3.3rem;
+  justify-content: center;
+  margin-bottom: 4rem;
+  margin-top: 4rem;
+}
+#imgDiv{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin-right: 2rem;
+}
+#form{
+  display: flex;
+  justify-content: space-between;
+}
+.data{
+  display: block;
+  margin-left: 10rem;
 }
 
+.map {
+  z-index: 0;
+  margin-left: 10rem;;
+}
 .form-submit {
   margin-top: 1rem;
   background-color: #4CAF50;
@@ -231,20 +246,16 @@ export default {
 .form-submit:hover {
   background-color: #3e8e41;
 }
-
-
 div {
   display: flex;
   align-items: center;
 }
-
 label {
   margin-top: 20px;
   font-weight: bold;
   display: flex;
   align-items: start;
 }
-
 input,
 input,
 textarea {
@@ -286,10 +297,6 @@ input:hover {
   background-color: #84b893;
 }
 
-.treasure-image {
-  display: flex;
-}
-
 .treasure-image img {
   width: 30px;
   height: 30px;
@@ -297,7 +304,7 @@ input:hover {
 
 .image-treasure {
   display: flex;
-  flex-direction: column;
+
 }
 
 .image-treasure img {
@@ -305,10 +312,6 @@ input:hover {
   border-radius: 20px;
 }
 
-.map {
-  margin-left: 7rem;
-  z-index: 0;
-}
 
 .image-container img {
   width: 50px;
