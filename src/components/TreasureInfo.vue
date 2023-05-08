@@ -11,7 +11,7 @@
     <p> {{ treasure.description }}</p>
     <div id="hintDiv">
       <img @click="showClue" src="../assets/icons/vista.png" class="clue">
-      <p id="hint" style="display: none;">{{ treasure.clue }}</p>
+      <p @click="showClue" v-show="showHint" id="hint" style="display: none;">{{ treasure.clue }}</p>
     </div>
     <button class="popup-button" @click="showTreasureStats">Show TreasureStats</button>
     <div v-if="showPopup" class="popup">
@@ -32,12 +32,13 @@ export default {
   name: 'TreasureInfo',
   components: { TreasureStats },
   props: {
-    id: String
+    id: String,
   },
   data() {
     return {
       treasure: "",
-      showPopup: false
+      showPopup: false,
+      showHint: false
     }
 
   },
@@ -49,11 +50,10 @@ export default {
       this.showPopup = false;
     },
     showClue() {
-      const clueDiv = document.getElementById('hint')
-      if (clueDiv.style.display == "none") {
-        clueDiv.style.display = "block"
+      if (this.showHint== true){
+        this.showHint = false
       } else {
-        clueDiv.style.display = "none"
+        this.showHint = true
       }
     }
   },
