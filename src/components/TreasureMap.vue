@@ -97,8 +97,8 @@ export default {
 }
 
 .image {
-  height: 100%;
-  width: 30%;
+  height: 250px;
+  width: 250px;
 }
 
 .rating {
