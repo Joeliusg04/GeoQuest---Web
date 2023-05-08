@@ -13,8 +13,11 @@
       <img @click="showClue" src="../assets/icons/vista.png" class="clue">
       <p @click="showClue" v-show="showHint" id="hint" style="display: none;">{{ treasure.clue }}</p>
     </div>
-    <p class="popup-button" @click="viewTreasureStats">Show TreasureStats <img class="stats" src="../assets/icons/stats.png"></p>
-    <TreasureStats v-if="showPopup" class="popup" />
+    <button class="popup-button" @click="showTreasureStats">Show TreasureStats</button>
+    <div v-if="showPopup" class="popup">
+      <button class="close-button" @click="closeTreasureStats">&times;</button>
+      <TreasureStats />
+    </div>
 
   </div>
 </template>
@@ -40,14 +43,14 @@ export default {
 
   },
   methods: {
-
-    viewTreasureStats() {
-      if (this.showPopup == true) {
-        this.showPopup = false
-      } else this.showPopup = true
+    showTreasureStats() {
+      this.showPopup = true;
+    },
+    closeTreasureStats() {
+      this.showPopup = false;
     },
     showClue() {
-      if (this.showHint == true) {
+      if (this.showHint== true){
         this.showHint = false
       } else {
         this.showHint = true
@@ -84,16 +87,16 @@ export default {
   font-size: 16px;
   margin: 10px;
   cursor: pointer;
+  border-radius: 4px;
+  border: 1px solid #84b893;
 }
 
-#hintDiv {
+#hintDiv{
   display: flex;
 }
-
 .clue {
   height: 50px;
   width: 50px;
-  margin-left: 2rem;
 }
 
 .popup-button:hover {
@@ -115,12 +118,21 @@ export default {
   border-radius: 4px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
+
+
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 18px;
+  color: #aaa;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
 .treasure2 h3 {
   font-size: 50px;
-}
-.stats{
-  height: 25px;
-  width: 25px;
 }
 
 .treasure2 {
