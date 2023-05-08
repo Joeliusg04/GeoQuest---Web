@@ -1,7 +1,6 @@
 <template>
   <div class="treasure2">
     <div class="image-rating">
-      <img id="treasureImage" alt="treasure-image">
       <h3>{{ treasure.name }}</h3>
       <img class="rating" id="rating" alt="rating-icon">
 
@@ -10,12 +9,15 @@
     </div>
     <hr>
     <p> {{ treasure.description }}</p>
-
+    <div id="hintDiv">
+      <img @click="showClue" src="../assets/icons/vista.png" class="clue">
+      <p id="hint" style="display: none;">{{ treasure.clue }}</p>
+    </div>
     <button class="popup-button" @click="showTreasureStats">Show TreasureStats</button>
-        <div v-if="showPopup" class="popup">
-          <button class="close-button" @click="closeTreasureStats">&times;</button>
-          <TreasureStats />
-        </div>
+    <div v-if="showPopup" class="popup">
+      <button class="close-button" @click="closeTreasureStats">&times;</button>
+      <TreasureStats />
+    </div>
 
   </div>
 </template>
@@ -28,7 +30,7 @@ import TreasureStats from "@/components/TreasureStats.vue";
 
 export default {
   name: 'TreasureInfo',
-  components: {TreasureStats},
+  components: { TreasureStats },
   props: {
     id: String
   },
@@ -45,14 +47,22 @@ export default {
     },
     closeTreasureStats() {
       this.showPopup = false;
+    },
+    showClue() {
+      const clueDiv = document.getElementById('hint')
+      if (clueDiv.style.display == "none") {
+        clueDiv.style.display = "block"
+      } else {
+        clueDiv.style.display = "none"
+      }
     }
   },
   created() {
     TreasureService.getById(this.id).then((response) => {
-          this.treasure = response.data
-          document.getElementById("rating").setAttribute("src", require(`../assets/rating/rating_${this.treasure.score}.png`))
-          document.getElementById("treasureImage").setAttribute("src", TreasureService.getPicture(this.treasure.idTreasure))
-        }
+      this.treasure = response.data
+      document.getElementById("rating").setAttribute("src", require(`../assets/rating/rating_${this.treasure.score}.png`))
+      document.getElementById("treasureImage").setAttribute("src", TreasureService.getPicture(this.treasure.idTreasure))
+    }
     ).catch((error) => {
       console.log("Ha fallat get de tresor amb id" + this.id)
       console.log(error)
@@ -68,7 +78,6 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
 .popup-button {
   background-color: #a0deb1;
   color: black;
@@ -82,9 +91,18 @@ export default {
   border: 1px solid #84b893;
 }
 
-.popup-button:hover{
+#hintDiv{
+  display: flex;
+}
+.clue {
+  height: 50px;
+  width: 50px;
+}
+
+.popup-button:hover {
   background-color: #84b893;
 }
+
 .popup {
   position: fixed;
   top: 50%;
@@ -93,7 +111,7 @@ export default {
   background-color: white;
   padding: 40px;
   width: 60%;
-  height: 20%; 
+  height: 20%;
   max-width: 800px;
   max-height: 600px;
   border: 1px solid #ccc;
@@ -112,6 +130,7 @@ export default {
   border: none;
   cursor: pointer;
 }
+
 .treasure2 h3 {
   font-size: 50px;
 }
@@ -138,5 +157,6 @@ export default {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-}</style>
+}
+</style>
   
