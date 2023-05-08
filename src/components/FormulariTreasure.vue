@@ -8,7 +8,7 @@
     </div>
 
     <div class="form">
-      <form id="form">
+      <form id="form" @submit.prevent="sendTreasure">
         <div>
           <label for="name">Name </label>
           <input type="text" id="name" name="name" required v-model="treasure.name">
@@ -50,7 +50,7 @@
           </select>
         </div>
         <div class="image-container">
-          <input v-if="id === ''" @click.prevent="sendTreasure" class="form-submit" type="submit" value="Add"/>
+          <input v-if="id === ''" class="form-submit" type="submit" value="Add"/>
           <button v-if="id !== ''" @click.prevent="updateTreasure"><img src="../assets/icons/edit.png" alt="edit-icon"/>
           </button>
           <button v-if="id !== ''" @click.prevent="deleteTreasure"><img src="../assets/icons/borrar.png"
