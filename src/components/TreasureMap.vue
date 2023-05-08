@@ -1,6 +1,6 @@
 <template>
   <div class="treasure">
-    <img class="image" src="../assets/dummy.png" alt="treasure-image" />
+    <img class="image" :id="treasure.idTreasure" alt="treasure-image" />
     <div class="flex-direction:column">
       <h3>{{ treasure.name }}</h3>
       <div class="flex">
@@ -20,6 +20,8 @@
 <script>
 
 
+import TreasureService from "@/services/treasure.service";
+
 export default {
   name: 'TreasureMap',
   components: {},
@@ -33,7 +35,7 @@ export default {
     treasure: Object
   },
   mounted() {
-    document.getElementById(`${this.treasure.idTreasure}`).setAttribute("src", require(`../assets/rating/rating_${this.treasure.score}.png`))
+    document.getElementById(`${this.treasure.idTreasure}`).setAttribute("src", TreasureService.getPicturePath(this.treasure.idTreasure))
   },
   methods: {
     centerMap() {
