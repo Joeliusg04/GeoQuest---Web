@@ -10,6 +10,10 @@
     </div>
     <hr>
     <p> {{ treasure.description }}</p>
+    <img src="">
+    <div id="hint">
+      <p>{{ treasure.clue }}</p>
+    </div>
   </div>
 </template>
 
