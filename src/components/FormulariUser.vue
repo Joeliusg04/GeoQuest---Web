@@ -54,7 +54,7 @@ export default {
   props: {},
   data() {
     return {
-      FILE: require("../assets/icons/user.png"),
+      FILE: "",
       user: {
       }
     }
@@ -85,18 +85,33 @@ export default {
       const file = event.target.files[0];
       if (file) {
         const reader = new FileReader();
-        reader.onload = (e) => {
-          this.FILE = e.target.result
+        reader.onload = () => {
+          // this.FILE = e.target.result
+
+          document.getElementById("profile-pic").src = reader.result
+          this.FILE = event.target.files[0]
           this.user.photo = this.FILE.name
-          document.getElementById("profile-pic").src = this.FILE
         };
         reader.readAsDataURL(file);
       }
     },
     getImage(user) {
 
-      this.FILE = UserService.getPicture(user.idUser)
-      document.getElementById("profile-pic").src = UserService.getPicture(user.idUser)
+      UserService.getPicture(user.idUser).then((response)=>{
+        const bytes = new Uint8Array(response.data.length);
+        for (var i = 0; i < response.data.length; i++) {
+          bytes[i] = response.data.charCodeAt(i);
+        }
+
+        console.log(bytes)
+        const blob = new Blob(bytes, {type: response.headers["content-type"]})
+        console.log(blob)
+        this.FILE = new File([blob], this.user.photo, {type: response.headers["content-type"]})
+      }).catch((error)=>{
+        console.log(error)
+      })
+
+      document.getElementById("profile-pic").src = UserService.getPicturePath(user.idUser)
 
     },
   }

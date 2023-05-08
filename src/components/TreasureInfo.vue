@@ -61,7 +61,6 @@ export default {
     TreasureService.getById(this.id).then((response) => {
       this.treasure = response.data
       document.getElementById("rating").setAttribute("src", require(`../assets/rating/rating_${this.treasure.score}.png`))
-      document.getElementById("treasureImage").setAttribute("src", TreasureService.getPicture(this.treasure.idTreasure))
     }
     ).catch((error) => {
       console.log("Ha fallat get de tresor amb id" + this.id)

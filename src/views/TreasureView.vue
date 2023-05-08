@@ -54,7 +54,7 @@ export default {
       });
   },
   mounted(){
-    document.getElementById('imagen').setAttribute('src', treasureService.getPicture(this.$route.params.idTreasure) )
+    document.getElementById('imagen').setAttribute('src', treasureService.getPicturePath(this.$route.params.idTreasure) )
   }
 };
 </script>
