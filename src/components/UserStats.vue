@@ -1,5 +1,4 @@
 <template>
-  <h1>User Stats</h1>
   <div class="container">
     <div class="title">
       <h1>User Stats</h1>

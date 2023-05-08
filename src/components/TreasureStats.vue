@@ -1,5 +1,4 @@
 <template>
-  <h1>Treasure Stats</h1>
   <div class="container">
     <div class="title">
       <h1>Treasure Stats</h1>
