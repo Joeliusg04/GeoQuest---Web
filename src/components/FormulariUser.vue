@@ -1,12 +1,15 @@
 <template>
   <div class="flex">
     <div class="image-username">
-      <img class="user" src="../assets/icons/user.png" alt="user-profile-pic"/>
+      <img class="user" :src="user.profilePicture" alt="user-profile-pic" />
       <h2>{{ user.nickName }}</h2>
       <b>Level: {{ user.userLevel }}</b>
       <div class="button">
-        <img src="../assets/icons/subir.png" alt="upload-icon">
-        <p>Change your profile picture</p>
+        <label for="fileInput">
+          <input type="file" id="fileInput" @change="previewImage" style="display: none" />
+          <img class="upload-icon" src="../assets/icons/subir.png" alt="upload-icon" />
+          <p>Change your profile picture</p>
+        </label>
       </div>
     </div>
     <div class="form">
@@ -14,19 +17,18 @@
         <div>
           <label for="nombre">Username </label>
           <div class="input-icon-container">
-            <input type="text" id="nombre" name="nombre" placeholder="Username" v-model="user.nickName" required>
+            <input type="text" id="nombre" name="nombre" placeholder="Username" v-model="user.nickName" readonly>
             <span class="icon-container">
-                <img class="icon" src="../assets/icons/edit.png" alt="edit-icon"/>
-              </span>
+            </span>
           </div>
         </div>
         <div>
           <label for="email">Mail </label>
           <div class="input-icon-container">
-            <input type="text" id="email" name="email" placeholder="Mail" v-model="user.email" required/>
+            <input type="text" id="email" name="email" placeholder="Mail" v-model="user.email" required />
             <span class="icon-container">
-                <img class="icon" src="../assets/icons/edit.png" alt="edit-icon"/>
-              </span>
+              <img class="icon" src="../assets/icons/edit.png" alt="edit-icon" />
+            </span>
           </div>
         </div>
         <div>
@@ -34,30 +36,47 @@
           <div class="input-icon-container">
             <input type="password" id="password" name="password" placeholder="Password" required>
             <span class="icon-container">
-                <img class="icon" src="../assets/icons/edit.png" alt="edit-icon"/>
-              </span>
+              <img class="icon" src="../assets/icons/edit.png" alt="edit-icon" />
+            </span>
           </div>
         </div>
         <input class="create" type="submit" value="Update" @click="updateUser">
       </form>
     </div>
   </div>
-
-
 </template>
 
 <script>
 import UserService from "@/services/user.service";
+import TreasureService from "@/services/treasure.service";
 
 export default {
   name: 'FormulariUser',
   props: {},
   data() {
     return {
-      user: ""
+      user: {
+        nickName: "",
+        email: "",
+        profilePicture: require("../assets/icons/user.png")
+      }
     }
   },
   mounted() {
+
+    if (this.id !== "") {
+      console.log("hola")
+      TreasureService.getById(this.id).then((response) => {
+            console.log(response.data)
+            this.treasure = response.data
+            this.getImage(response.data)
+
+          }
+      ).catch((error) => {
+        console.log(error)
+      });
+    }
+
     UserService.getByNickname(JSON.parse(localStorage.getItem('user'))).then((response) => {
       console.log(response)
       this.user = response.data
@@ -67,8 +86,22 @@ export default {
   },
   methods: {
     updateUser() {
+    },
+    previewImage(event) {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          this.user.profilePicture = e.target.result;
+        };
+        reader.readAsDataURL(file);
+      }
+    },
+    getImage(treasure) {
 
-    }
+      document.getElementById("preview").src = TreasureService.getPicture(treasure.idTreasure)
+
+    },
   }
 }
 </script>
@@ -158,6 +191,5 @@ input {
 .create:hover {
   background-color: #84b893;
 }
-
 </style>
   
