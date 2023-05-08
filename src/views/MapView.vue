@@ -21,7 +21,7 @@
           </select>
           <label @click="displayFilters('location')" for="location">Location</label>
           <input type="text" placeholder="Example: Barcelona" id="location" name="location" style="display: none;">
-          <input type="submit" id="submit">
+          <input type="submit" value="Filter" id="submit">
         </form>
       </div>
     </div>
@@ -119,18 +119,6 @@ label {
   display: flex;
   align-items: start;
 }
-input,
-input,
-textarea {
-  margin-top: 5px;
-  padding: 5px;
-  border-radius: 5px;
-  border: 1px solid #84b893;
-  font-size: 16px;
-}
-.select {
-  margin-top: 1rem;
-}
 
 input, select {
   padding: 10px;
@@ -140,6 +128,7 @@ input, select {
   font-size: 16px;
   border: none;
   cursor: pointer;
+  margin-top: 1rem;
 }
 
 input:hover {
