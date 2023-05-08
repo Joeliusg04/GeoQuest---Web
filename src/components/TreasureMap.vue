@@ -129,8 +129,8 @@ export default {
 }
 
 .rating {
-  height: 100%;
-  width: 40%;
+  height: 90%;
+  width: 90%;
 }
 
 button,
