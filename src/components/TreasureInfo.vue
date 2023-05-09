@@ -6,6 +6,8 @@
 
       <b> Difficulty: {{ treasure.difficulty }} </b>
       <b>Location: {{ treasure.location }} </b>
+      <img class="fav" v-show="fav" src="../assets/icons/fav.png" @click="addOrRemoveFav">
+      <img class="fav" v-show="!fav" src="../assets/icons/nofav.png" @click="addOrRemoveFav">
     </div>
     <hr>
     <p> {{ treasure.description }}</p>
@@ -38,7 +40,8 @@ export default {
     return {
       treasure: "",
       showPopup: false,
-      showHint: false
+      showHint: false,
+      fav: false
     }
 
   },
@@ -50,11 +53,16 @@ export default {
       this.showPopup = false;
     },
     showClue() {
-      if (this.showHint== true){
+      if (this.showHint == true) {
         this.showHint = false
       } else {
         this.showHint = true
       }
+    },
+    addOrRemoveFav() {
+      if (this.fav == true) {
+        this.fav = false
+      } else this.fav = true
     }
   },
   created() {
@@ -90,9 +98,10 @@ export default {
   border: 1px solid #84b893;
 }
 
-#hintDiv{
+#hintDiv {
   display: flex;
 }
+
 .clue {
   height: 50px;
   width: 50px;
@@ -101,7 +110,10 @@ export default {
 .popup-button:hover {
   background-color: #84b893;
 }
-
+.fav {
+  height: 20px;
+  width: 20px;
+}
 .popup {
   position: fixed;
   top: 50%;

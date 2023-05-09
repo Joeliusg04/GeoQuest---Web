@@ -5,7 +5,8 @@
       <h3>{{ treasure.name }}</h3>
       <div class="flex">
         <div class="rating">
-          <span v-for="index in maxStars" :key="index" class="star" :class="{ filled: index <= treasure.score }">&#9733;</span>
+          <span v-for="index in maxStars" :key="index" class="star"
+            :class="{ filled: index <= treasure.score }">&#9733;</span>
         </div>
         <h4 class="difficulty">Difficulty: {{ treasure.difficulty }}</h4>
       </div>
@@ -13,6 +14,7 @@
         <button @click="centerMap">View on map</button>
         <a :href="link">Treasure info</a>
       </div>
+
     </div>
   </div>
 </template>
@@ -26,11 +28,11 @@ export default {
   name: 'TreasureMap',
   data() {
     return {
-      maxStars: 5
+      maxStars: 5,
     };
   },
   props: {
-    treasure: Object
+    treasure: Object,
   },
   mounted() {
     document.getElementById(`${this.treasure.idTreasure}`).setAttribute("src", TreasureService.getPicturePath(this.treasure.idTreasure))
@@ -73,7 +75,6 @@ export default {
   margin-top: 0;
   text-align: center;
 }
-
 .flex {
   display: flex;
   justify-content: space-around;
@@ -124,5 +125,4 @@ a {
 button:hover,
 a:hover {
   background-color: #2d6a4f;
-}
-</style>
+}</style>
