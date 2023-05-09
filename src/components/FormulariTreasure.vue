@@ -156,26 +156,44 @@ export default {
           console.log(blob)
           this.FILE = new File([blob], this.treasure.image, {type: response.headers["content-type"]})
 
+
+          const formData = new FormData()
+          console.log("Saludos" + this.FILE)
+          formData.append('image', this.FILE, this.FILE.name)
+          formData.append('body', JSON.stringify(this.treasure))
+          console.log(this.treasure)
+          TreasureService.update(formData, this.id).then((response) => {
+            console.log(response)
+            this.$router.push(`/treasure/${this.id}`)
+          }).catch(
+              (error) => {
+                console.log("Ha fallat! Hahaha ajuda2")
+                console.log(error)
+              }
+          )
         }).catch((error)=>{
           console.log(error)
         })
+      } else {
+        const formData = new FormData()
+        console.log("Saludos" + this.FILE)
+        formData.append('image', this.FILE, this.FILE.name)
+        formData.append('body', JSON.stringify(this.treasure))
+        console.log(this.treasure)
+        TreasureService.update(formData, this.id).then((response) => {
+          console.log(response)
+          this.$router.push(`/treasure/${this.id}`)
+        }).catch(
+            (error) => {
+              console.log("Ha fallat! Hahaha ajuda2")
+              console.log(error)
+            }
+        )
       }
 
 
 
-      const formData = new FormData()
-      formData.append('image', this.FILE, this.FILE.name)
-      formData.append('body', JSON.stringify(this.treasure))
-      console.log(this.treasure)
-      TreasureService.update(formData, this.id).then((response) => {
-        console.log(response)
-        this.$router.push(`/treasure/${this.id}`)
-      }).catch(
-          (error) => {
-            console.log("Ha fallat! Hahaha ajuda2")
-            console.log(error)
-          }
-      )
+
 
     },
 
@@ -192,7 +210,6 @@ export default {
 
 
     if (this.id !== "") {
-      console.log("hola")
       TreasureService.getById(this.id).then((response) => {
             this.treasure = response.data
             this.getImage(response.data)
@@ -202,6 +219,8 @@ export default {
         localStorage.setItem('error', error.response.data)
         this.$router.push("/error")
       });
+    } else {
+      document.getElementById('image').setAttribute('required','')
     }
 
 
