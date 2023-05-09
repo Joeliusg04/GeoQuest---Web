@@ -1,6 +1,7 @@
 <template>
   <nav-bar v-if="logged"/>
   <navbar-guest v-if="!logged"/>
+  <h1>What is geocaching?</h1>
   <div class="info">
     <iframe width="3560" height="315" src="https://www.youtube.com/embed/1YTqitVK-Ts" title="What is geocaching"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -56,11 +57,18 @@ export default {
 
 .info {
   display: flex;
-  padding: 5rem 10rem 0 10rem;
+  padding: 0rem 10rem 0 10rem;
 }
 
 iframe {
   margin-right: 3rem;
+}
+h1{
+  margin-left: 10rem;
+  margin-top: 3rem;
+  display: flex;
+  justify-content: start;
+  align-items: start;
 }
 
 h2 {
