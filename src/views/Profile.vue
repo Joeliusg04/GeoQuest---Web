@@ -17,9 +17,12 @@
       <h2 style="background-color:#a0deb1">Favs </h2>
       <ul>
         <li v-for="(favorite, index) in favs" :key="index">
-          <div class="flex"> <a :href="link">{{ favorite.name }}</a> - Location: {{ favorite.location }} <button
-              class="borrar"><img class="del-img" src="../assets/icons/borrar.png"></button> </div>
+          <div class="flex">
+            <a :href="favorite.favoriteLink">{{ favorite.name }}</a> - Location: {{ favorite.location }}
+            <button class="borrar" @click="deleteFav(idTreasure)"><img class="del-img" src="../assets/icons/borrar.png"></button>
+          </div>
         </li>
+
       </ul>
     </div>
     <div v-if="showReviews" class="popup">
@@ -43,6 +46,7 @@ import UserService from "@/services/user.service";
 import FavService from "@/services/fav.service";
 import MiniReview from "@/components/MiniReview.vue"
 import reviewService from "@/services/review.service";
+
 
 
 export default {
@@ -103,7 +107,27 @@ export default {
     link() {
       return `${window.location.origin}/treasure/${this.treasure.idTreasure}`;
     }
-  }
+  },
+  mounted() {
+  UserService.getByNickname(JSON.parse(localStorage.getItem('user')))
+    .then((response) => {
+      const user = response.data;
+      FavService.getAllFavs(user.idUser)
+        .then((response) => {
+          this.favs = response.data.map((favorite) => ({
+            ...favorite,
+            favoriteLink: `${window.location.origin}/treasure/${favorite.idTreasure}`
+          }));
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+}
+
 }
 </script>
 
