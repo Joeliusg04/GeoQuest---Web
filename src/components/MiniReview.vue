@@ -1,14 +1,14 @@
 <template>
-    <div>
-        <img :id="review.idReview">
-        <p>{{ treasure.name }}</p>
-    </div>
+    <tr>
+        <td class="name">{{ treasure.name }}</td>
+        <td><img :id="review.idReview"></td>
+    </tr>
 </template>
 
 <script>
 import treasureService from "@/services/treasure.service";
 import UserService from "@/services/user.service";
-import ReviewService from "@/services/review.service";
+// import ReviewService from "@/services/review.service";
 
 export default {
     name: 'MiniReview',
@@ -27,7 +27,7 @@ export default {
 
             this.user = response.data
             document.getElementById(this.review.idReview).setAttribute('src', require(`../assets/rating/rating_${this.review.rating}.png`))
-            document.getElementById(`${this.review.idUser}$${this.review.idReview}`).setAttribute('src', ReviewService.getPicturePath(this.review.idTreasure, this.review.idReview))
+            // document.getElementById(`${this.review.idUser}$${this.review.idReview}`).setAttribute('src', ReviewService.getPicturePath(this.review.idTreasure, this.review.idReview))
 
         }).catch((error) => {
             console.log(error)
@@ -58,4 +58,19 @@ export default {
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+img{
+    height: 20%;
+    width: 20%;
+
+}
+td{
+    display: flex;
+    justify-content: center;
+    background-color: #8c996A;
+}
+.name{
+    background-color: #48603D;
+    color: white;
+}
+</style>
