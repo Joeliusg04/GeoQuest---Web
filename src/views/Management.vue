@@ -1,5 +1,6 @@
 <template>
   <nav-bar/>
+  <router-link v-show="this.$route.params.idTreasure !== ''" to="/management">Crear nou tresor</router-link>
   <FormulariTreasure v-bind:id="this.$route.params.idTreasure"/>
   <div v-if="this.$route.params.idTreasure!==''">
     <ReportInfo v-for="(report, index) of reports" v-bind:key="index" v-bind:report="report"/>
