@@ -32,7 +32,7 @@ class ReviewService {
 
 
     getAllByUser(idUser) {
-        return axios.get(API_URL + `/treasure/${idUser}/reviews`, {headers: authHeader()})
+        return axios.get(API_URL + `user/${idUser}/reviews`, {headers: authHeader()})
     }
 
 
