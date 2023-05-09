@@ -2,12 +2,12 @@
   <div>
     <nav-bar />
     <FormulariUser />
-    <button class="popup-button" @click="displayUserStats">Mostrar UserStats</button>
+    <button class="popup-button" @click="displayUserStats">Show your stats</button>
     <button class="popup-button" @click="displayFavs">
       <img src="../assets/icons/favorito.png" class="favorite-icon">
     </button>
     <button class="popup-button" @click="displayReviews"><img src="../assets/icons/like.png"
-        class="favorite-icon"></button>
+        class="reviews-icon"></button>
     <div v-if="showUserStats" class="popup">
       <button class="close-button" @click="displayUserStats">&times;</button>
       <UserStats />
@@ -173,20 +173,6 @@ table {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-.popup2 {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: white;
-  padding: 40px;
-  width: 80%;
-  max-width: 600px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-}
-
 .close-button {
   position: absolute;
   top: 10px;
@@ -196,10 +182,6 @@ table {
   background: none;
   border: none;
   cursor: pointer;
-}
-
-.popup2 h2 {
-  margin-top: 0;
 }
 
 ul {
@@ -238,6 +220,14 @@ table {
   border: none;
   border-collapse: collapse;
   
+}
+.reviews-icon{
+  width: 20px;
+  height: 15px;
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
 }
 </style>
 
