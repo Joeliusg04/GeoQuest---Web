@@ -67,7 +67,7 @@ router.beforeEach((to, from, next) => {
     const publicPages = ['/login', '/register', '/', '/error'];
     const authRequired = routes.filter(x => !publicPages.includes(x.path)).map(x => x.path).includes(to.path);
     const loggedIn = localStorage.getItem('logged');
-
+    const
     // trying to access a restricted page + not logged in
     // redirect to login page
     if (authRequired && loggedIn !== "true") {
@@ -77,6 +77,24 @@ router.beforeEach((to, from, next) => {
     }
 });
 */
+
+router.beforeEach((to, from, next) => {
+    const publicPages = ['/login','/register','/','/error']
+    const managementPages = ['/management']
+
+    const role = JSON.parse(localStorage.getItem('role'));
+    const logged = localStorage.getItem('user')
+    console.log(role==="Admin")
+
+    if ((logged===null || logged===undefined) && !publicPages.includes(to.path)){
+        next('/login')
+    } else if (role!=="Admin" && managementPages.includes(to.path)){
+        localStorage.setItem('error',"You cannot enter this page")
+        next('/error')
+    } else {
+        next()
+    }
+})
 
 
 export default router;
