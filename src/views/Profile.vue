@@ -14,16 +14,7 @@
     </div>
     <div v-if="showFavs" class="popup">
       <button class="close-button" @click="displayFavs">&times;</button>
-      <h2 style="background-color:#a0deb1">Favs </h2>
-      <ul>
-        <li v-for="(favorite, index) in favs" :key="index">
-          <div class="flex">
-            <a :href="favorite.favoriteLink">{{ favorite.name }}</a> - Location: {{ favorite.location }}
-            <button class="borrar" @click="deleteFav(idTreasure)"><img class="del-img" src="../assets/icons/borrar.png"></button>
-          </div>
-        </li>
-
-      </ul>
+      <ShowFavs v-for="(fav,index) of favs" v-bind:key="index" v-bind:favorite="fav"/>
     </div>
     <div v-if="showReviews" class="popup">
       <table>
@@ -46,12 +37,13 @@ import UserService from "@/services/user.service";
 import FavService from "@/services/fav.service";
 import MiniReview from "@/components/MiniReview.vue"
 import reviewService from "@/services/review.service";
+import ShowFavs from "@/components/ShowFavs.vue";
 
 
 
 export default {
   name: "ProfileView",
-  components: { UserStats, NavBar, FormulariUser, Footer, MiniReview },
+  components: { UserStats, NavBar, FormulariUser, Footer, MiniReview, ShowFavs },
   data() {
     return {
       showUserStats: false,
