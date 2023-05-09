@@ -8,8 +8,8 @@
           <label @click="displayFilters('difficulty')" for="difficulty">Difficulty</label>
           <select id="difficulty" name="difficulty" style="display: none;">
             <option name="select" value="none">--Select difficulty--</option>
-            <option name="easy" value="Noob">Easy</option>
-            <option name="medium" value="Normal">Medium</option>
+            <option name="easy" value="Noob">Noob</option>
+            <option name="medium" value="Normal">Normal</option>
             <option name="hard" value="Hard">Hard</option>
           </select>
           <label @click="displayFilters('rating')" for="rating">Rating</label>
