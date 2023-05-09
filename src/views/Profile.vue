@@ -1,12 +1,24 @@
 <template>
   <div>
-    <nav-bar/>
-    <FormulariUser/>
+    <nav-bar />
+    <FormulariUser />
     <button class="popup-button" @click="showUserStats">Mostrar UserStats</button>
-    <Footer/>
+    <button class="popup-button" @click="showPopupFavs">
+      <img src="../assets/icons/favorito.png" class="favorite-icon">
+    </button>
+    <Footer />
     <div v-if="showPopup" class="popup">
       <button class="close-button" @click="closeUserStats">&times;</button>
-      <UserStats/>
+      <UserStats />
+    </div>
+    <div v-if="showPopup2" class="popup2">
+      <button class="close-button" @click="closeFavs">&times;</button>
+      <h2>Favs </h2>
+      <ul>
+        <li v-for="(favorite, index) in favs" :key="index">
+          {{ favorite.name }}
+        </li>
+      </ul>
     </div>
   </div>
 </template>
@@ -16,13 +28,16 @@ import FormulariUser from "@/components/FormulariUser.vue";
 import Footer from "@/components/Footer.vue";
 import NavBar from "@/components/Navbar.vue";
 import UserStats from "@/components/UserStats.vue";
+import FavService from "@/services/fav.service";
 
 export default {
   name: "ProfileView",
   components: { UserStats, NavBar, FormulariUser, Footer },
   data() {
     return {
-      showPopup: false
+      showPopup: false,
+      showPopup2: false,
+      favs: []
     };
   },
   methods: {
@@ -31,8 +46,22 @@ export default {
     },
     closeUserStats() {
       this.showPopup = false;
+    },
+    showPopupFavs() {
+      this.showPopup2 = true;
+    },
+    closeFavs() {
+      this.showPopup2 = false;
     }
-  }
+  },
+  mounted() {
+    FavService.getAllFavs(JSON.parse(localStorage.getItem('user'))).then((response) => {
+      console.log(response)
+      this.favs = response.data
+    }).catch((error) => {
+      console.log(error)
+    })
+}
 }
 </script>
 
@@ -51,10 +80,34 @@ export default {
   border: 1px solid #84b893;
 }
 
-.popup-button:hover{
+.popup-button:hover {
   background-color: #84b893;
 }
+
+.favorite-icon {
+  width: 15px;
+  height: 15px;
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
 .popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 40px;
+  width: 80%;
+  max-width: 600px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.popup2 {
   position: fixed;
   top: 50%;
   left: 50%;
@@ -77,5 +130,18 @@ export default {
   background: none;
   border: none;
   cursor: pointer;
+}
+
+.popup2 h2 {
+  margin-top: 0;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  margin-bottom: 10px;
 }
 </style>
