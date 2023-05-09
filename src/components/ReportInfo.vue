@@ -4,7 +4,10 @@
     <div class="report2">
       <div class="username-date">
         <!--        <h4> {{ user.username }} - {{ review.solved }} </h4> -->
+        <div>
         <h4>Reported by: {{ user.nickName }} - Date: {{ report.reportDate }} </h4>
+      </div>
+        <button class="delete"><img class="delete-image" src="../assets/icons/borrar.png"></button>
       </div>
       <div class="report-text">
         <p v-if="report.reportInfo.length > 300" class="report-text-scroll">{{ report.reportInfo }}</p>
@@ -53,17 +56,31 @@ export default {
 .report2 {
   width: 100%;
 }
-
+.delete{
+  display: flex;
+align-items: center;
+  background-color: red;
+  margin: 0;
+  padding: 0;
+}
 .report2 p {
   margin: 2rem;
   align-items: center;
   text-align: left;
 }
 
+
 .username-date {
   display: flex;
   justify-content: space-around;
+  align-items: center;
 }
+.delete-image{
+  height: 20px;
+  width: 20px;
+}
+
+
 
 .username-rating h4 {
   margin-right: 10px;
@@ -72,7 +89,9 @@ export default {
   text-align: left;
 
 }
-
+button{
+  height: 50%;
+}
 
 .report-text {
   max-height: 150px;
