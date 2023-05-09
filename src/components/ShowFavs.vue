@@ -1,11 +1,9 @@
 <template>
     <div class="flex-column bg-green">
-        <h2>Favs</h2>
         <div class="flex-column">
             <div class="flex">
                 <a :href="favorite.favoriteLink">{{ favorite.name }}</a> - Location: {{ favorite.location }}
-                <button class="borrar" @click="deleteFav"><img class="del-img"
-                        src="../assets/icons/borrar.png"></button>
+                <button class="borrar" @click="deleteFav"><img class="del-img" src="../assets/icons/borrar.png"></button>
             </div>
         </div>
     </div>
@@ -14,16 +12,17 @@
 <script>
 
 import FavService from '@/services/fav.service';
+import UserService from '@/services/user.service';
 
 export default {
     name: "ShowFavs",
     components: {},
     data() {
         return {
-            
+
         }
     },
-    props:{
+    props: {
         favorite: Object
     },
     methods: {
@@ -33,40 +32,56 @@ export default {
             } else this.showFavs = false
         },
         deleteFav() {
-            FavService.delete(this.favorite.idTreasure).then((response) => {
-                alert(response.data)
-                this.$router.push("/profile")
-            }).catch((error) => {
-                console.log(error)
-            })
-        }
+            UserService.getByNickname(JSON.parse(localStorage.getItem('user')))
+                .then((response) => {
+                    const user = response.data;
+                    FavService.deleteFav(user.idUser, this.favorite.idTreasure,).then((response) => {
+                        alert(response.data)
+                        this.$router.push("/profile")
+                    }).catch((error) => {
+                        console.log(error)
+                    })
+                }).catch((error)=> {
+                    console.log(error)
+                })
+            }
     },
-    mounted() {
+        mounted() {
 
-    
-    },
-    computed: {
-        favoriteLink(){
-            return `${window.location.origin}/treasure/${this.favorite.idTreasure}`
+
+        },
+        computed: {
+            favoriteLink() {
+                return `${window.location.origin}/treasure/${this.favorite.idTreasure}`
+            }
         }
+
     }
-
-}
 
 </script>
 
 <style>
-
-.flex-column{
+.flex-column {
     display: flex;
     flex-direction: column;
+    align-items: center;
 }
 
-.bg-green{
+.bg-green {
     background-color: rgb(153, 226, 153);
 }
 
-.flex{
+.flex {
+    font-weight: bold;
     display: flex;
+}
+
+.del-img {
+    width: 10px;
+    height: 10px;
+}
+
+.button {
+    text-align: right;
 }
 </style>
