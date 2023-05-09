@@ -63,16 +63,22 @@ export default {
   },
   methods: {
     displayUserStats() {
+      this.showFavs = false
+      this.showReviews = false
       if (this.showUserStats == false) {
         this.showUserStats = true
       } else this.showUserStats = false
     },
     displayFavs() {
+      this.showUserStats = false
+      this.showReviews = false
       if (this.showFavs == false) {
         this.showFavs = true
       } else this.showFavs = false
     },
     displayReviews() {
+      this.showFavs = false
+      this.showUserStats = false
       if (this.showReviews == false) {
         this.showReviews = true
       } else this.showReviews = false
