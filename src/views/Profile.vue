@@ -16,8 +16,12 @@
       <h2 style="background-color:#a0deb1">Favs </h2>
       <ul>
         <li v-for="(favorite, index) in favs" :key="index">
-          <div class="flex"> <a :href="link">{{ favorite.name }}</a> - Location: {{ favorite.location }} <button class="borrar"><img class="del-img" src="../assets/icons/borrar.png"></button> </div>
+          <div class="flex">
+            <a :href="favorite.favoriteLink">{{ favorite.name }}</a> - Location: {{ favorite.location }}
+            <button class="borrar" @click="deleteFav(idTreasure)"><img class="del-img" src="../assets/icons/borrar.png"></button>
+          </div>
         </li>
+
       </ul>
     </div>
   </div>
@@ -30,6 +34,7 @@ import NavBar from "@/components/Navbar.vue";
 import UserStats from "@/components/UserStats.vue";
 import UserService from "@/services/user.service";
 import FavService from "@/services/fav.service";
+
 
 export default {
   name: "ProfileView",
@@ -53,30 +58,36 @@ export default {
     },
     closeFavs() {
       this.showPopup2 = false;
-    }
-  },
-  mounted() {
-
-    UserService.getByNickname(JSON.parse(localStorage.getItem('user'))).then((response) => {
-      console.log(response)
-      const user = response.data
-      FavService.getAllFavs(user.idUser).then((response) => {
-        console.log(response)
-        this.favs = response.data
+    },
+    deleteFav(idTreasure) {
+      FavService.delete(idTreasure).then((response) => {
+        alert(response.data)
+        this.$router.push("/profile")
       }).catch((error) => {
         console.log(error)
       })
-
-
-    }).catch((error) => {
-      console.log(error)
-    })
-  },
-  computed: {
-    link() {
-      return `${window.location.origin}/treasure/${this.treasure.idTreasure}`;
     }
-  }
+  },
+  mounted() {
+  UserService.getByNickname(JSON.parse(localStorage.getItem('user')))
+    .then((response) => {
+      const user = response.data;
+      FavService.getAllFavs(user.idUser)
+        .then((response) => {
+          this.favs = response.data.map((favorite) => ({
+            ...favorite,
+            favoriteLink: `${window.location.origin}/treasure/${favorite.idTreasure}`
+          }));
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+}
+
 }
 </script>
 
@@ -170,12 +181,12 @@ li {
   margin: 0;
 }
 
-.del-img{
+.del-img {
   width: 20px;
   height: 20px;
 }
 
-.del-img:hover{
+.del-img:hover {
   background-color: white;
 }
 </style>
