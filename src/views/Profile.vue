@@ -13,6 +13,7 @@
       <UserStats />
     </div>
     <div v-if="showFavs" class="popup">
+      <h2 class="bg-green">Favs</h2>
       <button class="close-button" @click="displayFavs">&times;</button>
       <ShowFavs v-for="(fav,index) of favs" v-bind:key="index" v-bind:favorite="fav"/>
     </div>
@@ -226,6 +227,10 @@ table {
   border: none;
   padding: 0;
   margin: 0;
+}
+.bg-green{
+  padding: 10px;
+  background-color: #a0deb1;
 }
 </style>
 
