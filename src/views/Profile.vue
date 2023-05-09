@@ -28,6 +28,7 @@ import FormulariUser from "@/components/FormulariUser.vue";
 import Footer from "@/components/Footer.vue";
 import NavBar from "@/components/Navbar.vue";
 import UserStats from "@/components/UserStats.vue";
+import UserService from "@/services/user.service";
 import FavService from "@/services/fav.service";
 
 export default {
@@ -55,13 +56,22 @@ export default {
     }
   },
   mounted() {
-    FavService.getAllFavs(JSON.parse(localStorage.getItem('user'))).then((response) => {
+
+    UserService.getByNickname(JSON.parse(localStorage.getItem('user'))).then((response) => {
       console.log(response)
-      this.favs = response.data
+      const user = response.data
+      FavService.getAllFavs(user.idUser).then((response) => {
+        console.log(response)
+        this.favs = response.data
+      }).catch((error) => {
+        console.log(error)
+      })
+
+
     }).catch((error) => {
       console.log(error)
     })
-}
+  }
 }
 </script>
 
