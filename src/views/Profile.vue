@@ -13,10 +13,10 @@
     </div>
     <div v-if="showPopup2" class="popup2">
       <button class="close-button" @click="closeFavs">&times;</button>
-      <h2>Favs </h2>
+      <h2 style="background-color:#a0deb1">Favs </h2>
       <ul>
         <li v-for="(favorite, index) in favs" :key="index">
-          {{ favorite.name }}
+          <div class="flex"> <a :href="link">{{ favorite.name }}</a> - Location: {{ favorite.location }} <button class="borrar"><img class="del-img" src="../assets/icons/borrar.png"></button> </div>
         </li>
       </ul>
     </div>
@@ -71,6 +71,11 @@ export default {
     }).catch((error) => {
       console.log(error)
     })
+  },
+  computed: {
+    link() {
+      return `${window.location.origin}/treasure/${this.treasure.idTreasure}`;
+    }
   }
 }
 </script>
@@ -147,11 +152,30 @@ export default {
 }
 
 ul {
+  margin-top: -3.3%;
   list-style-type: none;
-  padding: 0;
+  font-weight: bold;
+  padding: 20px;
+  background-color: #84b893;
 }
 
 li {
   margin-bottom: 10px;
+}
+
+.borrar {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+.del-img{
+  width: 20px;
+  height: 20px;
+}
+
+.del-img:hover{
+  background-color: white;
 }
 </style>
