@@ -41,6 +41,7 @@
           </div>
         </div>
         <input class="create" type="submit" value="Update" @click.prevent="updateUser">
+        <input class="delete" type="submit" value="Delete user" @click.prevent="deleteUser">
       </form>
     </div>
   </div>
@@ -114,6 +115,9 @@ export default {
       document.getElementById("profile-pic").src = UserService.getPicturePath(user.idUser)
 
     },
+    deleteUser(){
+      
+    }
   }
 }
 </script>
@@ -202,6 +206,20 @@ input {
 
 .create:hover {
   background-color: #84b893;
+}
+.delete {
+  padding: 10px;
+  border-radius: 5px;
+  margin-left: 2rem;
+  font-size: 16px;
+  cursor: pointer;
+  border: 1px solid black;
+  background-color: #D10000;
+  color: white;
+}
+
+.delete:hover {
+  background-color: #A30000;
 }
 </style>
   
