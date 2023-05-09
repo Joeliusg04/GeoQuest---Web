@@ -31,7 +31,7 @@
         <MiniReview v-for="(review, index) of reviews" :key="index" v-bind:review="review"></MiniReview>
       </table>
       <div>
-      </div>
+  </div>
     </div>
   </div>
   <Footer />
@@ -76,42 +76,26 @@ export default {
       if (this.showReviews == false) {
         this.showReviews = true
       } else this.showReviews = false
-    }
-  },
-  mounted() {
-
-    UserService.getByNickname(JSON.parse(localStorage.getItem('user'))).then((response) => {
-      console.log(response)
-      const user = response.data
-      FavService.getAllFavs(user.idUser).then((response) => {
-        console.log(response)
-        this.favs = response.data
+    },
+    closeFavs() {
+      this.showPopup2 = false;
+    },
+    deleteFav(idTreasure) {
+      FavService.delete(idTreasure).then((response) => {
+        alert(response.data)
+        this.$router.push("/profile")
       }).catch((error) => {
         console.log(error)
       })
-
-      reviewService.getAllByUser(user.idUser).then((response) => {
-        console.log(response)
-        this.reviews = response.data
-      }).catch((error) => {
-        console.log(error)
-      })
-
-
-
-    }).catch((error) => {
-      console.log(error)
-    })
-  },
-  computed: {
-    link() {
-      return `${window.location.origin}/treasure/${this.treasure.idTreasure}`;
     }
   },
+  
+  
   mounted() {
   UserService.getByNickname(JSON.parse(localStorage.getItem('user')))
     .then((response) => {
       const user = response.data;
+
       FavService.getAllFavs(user.idUser)
         .then((response) => {
           this.favs = response.data.map((favorite) => ({
@@ -122,13 +106,22 @@ export default {
         .catch((error) => {
           console.log(error);
         });
+
+      reviewService.getAllByUser(user.idUser)
+        .then((response) => {
+          console.log(response);
+          this.reviews = response.data;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     })
     .catch((error) => {
       console.log(error);
     });
 }
 
-}
+  }
 </script>
 
 <style scoped>
@@ -165,7 +158,6 @@ table {
   margin: auto;
   border: none;
   border-collapse: collapse;
-  
 }
 .popup {
   position: fixed;
@@ -180,6 +172,21 @@ table {
   border-radius: 4px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
+
+.popup2 {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 40px;
+  width: 80%;
+  max-width: 600px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
 .close-button {
   position: absolute;
   top: 10px;
@@ -222,4 +229,15 @@ li {
 .del-img:hover {
   background-color: white;
 }
+
+table {
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin: auto;
+  border: none;
+  border-collapse: collapse;
+  
+}
 </style>
+
