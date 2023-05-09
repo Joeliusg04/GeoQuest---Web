@@ -1,7 +1,7 @@
 <template>
-  <nav-bar/>
-  <div id="container">
-    <div id="search">
+  <nav-bar />
+  <div id="container" v-show="!emptyFilter">
+    <div id="search" v-show="!emptyFilter">
       <img @click="displayFilters('filters')" src="../assets/icons/filter.png" class="filter">
       <div id="filters" style="display: none;">
         <form>
@@ -27,12 +27,16 @@
     </div>
     <div id="treasure-info">
       <TreasureMap v-on:centerMap="centerMap" v-for="(treasure, index) of treasures" v-bind:key="index"
-                   v-bind:treasure="treasure"/>
+        v-bind:treasure="treasure" />
     </div>
-    <MapComponent v-if="!emptyFilter" class="map" ref="mapa" v-bind:treasures="treasures" v-bind:size="size"/>
-    <p v-if="emptyFilter">Empty Filter</p>
+    <MapComponent v-if="!emptyFilter" class="map" ref="mapa" v-bind:treasures="treasures" v-bind:size="size" />
+    
   </div>
-  <Footer/>
+  <div v-show="emptyFilter" class="nofiltersfound">
+    <p id="emptyFilter" v-if="emptyFilter"></p>
+    <img src="../assets/icons/robot.png">
+  </div>
+  <Footer />
 </template>
 
 <script>
@@ -45,7 +49,7 @@ import TreasureService from "@/services/treasure.service";
 
 export default {
   name: "BigMap",
-  components: {NavBar, Footer, TreasureMap, MapComponent},
+  components: { NavBar, Footer, TreasureMap, MapComponent },
 
   data() {
     return {
@@ -85,53 +89,71 @@ export default {
   created() {
     const urlParams = new URLSearchParams(window.location.search);
     TreasureService.getAll().then(
-        (response) => {
-          console.log(response.data)
-          this.treasures = response.data;
+      (response) => {
+        console.log(response.data)
+        this.treasures = response.data;
 
 
-          const diff = urlParams.get('difficulty')
-          const rating = urlParams.get('rating')
-          const loc = urlParams.get('location')
-          console.log(diff)
-          console.log(rating)
-          console.log(loc)
-          if (diff !== "none" && diff !== null) {
-            this.treasures = this.treasures.filter((t) => t.difficulty === diff)
-            console.log("filtrant diff")
-          }
-          if (rating !== "none" && rating !== null) {
-            switch (rating) {
-              case "2":
-                this.treasures = this.treasures.filter((t) => t.score <= 2)
-                break;
-              case "4":
-                this.treasures = this.treasures.filter((t) => t.score <= 4 && t.score > 2)
-                break;
-              case "5":
-                this.treasures = this.treasures.filter((t) => t.score > 4 && t.score <= 5)
-                break;
-            }
-
-          }
-
-          if (loc !== "" && loc !== null) {
-            this.treasures = this.treasures.filter((t) => t.location === loc)
-          }
-
-          if (this.treasures.length > 0) {
-            this.$refs.mapa.treasuresF = this.treasures
-          } else {
-            this.emptyFilter = true
-          }
-
-
-        },
-        (error) => {
-          console.log(error)
-          const code = error.code;
-          this.$router.push(`/error/${code}`);
+        const diff = urlParams.get('difficulty')
+        const rating = urlParams.get('rating')
+        const loc = urlParams.get('location')
+        console.log(diff)
+        console.log(rating)
+        console.log(loc)
+        if (diff !== "none" && diff !== null) {
+          this.treasures = this.treasures.filter((t) => t.difficulty === diff)
+          console.log("filtrant diff")
         }
+        if (rating !== "none" && rating !== null) {
+          switch (rating) {
+            case "2":
+              this.treasures = this.treasures.filter((t) => t.score <= 2)
+              break;
+            case "4":
+              this.treasures = this.treasures.filter((t) => t.score <= 4 && t.score > 2)
+              break;
+            case "5":
+              this.treasures = this.treasures.filter((t) => t.score > 4 && t.score <= 5)
+              break;
+          }
+
+        }
+
+        if (loc !== "" && loc !== null) {
+          this.treasures = this.treasures.filter((t) => t.location === loc)
+        }
+
+        if (this.treasures.length > 0) {
+          this.$refs.mapa.treasuresF = this.treasures
+        } else {
+          this.emptyFilter = true
+          setTimeout(function () {
+            window.location.href = '/map';
+          }, 5000);
+          let count = 5;
+
+          const countdown = setInterval(function () {
+            
+            const message = document.getElementById("emptyFilter")
+            message.innerText = "No results found, wait! You will be redirected in ... "+count
+            count--;
+
+
+            if (count < 0) {
+              clearInterval(countdown);
+              console.log("¡Cuenta regresiva terminada!");
+            }
+          }, 1000);
+
+        }
+
+
+      },
+      (error) => {
+        console.log(error)
+        const code = error.code;
+        this.$router.push(`/error/${code}`);
+      }
     )
   },
   watch: {
@@ -146,7 +168,6 @@ export default {
 </script>
 
 <style scoped>
-
 .map {
   border: black solid 1px;
   position: sticky;
@@ -158,15 +179,27 @@ export default {
   height: 100px;
   width: 100px;
 }
-
 label {
   margin-top: 20px;
   font-weight: bold;
   display: flex;
   align-items: start;
 }
+#emptyFilter{
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 20px;
 
-input, select {
+}
+.nofiltersfound{
+  margin-top: 10rem;
+  margin-bottom: 10rem;
+}
+input,
+select {
   padding: 10px;
   border-radius: 5px;
   background-color: #a0deb1;

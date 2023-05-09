@@ -1,9 +1,11 @@
 <template>
   <div class="review">
     <div class="review2">
+      <img :id="getId" alt="review-picture">
       <div class="username-rating">
         <h4> {{ user.nickName }} </h4>
         <img :id="review.idReview" class="rating" alt="rating-icon"/>
+        <p>{{review.rating}}</p>
       </div>
       <div class="review-text">
         <p v-if="review.opinion.length > 300" class="review-text-scroll">{{ review.opinion }}</p>
@@ -14,6 +16,7 @@
 </template>
 <script>
 import UserService from "@/services/user.service";
+import ReviewService from "@/services/review.service";
 
 export default {
   name: 'ReviewInfo',
@@ -28,10 +31,15 @@ export default {
   mounted() {
 
     UserService.getById(this.review.idUser).then((response) => {
+
       this.user = response.data
+      document.getElementById(this.review.idReview).setAttribute('src',require(`../assets/rating/rating_${this.review.rating}.png`))
+      document.getElementById(`${this.review.idUser}$${this.review.idReview}`).setAttribute('src',ReviewService.getPicturePath(this.review.idTreasure,this.review.idReview))
+
     }).catch((error) => {
       console.log(error)
-    })
+    });
+
 
     // TODO Acabar de carregar la imatge de la review (cal solucionar el tema imatges a FormulariTreasure tambe)
     /*    ReviewService.getPicture(this.review.idTreasure,this.review.idReview).then((response)=>{
@@ -41,6 +49,11 @@ export default {
           console.log(error)
         })*/
 
+  },
+  computed: {
+    getId(){
+      return this.review.idUser+"$"+this.review.idReview
+    }
   }
 }
 
