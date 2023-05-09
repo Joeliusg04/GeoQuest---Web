@@ -11,8 +11,16 @@ class ReviewService {
     }
 
 
-    getPicturePath(treasureID, reviewID) {
-        return API_URL + `/treasure/${treasureID}/reviews/${reviewID}/picture`
+    getOneByTreasure(idTreasure,idReview) {
+        return axios.get(API_URL + `/treasure/${idTreasure}/reviews/${idReview}`,{headers: authHeader()})
+    }
+
+    getPicture(idTreasure, idReview){
+        return axios.get(API_URL + `/treasure/${idTreasure}/reviews/${idReview}/picture`,{headers: authHeader()})
+    }
+
+    getPicturePath(idTreasure, idReview) {
+        return API_URL + `/treasure/${idTreasure}/reviews/${idReview}/picture`
     }
 
     createNew(idTreasure, review) {
@@ -28,6 +36,13 @@ class ReviewService {
 
     deleteByTreasure(idTreasure, idReview) {
         return axios.delete(API_URL + `/treasure/${idTreasure}/reviews/${idReview}`, {headers: authHeader()})
+    }
+
+    update(idTreasure, idReview, formData){
+        return axios.put(API_URL + `/treasure/${idTreasure}/reviews/${idReview}`, formData, {
+            'Content-Type': 'multipart/form-data',
+            'Authorization': authHeader().Authorization
+        })
     }
 
 

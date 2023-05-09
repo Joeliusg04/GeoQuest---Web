@@ -11,6 +11,7 @@
         <p v-if="review.opinion.length > 300" class="review-text-scroll">{{ review.opinion }}</p>
         <p v-else class="review-text-normal">{{ review.opinion }}</p>
       </div>
+      <router-link v-show="link!==''" v-bind:to="link">Editar</router-link>
     </div>
   </div>
 </template>
@@ -22,7 +23,8 @@ export default {
   name: 'ReviewInfo',
   data() {
     return {
-      user: ""
+      user: "",
+      link: ""
     }
   },
   props: {
@@ -36,18 +38,13 @@ export default {
       document.getElementById(this.review.idReview).setAttribute('src',require(`../assets/rating/rating_${this.review.rating}.png`))
       document.getElementById(`${this.review.idUser}$${this.review.idReview}`).setAttribute('src',ReviewService.getPicturePath(this.review.idTreasure,this.review.idReview))
 
+      if (this.user.nickName===JSON.parse(localStorage.getItem('user'))){
+        this.link = `/treasure/${this.review.idTreasure}/review/${this.review.idReview}`
+      }
+
     }).catch((error) => {
       console.log(error)
     });
-
-
-    // TODO Acabar de carregar la imatge de la review (cal solucionar el tema imatges a FormulariTreasure tambe)
-    /*    ReviewService.getPicture(this.review.idTreasure,this.review.idReview).then((response)=>{
-          console.log(response)
-            }
-        ).catch((error)=>{
-          console.log(error)
-        })*/
 
   },
   computed: {

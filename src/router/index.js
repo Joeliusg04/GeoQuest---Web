@@ -7,6 +7,7 @@ import HomePage from "@/views/HomePage.vue";
 import ErrorPage from "@/views/ErrorPage.vue";
 import Profile from "@/views/Profile.vue";
 import Management from "@/views/Management.vue";
+import Review from "@/views/Review.vue";
 
 
 const routes = [
@@ -47,6 +48,12 @@ const routes = [
         path: "/management/:idTreasure?",
         name: "Management",
         component: Management,
+        props: true
+    },
+    {
+      path: "/treasure/:idTreasure/review/:idReview?",
+        name: "Review",
+        component: Review,
         props: true
     },
     {
