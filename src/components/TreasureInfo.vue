@@ -20,19 +20,23 @@
       <button class="popup-button" @click="showTreasureStats">Show TreasureStats</button>
       <div v-if="showStatsPopup" class="popup">
         <button class="close-button" @click="closeStatsPopup">&times;</button>
-        <TreasureStats />
+        <TreasureStats/>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+
+
 import TreasureService from "@/services/treasure.service";
 import TreasureStats from "@/components/TreasureStats.vue";
+import FavService from "@/services/fav.service";
+import UserService from "@/services/user.service";
 
 export default {
   name: 'TreasureInfo',
-  components: { TreasureStats },
+  components: {TreasureStats},
   props: {
     id: String,
   },
@@ -58,23 +62,71 @@ export default {
       this.showStatsPopup = false;
     },
     addOrRemoveFav() {
-      this.fav = !this.fav;
+      if (this.fav === false) {
+        console.log("1")
+        UserService.getByNickname(JSON.parse(localStorage.getItem('user'))).then((response) => {
+          const user = response.data
+          console.log(this.treasure)
+          FavService.addToFav(this.treasure.idTreasure, user.idUser).then((response) => {
+            console.log(response)
+            this.fav = true
+          }).catch((error) => {
+            console.log(error)
+          })
+        }).catch((error) => {
+          console.log(error)
+        })
+
+
+        this.fav = true
+      } else {
+        console.log("2")
+        UserService.getByNickname(JSON.parse(localStorage.getItem('user'))).then((response) => {
+          const user = response.data
+          FavService.deleteFav(user.idUser, this.treasure.idTreasure).then((response) => {
+            console.log(response)
+            this.fav = true
+          }).catch((error) => {
+            console.log(error)
+          })
+        }).catch((error) => {
+          console.log(error)
+        })
+
+
+        this.fav = false
+      }
     }
   },
   created() {
-    TreasureService.getById(this.id)
-      .then((response) => {
-        this.treasure = response.data;
-        document.getElementById("rating").setAttribute("src", require(`../assets/rating/rating_${this.treasure.score}.png`));
-      })
-      .catch((error) => {
-        console.log(`Failed to get treasure with id ${this.id}`);
-        console.log(error);
-      });
-  }
-};
+    TreasureService.getById(this.id).then((response) => {
+          this.treasure = response.data
+          document.getElementById("rating").setAttribute("src", require(`../assets/rating/rating_${this.treasure.score}.png`))
+
+          // document.getElementById("rating").setAttribute("src", require(`../assets/rating/rating_${this.treasure.score}.png`))
+          UserService.getByNickname(JSON.parse(localStorage.getItem('user'))).then((response) => {
+            const user = response.data
+            FavService.getFav(user.idUser, this.treasure.idTreasure).then((response) => {
+              this.fav = response.data
+            }).catch((error) => {
+              console.log(error)
+              this.fav = false
+            })
+          }).catch((error) => {
+            console.log(error)
+          })
+        }
+    ).catch((error) => {
+      console.log("Ha fallat get de tresor amb id" + this.id)
+      console.log(error)
+    })
+  },
+
+
+}
 </script>
 
+<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .popup-button {
   background-color: #a0deb1;
