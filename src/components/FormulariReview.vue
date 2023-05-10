@@ -1,37 +1,34 @@
 <template>
-
-  <div class="flex">
+  <div class="flex-column">
     <h1>Treasure: PLACEHOLDER</h1>
     <form id="form" @submit.prevent="sendReview">
       <div id="imgDiv" class="image-review">
-        <img id="preview" alt="preview"/>
+        <img id="preview" alt="preview" />
         <div class="review-image">
-          <input id="image" type="file" @change="onFileUpload">
+          <input id="image" name="add" type="file" @change="onFileUpload">
         </div>
       </div>
       <div class="data">
-        <div>
+        <div class="rating">
           <label for="rating">Rating </label>
-          <input type="range" min="0" max="5" step="0.1" id="rating" name="rating" required v-model="review.rating">
-          <p>{{review.rating}}</p>
+          <div class="rate-bar">
+            <input type="range" min="0" max="5"  id="rating" name="rating" required v-model="review.rating">
+            <p>{{ review.rating }}</p>
+          </div>
         </div>
-        <div>
+        <div class="opinion">
           <label for="opinion">Opinion </label>
           <textarea id="opinion" name="opinion" required v-model="review.opinion"></textarea>
         </div>
-      </div>
-
-      <div class="image-container">
-        <input v-if="id === ''" class="form-submit" type="submit" value="Add"/>
-        <button v-if="id !== ''" @click.prevent="updateReview"><img src="../assets/icons/edit.png" alt="edit-icon"/>
+        <input v-if="id === ''" class="form-submit" type="submit" value="Add" />
+        <button v-if="id !== ''" @click.prevent="updateReview"><img src="../assets/icons/edit.png" alt="edit-icon" />
         </button>
         <button v-if="id !== ''" @click.prevent="deleteReview"><img src="../assets/icons/borrar.png"
-                                                                    alt="delete-icon"/></button>
+            alt="delete-icon" /></button>
       </div>
 
     </form>
   </div>
-
 </template>
 
 <script>
@@ -65,6 +62,19 @@ export default {
     }
   },
   methods: {
+  handleTextareaInput() {
+    const textarea = document.getElementById('opinion');
+    textarea.style.height = ''; // Reiniciar la altura para calcular el nuevo tamaño correctamente
+
+    const textareaContainer = document.querySelector('.textarea-container');
+    const isTextareaScrollable = textarea.scrollHeight > textareaContainer.clientHeight;
+
+    if (isTextareaScrollable) {
+      textareaContainer.classList.add('scrollable');
+    } else {
+      textareaContainer.classList.remove('scrollable');
+    }
+  },
     onFileUpload(event) {
       this.FILE = event.target.files[0]
       this.review.photo = this.FILE.name
@@ -110,8 +120,8 @@ export default {
             bytes[i] = response.data.charCodeAt(i);
           }
 
-          const blob = new Blob(bytes, {type: response.headers["content-type"]})
-          this.FILE = new File([blob], this.review.photo, {type: response.headers["content-type"]})
+          const blob = new Blob(bytes, { type: response.headers["content-type"] })
+          this.FILE = new File([blob], this.review.photo, { type: response.headers["content-type"] })
 
           const formData = new FormData()
 
@@ -174,5 +184,85 @@ export default {
 </script>
 
 <style scoped>
+h1{
+  margin-bottom: 5rem;
+}
+.flex-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 10rem;
+  margin-top: 4rem;
+}
 
+#imgDiv {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin-right: 2rem;
+}
+
+#form {
+  display: flex;
+  justify-content: space-between;
+}
+
+.data {
+  display: block;
+  margin-left: 10rem;
+}
+
+.form-submit {
+  margin-top: 1rem;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+}
+
+.form-submit:hover {
+  background-color: #3e8e41;
+}
+
+.rate-bar{
+  display: flex;
+  flex-direction: row;
+}
+
+.opinion label{
+  font-size: 20px;
+  font-weight: bold;
+  padding: 1rem;
+}
+
+.rating{
+  max-width: 250px;
+  min-width: 250px;
+}
+.rating label{
+  font-size: 20px;
+  font-weight: bold;
+  padding: 1rem;
+}
+
+.rating input{
+  margin-left: 3rem;
+}
+
+.opinion {
+  display: flex;
+  flex-direction: column;
+}
+
+.opinion .textarea-container {
+  max-height: 100px;
+  overflow-y: auto;
+  margin-bottom: 1rem;
+}
+
+.opinion .textarea-container.scrollable {
+  overflow-y: scroll;
+}
 </style>
