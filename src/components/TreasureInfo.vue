@@ -12,14 +12,14 @@
     <hr>
     <p>{{ treasure.description }}</p>
     <div class="flex">
-      <img @click="showClue" src="../assets/icons/vista.png" class="clue">
+      <img @click="displayClue" src="../assets/icons/vista.png" class="clue">
       <div v-if="showCluePopup" class="popup">
-        <button class="close-button" @click="closeCluePopup">&times;</button>
+        <button class="close-button" @click="displayClue">&times;</button>
         <p class="clue-text">{{ treasure.clue }}</p>
       </div>
-      <button class="popup-button" @click="showTreasureStats">Show TreasureStats</button>
+      <button class="popup-button" @click="displayTreasureStats">Show TreasureStats</button>
       <div v-if="showStatsPopup" class="popup">
-        <button class="close-button" @click="closeStatsPopup">&times;</button>
+        <button class="close-button" @click="displayTreasureStats">&times;</button>
         <TreasureStats/>
       </div>
     </div>
@@ -49,17 +49,17 @@ export default {
     };
   },
   methods: {
-    showClue() {
-      this.showCluePopup = true;
+    displayTreasureStats(){
+      this.showCluePopup = false
+      if (this.showStatsPopup == false){
+        this.showStatsPopup = true
+      } else this.showStatsPopup = false
     },
-    closeCluePopup() {
-      this.showCluePopup = false;
-    },
-    showTreasureStats() {
-      this.showStatsPopup = true;
-    },
-    closeStatsPopup() {
-      this.showStatsPopup = false;
+    displayClue(){
+      this.showStatsPopup = false
+      if (this.showCluePopup == false){
+        this.showCluePopup = true
+      } else this.showCluePopup = false
     },
     addOrRemoveFav() {
       if (this.fav === false) {

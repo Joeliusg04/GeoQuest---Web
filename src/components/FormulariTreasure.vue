@@ -11,7 +11,7 @@
       <div class="data">
         <div>
           <label for="name">Name </label>
-          <input type="text" id="name" name="name" required v-model="treasure.name">
+          <input type="text" id="name" name="name" maxlength="30" required v-model="treasure.name">
         </div>
         <div>
           <label for="description">Description </label>
@@ -198,11 +198,14 @@ export default {
     },
 
     deleteTreasure() {
+      console.log(this.id)
       TreasureService.delete(this.id).then((response) => {
+        console.log("asier")
         alert(response.data)
         this.$router.push("/management")
       }).catch((error) => {
         console.log(error)
+        console.log("no entra")
       })
     }
   },

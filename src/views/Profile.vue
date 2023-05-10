@@ -13,14 +13,15 @@
       <UserStats />
     </div>
     <div v-if="showFavs" class="popup">
-      <h2 class="bg-green">Favs</h2>
       <button class="close-button" @click="displayFavs">&times;</button>
-      <ShowFavs v-for="(fav,index) of favs" v-bind:key="index" v-bind:favorite="fav"/>
+      <ShowFavs class="favs" v-for="(fav,index) of favs" v-bind:key="index" v-bind:favorite="fav"/>
+      <p v-show="favs.length === 0">No favourite treasures found</p>
     </div>
     <div v-if="showReviews" class="popup">
       <table>
         <button class="close-button" @click="displayReviews">&times;</button>
         <MiniReview v-for="(review, index) of reviews" :key="index" v-bind:review="review"></MiniReview>
+        <p v-show="reviews.length === 0">No reviews found</p>
       </table>
       <div>
   </div>
@@ -157,6 +158,9 @@ table {
   margin: auto;
   border: none;
   border-collapse: collapse;
+}
+.favs{
+  border: 1px solid black;
 }
 .popup {
   position: fixed;

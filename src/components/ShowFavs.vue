@@ -2,8 +2,9 @@
     <div class="flex-column bg-green">
         <div class="flex-column">
             <div class="flex">
-                <a :href="favorite.favoriteLink">{{ favorite.name }}</a> - Location: {{ favorite.location }}
-                <button class="borrar" @click="deleteFav"><img class="del-img" src="../assets/icons/borrar.png"></button>
+                <div>
+                <a :href="favorite.favoriteLink">{{ favorite.name }}</a> - Location: {{ favorite.location }}</div>
+                <img @click="deleteFav" class="del-img" src="../assets/icons/borrar.png">
             </div>
         </div>
     </div>
@@ -74,14 +75,22 @@ export default {
 .flex {
     font-weight: bold;
     display: flex;
+    justify-content: space-around;
+    align-items: center;
 }
 
 .del-img {
     width: 10px;
     height: 10px;
+    cursor: pointer;
+    margin-left: 1rem;
 }
 
 .button {
     text-align: right;
+}
+a{
+    text-decoration: none;
+    color: black;
 }
 </style>
