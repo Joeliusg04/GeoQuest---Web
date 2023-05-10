@@ -89,7 +89,7 @@ export default {
 
 .review-content {
   flex-grow: 1;
-  margin-left: 8rem;
+  margin-left: 6rem;
 }
 
 .username-rating {

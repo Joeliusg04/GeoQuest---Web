@@ -36,8 +36,8 @@ export default {
                 .then((response) => {
                     const user = response.data;
                     FavService.deleteFav(user.idUser, this.favorite.idTreasure,).then((response) => {
-                        alert(response.data)
-                        this.$router.push("/profile")
+                        console.log(response.data)
+                        location.reload()
                     }).catch((error) => {
                         console.log(error)
                     })

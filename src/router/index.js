@@ -96,7 +96,7 @@ router.beforeEach((to, from, next) => {
     if ((logged===null || logged===undefined) && !publicPages.includes(to.path)){
         next('/login')
     } else if (role!=="Admin" && managementPages.includes(to.path)){
-        localStorage.setItem('error',"You cannot enter this page")
+        localStorage.setItem('error',JSON.stringify("You cannot enter this page"))
         next('/error')
     } else {
         next()

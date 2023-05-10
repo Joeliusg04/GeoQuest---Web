@@ -6,11 +6,13 @@ const API_URL = 'http://127.0.0.1:8090';
 
 class FavService {
 
-    addToFav(treasure, userId) {
-        return axios.post(API_URL + `/user/${userId}/favs`, treasure, {
+    addToFav(idTreasure, idUser) {
+        console.log(idUser)
+        console.log(idTreasure)
+        return axios.post(API_URL + `/user/${idUser}/favs`, parseInt(idTreasure), {
             headers: {
-                'Content-Type': 'multipart/form-data',
-                'Authorization': authHeader().Authorization
+                'Authorization': authHeader().Authorization,
+                'Content-Type': "application/json"
             },
         });
     }
