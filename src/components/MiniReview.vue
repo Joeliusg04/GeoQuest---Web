@@ -1,7 +1,7 @@
 <template>
     <tr>
         <td class="name">{{ treasure.name }}</td>
-        <td><img :id="review.idReview"></td>
+        <td><img :id="review.idReview"><img class="edit" @click="editReview" src="../assets/icons/edit.png"></td>
     </tr>
 </template>
 
@@ -50,6 +50,12 @@ export default {
             console.log(error)
         });
     },
+    methods: {
+        editReview(){
+            window.location.href = "/treasure/"+this.treasure.idTreasure+"/review/"+this.review.idReview
+
+        }
+    },
     computed: {
         getId() {
             return this.review.idUser + "$" + this.review.idReview
@@ -72,5 +78,11 @@ td{
 .name{
     background-color: #48603D;
     color: white;
+}
+.edit{
+    height: 25px;
+    width: 25px;
+    cursor: pointer;
+
 }
 </style>
