@@ -1,7 +1,7 @@
 <template>
   <div class="flex-column">
-    <h1>Treasure: PLACEHOLDER</h1>
-    <form id="form" @submit.prevent="sendReview">
+    <h1>{{ treasure.name }}</h1>
+  <form id="form" @submit.prevent="sendReview">
       <div id="imgDiv" class="image-review">
         <img id="preview" alt="preview" />
         <div class="review-image">
@@ -9,22 +9,29 @@
         </div>
       </div>
       <div class="data">
-        <div class="rating">
-          <label for="rating">Rating </label>
-          <div class="rate-bar">
-            <input type="range" min="0" max="5"  id="rating" name="rating" required v-model="review.rating">
-            <p>{{ review.rating }}</p>
-          </div>
+        <div class="rate">
+          <input type="radio" id="star5" name="rate" value="5" />
+          <label for="star5" title="5">5 stars</label>
+          <input type="radio" id="star4" name="rate" value="4" />
+          <label for="star4" title="4">4 stars</label>
+          <input type="radio" id="star3" name="rate" value="3" />
+          <label for="star3" title="3">3 stars</label>
+          <input type="radio" id="star2" name="rate" value="2" />
+          <label for="star2" title="2">2 stars</label>
+          <input type="radio" id="star1" name="rate" value="1" />
+          <label for="star1" title="1">1 star</label>
         </div>
         <div class="opinion">
-          <label for="opinion">Opinion </label>
+          <label class="title" for="opinion">Opinion </label>
           <textarea id="opinion" name="opinion" required v-model="review.opinion"></textarea>
+          <div class="completed"><input type="checkbox" id="solved" name="completed" value="true"><label for="completed">Mark as
+            completed</label></div>
         </div>
         <input v-if="id === ''" class="form-submit" type="submit" value="Add" />
-        <button v-if="id !== ''" @click.prevent="updateReview"><img src="../assets/icons/edit.png" alt="edit-icon" />
-        </button>
-        <button v-if="id !== ''" @click.prevent="deleteReview"><img src="../assets/icons/borrar.png"
-            alt="delete-icon" /></button>
+        <img class="buttonimage" v-if="id !== ''" @click.prevent="updateReview" src="../assets/icons/edit.png" alt="edit-icon" />
+        
+        <img class="buttonimage" v-if="id !== ''" @click.prevent="deleteReview" src="../assets/icons/borrar.png"
+            alt="delete-icon" />
       </div>
 
     </form>
@@ -34,6 +41,7 @@
 <script>
 import ReviewService from "@/services/review.service";
 import UserService from "@/services/user.service";
+import TreasureService from "@/services/treasure.service";
 
 export default {
   name: "FormulariReview",
@@ -46,6 +54,9 @@ export default {
         opinion: "",
         rating: 0,
         photo: "",
+      },
+      treasure: {
+        name: ""
       }
     }
   },
@@ -100,6 +111,9 @@ export default {
     },
 
     updateReview() {
+
+      this.getRating()
+      
       if (this.FILE === null) {
         ReviewService.getPicture(this.review.idTreasure, this.review.idReview).then((response) => {
           const bytes = new Uint8Array(response.data.length);
@@ -139,6 +153,21 @@ export default {
         });
 
       }
+    },
+    deleteReview(){
+      ReviewService.deleteByTreasure(this.$route.params.idTreasure, this.$route.params.idReview).then((response)=>{
+            console.log("funciona"+response)
+      })
+
+    },
+    getRating(){
+      let radioButtons = document.getElementsByName('rate');
+         for (let radio of radioButtons) {
+            if (radio.checked) {
+              this.review.rating = radio.value
+               console.log("Ha funcionado")
+            }
+         }
     }
   },
   mounted() {
@@ -147,6 +176,7 @@ export default {
       ReviewService.getOneByTreasure(this.$route.params.idTreasure, this.$route.params.idReview).then((response) => {
         this.review = response.data
         console.log(response.data)
+      
         UserService.getByNickname(JSON.parse(localStorage.getItem('user'))).then((response) => {
           if (this.review.idUser !== response.data.idUser) {
             localStorage.setItem('error', JSON.stringify("You have been a very bad boy"))
@@ -166,12 +196,109 @@ export default {
         console.log(error)
       })
     }
+
+    TreasureService.getById(this.$route.params.idTreasure).then((response)=>{
+      this.treasure = response.data
+    }).catch((error) => {
+            console.log(error)
+     });
   }
 }
 </script>
 
 <style scoped>
+template{
+  margin: 0;
+  padding: 0;
+}
+.flex-column{
+  display: flex;
+  margin: 4rem 5rem 10rem 5rem;
+  flex-direction: column;
+  align-items: center;
+}
+.buttonimage{
+  height: 50px;
+  width: 50px;
+  cursor: pointer;
+}
+#form{
+  display: flex;
+  justify-content: space-around;
+  width: 80%;
+  height: 100%;
+}
+#imgDiv{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin-right: 2rem;
+}
+.title{
+  display: flex;
+  justify-content: center;
+  font-size: 20px;
+  font-weight: bold;
+  padding: 1rem;
+
+}
+.completed{
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+#preview{
+  border: 1px solid black;
+  border-radius: 50px;
+  margin-bottom: 1rem;
+}
+#image{
+  border: 1px solid black;
+}
 h1{
+  margin-bottom: 5rem;
+}
+
+
+.rate {
+  justify-content: center;
+  align-items: center;
+    float: left;
+    height: 46px;
+    padding: 0 10px;
+    margin-bottom: 2rem;
+}
+.rate:not(:checked) > input {
+    position:absolute;
+    top:-9999px;
+}
+.rate:not(:checked) > label {
+    float:right;
+    width:1em;
+    overflow:hidden;
+    white-space:nowrap;
+    cursor:pointer;
+    font-size:30px;
+    color:#ccc;
+}
+.rate:not(:checked) > label:before {
+    content: '★ ';
+}
+.rate > input:checked ~ label {
+    color: #ffc700;    
+}
+.rate:not(:checked) > label:hover,
+.rate:not(:checked) > label:hover ~ label {
+    color: #deb217;  
+}
+.rate > input:checked + label:hover,
+.rate > input:checked + label:hover ~ label,
+.rate > input:checked ~ label:hover,
+.rate > input:checked ~ label:hover ~ label,
+.rate > label:hover ~ input:checked ~ label {
+    color: #c59b08;
+}
+/* h1{
   margin-bottom: 5rem;
 }
 .flex-column {
@@ -193,7 +320,12 @@ h1{
   display: flex;
   justify-content: space-between;
 }
+#imgDiv, #imgDiv *{
+  border: 1px solid black;
+}
+#preview{
 
+}
 .data {
   display: block;
   margin-left: 10rem;
@@ -241,6 +373,5 @@ h1{
 .opinion {
   display: flex;
   flex-direction: column;
-}
-
+} */
 </style>
