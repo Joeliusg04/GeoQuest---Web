@@ -12,7 +12,7 @@
         <div class="rating">
           <label for="rating">Rating </label>
           <div class="rate-bar">
-            <input type="range" min="0" max="5" step="0.1" id="rating" name="rating" required v-model="review.rating">
+            <input type="range" min="0" max="5"  id="rating" name="rating" required v-model="review.rating">
             <p>{{ review.rating }}</p>
           </div>
         </div>
