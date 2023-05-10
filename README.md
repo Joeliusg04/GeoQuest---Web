@@ -1,62 +1,92 @@
 # GeoQuest Web
 
-¡Bienvenido al repositorio de GeoQuest Web! Este repositorio contiene el código fuente para la versión web de GeoQuest, un juego de búsqueda y aventura basado en la ubicación geográfica.
+Welcome to the GeoQuest Web repository! This repository contains the source code for the web version of GeoQuest, a location-based adventure and quest game.
 
-## Tabla de Contenidos
+## Table of Contents
 
-- [Introducción](#introducción)
-- [Características](#características)
-- [Instalación](#instalación)
-- [Uso](#uso)
+- [Introduction](#introduction)
+- [Features](#features)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Contributing](#contributing)
+- [License](#license)
 
-## Introducción
+## Introduction
 
-GeoQuest Web es una aplicación web diseñada para proporcionar una experiencia de juego inmersiva y emocionante basada en la ubicación geográfica de los jugadores. El juego permite a los usuarios participar en misiones, resolver acertijos y descubrir tesoros mientras exploran el mundo real.
+GeoQuest Web is a web application designed to provide an immersive and exciting gaming experience based on players' geographical location. The game allows users to participate in quests, solve puzzles, and discover treasures while exploring the real world.
 
-Este repositorio contiene el código fuente de la aplicación web, desarrollado utilizando tecnologías como HTML, CSS y JavaScript.
+This repository holds the source code for the web application, developed using technologies such as HTML, CSS, and JavaScript.
 
-## Características
+## Features
 
-- **Misiones basadas en la ubicación**: los usuarios pueden embarcarse en misiones emocionantes que están vinculadas a ubicaciones geográficas reales.
-- **Resolución de acertijos**: las misiones desafían a los jugadores a resolver acertijos y enigmas para avanzar en el juego.
-- **Exploración del mapa**: los jugadores pueden explorar el mapa interactivo para descubrir misiones y tesoros ocultos.
-- **Sistema de puntuación**: los jugadores acumulan puntos al completar misiones y desafíos, lo que les permite desbloquear nuevas funciones y logros.
-- **Interfaz de usuario intuitiva**: la aplicación web ofrece una interfaz de usuario fácil de usar y atractiva, que permite a los jugadores navegar y disfrutar del juego sin problemas.
+- **Map Exploration**: Players can explore the interactive map to discover missions and hidden treasures.
+- **Scoring System**: Players earn points by completing quests and challenges, allowing them to unlock new features and achievements.
+- **Intuitive User Interface**: The web application offers a user-friendly and visually appealing interface, enabling players to navigate and enjoy the game seamlessly.
 
-## Instalación
+## Installation
 
-Para instalar y configurar GeoQuest Web en tu entorno local, sigue estos pasos:
+To install and set up GeoQuest Web in your local environment, follow these steps:
 
-1. Clona el repositorio:
+1. Clone the repository:
 
    ```bash
    git clone https://gitlab.com/asier.barranco.7e6/geoquest-web.git
    ```
 
-2. Navega al directorio del proyecto:
+2. Navigate to the project directory:
 
    ```bash
    cd geoquest-web
    ```
 
-3. Abre el archivo `index.html` en tu navegador web preferido.
+3. Open the `index.html` file in your preferred web browser.
 
-¡Listo! Ahora podrás disfrutar de GeoQuest Web en tu entorno local.
+That's it! Now you can enjoy GeoQuest Web in your local environment.
 
-## Uso
+## Usage
 
-Una vez que hayas abierto la aplicación web de GeoQuest, puedes seguir estos pasos para comenzar tu aventura:
+Once you have opened the GeoQuest web application, you can follow these steps to begin your adventure:
 
-1. Crea una cuenta de usuario o inicia sesión con una cuenta existente.
+1. Create a user account or log in with an existing account.
 
-2. Explora el mapa interactivo para descubrir misiones disponibles.
+2. Explore the interactive map to discover available quests.
 
-3. Selecciona una misión y lee su descripción y objetivos.
+3. Select a quest and read its description and objectives.
 
-4. Utiliza las pistas y la información proporcionada para resolver los acertijos y avanzar en la misión.
+4. Use the provided clues and information to solve puzzles and progress in the quest.
 
-5. Una vez que hayas completado una misión, recibirás recompensas y podrás desbloquear nuevas misiones.
+5. Upon completing a quest, you will receive rewards and unlock new missions.
 
-6. Sigue explorando, resuelve más acertijos y descubre tesoros ocultos en el mundo del juego.
+6. Keep exploring, solve more puzzles, and discover hidden treasures in the game world.
 
-Para obtener más información sobre el uso y las funciones disponibles, consulta la documentación del proyecto.
+For more information on usage and available features, please refer to the project documentation.
+
+## Contributing
+
+Contributions to GeoQuest Web are welcome and appreciated! If you wish to contribute to this project, follow these steps:
+
+1. Make sure you have cloned the repository and set up the project on your local machine.
+
+2. Create a new branch for your feature or bug fix:
+
+   ```bash
+   git checkout -b feature/your-feature-name
+   ```
+
+3. Make the necessary changes and commit your code.
+
+4. Push your changes to the repository:
+
+   ```bash
+   git push origin feature/your-feature-name
+   ```
+
+5. Open a pull request in this repository, targeting the appropriate branch.
+
+Please ensure that your contributions adhere to the project's coding standards and include relevant documentation.
+
+## License
+
+The GeoQuest Web project is licensed under the [MIT License](LICENSE). Feel free to use, modify, and distribute this code as permitted by the license.
+
+Please note that this README template is meant as a starting point. You should update it to accurately reflect the details of your specific project.
