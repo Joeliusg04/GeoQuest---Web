@@ -11,10 +11,12 @@
         <h4 class="difficulty">Difficulty: {{ treasure.difficulty }}</h4>
       </div>
       <div class="buttons">
+        <div>
         <button @click="centerMap">View on map</button>
         <a :href="link">Treasure info</a>
       </div>
-
+        <img @click="redirectAdmin" v-if="admin" class="config" src="../assets/icons/config.png">
+      </div>
     </div>
   </div>
 </template>
@@ -29,6 +31,7 @@ export default {
   data() {
     return {
       maxStars: 5,
+      admin: true
     };
   },
   props: {
@@ -41,6 +44,9 @@ export default {
     centerMap() {
       console.log("center 1");
       this.$emit('centerMap', this.treasure);
+    },
+    redirectAdmin(){
+      window.location.href = '/management/'+this.treasure.idTreasure;
     }
   },
   computed: {
@@ -81,11 +87,10 @@ export default {
   margin-top: 0;
   align-items: center;
 }
-
 .buttons {
   display: flex;
-  justify-content: space-around;
   margin-top: 1rem;
+  align-items: center;
 }
 
 .treasure {
@@ -96,7 +101,16 @@ export default {
   margin-left: 2rem;
   margin-right: 2rem;
 }
+.config{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 20px;
+  width: 20px;
+  cursor: pointer;
+  margin-left: 2rem;
 
+}
 .image {
   height: 200px;
   width: 200px;
@@ -120,6 +134,7 @@ a {
   cursor: pointer;
   transition: background-color 0.3s ease;
   text-decoration: none;
+  margin-left: 1rem;
 }
 
 button:hover,

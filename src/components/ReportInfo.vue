@@ -5,9 +5,9 @@
       <div class="username-date">
         <!--        <h4> {{ user.username }} - {{ review.solved }} </h4> -->
         <div>
-        <h4>Reported by: {{ user.nickName }} - Date: {{ report.reportDate }} </h4>
-      </div>
-        <button class="delete"><img class="delete-image" src="../assets/icons/borrar.png"></button>
+          <h4>Reported by: {{ user.nickName }} - Date: {{ report.reportDate }} </h4>
+        </div>
+        <button class="delete" @click="deleteReport"><img class="delete-image" src="../assets/icons/borrar.png"></button>
       </div>
       <div class="report-text">
         <p v-if="report.reportInfo.length > 300" class="report-text-scroll">{{ report.reportInfo }}</p>
@@ -21,6 +21,7 @@
 <script>
 
 import UserService from "@/services/user.service";
+import ReportService from "@/services/report.service";
 
 export default {
   name: "ReportInfo",
@@ -38,6 +39,16 @@ export default {
     }).catch((error) => {
       console.log(error)
     })
+  },
+  methods: {
+    deleteReport() {
+      ReportService.deleteByUser(this.user.idUser, this.report.idReport).then((response) => {
+        console.log(response.data)
+        location.reload()
+      }).catch((error) => {
+        console.log(error)
+      })
+    }
   }
 }
 </script>
@@ -56,13 +67,15 @@ export default {
 .report2 {
   width: 100%;
 }
-.delete{
+
+.delete {
   display: flex;
-align-items: center;
+  align-items: center;
   background-color: red;
   margin: 0;
   padding: 0;
 }
+
 .report2 p {
   margin: 2rem;
   align-items: center;
@@ -75,11 +88,11 @@ align-items: center;
   justify-content: space-around;
   align-items: center;
 }
-.delete-image{
+
+.delete-image {
   height: 20px;
   width: 20px;
 }
-
 
 
 .username-rating h4 {
@@ -89,7 +102,8 @@ align-items: center;
   text-align: left;
 
 }
-button{
+
+button {
   height: 50%;
 }
 
