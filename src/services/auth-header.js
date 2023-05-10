@@ -1,9 +1,9 @@
 export default function authHeader() {
-    let user = JSON.parse(localStorage.getItem('user'));
+    let token = JSON.parse(localStorage.getItem('token'));
 
     // En cas de tenir un usuari logged amb un accessToken, retorna l'Authorization Header HTTP
-    if (user && user.accessToken) {
-        return {Authorization: 'Bearer ' + user.accessToken};
+    if (token) {
+        return {Authorization: 'Bearer ' + token};
     } else {
         return {};
     }

@@ -41,6 +41,13 @@ class UserService {
     getSolved(id) {
         return axios.get(API_URL + `/user/${id}/treasures`, {headers: authHeader()})
     }
+
+
+    getUsername(){
+        return axios.get(API_URL + "/user/secret",{headers: authHeader()})
+
+    }
+
 }
 
 

@@ -1,8 +1,11 @@
 import AuthService from '../services/auth.service';
 
-const user = JSON.parse(localStorage.getItem('user'));
+const token = JSON.parse(localStorage.getItem('token'));
+const user = JSON.parse(localStorage.getItem('user'))
+localStorage.removeItem('user')
 
-const initialState = user
+
+const initialState = token
     ? {status: {loggedIn: true}, user: user}
     : {status: {loggedIn: false}, user: null};
 
@@ -33,7 +36,11 @@ export const auth = {
                     return Promise.reject(error);
                 }
             )
-        }
+        },
+        logout({ commit }) {
+            AuthService.logout();
+            commit('logout');
+        },
     },
     mutations: {
         loginSuccess(state, user) {
