@@ -5,25 +5,22 @@
       <h3>{{ treasure.name }}</h3>
       <div class="flex">
         <div class="rating">
-          <span v-for="index in maxStars" :key="index" class="star"
-            :class="{ filled: index <= treasure.score }">&#9733;</span>
+          <span v-for="index in maxStars" :key="index" class="star" :class="{ filled: index <= treasure.score }">&#9733;</span>
         </div>
         <h4 class="difficulty">Difficulty: {{ treasure.difficulty }}</h4>
       </div>
       <div class="buttons">
         <div>
-        <button @click="centerMap">View on map</button>
-        <a :href="link">Treasure info</a>
-      </div>
-        <img @click="redirectAdmin" v-if="admin" class="config" src="../assets/icons/config.png">
+          <button @click="centerMap">View on map</button>
+          <a :href="link">Treasure info</a>
+        </div>
+        <img @click="redirectAdmin" v-if="Admin" class="config" src="../assets/icons/config.png">
       </div>
     </div>
   </div>
 </template>
 
 <script>
-
-
 import TreasureService from "@/services/treasure.service";
 
 export default {
@@ -31,14 +28,15 @@ export default {
   data() {
     return {
       maxStars: 5,
-      admin: true
+      Admin: false
     };
   },
   props: {
     treasure: Object,
   },
   mounted() {
-    document.getElementById(`${this.treasure.idTreasure}`).setAttribute("src", TreasureService.getPicturePath(this.treasure.idTreasure))
+    document.getElementById(`${this.treasure.idTreasure}`).setAttribute("src", TreasureService.getPicturePath(this.treasure.idTreasure));
+    this.Admin = JSON.parse(localStorage.getItem("role")) === "Admin"
   },
   methods: {
     centerMap() {
