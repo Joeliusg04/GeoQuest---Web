@@ -2,7 +2,7 @@
   <Navbar/>
   <div>
     <h1>ERROR!</h1>
-    <p>{{ test }}</p>
+    <p>{{ msg }}</p>
     <img class="errImg" src="../assets/icons/phonemap.png" alt="phonemap-error-icon">
     <img class="errImg" src="../assets/icons/robot.png" alt="robot-error-icon">
   </div>
@@ -22,20 +22,26 @@ export default {
   },
   data() {
     return {
-      test: ""
+      msg: ""
     }
-  },
-  props: {
-    msg: String
   },
   created() {
-    if (localStorage.getItem('error') !== null) {
-      this.test = localStorage.getItem('error')
-      localStorage.removeItem('error')
+    if (this.error !== null) {
+      this.msg = this.error
+
     } else {
-      this.test = "There has been an undefined error"
+      this.msg = "There has been an undefined error"
     }
 
+  },
+  beforeUnmount() {
+    localStorage.removeItem('error')
+  },
+  computed: {
+    error(){
+      console.log("a")
+      return JSON.parse(localStorage.getItem('error'))
+    }
   }
 }
 </script>
