@@ -1,6 +1,6 @@
 <template>
   <nav-bar/>
-  <FormulariReview/>
+  <FormulariReview class="form"/>
   <Footer/>
 </template>
 
@@ -16,5 +16,7 @@ export default {
 </script>
 
 <style scoped>
-
+.form{
+  height: 100%;
+}
 </style>
