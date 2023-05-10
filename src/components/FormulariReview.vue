@@ -3,7 +3,7 @@
     <h1>Treasure: PLACEHOLDER</h1>
     <form id="form" @submit.prevent="sendReview">
       <div id="imgDiv" class="image-review">
-        <img id="preview" alt="preview" />
+        <img id="preview" alt="preview"/>
         <div class="review-image">
           <input id="image" name="add" type="file" @change="onFileUpload">
         </div>
@@ -12,7 +12,7 @@
         <div class="rating">
           <label for="rating">Rating </label>
           <div class="rate-bar">
-            <input type="range" min="0" max="5"  id="rating" name="rating" required v-model="review.rating">
+            <input type="range" min="0" max="5" id="rating" name="rating" required v-model="review.rating">
             <p>{{ review.rating }}</p>
           </div>
         </div>
@@ -20,11 +20,11 @@
           <label for="opinion">Opinion </label>
           <textarea id="opinion" name="opinion" required v-model="review.opinion"></textarea>
         </div>
-        <input v-if="id === ''" class="form-submit" type="submit" value="Add" />
-        <button v-if="id !== ''" @click.prevent="updateReview"><img src="../assets/icons/edit.png" alt="edit-icon" />
+        <input v-if="id === ''" class="form-submit" type="submit" value="Add"/>
+        <button v-if="id !== ''" @click.prevent="updateReview"><img src="../assets/icons/edit.png" alt="edit-icon"/>
         </button>
         <button v-if="id !== ''" @click.prevent="deleteReview"><img src="../assets/icons/borrar.png"
-            alt="delete-icon" /></button>
+                                                                    alt="delete-icon"/></button>
       </div>
 
     </form>
@@ -107,8 +107,8 @@ export default {
             bytes[i] = response.data.charCodeAt(i);
           }
 
-          const blob = new Blob(bytes, { type: response.headers["content-type"] })
-          this.FILE = new File([blob], this.review.photo, { type: response.headers["content-type"] })
+          const blob = new Blob(bytes, {type: response.headers["content-type"]})
+          this.FILE = new File([blob], this.review.photo, {type: response.headers["content-type"]})
 
           const formData = new FormData()
 
@@ -156,6 +156,8 @@ export default {
           console.log(error)
         })
       }).catch((error) => {
+        localStorage.setItem('error', JSON.stringify("Review not found"))
+        this.$router.push("/error")
         console.log(error)
       })
     } else {
@@ -171,9 +173,10 @@ export default {
 </script>
 
 <style scoped>
-h1{
+h1 {
   margin-bottom: 5rem;
 }
+
 .flex-column {
   display: flex;
   flex-direction: column;
@@ -213,28 +216,29 @@ h1{
   background-color: #3e8e41;
 }
 
-.rate-bar{
+.rate-bar {
   display: flex;
   flex-direction: row;
 }
 
-.opinion label{
+.opinion label {
   font-size: 20px;
   font-weight: bold;
   padding: 1rem;
 }
 
-.rating{
+.rating {
   max-width: 250px;
   min-width: 250px;
 }
-.rating label{
+
+.rating label {
   font-size: 20px;
   font-weight: bold;
   padding: 1rem;
 }
 
-.rating input{
+.rating input {
   margin-left: 3rem;
 }
 
