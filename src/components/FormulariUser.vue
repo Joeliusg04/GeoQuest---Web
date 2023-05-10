@@ -115,8 +115,19 @@ export default {
       document.getElementById("profile-pic").src = UserService.getPicturePath(user.idUser)
 
     },
-    deleteUser(){
-      
+    deleteUser() {
+      const confirmation = confirm("Are you sure you want to delete this user?");
+
+      if (confirmation) {
+        UserService.delete(this.user.idUser)
+          .then(() => {
+            localStorage.clear()
+            this.$router.push("/home")
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
     }
   }
 }
