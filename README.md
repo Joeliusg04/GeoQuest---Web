@@ -8,8 +8,6 @@
 - [Características](#características)
 - [Instalación](#instalación)
 - [Uso](#uso)
-- [Contribuciones](#contribuciones)
-- [Licencia](#licencia)
 
 ## Introducción
 
