@@ -1,17 +1,21 @@
 <template>
   <div class="review">
     <div class="review2">
-      <img :id="getId" alt="review-picture">
-      <div class="username-rating">
-        <h4> {{ user.nickName }} </h4>
-        <img :id="review.idReview" class="rating" alt="rating-icon"/>
-        <p>{{review.rating}}</p>
+      <img :id="getId" alt="review-picture" class="review-image">
+      <div class="review-content">
+        <div class="username-rating">
+          <h4>{{ user.nickName }}</h4>
+          <div class="rating">
+            <span v-for="index in maxStars" :key="index" class="star" :class="{ filled: index <= review.rating }">&#9733;</span>
+          </div>
+          <p>{{ review.rating }}</p>
+        </div>
+        <div class="review-text">
+          <p v-if="review.opinion.length > 300" class="review-text-scroll">{{ review.opinion }}</p>
+          <p v-else class="review-text-normal">{{ review.opinion }}</p>
+        </div>
       </div>
-      <div class="review-text">
-        <p v-if="review.opinion.length > 300" class="review-text-scroll">{{ review.opinion }}</p>
-        <p v-else class="review-text-normal">{{ review.opinion }}</p>
-      </div>
-      <router-link v-show="link!==''" v-bind:to="link">Editar</router-link>
+      <router-link v-show="link !== ''" v-bind:to="link">Editar</router-link>
     </div>
   </div>
 </template>
@@ -24,7 +28,8 @@ export default {
   data() {
     return {
       user: "",
-      link: ""
+      link: "",
+      maxStars: 5
     }
   },
   props: {
@@ -35,7 +40,6 @@ export default {
     UserService.getById(this.review.idUser).then((response) => {
 
       this.user = response.data
-      document.getElementById(this.review.idReview).setAttribute('src',require(`../assets/rating/rating_${this.review.rating}.png`))
       document.getElementById(`${this.review.idUser}$${this.review.idReview}`).setAttribute('src',ReviewService.getPicturePath(this.review.idTreasure,this.review.idReview))
 
       if (this.user.nickName===JSON.parse(localStorage.getItem('user'))){
@@ -55,8 +59,13 @@ export default {
 }
 
 </script>
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 .review {
   display: flex;
   background: #a0deb1;
@@ -66,27 +75,24 @@ export default {
   border-radius: 25px;
 }
 
-.review img {
-  margin: auto 20px auto 1%;
+.review-image {
+  margin: 20px;
+  max-width: 100px;
 }
 
 .review2 {
-  width: 100%;
+  display: flex;
+  align-items: center;
 }
 
-.review2 p {
-  margin: 2rem;
-  align-items: center;
-  text-align: center;
-  display: flex; 
-  justify-content: center; 
-  flex-direction: column; 
-  height: 100%; 
+.review-content {
+  flex-grow: 1;
 }
 
 .username-rating {
   display: flex;
-  justify-content: space-around;
+  align-items: center;
+  margin-bottom: 10px;
 }
 
 .username-rating h4 {
@@ -94,13 +100,48 @@ export default {
   font-weight: bold;
   width: 200px;
   text-align: left;
-
 }
 
 .rating {
-  height: 50px;
-  width: 200px;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
 }
 
+.star {
+  font-size: 45px;
+  margin-right: 5px;
+}
 
+.filled {
+  color: #ffee00;
+}
+
+.review-text {
+  margin-top: 10px;
+}
+
+.review-text p {
+  margin: 2rem;
+  text-align: center;
+}
+
+.review-text-scroll {
+  max-height: 150px;
+  overflow-y: scroll;
+}
+
+.router-link {
+  margin-left: auto;
+}
+
+.router-link a {
+  color: #84b893;
+  text-decoration: underline;
+}
+
+.router-link a:hover {
+  color: #84b893;
+  text-decoration: none;
+}
 </style>

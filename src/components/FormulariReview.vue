@@ -62,19 +62,6 @@ export default {
     }
   },
   methods: {
-  handleTextareaInput() {
-    const textarea = document.getElementById('opinion');
-    textarea.style.height = ''; // Reiniciar la altura para calcular el nuevo tamaño correctamente
-
-    const textareaContainer = document.querySelector('.textarea-container');
-    const isTextareaScrollable = textarea.scrollHeight > textareaContainer.clientHeight;
-
-    if (isTextareaScrollable) {
-      textareaContainer.classList.add('scrollable');
-    } else {
-      textareaContainer.classList.remove('scrollable');
-    }
-  },
     onFileUpload(event) {
       this.FILE = event.target.files[0]
       this.review.photo = this.FILE.name
@@ -256,13 +243,4 @@ h1{
   flex-direction: column;
 }
 
-.opinion .textarea-container {
-  max-height: 100px;
-  overflow-y: auto;
-  margin-bottom: 1rem;
-}
-
-.opinion .textarea-container.scrollable {
-  overflow-y: scroll;
-}
 </style>
