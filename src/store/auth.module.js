@@ -1,8 +1,28 @@
 import AuthService from '../services/auth.service';
+// import UserService from "@/services/user.service";
 
 const token = JSON.parse(localStorage.getItem('token'));
-const user = JSON.parse(localStorage.getItem('user'))
-localStorage.removeItem('user')
+
+const user = JSON.parse(localStorage.getItem('user'));
+
+/*
+
+if (token) {
+
+    UserService.getUsername().then((response) => {
+
+        UserService.getByNickname(response.data).then((response) => {
+
+            auth.user = response.data
+            console.log("he arribat aqui")
+        }).catch((error) => {
+            console.log("Error store" + error)
+        })
+    }).catch((error) => {
+        console.log("Error store 2" + error)
+    })
+}
+*/
 
 
 const initialState = token
@@ -37,7 +57,7 @@ export const auth = {
                 }
             )
         },
-        logout({ commit }) {
+        logout({commit}) {
             AuthService.logout();
             commit('logout');
         },

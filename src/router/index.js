@@ -8,7 +8,7 @@ import ErrorPage from "@/views/ErrorPage.vue";
 import Profile from "@/views/Profile.vue";
 import Management from "@/views/Management.vue";
 import Review from "@/views/Review.vue";
-import UserService from "@/services/user.service";
+
 
 
 const routes = [
@@ -72,32 +72,27 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
     const publicPages = ['/login', '/register', '/', '/error']
-    const managementPages = ['/management']
+    const managementPages = ['Management']
 
 
     const logged = localStorage.getItem('token')
-    let role = ""
 
 
     if ((logged === null || logged === undefined) && !publicPages.includes(to.path)) {
+        console.log("a")
         next('/login')
-    }
-
-    UserService.getUsername().then((response) => {
-        UserService.getByNickname(response.data).then((response) => {
-            role = response.data.role
-        }).catch((error) => {
-            console.log(error)
-        })
-    }).catch((error) => {
-        console.log(error)
-    })
-
-    if (role !== "Admin" && managementPages.includes(to.path)) {
-        localStorage.setItem('error', JSON.stringify("You cannot enter this page"))
-        next('/error')
     } else {
-        next()
+        let role = ""
+        if (logged){
+            role = JSON.parse(localStorage.getItem('user')).role
+        }
+
+        if (role !== "Admin" && managementPages.includes(to.name)) {
+            localStorage.setItem('error', JSON.stringify("You cannot enter this page"))
+            next('/error')
+        } else {
+            next()
+        }
     }
 })
 

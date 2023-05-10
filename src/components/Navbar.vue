@@ -25,7 +25,6 @@ export default {
 
       this.$store.dispatch("auth/logout")
       AuthService.logout()
-      this.$forceUpdate()
       this.$router.push("/home");
     }
   },

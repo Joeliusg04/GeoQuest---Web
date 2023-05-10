@@ -1,13 +1,13 @@
 <template>
   <div class="flex">
     <div class="image-username">
-      <img class="user" id="profile-pic" alt="user-profile-pic" />
+      <img class="user" id="profile-pic" alt="user-profile-pic"/>
       <h2>{{ user.nickName }}</h2>
       <b>Level: {{ user.userLevel }}</b>
       <div class="button">
         <label for="fileInput">
-          <input type="file" id="fileInput" @change="previewImage" style="display: none" />
-          <img class="upload-icon" src="../assets/icons/subir.png" alt="upload-icon" />
+          <input type="file" id="fileInput" @change="previewImage" style="display: none"/>
+          <img class="upload-icon" src="../assets/icons/subir.png" alt="upload-icon"/>
           <p>Change your profile picture</p>
         </label>
       </div>
@@ -25,9 +25,9 @@
         <div>
           <label for="email">Mail </label>
           <div class="input-icon-container">
-            <input type="text" id="email" name="email" placeholder="Mail" v-model="user.email" required />
+            <input type="text" id="email" name="email" placeholder="Mail" v-model="user.email" required/>
             <span class="icon-container">
-              <img class="icon" src="../assets/icons/edit.png" alt="edit-icon" />
+              <img class="icon" src="../assets/icons/edit.png" alt="edit-icon"/>
             </span>
           </div>
         </div>
@@ -36,7 +36,7 @@
           <div class="input-icon-container">
             <input type="password" id="password" name="password" placeholder="Password" required>
             <span class="icon-container">
-              <img class="icon" src="../assets/icons/edit.png" alt="edit-icon" />
+              <img class="icon" src="../assets/icons/edit.png" alt="edit-icon"/>
             </span>
           </div>
         </div>
@@ -56,16 +56,13 @@ export default {
   data() {
     return {
       FILE: "",
-      user: {
-      }
+      user: {}
     }
   },
   mounted() {
 
-
     this.user = this.$store.state.auth.user
-    this.getImage(this.user)
-
+    this.getImage(this.$store.state.auth.user)
   },
   methods: {
     updateUser() {
@@ -73,9 +70,9 @@ export default {
       console.log(this.FILE)
       formData.append('image', this.FILE, this.FILE.name)
       formData.append('body', JSON.stringify(this.user))
-      UserService.update(formData,this.user.idUser).then((response)=>{
+      UserService.update(formData, this.user.idUser).then((response) => {
         this.user = response.data
-      }).catch((error)=>{
+      }).catch((error) => {
         console.log(error)
       })
     },
@@ -94,8 +91,7 @@ export default {
       }
     },
     getImage(user) {
-
-      UserService.getPicture(user.idUser).then((response)=>{
+      UserService.getPicture(user.idUser).then((response) => {
         const bytes = new Uint8Array(response.data.length);
         for (var i = 0; i < response.data.length; i++) {
           bytes[i] = response.data.charCodeAt(i);
@@ -105,15 +101,15 @@ export default {
         const blob = new Blob(bytes, {type: response.headers["content-type"]})
         console.log(blob)
         this.FILE = new File([blob], this.user.photo, {type: response.headers["content-type"]})
-      }).catch((error)=>{
+      }).catch((error) => {
         console.log(error)
       })
 
       document.getElementById("profile-pic").src = UserService.getPicturePath(user.idUser)
 
     },
-    deleteUser(){
-      
+    deleteUser() {
+
     }
   }
 }
@@ -204,6 +200,7 @@ input {
 .create:hover {
   background-color: #84b893;
 }
+
 .delete {
   padding: 10px;
   border-radius: 5px;

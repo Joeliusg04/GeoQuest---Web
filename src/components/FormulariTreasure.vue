@@ -3,7 +3,7 @@
 
     <form id="form" @submit.prevent="sendTreasure">
       <div id="imgDiv" class="image-treasure">
-        <img id="preview" alt="preview" />
+        <img id="preview" alt="preview"/>
         <div class="treasure-image">
           <input id="image" type="file" @change="onFileUpload">
         </div>
@@ -20,12 +20,12 @@
         <div>
           <label for="latitude">Latitude </label>
           <input type="number" step="0.00001" id="latitude" min=-90 max=90 name="latitude" required
-            v-model="treasure.latitude">
+                 v-model="treasure.latitude">
         </div>
         <div>
           <label for="longitude">Longitude </label>
           <input type="number" step="0.00001" id="longitude" min=-180 max=180 name="longitude" required
-            v-model="treasure.longitude">
+                 v-model="treasure.longitude">
         </div>
         <div>
           <label for="location">Location </label>
@@ -52,14 +52,16 @@
           </select>
         </div>
         <div class="image-container">
-          <input v-if="id === ''" class="form-submit" type="submit" value="Add" />
-          <img class="buttons" v-if="id !== ''" @click.prevent="updateTreasure" src="../assets/icons/edit.png" alt="edit-icon" />
-          <img class="buttons" v-if="id !== ''" @click.prevent="deleteTreasure" src="../assets/icons/borrar.png" alt="delete-icon" />
+          <input v-if="id === ''" class="form-submit" type="submit" value="Add"/>
+          <img class="buttons" v-if="id !== ''" @click.prevent="updateTreasure" src="../assets/icons/edit.png"
+               alt="edit-icon"/>
+          <img class="buttons" v-if="id !== ''" @click.prevent="deleteTreasure" src="../assets/icons/borrar.png"
+               alt="delete-icon"/>
         </div>
       </div>
     </form>
     <MapComponent class="map" ref="mapa" v-bind:new="newTreasure" v-bind:id="this.$route.params.idTreasure"
-      v-bind:size="size" v-on:emitCoords="receiveCoords" />
+                  v-bind:size="size" v-on:emitCoords="receiveCoords"/>
   </div>
 </template>
 
@@ -69,7 +71,7 @@ import MapComponent from "./MapComponent.vue";
 
 export default {
   name: 'FormulariTreasure',
-  components: { MapComponent },
+  components: {MapComponent},
   props: {
     id: String
   },
@@ -133,10 +135,10 @@ export default {
         console.log("ha funcionat")
         this.$router.push(`/map`)
       }).catch(
-        (error) => {
-          console.log("Ha fallat! Hahaha ajuda")
-          console.log(error)
-        }
+          (error) => {
+            console.log("Ha fallat! Hahaha ajuda")
+            console.log(error)
+          }
       )
 
     },
@@ -152,9 +154,9 @@ export default {
           }
 
           console.log(bytes)
-          const blob = new Blob(bytes, { type: response.headers["content-type"] })
+          const blob = new Blob(bytes, {type: response.headers["content-type"]})
           console.log(blob)
-          this.FILE = new File([blob], this.treasure.image, { type: response.headers["content-type"] })
+          this.FILE = new File([blob], this.treasure.image, {type: response.headers["content-type"]})
 
 
           const formData = new FormData()
@@ -166,10 +168,10 @@ export default {
             console.log(response)
             this.$router.push(`/treasure/${this.id}`)
           }).catch(
-            (error) => {
-              console.log("Ha fallat! Hahaha ajuda2")
-              console.log(error)
-            }
+              (error) => {
+                console.log("Ha fallat! Hahaha ajuda2")
+                console.log(error)
+              }
           )
         }).catch((error) => {
           console.log(error)
@@ -184,26 +186,25 @@ export default {
           console.log(response)
           this.$router.push(`/treasure/${this.id}`)
         }).catch(
-          (error) => {
-            console.log("Ha fallat! Hahaha ajuda2")
-            console.log(error)
-          }
+            (error) => {
+              console.log("Ha fallat! Hahaha ajuda2")
+              console.log(error)
+            }
         )
       }
-
-
-
 
 
     },
 
     deleteTreasure() {
-      TreasureService.delete(this.id).then((response) => {
-        alert(response.data)
-        this.$router.push("/management")
-      }).catch((error) => {
-        console.log(error)
-      })
+      if (this.$store.state.auth.user) {
+        TreasureService.delete(this.id).then((response) => {
+          alert(response.data)
+          this.$router.push("/management")
+        }).catch((error) => {
+          console.log(error)
+        });
+      }
     }
   },
   mounted() {
@@ -211,10 +212,10 @@ export default {
 
     if (this.id !== "") {
       TreasureService.getById(this.id).then((response) => {
-        this.treasure = response.data
-        this.getImage(response.data)
+            this.treasure = response.data
+            this.getImage(response.data)
 
-      }
+          }
       ).catch((error) => {
         localStorage.setItem('error', error.response.data)
         this.$router.push("/error")
@@ -275,8 +276,7 @@ export default {
 
 .map {
   z-index: 0;
-  margin-left: 10rem;
-  ;
+  margin-left: 10rem;;
 }
 
 .form-submit {
@@ -361,7 +361,8 @@ input:hover {
   border: 1px solid #4CAF50;
   border-radius: 20px;
 }
-.buttons{
+
+.buttons {
   border-radius: 5px;
   cursor: pointer;
 }
@@ -385,9 +386,11 @@ input:hover {
 .image-container button:hover img {
   filter: brightness(0.7);
 }
-.buttons:hover{
+
+.buttons:hover {
   background-color: lightgray;
 }
+
 .image-container button:not(:last-child) {
   margin-right: 1rem;
 }

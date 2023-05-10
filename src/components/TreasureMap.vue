@@ -36,6 +36,7 @@ export default {
   },
   mounted() {
     document.getElementById(`${this.treasure.idTreasure}`).setAttribute("src", TreasureService.getPicturePath(this.treasure.idTreasure));
+    console.log("salalsasla " + this.$store.state.auth.user.role === "Admin")
     this.Admin = this.$store.state.auth.user.role === "Admin"
   },
   methods: {
