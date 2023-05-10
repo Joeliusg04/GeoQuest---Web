@@ -4,11 +4,12 @@
       <img :id="getId" alt="review-picture" class="review-image">
       <div class="review-content">
         <div class="username-rating">
-          <h4>{{ user.nickName }}</h4>
+          <div class="username">
+            <h4>{{ user.nickName }}</h4>
+          </div>
           <div class="rating">
             <span v-for="index in maxStars" :key="index" class="star" :class="{ filled: index <= review.rating }">&#9733;</span>
           </div>
-          <p>{{ review.rating }}</p>
         </div>
         <div class="review-text">
           <p v-if="review.opinion.length > 300" class="review-text-scroll">{{ review.opinion }}</p>
@@ -76,8 +77,9 @@ export default {
 }
 
 .review-image {
-  margin: 20px;
-  max-width: 100px;
+  width: 150px;
+  height: 150px;
+  padding: 20px;
 }
 
 .review2 {
@@ -87,25 +89,28 @@ export default {
 
 .review-content {
   flex-grow: 1;
+  margin-left: 8rem;
 }
 
 .username-rating {
   display: flex;
+  justify-content: space-between;
   align-items: center;
   margin-bottom: 10px;
+  margin-right: 5rem;
 }
 
-.username-rating h4 {
-  margin-right: 10px;
+.username {
+  margin-right: 20px;
+}
+
+.username h4 {
   font-weight: bold;
-  width: 200px;
-  text-align: left;
+  text-align: right;
 }
 
 .rating {
   color: #ffffff;
-  display: flex;
-  align-items: center;
 }
 
 .star {

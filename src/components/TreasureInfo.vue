@@ -4,29 +4,29 @@
       <h3>{{ treasure.name }}</h3>
       <img class="rating" id="rating" alt="rating-icon">
 
-      <b> Difficulty: {{ treasure.difficulty }} </b>
-      <b>Location: {{ treasure.location }} </b>
+      <b>Difficulty: {{ treasure.difficulty }}</b>
+      <b>Location: {{ treasure.location }}</b>
       <img class="fav" v-show="fav" src="../assets/icons/fav.png" @click="addOrRemoveFav">
       <img class="fav" v-show="!fav" src="../assets/icons/nofav.png" @click="addOrRemoveFav">
     </div>
     <hr>
-    <p> {{ treasure.description }}</p>
-    <div id="hintDiv">
+    <p>{{ treasure.description }}</p>
+    <div class="flex">
       <img @click="showClue" src="../assets/icons/vista.png" class="clue">
-      <p @click="showClue" v-show="showHint" id="hint" style="display: none;">{{ treasure.clue }}</p>
+      <div v-if="showCluePopup" class="popup">
+        <button class="close-button" @click="closeCluePopup">&times;</button>
+        <p class="clue-text">{{ treasure.clue }}</p>
+      </div>
+      <button class="popup-button" @click="showTreasureStats">Show TreasureStats</button>
+      <div v-if="showStatsPopup" class="popup">
+        <button class="close-button" @click="closeStatsPopup">&times;</button>
+        <TreasureStats />
+      </div>
     </div>
-    <button class="popup-button" @click="showTreasureStats">Show TreasureStats</button>
-    <div v-if="showPopup" class="popup">
-      <button class="close-button" @click="closeTreasureStats">&times;</button>
-      <TreasureStats />
-    </div>
-
   </div>
 </template>
 
 <script>
-
-
 import TreasureService from "@/services/treasure.service";
 import TreasureStats from "@/components/TreasureStats.vue";
 
@@ -39,51 +39,42 @@ export default {
   data() {
     return {
       treasure: "",
-      showPopup: false,
-      showHint: false,
+      showCluePopup: false,
+      showStatsPopup: false,
       fav: false
-    }
-
+    };
   },
   methods: {
-    showTreasureStats() {
-      this.showPopup = true;
-    },
-    closeTreasureStats() {
-      this.showPopup = false;
-    },
     showClue() {
-      if (this.showHint == true) {
-        this.showHint = false
-      } else {
-        this.showHint = true
-      }
+      this.showCluePopup = true;
+    },
+    closeCluePopup() {
+      this.showCluePopup = false;
+    },
+    showTreasureStats() {
+      this.showStatsPopup = true;
+    },
+    closeStatsPopup() {
+      this.showStatsPopup = false;
     },
     addOrRemoveFav() {
-      if (this.fav == true) {
-        this.fav = false
-      } else this.fav = true
+      this.fav = !this.fav;
     }
   },
   created() {
-    TreasureService.getById(this.id).then((response) => {
-      this.treasure = response.data
-      document.getElementById("rating").setAttribute("src", require(`../assets/rating/rating_${this.treasure.score}.png`))
-    }
-    ).catch((error) => {
-      console.log("Ha fallat get de tresor amb id" + this.id)
-      console.log(error)
-    })
-  },
-  mounted() {
-    // document.getElementById("rating").setAttribute("src", require(`../assets/rating/rating_${this.treasure.score}.png`))
-  },
-
-
-}
+    TreasureService.getById(this.id)
+      .then((response) => {
+        this.treasure = response.data;
+        document.getElementById("rating").setAttribute("src", require(`../assets/rating/rating_${this.treasure.score}.png`));
+      })
+      .catch((error) => {
+        console.log(`Failed to get treasure with id ${this.id}`);
+        console.log(error);
+      });
+  }
+};
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .popup-button {
   background-color: #a0deb1;
@@ -96,6 +87,7 @@ export default {
   cursor: pointer;
   border-radius: 4px;
   border: 1px solid #84b893;
+  width: 100%;
 }
 
 #hintDiv {
@@ -105,15 +97,19 @@ export default {
 .clue {
   height: 50px;
   width: 50px;
+  cursor: pointer;
 }
 
 .popup-button:hover {
   background-color: #84b893;
 }
+
 .fav {
   height: 20px;
   width: 20px;
+
 }
+
 .popup {
   position: fixed;
   top: 50%;
@@ -121,15 +117,11 @@ export default {
   transform: translate(-50%, -50%);
   background-color: white;
   padding: 40px;
-  width: 60%;
-  height: 20%;
-  max-width: 800px;
-  max-height: 600px;
+  max-width: 100%;
   border: 1px solid #ccc;
   border-radius: 4px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2)
 }
-
 
 .close-button {
   position: absolute;
@@ -163,11 +155,23 @@ export default {
   width: 40%;
 }
 
-
 .image-rating {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
 }
+
+.flex {
+  display: flex;
+  margin-left: 1rem;
+}
+
+.clue-text {
+  background-color: #a0deb1;
+  text-align: center;
+  padding: 10px;
+  margin: 0;
+}
+
 </style>
   
