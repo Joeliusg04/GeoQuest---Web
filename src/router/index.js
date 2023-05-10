@@ -52,7 +52,7 @@ const routes = [
         props: true
     },
     {
-      path: "/treasure/:idTreasure/review/:idReview?",
+        path: "/treasure/:idTreasure/review/:idReview?",
         name: "Review",
         component: Review,
         props: true
@@ -70,24 +70,8 @@ const router = createRouter({
 });
 
 
-/*
 router.beforeEach((to, from, next) => {
-    const publicPages = ['/login', '/register', '/', '/error'];
-    const authRequired = routes.filter(x => !publicPages.includes(x.path)).map(x => x.path).includes(to.path);
-    const loggedIn = localStorage.getItem('logged');
-    const
-    // trying to access a restricted page + not logged in
-    // redirect to login page
-    if (authRequired && loggedIn !== "true") {
-        next('/login');
-    } else {
-        next();
-    }
-});
-*/
-
-router.beforeEach((to, from, next) => {
-    const publicPages = ['/login','/register','/','/error']
+    const publicPages = ['/login', '/register', '/', '/error']
     const managementPages = ['/management']
 
 
@@ -95,8 +79,7 @@ router.beforeEach((to, from, next) => {
     let role = ""
 
 
-
-    if ((logged===null || logged===undefined) && !publicPages.includes(to.path)){
+    if ((logged === null || logged === undefined) && !publicPages.includes(to.path)) {
         next('/login')
     }
 
@@ -110,8 +93,8 @@ router.beforeEach((to, from, next) => {
         console.log(error)
     })
 
-    if (role!=="Admin" && managementPages.includes(to.path)){
-        localStorage.setItem('error',JSON.stringify("You cannot enter this page"))
+    if (role !== "Admin" && managementPages.includes(to.path)) {
+        localStorage.setItem('error', JSON.stringify("You cannot enter this page"))
         next('/error')
     } else {
         next()

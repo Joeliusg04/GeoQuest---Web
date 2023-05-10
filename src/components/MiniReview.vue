@@ -34,13 +34,6 @@ export default {
         });
 
 
-        // TODO Acabar de carregar la imatge de la review (cal solucionar el tema imatges a FormulariTreasure tambe)
-        /*    ReviewService.getPicture(this.review.idTreasure,this.review.idReview).then((response)=>{
-              console.log(response)
-                }
-            ).catch((error)=>{
-              console.log(error)
-            })*/
         treasureService.getById(this.review.idTreasure).then((response) => {
 
             this.treasure = response.data
