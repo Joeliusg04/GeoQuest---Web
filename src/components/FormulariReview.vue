@@ -157,6 +157,7 @@ export default {
     deleteReview(){
       ReviewService.deleteByTreasure(this.$route.params.idTreasure, this.$route.params.idReview).then((response)=>{
             console.log("funciona"+response)
+            window.location.href = "/profile"
       })
 
     },
