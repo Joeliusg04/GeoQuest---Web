@@ -62,13 +62,10 @@ export default {
   },
   mounted() {
 
-    UserService.getByNickname(JSON.parse(localStorage.getItem('user'))).then((response) => {
-      console.log(response)
-      this.user = response.data
-      this.getImage(this.user)
-    }).catch((error) => {
-      console.log(error)
-    })
+
+    this.user = this.$store.state.auth.user
+    this.getImage(this.user)
+
   },
   methods: {
     updateUser() {

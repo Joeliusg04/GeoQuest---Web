@@ -54,6 +54,11 @@ export default {
       return this.$store.state.auth.status.loggedIn;
     },
   },
+  created() {
+    if (this.loggedIn){
+      this.$router.push("/map")
+    }
+  },
   methods: {
     login() {
       this.$store.dispatch("auth/login", {nickname: this.nickname, password: this.password}).then(

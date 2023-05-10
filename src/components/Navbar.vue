@@ -8,9 +8,7 @@
       <router-link to="/">Home</router-link>
       <router-link to="/map">Map</router-link>
       <router-link to="/profile">Profile</router-link>
-      <router-link to="/management">Management</router-link>
-      <router-link to="/treasure/1">Treasure</router-link>
-      <router-link to="/error/404">Error</router-link>
+      <router-link v-if="Admin" to="/management">Management</router-link>
       <button @click="logout">Log Out</button>
       <!--      -->
     </div>
@@ -24,10 +22,16 @@ export default {
   name: "NavBar",
   methods: {
     logout() {
+
+      this.$store.dispatch("auth/logout")
       AuthService.logout()
-      localStorage.setItem("logged", "false");
       this.$forceUpdate()
-      this.$router.push({name: 'Home'});
+      this.$router.push("/home");
+    }
+  },
+  computed: {
+    admin(){
+      return this.$store.state.auth.status.user.role==="Admin";
     }
   }
 }

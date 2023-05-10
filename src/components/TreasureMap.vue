@@ -36,7 +36,7 @@ export default {
   },
   mounted() {
     document.getElementById(`${this.treasure.idTreasure}`).setAttribute("src", TreasureService.getPicturePath(this.treasure.idTreasure));
-    this.Admin = JSON.parse(localStorage.getItem("role")) === "Admin"
+    this.Admin = this.$store.state.auth.user.role === "Admin"
   },
   methods: {
     centerMap() {

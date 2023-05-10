@@ -41,7 +41,6 @@
 
 <script>
 
-import authService from "@/services/auth.service";
 import NavbarGuest from "@/components/NavbarGuest.vue";
 import Footer from "@/components/Footer.vue";
 
@@ -58,7 +57,7 @@ export default {
   }),
   computed: {
     loggedIn() {
-      return localStorage.getItem('logged')==="true";
+      return this.$store.state.auth.status.loggedIn;
     }
   },
   mounted() {
@@ -81,7 +80,7 @@ export default {
             nickname: this.nickname
           };
 
-          authService.register(user).then(
+          this.$store.dispatch("auth/register",user).then(
               (response) => {
                 console.log(response)
                 this.$router.push("/login")

@@ -39,18 +39,13 @@ export default {
   },
   props: {},
   mounted() {
-
-    UserService.getByNickname(JSON.parse(localStorage.getItem('user'))).then((response) => {
-      const id = response.data.idUser
+      const id = this.$store.state.auth.user.idUser
       UserService.getStats(id).then((response) => {
         console.log(response.data)
         this.userStats = response.data
       }).catch((error) => {
         console.log(error)
       });
-    }).catch((error) => {
-      console.log(error)
-    });
   }
 }
 </script>

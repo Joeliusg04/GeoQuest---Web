@@ -43,7 +43,7 @@ export default {
       this.user = response.data
       document.getElementById(`${this.review.idUser}$${this.review.idReview}`).setAttribute('src',ReviewService.getPicturePath(this.review.idTreasure,this.review.idReview))
 
-      if (this.user.nickName===JSON.parse(localStorage.getItem('user'))){
+      if (this.user.nickName===this.$store.state.auth.user.nickName){
         this.link = `/treasure/${this.review.idTreasure}/review/${this.review.idReview}`
       }
 

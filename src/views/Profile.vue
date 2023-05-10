@@ -1,16 +1,16 @@
 <template>
   <div>
-    <nav-bar />
-    <FormulariUser />
+    <nav-bar/>
+    <FormulariUser/>
     <button class="popup-button" @click="displayUserStats">Show your stats</button>
     <button class="popup-button" @click="displayFavs">
       <img src="../assets/icons/favorito.png" class="favorite-icon">
     </button>
     <button class="popup-button" @click="displayReviews"><img src="../assets/icons/like.png"
-        class="reviews-icon"></button>
+                                                              class="reviews-icon"></button>
     <div v-if="showUserStats" class="popup">
       <button class="close-button" @click="displayUserStats">&times;</button>
-      <UserStats />
+      <UserStats/>
     </div>
     <div v-if="showFavs" class="popup">
       <h2 class="bg-green">Favs</h2>
@@ -23,10 +23,10 @@
         <MiniReview v-for="(review, index) of reviews" :key="index" v-bind:review="review"></MiniReview>
       </table>
       <div>
-  </div>
+      </div>
     </div>
   </div>
-  <Footer />
+  <Footer/>
 </template>
 
 <script>
@@ -34,17 +34,15 @@ import FormulariUser from "@/components/FormulariUser.vue";
 import Footer from "@/components/Footer.vue";
 import NavBar from "@/components/Navbar.vue";
 import UserStats from "@/components/UserStats.vue";
-import UserService from "@/services/user.service";
 import FavService from "@/services/fav.service";
 import MiniReview from "@/components/MiniReview.vue"
 import reviewService from "@/services/review.service";
 import ShowFavs from "@/components/ShowFavs.vue";
 
 
-
 export default {
   name: "ProfileView",
-  components: { UserStats, NavBar, FormulariUser, Footer, MiniReview, ShowFavs },
+  components: {UserStats, NavBar, FormulariUser, Footer, MiniReview, ShowFavs},
   data() {
     return {
       showUserStats: false,
@@ -88,14 +86,13 @@ export default {
       })
     }
   },
-  
-  
-  mounted() {
-  UserService.getByNickname(JSON.parse(localStorage.getItem('user')))
-    .then((response) => {
-      const user = response.data;
 
-      FavService.getAllFavs(user.idUser)
+
+  mounted() {
+
+    const user = this.$store.state.auth.user
+
+    FavService.getAllFavs(user.idUser)
         .then((response) => {
           this.favs = response.data.map((favorite) => ({
             ...favorite,
@@ -106,7 +103,7 @@ export default {
           console.log(error);
         });
 
-      reviewService.getAllByUser(user.idUser)
+    reviewService.getAllByUser(user.idUser)
         .then((response) => {
           console.log(response);
           this.reviews = response.data;
@@ -114,13 +111,9 @@ export default {
         .catch((error) => {
           console.log(error);
         });
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-}
-
   }
+
+}
 </script>
 
 <style scoped>
@@ -150,6 +143,7 @@ export default {
   padding: 0;
   margin: 0;
 }
+
 table {
   align-items: center;
   justify-content: center;
@@ -158,6 +152,7 @@ table {
   border: none;
   border-collapse: collapse;
 }
+
 .popup {
   position: fixed;
   top: 50%;
@@ -218,9 +213,10 @@ table {
   margin: auto;
   border: none;
   border-collapse: collapse;
-  
+
 }
-.reviews-icon{
+
+.reviews-icon {
   width: 20px;
   height: 15px;
   background: none;
@@ -228,7 +224,8 @@ table {
   padding: 0;
   margin: 0;
 }
-.bg-green{
+
+.bg-green {
   padding: 10px;
   background-color: #a0deb1;
 }
