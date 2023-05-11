@@ -1,6 +1,6 @@
 <template>
-  <nav-bar v-if="logged"/>
-  <navbar-guest v-if="!logged"/>
+  <nav-bar v-if="loggedIn"/>
+  <navbar-guest v-if="!loggedIn"/>
   <h1>What is geocaching?</h1>
   <div class="info">
     <iframe width="3560" height="315" src="https://www.youtube.com/embed/1YTqitVK-Ts" title="What is geocaching"
@@ -44,8 +44,8 @@ export default {
     Step
   },
   computed: {
-    logged() {
-      return localStorage.getItem("logged") === "true";
+    loggedIn() {
+      return this.$store.state.auth.status.loggedIn;
     }
   }
 }

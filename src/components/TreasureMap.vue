@@ -1,11 +1,12 @@
 <template>
   <div class="treasure">
-    <img class="image" :id="treasure.idTreasure" alt="treasure-image" />
+    <img class="image" :id="treasure.idTreasure" alt="treasure-image"/>
     <div class="flex-direction:column">
       <h3>{{ treasure.name }}</h3>
       <div class="flex">
         <div class="rating">
-          <span v-for="index in maxStars" :key="index" class="star" :class="{ filled: index <= treasure.score }">&#9733;</span>
+          <span v-for="index in maxStars" :key="index" class="star"
+                :class="{ filled: index <= treasure.score }">&#9733;</span>
         </div>
         <h4 class="difficulty">Difficulty: {{ treasure.difficulty }}</h4>
       </div>
@@ -22,6 +23,7 @@
 
 <script>
 import TreasureService from "@/services/treasure.service";
+import UserService from "@/services/user.service";
 
 export default {
   name: 'TreasureMap',
@@ -36,17 +38,29 @@ export default {
   },
   mounted() {
     document.getElementById(`${this.treasure.idTreasure}`).setAttribute("src", TreasureService.getPicturePath(this.treasure.idTreasure));
-    this.Admin = JSON.parse(localStorage.getItem("role")) === "Admin"
+    UserService.getCurrentUsername().then((response) => {
+      UserService.getByNickname(response.data).then((response) => {
+        this.Admin = response.data.role === "Admin"
+      }).catch((error) => {
+        console.log(error)
+      }).catch((error) => {
+        console.log(error)
+      })
+    }).catch((error) => {
+      console.log(error)
+    })
   },
   methods: {
     centerMap() {
       console.log("center 1");
       this.$emit('centerMap', this.treasure);
-    },
-    redirectAdmin(){
-      window.location.href = '/management/'+this.treasure.idTreasure;
     }
-  },
+    ,
+    redirectAdmin() {
+      window.location.href = '/management/' + this.treasure.idTreasure;
+    }
+  }
+  ,
   computed: {
     link() {
       return `${window.location.origin}/treasure/${this.treasure.idTreasure}`;
@@ -79,12 +93,14 @@ export default {
   margin-top: 0;
   text-align: center;
 }
+
 .flex {
   display: flex;
   justify-content: space-around;
   margin-top: 0;
   align-items: center;
 }
+
 .buttons {
   display: flex;
   margin-top: 1rem;
@@ -99,7 +115,8 @@ export default {
   margin-left: 2rem;
   margin-right: 2rem;
 }
-.config{
+
+.config {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -109,6 +126,7 @@ export default {
   margin-left: 2rem;
 
 }
+
 .image {
   height: 200px;
   width: 200px;

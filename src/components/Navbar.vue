@@ -8,9 +8,7 @@
       <router-link to="/">Home</router-link>
       <router-link to="/map">Map</router-link>
       <router-link to="/profile">Profile</router-link>
-      <router-link to="/management">Management</router-link>
-      <router-link to="/treasure/1">Treasure</router-link>
-      <router-link to="/error/404">Error</router-link>
+      <router-link v-if="Admin" to="/management">Management</router-link>
       <button @click="logout">Log Out</button>
       <!--      -->
     </div>
@@ -18,17 +16,17 @@
 </template>
 
 <script>
-import AuthService from "@/services/auth.service";
 
 export default {
   name: "NavBar",
   methods: {
     logout() {
-      AuthService.logout()
-      localStorage.setItem("logged", "false");
+      this.$store.dispatch("auth/logout")
       this.$forceUpdate()
-      this.$router.push({name: 'Home'});
+      this.$router.push("/home");
     }
+  },created() {
+
   }
 }
 </script>

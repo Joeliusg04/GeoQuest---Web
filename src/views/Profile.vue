@@ -1,16 +1,16 @@
 <template>
   <div>
-    <nav-bar />
-    <FormulariUser />
+    <nav-bar/>
+    <FormulariUser/>
     <button class="popup-button" @click="displayUserStats">Show your stats</button>
     <button class="popup-button" @click="displayFavs">
       <img src="../assets/icons/favorito.png" class="favorite-icon">
     </button>
     <button class="popup-button" @click="displayReviews"><img src="../assets/icons/like.png"
-        class="reviews-icon"></button>
+                                                              class="reviews-icon"></button>
     <div v-if="showUserStats" class="popup">
       <button class="close-button" @click="displayUserStats">&times;</button>
-      <UserStats />
+      <UserStats/>
     </div>
     <div v-if="showFavs" class="popup">
       <button class="close-button" @click="displayFavs">&times;</button>
@@ -24,10 +24,10 @@
         <p v-show="reviews.length === 0">No reviews found</p>
       </table>
       <div>
-  </div>
+      </div>
     </div>
   </div>
-  <Footer />
+  <Footer/>
 </template>
 
 <script>
@@ -42,10 +42,9 @@ import reviewService from "@/services/review.service";
 import ShowFavs from "@/components/ShowFavs.vue";
 
 
-
 export default {
   name: "ProfileView",
-  components: { UserStats, NavBar, FormulariUser, Footer, MiniReview, ShowFavs },
+  components: {UserStats, NavBar, FormulariUser, Footer, MiniReview, ShowFavs},
   data() {
     return {
       showUserStats: false,
@@ -89,39 +88,43 @@ export default {
       })
     }
   },
-  
-  
+
+
   mounted() {
-  UserService.getByNickname(JSON.parse(localStorage.getItem('user')))
-    .then((response) => {
-      const user = response.data;
+    UserService.getCurrentUsername().then((response) => {
+      UserService.getByNickname(response.data).then((response) => {
+        const user = response.data;
 
-      FavService.getAllFavs(user.idUser)
-        .then((response) => {
-          this.favs = response.data.map((favorite) => ({
-            ...favorite,
-            favoriteLink: `${window.location.origin}/treasure/${favorite.idTreasure}`
-          }));
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+        FavService.getAllFavs(user.idUser)
+            .then((response) => {
+              this.favs = response.data.map((favorite) => ({
+                ...favorite,
+                favoriteLink: `${window.location.origin}/treasure/${favorite.idTreasure}`
+              }));
+            })
+            .catch((error) => {
+              console.log(error);
+            });
 
-      reviewService.getAllByUser(user.idUser)
-        .then((response) => {
-          console.log(response);
-          this.reviews = response.data;
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+        reviewService.getAllByUser(user.idUser)
+            .then((response) => {
+              console.log(response);
+              this.reviews = response.data;
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+      })
+          .catch((error) => {
+            console.log(error);
+          });
+    }).catch((error) => {
+      console.log(error)
     })
-    .catch((error) => {
-      console.log(error);
-    });
+  }
 }
 
-  }
+
 </script>
 
 <style scoped>
@@ -151,6 +154,7 @@ export default {
   padding: 0;
   margin: 0;
 }
+
 table {
   align-items: center;
   justify-content: center;
@@ -159,9 +163,11 @@ table {
   border: none;
   border-collapse: collapse;
 }
-.favs{
+
+.favs {
   border: 1px solid black;
 }
+
 .popup {
   position: fixed;
   top: 50%;
@@ -222,9 +228,10 @@ table {
   margin: auto;
   border: none;
   border-collapse: collapse;
-  
+
 }
-.reviews-icon{
+
+.reviews-icon {
   width: 20px;
   height: 15px;
   background: none;
@@ -232,7 +239,8 @@ table {
   padding: 0;
   margin: 0;
 }
-.bg-green{
+
+.bg-green {
   padding: 10px;
   background-color: #a0deb1;
 }

@@ -38,23 +38,28 @@ export default {
   },
   mounted() {
 
-    UserService.getById(this.review.idUser).then((response) => {
+    UserService.getCurrentUsername().then((response) => {
+      const currentUser = response.data
+      UserService.getById(this.review.idUser).then((response) => {
 
-      this.user = response.data
-      document.getElementById(`${this.review.idUser}$${this.review.idReview}`).setAttribute('src',ReviewService.getPicturePath(this.review.idTreasure,this.review.idReview))
+        this.user = response.data
+        document.getElementById(`${this.review.idUser}$${this.review.idReview}`).setAttribute('src', ReviewService.getPicturePath(this.review.idTreasure, this.review.idReview))
 
-      if (this.user.nickName===JSON.parse(localStorage.getItem('user'))){
-        this.link = `/treasure/${this.review.idTreasure}/review/${this.review.idReview}`
-      }
+        if (this.user.nickName === currentUser) {
+          this.link = `/treasure/${this.review.idTreasure}/review/${this.review.idReview}`
+        }
 
+      }).catch((error) => {
+        console.log(error)
+      });
     }).catch((error) => {
       console.log(error)
-    });
+    })
 
   },
   computed: {
-    getId(){
-      return this.review.idUser+"$"+this.review.idReview
+    getId() {
+      return this.review.idUser + "$" + this.review.idReview
     }
   }
 }
