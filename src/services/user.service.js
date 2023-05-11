@@ -21,6 +21,11 @@ class UserService {
     }
 
 
+    getCurrentUsername(){
+        return axios.get(API_URL + "/user/secret",{headers: authHeader()})
+    }
+
+
     delete(id) {
         return axios.delete(API_URL + `/user/${id}`, {headers: authHeader()})
     }

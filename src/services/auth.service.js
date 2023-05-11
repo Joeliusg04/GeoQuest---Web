@@ -11,27 +11,20 @@ class AuthService {
     login(username, password) {
         return axios
             .post(API_URL + '/user/login',
-                `${username},${password}`
+                {
+                    username: username, password: password
+                }
             )
             .then(response => {
-                if (response.data.accessToken) {
-                    localStorage.setItem('user', JSON.stringify(username));
-                }
-                localStorage.setItem('user', JSON.stringify(username));
-                UserService.getByNickname(username).then((response)=>{
-                    console.log(response.data)
-                    const role = response.data.userRole
-                    localStorage.setItem('role',JSON.stringify(role))
-                }).catch((error)=>{
-                    console.log(error)
-                })
+
+                localStorage.setItem('token', JSON.stringify(response.data.token.token))
+
                 return response.data;
             })
     }
 
     logout() {
-        localStorage.removeItem('user');
-        localStorage.removeItem('role')
+        localStorage.removeItem('token');
     }
 
     register(user) {
