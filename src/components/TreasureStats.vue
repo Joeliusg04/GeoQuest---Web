@@ -49,7 +49,6 @@ export default {
   },
   created() {
     TreasureService.getStats(this.$route.params.idTreasure).then((response)=>{
-      console.log(response.data)
       this.stats = response.data
     }).catch((error)=> {
       console.log(error)

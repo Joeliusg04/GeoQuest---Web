@@ -50,6 +50,7 @@
 
 <script>
 import UserService from "@/services/user.service";
+import { SHA256 } from 'crypto-js';
 
 export default {
   name: 'FormulariUser',
@@ -67,7 +68,6 @@ export default {
 
     UserService.getCurrentUsername().then((response) => {
       UserService.getByNickname(response.data).then((response) => {
-        console.log(response)
         this.user = response.data
         this.getImage(this.user)
       }).catch((error) => {
@@ -115,8 +115,8 @@ export default {
       const newPass = document.getElementById('password').value
       if (!newPass.length == 0) {
         if (this.checkPasswordSecurity(newPass)) {
-          this.user.password = newPass
-          console.log("nova contrasenya: " + this.user.password)
+          const encryptedPass = SHA256(newPass).toString();
+          this.user.password = encryptedPass
         } else {
           correctUpdate = false
         }
@@ -127,9 +127,11 @@ export default {
         formData.append('body', JSON.stringify(this.user))
         UserService.update(formData, this.user.idUser).then((response) => {
           this.user = response.data
+          location.reload()
         }).catch((error) => {
           console.log(error)
         })
+
       }
     }
     ,
@@ -172,7 +174,7 @@ export default {
         UserService.delete(this.user.idUser)
           .then(() => {
             localStorage.clear()
-            this.$router.push("/home")
+            this.$router.push("/")
           })
           .catch((error) => {
             console.log(error);

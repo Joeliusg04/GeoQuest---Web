@@ -67,8 +67,7 @@ export default {
           UserService.getByNickname(response.data).then((response) => {
             const user = response.data
             console.log(this.treasure)
-            FavService.addToFav(this.treasure.idTreasure, user.idUser).then((response) => {
-              console.log(response)
+            FavService.addToFav(this.treasure.idTreasure, user.idUser).then(() => {
               this.fav = true
             }).catch((error) => {
               console.log(error)
@@ -88,8 +87,7 @@ export default {
           UserService.getCurrentUsername().then((response) => {
             UserService.getByNickname(response.data).then((response) => {
               const user = response.data
-              FavService.deleteFav(user.idUser, this.treasure.idTreasure).then((response) => {
-                console.log(response)
+              FavService.deleteFav(user.idUser, this.treasure.idTreasure).then(() => {
                 this.fav = true
               }).catch((error) => {
                 console.log(error)

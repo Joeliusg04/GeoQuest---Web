@@ -108,7 +108,6 @@ export default {
 
         reviewService.getAllByUser(user.idUser)
             .then((response) => {
-              console.log(response);
               this.reviews = response.data;
             })
             .catch((error) => {

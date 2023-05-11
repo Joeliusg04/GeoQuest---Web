@@ -45,7 +45,6 @@ export default {
   created() {
     ReviewService.getAllByTreasure(this.$route.params.idTreasure)
       .then((response) => {
-        console.log(response.data);
         this.reviews = response.data;
         if (this.reviews.length > 0) this.hasReviews = true;
       })

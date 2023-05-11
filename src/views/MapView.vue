@@ -30,7 +30,7 @@
         v-bind:treasure="treasure" />
     </div>
     <MapComponent v-if="!emptyFilter" class="map" ref="mapa" v-bind:treasures="treasures" v-bind:size="size" />
-    
+
   </div>
   <div v-show="emptyFilter" class="nofiltersfound">
     <p id="emptyFilter" v-if="emptyFilter"></p>
@@ -76,7 +76,6 @@ export default {
     const urlParams = new URLSearchParams(window.location.search);
     TreasureService.getAll().then(
       (response) => {
-        console.log(response.data)
         this.treasures = response.data;
 
 
@@ -102,8 +101,9 @@ export default {
         }
 
         if (loc !== "" && loc !== null) {
-          this.treasures = this.treasures.filter((t) => t.location === loc)
+          this.treasures = this.treasures.filter((t) => t.location.toLowerCase().includes(loc.toLowerCase()))
         }
+
 
         if (this.treasures.length > 0) {
           this.$refs.mapa.treasuresF = this.treasures
@@ -115,9 +115,9 @@ export default {
           let count = 5;
 
           const countdown = setInterval(function () {
-            
+
             const message = document.getElementById("emptyFilter")
-            message.innerText = "No results found, wait! You will be redirected in ... "+count
+            message.innerText = "No results found, wait! You will be redirected in ... " + count
             count--;
 
 
@@ -164,13 +164,15 @@ export default {
   height: 100px;
   width: 100px;
 }
+
 label {
   margin-top: 20px;
   font-weight: bold;
   display: flex;
   align-items: start;
 }
-#emptyFilter{
+
+#emptyFilter {
   display: flex;
   justify-content: center;
   text-align: center;
@@ -179,10 +181,12 @@ label {
   font-size: 20px;
 
 }
-.nofiltersfound{
+
+.nofiltersfound {
   margin-top: 10rem;
   margin-bottom: 10rem;
 }
+
 input,
 select {
   padding: 10px;
@@ -206,5 +210,4 @@ input:hover {
 #treasure-info {
   display: flex;
   flex-direction: column;
-}
-</style>
+}</style>

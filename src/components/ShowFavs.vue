@@ -35,8 +35,7 @@ export default {
       UserService.getCurrentUsername().then((response) => {
         UserService.getByNickname(response.data).then((response) => {
           const user = response.data;
-          FavService.deleteFav(user.idUser, this.favorite.idTreasure,).then((response) => {
-            console.log(response.data)
+          FavService.deleteFav(user.idUser, this.favorite.idTreasure,).then(() => {
             location.reload()
           }).catch((error) => {
             console.log(error)
