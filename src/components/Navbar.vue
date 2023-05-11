@@ -22,7 +22,6 @@ export default {
   methods: {
     logout() {
       this.$store.dispatch("auth/logout")
-      this.$forceUpdate()
       this.$router.push("/home");
     }
   },created() {

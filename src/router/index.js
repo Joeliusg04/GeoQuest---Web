@@ -52,7 +52,7 @@ const routes = [
         props: true
     },
     {
-      path: "/treasure/:idTreasure/review/:idReview?",
+        path: "/treasure/:idTreasure/review/:idReview?",
         name: "Review",
         component: Review,
         props: true
@@ -70,34 +70,34 @@ const router = createRouter({
 });
 
 
-
 router.beforeEach((to, from, next) => {
-    const publicPages = ['/login','/register','/','/error']
+    const publicPages = ['/login', '/register', '/', '/error']
     const managementPages = ['Management']
 
     const logged = localStorage.getItem('token')
-    let role = ""
 
-    if ((logged===null || logged===undefined) && !publicPages.includes(to.path)){
+
+    if ((logged === null || logged === undefined) && !publicPages.includes(to.path)) {
         next('/login')
-    }
+    } else {
 
-
-    UserService.getCurrentUsername().then((response)=>{
-        UserService.getByNickname(response.data).then((response)=>{
-            role = response.data.role
-        }).catch((error)=>{
+        let role = ""
+        UserService.getCurrentUsername().then((response) => {
+            UserService.getByNickname(response.data).then((response) => {
+                role = response.data.role
+            }).catch((error) => {
+                console.log(error)
+            })
+        }).catch((error) => {
             console.log(error)
         })
-    }).catch((error)=>{
-        console.log(error)
-    })
 
-    if (role!=="Admin" && managementPages.includes(to.name)){
-        localStorage.setItem('error',JSON.stringify("You cannot enter this page"))
-        next('/error')
-    } else {
-        next()
+        if (role !== "Admin" && managementPages.includes(to.name)) {
+            localStorage.setItem('error', JSON.stringify("You cannot enter this page"))
+            next('/error')
+        } else {
+            next()
+        }
     }
 })
 
