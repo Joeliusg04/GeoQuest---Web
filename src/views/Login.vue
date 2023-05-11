@@ -29,7 +29,7 @@
       </p><br>
       <input class="form-submit" type="submit" value="Login"/>
       <p>Do not have an account yet?
-        <router-link to="/register">Sign in</router-link>
+        <router-link to="/register">Sign up</router-link>
       </p>
     </form>
   </div>
@@ -82,7 +82,7 @@ export default {
   padding: 5rem;
   border: black solid 2px;
   margin: 7rem auto;
-  background-color: #f2f2f2;
+  background-color: #e8ecde;
 }
 
 .title {

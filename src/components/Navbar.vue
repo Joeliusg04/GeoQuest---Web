@@ -9,7 +9,7 @@
       <router-link to="/map">Map</router-link>
       <router-link to="/profile">Profile</router-link>
       <router-link v-if="Admin" to="/management">Management</router-link>
-      <button @click="logout">Log Out</button>
+      <router-link to="/home" @click="logout">Log Out</router-link>
       <!--      -->
     </div>
   </nav>
@@ -46,7 +46,7 @@ export default {
 
 <style scoped>
 nav {
-  background-color: #A0DEB1;
+  background-color: #8c996a;
   display: flex;
   justify-content: space-between;
   position: sticky;
@@ -82,8 +82,6 @@ h1 {
 .empresa {
   display: flex;
 }
-
-
 button {
   background: none;
   color: inherit;

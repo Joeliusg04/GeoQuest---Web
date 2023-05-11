@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container">
     <nav-bar/>
     <FormulariUser/>
     <button class="popup-button" @click="displayUserStats">Show your stats</button>
@@ -154,7 +154,9 @@ export default {
   padding: 0;
   margin: 0;
 }
-
+.container{
+  margin-bottom: 5rem;
+}
 table {
   align-items: center;
   justify-content: center;

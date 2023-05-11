@@ -161,7 +161,7 @@ export default {
   padding: 5rem;
   border: black solid 2px;
   margin: 7rem auto;
-  background-color: #f2f2f2;
+  background-color: #e8ecde;
 }
 
 .check {

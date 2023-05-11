@@ -22,7 +22,7 @@ export default {
 
 <style scoped>
 nav {
-  background-color: #A0DEB1;
+  background-color: #8c996a;
   display: flex;
   justify-content: space-between;
   position: sticky;

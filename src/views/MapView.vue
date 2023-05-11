@@ -53,7 +53,7 @@ export default {
 
   data() {
     return {
-      size: ["1000px", "560px"],
+      size: ["1000px", "800px"],
       treasures: [],
       emptyFilter: false
     }
@@ -149,13 +149,17 @@ export default {
 </script>
 
 <style scoped>
+  #container {
+    display: flex;
+    margin: 2rem;
+    justify-content: space-evenly;
+  }
 .map {
   border: black solid 1px;
   position: sticky;
-  top: 150px;
+  top: 155px;
   z-index: 0;
 }
-
 .filter {
   height: 100px;
   width: 100px;
@@ -183,7 +187,7 @@ input,
 select {
   padding: 10px;
   border-radius: 5px;
-  background-color: #a0deb1;
+  background-color: #8c997a;
   color: black;
   font-size: 16px;
   border: none;
@@ -192,15 +196,13 @@ select {
 }
 
 input:hover {
-  background-color: #84b893;
+  background-color: #48603d;
 }
 
-#container {
-  display: flex;
-  margin: 2rem;
-  justify-content: space-evenly;
+#submit{
+  background-color: #48603d;
+  color: white
 }
-
 #treasure-info {
   display: flex;
   flex-direction: column;

@@ -43,7 +43,7 @@ h3 {
 }
 
 footer {
-  background-color: #3d5543;
+  background-color: #5a4a37;
   color: white;
   padding: 20px;
 }
