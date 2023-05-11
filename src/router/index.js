@@ -84,7 +84,13 @@ router.beforeEach((to, from, next) => {
         let role = ""
         UserService.getCurrentUsername().then((response) => {
             UserService.getByNickname(response.data).then((response) => {
-                role = response.data.role
+                role = response.data.userRole
+                if (role !== "Admin" && managementPages.includes(to.name)) {
+                    localStorage.setItem('error', JSON.stringify("You cannot enter this page"))
+                    next('/error')
+                } else {
+                    next()
+                }
             }).catch((error) => {
                 console.log(error)
             })
@@ -92,12 +98,7 @@ router.beforeEach((to, from, next) => {
             console.log(error)
         })
 
-        if (role !== "Admin" && managementPages.includes(to.name)) {
-            localStorage.setItem('error', JSON.stringify("You cannot enter this page"))
-            next('/error')
-        } else {
-            next()
-        }
+
     }
 })
 
