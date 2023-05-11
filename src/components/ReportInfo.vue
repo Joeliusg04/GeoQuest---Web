@@ -10,7 +10,7 @@
         <button class="delete" @click="deleteReport"><img class="delete-image" src="../assets/icons/borrar.png"></button>
       </div>
       <div class="report-text">
-        <p v-if="report.reportInfo.length > 300" class="report-text-scroll">{{ report.reportInfo }}</p>
+        <p v-if="report.reportInfo.length > 300">{{ report.reportInfo }}</p>
         <p v-else class="report-text-normal">{{ report.reportInfo }}</p>
       </div>
       <!--      <p>{{ review.path }}</p>-->
@@ -108,17 +108,13 @@ button {
 }
 
 .report-text {
-  max-height: 150px;
-  overflow-y: scroll;
+  max-height: 200px;
+  margin-left: 6rem;
 }
 
 .report-text-normal {
   margin: 0;
+  margin-left: 10rem;
 }
 
-.report-text-scroll {
-  margin: 0;
-  white-space: pre-line;
-  overflow-wrap: anywhere;
-}
 </style>

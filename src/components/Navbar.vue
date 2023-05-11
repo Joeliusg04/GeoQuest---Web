@@ -17,6 +17,8 @@
 
 <script>
 
+import UserService from '@/services/user.service';
+
 export default {
   name: "NavBar",
   methods: {
@@ -24,9 +26,21 @@ export default {
       this.$store.dispatch("auth/logout")
       this.$router.push("/home");
     }
-  },created() {
-
-  }
+  },
+  data() {
+    return {
+      Admin: false
+    }
+  },
+  mounted() {
+    UserService.getCurrentUsername().then((response) => {
+      UserService.getByNickname(response.data).then((response) => {
+        this.Admin = response.data.userRole === "Admin"
+      }).catch((error) => {
+        console.log(error)
+      }
+    )}
+  )}
 }
 </script>
 
@@ -47,7 +61,8 @@ nav {
   padding: 10px;
 }
 
-.navegacio, a {
+.navegacio,
+a {
   color: black;
   text-decoration: none;
   padding: 10px;

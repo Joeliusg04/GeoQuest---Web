@@ -1,5 +1,6 @@
 <template>
-  <Navbar/>
+  <Navbar v-if="loggedIn" />
+  <NavbarGuest v-else/>
   <div>
     <h1>ERROR!</h1>
     <p>{{ msg }}</p>
@@ -13,13 +14,15 @@
 <script>
 import Navbar from "@/components/Navbar.vue";
 import Footer from "@/components/Footer.vue";
+import NavbarGuest from "@/components/NavbarGuest.vue";
 
 export default {
   name: 'ErrorPage',
   components: {
     Navbar,
-    Footer
-  },
+    Footer,
+    NavbarGuest
+},
   data() {
     return {
       msg: ""
@@ -41,6 +44,9 @@ export default {
     error(){
       console.log("a")
       return JSON.parse(localStorage.getItem('error'))
+    },
+    loggedIn(){
+      return this.$store.state.auth.status.loggedIn;
     }
   }
 }
