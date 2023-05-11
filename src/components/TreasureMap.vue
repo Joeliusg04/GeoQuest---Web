@@ -40,7 +40,7 @@ export default {
     document.getElementById(`${this.treasure.idTreasure}`).setAttribute("src", TreasureService.getPicturePath(this.treasure.idTreasure));
     UserService.getCurrentUsername().then((response) => {
       UserService.getByNickname(response.data).then((response) => {
-        this.Admin = response.data.role === "Admin"
+        this.Admin = response.data.userRole === "Admin"
       }).catch((error) => {
         console.log(error)
       }).catch((error) => {
