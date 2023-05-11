@@ -42,7 +42,6 @@ export default {
   },
   computed: {
     error(){
-      console.log("a")
       return JSON.parse(localStorage.getItem('error'))
     },
     loggedIn(){

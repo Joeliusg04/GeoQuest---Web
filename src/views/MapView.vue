@@ -60,23 +60,9 @@ export default {
   },
   methods: {
     centerMap(treasure) {
-      console.log("center 2")
       this.$refs.mapa.centerMap([treasure.latitude, treasure.longitude])
     },
     displayFilters(filter) {
-
-
-      /*const filtersDiv = document.getElementById('filters')
-      if (filtersDiv.style.display == "block"){
-        filtersDiv.style.display = "none"
-      } else {
-        filtersDiv.style.display = "block"
-      }
-      const button = document.getElementById('submit')
-      button.addEventListener("click", function(){
-        filtersDiv.style.display ="none";
-      });
-      */
 
       const filterElement = document.getElementById(filter)
       if (filterElement.style.display == "block") {
@@ -97,12 +83,8 @@ export default {
         const diff = urlParams.get('difficulty')
         const rating = urlParams.get('rating')
         const loc = urlParams.get('location')
-        console.log(diff)
-        console.log(rating)
-        console.log(loc)
         if (diff !== "none" && diff !== null) {
           this.treasures = this.treasures.filter((t) => t.difficulty === diff)
-          console.log("filtrant diff")
         }
         if (rating !== "none" && rating !== null) {
           switch (rating) {
@@ -141,7 +123,6 @@ export default {
 
             if (count < 0) {
               clearInterval(countdown);
-              console.log("¡Cuenta regresiva terminada!");
             }
           }, 1000);
 

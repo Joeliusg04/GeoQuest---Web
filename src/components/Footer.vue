@@ -37,9 +37,7 @@ export default {
 </script>
 
 <style scoped>
-/* *{
-    border: black solid 1px;
-} */
+
 h3 {
   color: white;
 }

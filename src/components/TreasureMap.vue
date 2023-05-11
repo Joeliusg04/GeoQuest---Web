@@ -52,7 +52,6 @@ export default {
   },
   methods: {
     centerMap() {
-      console.log("center 1");
       this.$emit('centerMap', this.treasure);
     }
     ,

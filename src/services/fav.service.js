@@ -7,8 +7,6 @@ const API_URL = 'http://127.0.0.1:8090';
 class FavService {
 
     addToFav(idTreasure, idUser) {
-        console.log(idUser)
-        console.log(idTreasure)
         return axios.post(API_URL + `/user/${idUser}/favs`, parseInt(idTreasure), {
             headers: {
                 'Authorization': authHeader().Authorization,

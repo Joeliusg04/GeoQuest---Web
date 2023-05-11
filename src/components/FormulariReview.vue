@@ -84,9 +84,7 @@ export default {
       const reader = new FileReader();
       reader.onload = () => {
         document.getElementById("preview").src = reader.result;
-        // console.log(reader.result)
       };
-      // console.log(this.FILE)
       reader.readAsDataURL(this.FILE);
     },
 
@@ -168,13 +166,11 @@ export default {
       for (let radio of radioButtons) {
         if (radio.checked) {
           this.review.rating = radio.value
-          console.log("Ha funcionado")
         }
       }
     }
   },
   mounted() {
-    console.log(this.$route.params)
     if (this.$route.params.idReview !== '') {
       ReviewService.getOneByTreasure(this.$route.params.idTreasure, this.$route.params.idReview).then((response) => {
         this.review = response.data

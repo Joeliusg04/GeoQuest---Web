@@ -63,7 +63,6 @@ export default {
     },
     addOrRemoveFav() {
       if (this.fav === false) {
-        console.log("1")
         UserService.getCurrentUsername().then((response) => {
           UserService.getByNickname(response.data).then((response) => {
             const user = response.data
@@ -86,7 +85,6 @@ export default {
         }
       else
         {
-          console.log("2")
           UserService.getCurrentUsername().then((response) => {
             UserService.getByNickname(response.data).then((response) => {
               const user = response.data
@@ -113,7 +111,6 @@ export default {
             this.treasure = response.data
             document.getElementById("rating").setAttribute("src", require(`../assets/rating/rating_${this.treasure.score}.png`))
 
-            // document.getElementById("rating").setAttribute("src", require(`../assets/rating/rating_${this.treasure.score}.png`))
             UserService.getCurrentUsername().then((response) => {
               UserService.getByNickname(response.data).then((response) => {
                 const user = response.data
@@ -131,7 +128,6 @@ export default {
             })
           }
       ).catch((error) => {
-        console.log("Ha fallat get de tresor amb id" + this.id)
         console.log(error)
       })
     },

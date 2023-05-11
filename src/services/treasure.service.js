@@ -33,10 +33,6 @@ class TreasureService {
 
     update(formData, id) {
 
-        console.log(formData.get('image'))
-        console.log(formData.get('body'))
-        console.log(...formData)
-
 
         var url = API_URL + `/treasure/${id}`
         return axios.put(url, formData, {
@@ -50,9 +46,6 @@ class TreasureService {
 
     createNew(formData) {
 
-        console.log(formData.get('image'))
-        console.log(formData.get('body'))
-        console.log(...formData)
 
         return axios.post(API_URL + "/treasure", formData, {
             headers: {

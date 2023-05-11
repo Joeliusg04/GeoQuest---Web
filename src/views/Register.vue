@@ -87,7 +87,6 @@ export default {
               }
           ).catch(
               (error) => {
-                console.log("ha petat")
                 console.log(error)
               }
           )

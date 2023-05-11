@@ -112,27 +112,21 @@ export default {
     },
     updateUser() {
       var correctUpdate = true
-      console.log(this.user.password)
       const newPass = document.getElementById('password').value
       if (!newPass.length == 0) {
         if (this.checkPasswordSecurity(newPass)) {
           this.user.password = newPass
           console.log("nova contrasenya: " + this.user.password)
         } else {
-          console.log("false")
           correctUpdate = false
         }
-      } else {
-        console.log("marticampeon")
       }
       if (correctUpdate) {
         const formData = new FormData()
-        console.log(this.FILE)
         formData.append('image', this.FILE, this.FILE.name)
         formData.append('body', JSON.stringify(this.user))
         UserService.update(formData, this.user.idUser).then((response) => {
           this.user = response.data
-          console.log(this.user)
         }).catch((error) => {
           console.log(error)
         })
@@ -144,7 +138,6 @@ export default {
       if (file) {
         const reader = new FileReader();
         reader.onload = () => {
-          // this.FILE = e.target.result
 
           document.getElementById("profile-pic").src = reader.result
           this.FILE = event.target.files[0]
@@ -162,9 +155,7 @@ export default {
           bytes[i] = response.data.charCodeAt(i);
         }
 
-        console.log(bytes)
         const blob = new Blob(bytes, { type: response.headers["content-type"] })
-        console.log(blob)
         this.FILE = new File([blob], this.user.photo, { type: response.headers["content-type"] })
       }).catch((error) => {
         console.log(error)

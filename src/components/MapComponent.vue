@@ -3,33 +3,6 @@
 </template>
 
 
-<!--<script setup>
-import TreasureService from "@/services/treasure.service";
-import {ref} from "vue";
-
-const treasures = ref(null)
-async function load() {
-  treasures.value = await TreasureService.getAll().then(
-      (response) => {
-        console.log(response.data)
-        console.log("tipus es:" + typeof response.data)
-        this.$refs.mapa.setTreasures([response.data])
-        this.treasures = response.data;
-
-      }).catch(
-      (error) => {
-        console.log(error)
-        var code = error.code
-        this.$route.push(`/error/${code}`);
-      }
-  );
-
-
-}
-load()
-</script>-->
-
-
 <script>
 import "leaflet/dist/leaflet.css";
 import L from 'leaflet';
@@ -39,7 +12,6 @@ export default {
   name: "MapComponent",
 
   props: {
-    //treasuresF: Array[Object],
     size: Array,
     id: String,
     new: Boolean
@@ -87,7 +59,6 @@ export default {
 
     this.setupMap()
     if (this.id !== undefined && this.id !== "") {
-      //console.log("ID ES "+this.id)
       TreasureService.getById(this.id).then(
           (response) => {
             console.log(response.data)
@@ -98,7 +69,6 @@ export default {
           (error) => {
             console.log(error)
             const code = error.message;
-            console.log("code: " + code)
             this.$router.push(`/error/${code}`);
           }
       );
@@ -110,7 +80,6 @@ export default {
 
             for (let treasure of this.treasures) {
               let link = `<a href='${window.location.origin}/treasure/${treasure.idTreasure}'>${treasure["name"]}</a>`
-              // console.log(treasure)
               L.marker([treasure.latitude, treasure.longitude]).bindPopup(link).addTo(this.map)
             }
           },
@@ -143,8 +112,5 @@ export default {
 </script>
 
 <style scoped>
-/*#map {*/
-/*  width: 800px;*/
-/*  height: 700px;*/
-/*}*/
+
 </style>

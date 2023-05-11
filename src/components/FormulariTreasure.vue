@@ -111,9 +111,7 @@ export default {
       const reader = new FileReader();
       reader.onload = () => {
         document.getElementById("preview").src = reader.result;
-        // console.log(reader.result)
       };
-      // console.log(this.FILE)
       reader.readAsDataURL(this.FILE);
     },
 
@@ -202,7 +200,7 @@ export default {
       UserService.getCurrentUsername().then((response) => {
         UserService.getByNickname(response.data).then((response) => {
 
-          if (response.data.role === "Admin") {
+          if (response.data.userRole === "Admin") {
             TreasureService.delete(this.id).then((response) => {
               console.log("asier")
               alert(response.data)
@@ -243,13 +241,11 @@ export default {
   watch: {
     'treasure.latitude': {
       handler() {
-        // this.$refs.mapa.setupMap()
         this.$refs.mapa.addMarker([this.treasure.latitude, this.treasure.longitude])
       }
     },
     'treasure.longitude': {
       handler() {
-        // this.$refs.mapa.setupMap()
         this.$refs.mapa.addMarker([this.treasure.latitude, this.treasure.longitude])
       }
     }
