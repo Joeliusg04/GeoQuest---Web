@@ -69,10 +69,6 @@ export default {
 </script>
 
 <style scoped>
-* {
-
-  /* bordeR: 1px solid black; */
-}
 .treasure {
   display: flex;
   align-items: center;
