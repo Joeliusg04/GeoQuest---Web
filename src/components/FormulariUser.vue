@@ -1,13 +1,13 @@
 <template>
   <div class="flex">
     <div class="image-username">
-      <img class="user" id="profile-pic" alt="user-profile-pic"/>
+      <img class="user" id="profile-pic" alt="user-profile-pic" />
       <h2>{{ user.nickName }}</h2>
       <b>Level: {{ user.userLevel }}</b>
       <div class="button">
         <label for="fileInput">
-          <input type="file" id="fileInput" @change="previewImage" style="display: none"/>
-          <img class="upload-icon" src="../assets/icons/subir.png" alt="upload-icon"/>
+          <input type="file" id="fileInput" @change="previewImage" style="display: none" />
+          <img class="upload-icon" src="../assets/icons/subir.png" alt="upload-icon" />
           <p>Change your profile picture</p>
         </label>
       </div>
@@ -25,24 +25,25 @@
         <div>
           <label for="email">Mail </label>
           <div class="input-icon-container">
-            <input type="text" id="email" name="email" placeholder="Mail" v-model="user.email" required/>
+            <input type="text" id="email" name="email" placeholder="Mail" v-model="user.email" required />
             <span class="icon-container">
-              <img class="icon" src="../assets/icons/edit.png" alt="edit-icon"/>
+              <img class="icon" src="../assets/icons/edit.png" alt="edit-icon" />
             </span>
           </div>
         </div>
         <div>
           <label for="password">Password </label>
           <div class="input-icon-container">
-            <input type="password" id="password" name="password" placeholder="Password" required>
+            <input type="password" id="password" name="password" placeholder="●●●●●●●●●●●" required>
             <span class="icon-container">
-              <img class="icon" src="../assets/icons/edit.png" alt="edit-icon"/>
+              <img class="icon" src="../assets/icons/edit.png" alt="edit-icon" />
             </span>
           </div>
         </div>
         <input class="create" type="submit" value="Update" @click.prevent="updateUser">
         <input class="delete" type="submit" value="Delete user" @click.prevent="deleteUser">
       </form>
+      <p class="error" v-if="error">{{ errorMsg }}</p>
     </div>
   </div>
 </template>
@@ -56,7 +57,10 @@ export default {
   data() {
     return {
       FILE: "",
-      user: {}
+      user: {},
+      error: false,
+      errorMsg: ""
+
     }
   },
   mounted() {
@@ -70,21 +74,69 @@ export default {
         console.log(error)
       })
     }).catch((error) => {
-          console.log(error)
-        }
+      console.log(error)
+    }
     )
   },
   methods: {
+    checkPasswordSecurity(password) {
+
+      const uppercaseRegex = /[A-Z]/;
+      const lowercaseRegex = /[a-z]/;
+      const numberRegex = /[0-9]/;
+
+      if (password.length < 8) {
+        this.error = true;
+        this.errorMsg = "Password too short. Minimum 8 characters";
+        return false;
+      }
+
+      if (!uppercaseRegex.test(password)) {
+        this.error = true;
+        this.errorMsg = "Password must contain an upper case letter";
+        return false;
+      }
+
+      if (!lowercaseRegex.test(password)) {
+        this.error = true;
+        this.errorMsg = "Password must contain a lower case letter";
+        return false;
+      }
+
+      if (!numberRegex.test(password)) {
+        this.error = true;
+        this.errorMsg = "Password must contain a number";
+        return false;
+      }
+      return true;
+    },
     updateUser() {
-      const formData = new FormData()
-      console.log(this.FILE)
-      formData.append('image', this.FILE, this.FILE.name)
-      formData.append('body', JSON.stringify(this.user))
-      UserService.update(formData, this.user.idUser).then((response) => {
-        this.user = response.data
-      }).catch((error) => {
-        console.log(error)
-      })
+      var correctUpdate = true
+      console.log(this.user.password)
+      const newPass = document.getElementById('password').value
+      if (!newPass.length == 0) {
+        if (this.checkPasswordSecurity(newPass)) {
+          this.user.password = newPass
+          console.log("nova contrasenya: " + this.user.password)
+        } else {
+          console.log("false")
+          correctUpdate = false
+        }
+      } else {
+        console.log("marticampeon")
+      }
+      if (correctUpdate) {
+        const formData = new FormData()
+        console.log(this.FILE)
+        formData.append('image', this.FILE, this.FILE.name)
+        formData.append('body', JSON.stringify(this.user))
+        UserService.update(formData, this.user.idUser).then((response) => {
+          this.user = response.data
+          console.log(this.user)
+        }).catch((error) => {
+          console.log(error)
+        })
+      }
     }
     ,
     previewImage(event) {
@@ -111,9 +163,9 @@ export default {
         }
 
         console.log(bytes)
-        const blob = new Blob(bytes, {type: response.headers["content-type"]})
+        const blob = new Blob(bytes, { type: response.headers["content-type"] })
         console.log(blob)
-        this.FILE = new File([blob], this.user.photo, {type: response.headers["content-type"]})
+        this.FILE = new File([blob], this.user.photo, { type: response.headers["content-type"] })
       }).catch((error) => {
         console.log(error)
       })
@@ -127,13 +179,13 @@ export default {
 
       if (confirmation) {
         UserService.delete(this.user.idUser)
-            .then(() => {
-              localStorage.clear()
-              this.$router.push("/home")
-            })
-            .catch((error) => {
-              console.log(error);
-            });
+          .then(() => {
+            localStorage.clear()
+            this.$router.push("/home")
+          })
+          .catch((error) => {
+            console.log(error);
+          });
       }
     }
   }
