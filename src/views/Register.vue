@@ -41,7 +41,6 @@
 
 <script>
 
-import authService from "@/services/auth.service";
 import NavbarGuest from "@/components/NavbarGuest.vue";
 import Footer from "@/components/Footer.vue";
 

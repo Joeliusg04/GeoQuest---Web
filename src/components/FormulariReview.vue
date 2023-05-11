@@ -44,7 +44,6 @@
 import ReviewService from "@/services/review.service";
 import UserService from "@/services/user.service";
 import TreasureService from "@/services/treasure.service";
-import {error} from "@babel/eslint-parser/lib/convert";
 
 export default {
   name: "FormulariReview",

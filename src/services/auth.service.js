@@ -1,7 +1,5 @@
 import axios from "axios";
 import authHeader from "@/services/auth-header";
-import UserService from "@/services/user.service";
-// import authHeader from "@/services/auth-header";
 
 
 const API_URL = 'http://127.0.0.1:8090';
