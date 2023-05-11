@@ -50,6 +50,7 @@
 
 <script>
 import UserService from "@/services/user.service";
+import { SHA256 } from 'crypto-js';
 
 export default {
   name: 'FormulariUser',
@@ -115,7 +116,8 @@ export default {
       const newPass = document.getElementById('password').value
       if (!newPass.length == 0) {
         if (this.checkPasswordSecurity(newPass)) {
-          this.user.password = newPass
+          const encryptedPass = SHA256(newPass).toString();
+          this.user.password = encryptedPass
           console.log("nova contrasenya: " + this.user.password)
         } else {
           correctUpdate = false

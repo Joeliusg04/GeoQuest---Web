@@ -40,9 +40,9 @@
 </template>
 
 <script>
-
 import NavbarGuest from "@/components/NavbarGuest.vue";
 import Footer from "@/components/Footer.vue";
+import { SHA256 } from 'crypto-js';
 
 export default {
   name: "RegisterView",
@@ -69,16 +69,16 @@ export default {
     register() {
       if (this.checkPasswordSecurity()) {
         if (this.password !== this.passwordRepeat) {
-          this.error = true
+          this.error = true;
           this.errorMsg = "Passwords do not match!";
         } else {
-
-
+          const encryptedPass = SHA256(this.password).toString();
           const user = {
             email: this.email,
-            password: this.password,
+            password: encryptedPass,
             nickname: this.nickname
           };
+          console.log(encryptedPass)
 
           this.$store.dispatch("auth/register", user).then(
               (response) => {

@@ -39,6 +39,7 @@
 <script>
 import NavbarGuest from "@/components/NavbarGuest.vue";
 import Footer from "@/components/Footer.vue";
+import { SHA256 } from 'crypto-js';
 
 export default {
   name: "LoginView",
@@ -61,7 +62,8 @@ export default {
   },
   methods: {
     login() {
-      this.$store.dispatch("auth/login", {nickname: this.nickname, password: this.password}).then(
+      const encryptedPass = SHA256(this.password).toString();
+      this.$store.dispatch("auth/login", {nickname: this.nickname, password: encryptedPass}).then(
           () => {
             this.$router.push("/map");
           },
