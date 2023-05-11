@@ -77,28 +77,31 @@ router.beforeEach((to, from, next) => {
     const logged = localStorage.getItem('token')
 
 
-    if ((logged === null || logged === undefined) && !publicPages.includes(to.path)) {
-        next('/login')
-    } else {
-
-        let role = ""
+    if (logged !== null && logged !== undefined) {
         UserService.getCurrentUsername().then((response) => {
             UserService.getByNickname(response.data).then((response) => {
-                role = response.data.role
+                const role = response.data.userRole
+                if (role !== "Admin" && managementPages.includes(to.name)) {
+                    localStorage.setItem('error', JSON.stringify("You cannot enter this page"))
+                    next('/error')
+                } else {
+                    next()
+                }
             }).catch((error) => {
                 console.log(error)
             })
-        }).catch((error) => {
-            console.log(error)
+        }).catch(() => {
+            next('/login')
         })
-
-        if (role !== "Admin" && managementPages.includes(to.name)) {
-            localStorage.setItem('error', JSON.stringify("You cannot enter this page"))
-            next('/error')
-        } else {
+    } else {
+        if (publicPages.includes(to.path)) {
             next()
+        } else {
+            next("/login")
         }
     }
+
+
 })
 
 

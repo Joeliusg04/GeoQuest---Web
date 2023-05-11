@@ -64,27 +64,11 @@ export default {
     addOrRemoveFav() {
       if (this.fav === false) {
         console.log("1")
-        UserService.getByNickname(JSON.parse(localStorage.getItem('user'))).then((response) => {
-          const user = response.data
-          console.log(this.treasure)
-          FavService.addToFav(this.treasure.idTreasure, user.idUser).then((response) => {
-            console.log(response)
-            this.fav = true
-          }).catch((error) => {
-            console.log(error)
-          })
-        }).catch((error) => {
-          console.log(error)
-        })
-
-
-        this.fav = true
-      } else {
-        console.log("2")
         UserService.getCurrentUsername().then((response) => {
           UserService.getByNickname(response.data).then((response) => {
             const user = response.data
-            FavService.deleteFav(user.idUser, this.treasure.idTreasure).then((response) => {
+            console.log(this.treasure)
+            FavService.addToFav(this.treasure.idTreasure, user.idUser).then((response) => {
               console.log(response)
               this.fav = true
             }).catch((error) => {
@@ -93,29 +77,24 @@ export default {
           }).catch((error) => {
             console.log(error)
           })
-        }).catch((error) => {
+        }).catch((error)=>{
           console.log(error)
         })
 
 
-        this.fav = false
-      }
-    }
-  },
-  created() {
-    TreasureService.getById(this.id).then((response) => {
-          this.treasure = response.data
-          document.getElementById("rating").setAttribute("src", require(`../assets/rating/rating_${this.treasure.score}.png`))
-
-          // document.getElementById("rating").setAttribute("src", require(`../assets/rating/rating_${this.treasure.score}.png`))
+          this.fav = true
+        }
+      else
+        {
+          console.log("2")
           UserService.getCurrentUsername().then((response) => {
             UserService.getByNickname(response.data).then((response) => {
               const user = response.data
-              FavService.getFav(user.idUser, this.treasure.idTreasure).then((response) => {
-                this.fav = response.data
+              FavService.deleteFav(user.idUser, this.treasure.idTreasure).then((response) => {
+                console.log(response)
+                this.fav = true
               }).catch((error) => {
                 console.log(error)
-                this.fav = false
               })
             }).catch((error) => {
               console.log(error)
@@ -123,15 +102,42 @@ export default {
           }).catch((error) => {
             console.log(error)
           })
+
+
+          this.fav = false
         }
-    ).catch((error) => {
-      console.log("Ha fallat get de tresor amb id" + this.id)
-      console.log(error)
-    })
-  },
+      }
+    },
+    created() {
+      TreasureService.getById(this.id).then((response) => {
+            this.treasure = response.data
+            document.getElementById("rating").setAttribute("src", require(`../assets/rating/rating_${this.treasure.score}.png`))
+
+            // document.getElementById("rating").setAttribute("src", require(`../assets/rating/rating_${this.treasure.score}.png`))
+            UserService.getCurrentUsername().then((response) => {
+              UserService.getByNickname(response.data).then((response) => {
+                const user = response.data
+                FavService.getFav(user.idUser, this.treasure.idTreasure).then((response) => {
+                  this.fav = response.data
+                }).catch((error) => {
+                  console.log(error)
+                  this.fav = false
+                })
+              }).catch((error) => {
+                console.log(error)
+              })
+            }).catch((error) => {
+              console.log(error)
+            })
+          }
+      ).catch((error) => {
+        console.log("Ha fallat get de tresor amb id" + this.id)
+        console.log(error)
+      })
+    },
 
 
-}
+  }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
