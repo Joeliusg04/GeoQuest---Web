@@ -38,9 +38,9 @@
         <div class="select">
           <label for="status">Status</label>
           <select id="status" name="status" form="form" required v-model="treasure.status">
-            <option value="Good conditions">Excellent</option>
-            <option value="Correct conditions">Correct</option>
-            <option value="Poor conditions">Poor</option>
+            <option value="Excellent">Excellent</option>
+            <option value="Good">Good</option>
+            <option value="Poor">Poor</option>
           </select>
         </div>
         <div class="select">
