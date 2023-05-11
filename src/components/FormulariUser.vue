@@ -129,9 +129,11 @@ export default {
         formData.append('body', JSON.stringify(this.user))
         UserService.update(formData, this.user.idUser).then((response) => {
           this.user = response.data
+          location.reload()
         }).catch((error) => {
           console.log(error)
         })
+
       }
     }
     ,
