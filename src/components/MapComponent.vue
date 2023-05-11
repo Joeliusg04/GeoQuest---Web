@@ -61,7 +61,6 @@ export default {
     if (this.id !== undefined && this.id !== "") {
       TreasureService.getById(this.id).then(
           (response) => {
-            console.log(response.data)
             const treasure = response.data;
             this.marker = L.marker([treasure.latitude, treasure.longitude]).addTo(this.map)
             this.map.setView([treasure.latitude, treasure.longitude], 8)
@@ -74,8 +73,7 @@ export default {
       );
     } else if (!this.new === true) {
       TreasureService.getAll().then(
-          (response) => {
-            console.log(response.data)
+          () => {
             this.treasures = this.treasuresF;
 
             for (let treasure of this.treasures) {

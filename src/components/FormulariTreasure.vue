@@ -102,7 +102,6 @@ export default {
     },
 
     receiveCoords(lat, lng) {
-      console.log("eeei")
       this.treasure.latitude = Math.round(lat * 100000) / 100000
       this.treasure.longitude = Math.round(lng * 100000) / 100000
     },
@@ -129,13 +128,10 @@ export default {
       formData.append('image', this.FILE, this.FILE.name)
       formData.append('body', JSON.stringify(this.treasure))
 
-      TreasureService.createNew(formData).then((response) => {
-        console.log(response)
-        console.log("ha funcionat")
+      TreasureService.createNew(formData).then(() => {
         this.$router.push(`/map`)
       }).catch(
           (error) => {
-            console.log("Ha fallat! Hahaha ajuda")
             console.log(error)
           }
       )
@@ -152,23 +148,18 @@ export default {
             bytes[i] = response.data.charCodeAt(i);
           }
 
-          console.log(bytes)
           const blob = new Blob(bytes, {type: response.headers["content-type"]})
-          console.log(blob)
           this.FILE = new File([blob], this.treasure.image, {type: response.headers["content-type"]})
 
 
           const formData = new FormData()
-          console.log("Saludos" + this.FILE)
+
           formData.append('image', this.FILE, this.FILE.name)
           formData.append('body', JSON.stringify(this.treasure))
-          console.log(this.treasure)
-          TreasureService.update(formData, this.id).then((response) => {
-            console.log(response)
+          TreasureService.update(formData, this.id).then(() => {
             this.$router.push(`/treasure/${this.id}`)
           }).catch(
               (error) => {
-                console.log("Ha fallat! Hahaha ajuda2")
                 console.log(error)
               }
           )
@@ -177,16 +168,12 @@ export default {
         })
       } else {
         const formData = new FormData()
-        console.log("Saludos" + this.FILE)
         formData.append('image', this.FILE, this.FILE.name)
         formData.append('body', JSON.stringify(this.treasure))
-        console.log(this.treasure)
-        TreasureService.update(formData, this.id).then((response) => {
-          console.log(response)
+        TreasureService.update(formData, this.id).then(() => {
           this.$router.push(`/treasure/${this.id}`)
         }).catch(
             (error) => {
-              console.log("Ha fallat! Hahaha ajuda2")
               console.log(error)
             }
         )
@@ -202,12 +189,10 @@ export default {
 
           if (response.data.userRole === "Admin") {
             TreasureService.delete(this.id).then((response) => {
-              console.log("asier")
               alert(response.data)
               this.$router.push("/management")
             }).catch((error) => {
               console.log(error)
-              console.log("no entra")
             })
           }
         }).catch((error) => {

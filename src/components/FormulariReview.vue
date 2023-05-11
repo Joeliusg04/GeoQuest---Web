@@ -101,8 +101,7 @@ export default {
       formData.append('image', this.FILE, this.FILE.name)
       formData.append('body', JSON.stringify(this.review))
 
-      ReviewService.createNew(this.review.idTreasure, formData).then((response) => {
-        console.log(response)
+      ReviewService.createNew(this.review.idTreasure, formData).then(() => {
         this.$router.push(`/treasure/${this.review.idTreasure}`)
       }).catch((error) => {
         console.log(error)
@@ -129,8 +128,7 @@ export default {
           formData.append('image', this.FILE, this.FILE.name)
           formData.append('body', JSON.stringify(this.review))
 
-          ReviewService.update(this.review.idTreasure, this.review.idReview, formData).then((response) => {
-            console.log(response)
+          ReviewService.update(this.review.idTreasure, this.review.idReview, formData).then(() => {
             this.$router.push(`/treasure/${this.review.idTreasure}`)
           }).catch((error) => {
             console.log(error)
@@ -145,8 +143,7 @@ export default {
         formData.append('image', this.FILE, this.FILE.name)
         formData.append('body', JSON.stringify(this.review))
 
-        ReviewService.update(this.review.idTreasure, this.review.idReview, formData).then((response) => {
-          console.log(response)
+        ReviewService.update(this.review.idTreasure, this.review.idReview, formData).then(() => {
           this.$router.push(`/treasure/${this.review.idTreasure}`)
         }).catch((error) => {
           console.log(error)
@@ -155,8 +152,7 @@ export default {
       }
     },
     deleteReview() {
-      ReviewService.deleteByTreasure(this.$route.params.idTreasure, this.$route.params.idReview).then((response) => {
-        console.log("funciona" + response)
+      ReviewService.deleteByTreasure(this.$route.params.idTreasure, this.$route.params.idReview).then(() => {
         window.location.href = "/profile"
       })
 

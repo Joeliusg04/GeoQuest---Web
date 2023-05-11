@@ -78,11 +78,9 @@ export default {
             password: encryptedPass,
             nickname: this.nickname
           };
-          console.log(encryptedPass)
 
           this.$store.dispatch("auth/register", user).then(
-              (response) => {
-                console.log(response)
+              () => {
                 this.$router.push("/login")
               }
           ).catch(

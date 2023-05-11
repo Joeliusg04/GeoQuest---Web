@@ -44,7 +44,6 @@ export default {
       UserService.getByNickname(response.data).then((response) => {
         const id = response.data.idUser
         UserService.getStats(id).then((response) => {
-          console.log(response.data)
           this.userStats = response.data
         }).catch((error) => {
           console.log(error)

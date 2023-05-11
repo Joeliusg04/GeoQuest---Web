@@ -42,8 +42,7 @@ export default {
   },
   methods: {
     deleteReport() {
-      ReportService.deleteByUser(this.user.idUser, this.report.idReport).then((response) => {
-        console.log(response.data)
+      ReportService.deleteByUser(this.user.idUser, this.report.idReport).then(() => {
         location.reload()
       }).catch((error) => {
         console.log(error)

@@ -68,7 +68,6 @@ export default {
 
     UserService.getCurrentUsername().then((response) => {
       UserService.getByNickname(response.data).then((response) => {
-        console.log(response)
         this.user = response.data
         this.getImage(this.user)
       }).catch((error) => {
@@ -118,7 +117,6 @@ export default {
         if (this.checkPasswordSecurity(newPass)) {
           const encryptedPass = SHA256(newPass).toString();
           this.user.password = encryptedPass
-          console.log("nova contrasenya: " + this.user.password)
         } else {
           correctUpdate = false
         }
@@ -174,7 +172,7 @@ export default {
         UserService.delete(this.user.idUser)
           .then(() => {
             localStorage.clear()
-            this.$router.push("/home")
+            this.$router.push("/")
           })
           .catch((error) => {
             console.log(error);
