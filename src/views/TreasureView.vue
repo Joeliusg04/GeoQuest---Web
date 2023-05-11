@@ -48,8 +48,7 @@ export default {
         this.reviews = response.data;
         if (this.reviews.length > 0) this.hasReviews = true;
       })
-      .catch((error) => {
-        console.log(error);
+      .catch(() => {
       });
   },
   mounted(){

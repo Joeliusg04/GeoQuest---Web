@@ -41,8 +41,7 @@ export default {
     if (this.$route.params.idTreasure !== '') {
       ReportService.getAllByTreasure(this.$route.params.idTreasure).then((response) => {
         this.reports = response.data
-      }).catch((error) => {
-        console.log(error)
+      }).catch(() => {
       })
     }
   }

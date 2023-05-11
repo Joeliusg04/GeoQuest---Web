@@ -37,19 +37,16 @@ export default {
           const user = response.data;
           FavService.deleteFav(user.idUser, this.favorite.idTreasure,).then(() => {
             location.reload()
-          }).catch((error) => {
-            console.log(error)
+          }).catch(() => {
+            localStorage.setItem('error', JSON.stringify("Error when removing treasure from favorites"))
+            this.$router.push("/error")
           })
-        }).catch((error) => {
-          console.log(error)
+        }).catch(() => {
         })
-      }).catch((error) => {
-        console.log(error)
+      }).catch(() => {
+        localStorage.removeItem('token')
+        this.$router.push("/login")
       })
-    },
-    mounted() {
-
-
     },
     computed: {
       favoriteLink() {

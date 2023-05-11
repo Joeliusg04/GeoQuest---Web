@@ -36,11 +36,13 @@ export default {
     UserService.getCurrentUsername().then((response) => {
       UserService.getByNickname(response.data).then((response) => {
         this.Admin = response.data.userRole === "Admin"
-      }).catch((error) => {
-        console.log(error)
+      }).catch(() => {
       }
     )}
-  )}
+  ).catch(()=>{
+      localStorage.removeItem('token')
+      this.$router.push("/login")
+    })}
 }
 </script>
 

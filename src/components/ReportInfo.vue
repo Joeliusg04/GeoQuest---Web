@@ -36,16 +36,18 @@ export default {
   mounted() {
     UserService.getById(this.report.idUser).then((response) => {
       this.user = response.data
-    }).catch((error) => {
-      console.log(error)
+    }).catch(() => {
+      localStorage.setItem('error', JSON.stringify("Error when loading resources"))
+      this.$router.push("/error")
     })
   },
   methods: {
     deleteReport() {
       ReportService.deleteByUser(this.user.idUser, this.report.idReport).then(() => {
         location.reload()
-      }).catch((error) => {
-        console.log(error)
+      }).catch(() => {
+        localStorage.setItem('error', JSON.stringify("Error when deleting report"))
+        this.$router.push("/error")
       })
     }
   }

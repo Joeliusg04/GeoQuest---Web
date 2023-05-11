@@ -49,11 +49,11 @@ export default {
           this.link = `/treasure/${this.review.idTreasure}/review/${this.review.idReview}`
         }
 
-      }).catch((error) => {
-        console.log(error)
+      }).catch(() => {
       });
-    }).catch((error) => {
-      console.log(error)
+    }).catch(() => {
+      localStorage.removeItem('token')
+      this.$router.push("/login")
     })
 
   },

@@ -87,10 +87,10 @@ router.beforeEach((to, from, next) => {
                 } else {
                     next()
                 }
-            }).catch((error) => {
-                console.log(error)
+            }).catch(() => {
             })
         }).catch(() => {
+            localStorage.removeItem('token')
             next('/login')
         })
     } else {

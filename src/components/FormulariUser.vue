@@ -1,13 +1,13 @@
 <template>
   <div class="flex">
     <div class="image-username">
-      <img class="user" id="profile-pic" alt="user-profile-pic" />
+      <img class="user" id="profile-pic" alt="user-profile-pic"/>
       <h2>{{ user.nickName }}</h2>
       <b>Level: {{ user.userLevel }}</b>
       <div class="button">
         <label for="fileInput">
-          <input type="file" id="fileInput" @change="previewImage" style="display: none" />
-          <img class="upload-icon" src="../assets/icons/subir.png" alt="upload-icon" />
+          <input type="file" id="fileInput" @change="previewImage" style="display: none"/>
+          <img class="upload-icon" src="../assets/icons/subir.png" alt="upload-icon"/>
           <p>Change your profile picture</p>
         </label>
       </div>
@@ -25,9 +25,9 @@
         <div>
           <label for="email">Mail </label>
           <div class="input-icon-container">
-            <input type="text" id="email" name="email" placeholder="Mail" v-model="user.email" required />
+            <input type="text" id="email" name="email" placeholder="Mail" v-model="user.email" required/>
             <span class="icon-container">
-              <img class="icon" src="../assets/icons/edit.png" alt="edit-icon" />
+              <img class="icon" src="../assets/icons/edit.png" alt="edit-icon"/>
             </span>
           </div>
         </div>
@@ -36,7 +36,7 @@
           <div class="input-icon-container">
             <input type="password" id="password" name="password" placeholder="●●●●●●●●●●●" required>
             <span class="icon-container">
-              <img class="icon" src="../assets/icons/edit.png" alt="edit-icon" />
+              <img class="icon" src="../assets/icons/edit.png" alt="edit-icon"/>
             </span>
           </div>
         </div>
@@ -50,7 +50,7 @@
 
 <script>
 import UserService from "@/services/user.service";
-import { SHA256 } from 'crypto-js';
+import {SHA256} from 'crypto-js';
 
 export default {
   name: 'FormulariUser',
@@ -70,12 +70,12 @@ export default {
       UserService.getByNickname(response.data).then((response) => {
         this.user = response.data
         this.getImage(this.user)
-      }).catch((error) => {
-        console.log(error)
+      }).catch(() => {
       })
-    }).catch((error) => {
-      console.log(error)
-    }
+    }).catch(() => {
+          localStorage.removeItem('token')
+          this.$router.push("/login")
+        }
     )
   },
   methods: {
@@ -128,8 +128,9 @@ export default {
         UserService.update(formData, this.user.idUser).then((response) => {
           this.user = response.data
           location.reload()
-        }).catch((error) => {
-          console.log(error)
+        }).catch(() => {
+          localStorage.setItem('error', JSON.stringify("Error when updating profile"))
+          this.$router.push("/error")
         })
 
       }
@@ -157,10 +158,11 @@ export default {
           bytes[i] = response.data.charCodeAt(i);
         }
 
-        const blob = new Blob(bytes, { type: response.headers["content-type"] })
-        this.FILE = new File([blob], this.user.photo, { type: response.headers["content-type"] })
-      }).catch((error) => {
-        console.log(error)
+        const blob = new Blob(bytes, {type: response.headers["content-type"]})
+        this.FILE = new File([blob], this.user.photo, {type: response.headers["content-type"]})
+      }).catch(() => {
+        localStorage.setItem('error', JSON.stringify("Error when getting picture"))
+        this.$router.push("/error")
       })
 
       document.getElementById("profile-pic").src = UserService.getPicturePath(user.idUser)
@@ -172,13 +174,14 @@ export default {
 
       if (confirmation) {
         UserService.delete(this.user.idUser)
-          .then(() => {
-            localStorage.clear()
-            this.$router.push("/")
-          })
-          .catch((error) => {
-            console.log(error);
-          });
+            .then(() => {
+              localStorage.clear()
+              this.$router.push("/")
+            })
+            .catch(() => {
+              localStorage.setItem('error', JSON.stringify("Error when deleting account"))
+              this.$router.push("/error")
+            });
       }
     }
   }

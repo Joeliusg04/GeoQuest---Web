@@ -41,14 +41,12 @@ export default {
     UserService.getCurrentUsername().then((response) => {
       UserService.getByNickname(response.data).then((response) => {
         this.Admin = response.data.userRole === "Admin"
-      }).catch((error) => {
-        console.log(error)
-      }).catch((error) => {
-        console.log(error)
-      })
-    }).catch((error) => {
-      console.log(error)
-    })
+      }).catch(() => {
+      });
+    }).catch(() => {
+      localStorage.removeItem('token')
+      this.$router.push("/login")
+    });
   },
   methods: {
     centerMap() {
@@ -78,7 +76,8 @@ export default {
   margin-right: 2rem;
   margin-bottom: 1rem;
 }
-.title{
+
+.title {
   display: flex;
   justify-content: start;
   margin: 0;
@@ -86,6 +85,7 @@ export default {
   text-align: center;
   color: black;
 }
+
 .image {
   height: 100%;
   width: 200px;
@@ -94,38 +94,45 @@ export default {
   border-top-left-radius: 20px;
 }
 
-.flex-direction{
+.flex-direction {
   margin-top: 0.5rem;
   width: 100%;
 }
+
 .flex {
   display: flex;
   justify-content: space-around;
   margin: 0;
   align-items: center;
 }
+
 .rating {
   color: #ffffff;
   height: 90%;
   width: 90%;
 }
+
 .star {
   font-size: 45px;
 }
+
 .filled {
   color: #ffee00;
 }
-.difficulty{
+
+.difficulty {
   display: flex;
   margin-right: 1rem;
   color: black;
 }
+
 .buttons {
   display: flex;
   margin-top: 1rem;
   align-items: center;
   justify-content: center;
 }
+
 .config {
   display: flex;
   justify-content: center;
@@ -136,6 +143,7 @@ export default {
   margin-left: 2rem;
 
 }
+
 button,
 a {
   display: inline-block;
@@ -151,6 +159,7 @@ a {
   text-decoration: none;
   margin: 0.5rem;
 }
+
 button:hover,
 a:hover {
   background-color: black;

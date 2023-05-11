@@ -83,8 +83,9 @@ export default {
       FavService.delete(idTreasure).then((response) => {
         alert(response.data)
         this.$router.push("/profile")
-      }).catch((error) => {
-        console.log(error)
+      }).catch(() => {
+        localStorage.setItem('error', JSON.stringify("Error when removing treasure from favorites"))
+        this.$router.push("/error")
       })
     }
   },
@@ -102,23 +103,20 @@ export default {
                 favoriteLink: `${window.location.origin}/treasure/${favorite.idTreasure}`
               }));
             })
-            .catch((error) => {
-              console.log(error);
+            .catch(() => {
             });
 
         reviewService.getAllByUser(user.idUser)
             .then((response) => {
               this.reviews = response.data;
             })
-            .catch((error) => {
-              console.log(error);
+            .catch(() => {
             });
-      })
-          .catch((error) => {
-            console.log(error);
-          });
-    }).catch((error) => {
-      console.log(error)
+      }).catch(() => {
+      });
+    }).catch(() => {
+      localStorage.removeItem('token')
+      this.$router.push("/login")
     })
   }
 }
@@ -153,9 +151,11 @@ export default {
   padding: 0;
   margin: 0;
 }
-.container{
+
+.container {
   margin-bottom: 5rem;
 }
+
 table {
   align-items: center;
   justify-content: center;

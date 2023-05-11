@@ -69,69 +69,65 @@ export default {
             console.log(this.treasure)
             FavService.addToFav(this.treasure.idTreasure, user.idUser).then(() => {
               this.fav = true
-            }).catch((error) => {
-              console.log(error)
+            }).catch(() => {
+              localStorage.setItem('error', JSON.stringify("Error when adding treasure to favorites"))
+              this.$router.push("/error")
             })
-          }).catch((error) => {
-            console.log(error)
+          }).catch(() => {
           })
-        }).catch((error)=>{
-          console.log(error)
+        }).catch(() => {
+          localStorage.removeItem('token')
+          this.$router.push("/login")
         })
 
 
-          this.fav = true
-        }
-      else
-        {
-          UserService.getCurrentUsername().then((response) => {
-            UserService.getByNickname(response.data).then((response) => {
-              const user = response.data
-              FavService.deleteFav(user.idUser, this.treasure.idTreasure).then(() => {
-                this.fav = true
-              }).catch((error) => {
-                console.log(error)
-              })
-            }).catch((error) => {
-              console.log(error)
+        this.fav = true
+      } else {
+        UserService.getCurrentUsername().then((response) => {
+          UserService.getByNickname(response.data).then((response) => {
+            const user = response.data
+            FavService.deleteFav(user.idUser, this.treasure.idTreasure).then(() => {
+              this.fav = true
+            }).catch(() => {
+              localStorage.setItem('error', JSON.stringify("Error when removing treasure from favorites"))
+              this.$router.push("/error")
             })
-          }).catch((error) => {
-            console.log(error)
+          }).catch(() => {
           })
+        }).catch(() => {
+          localStorage.removeItem('token')
+          this.$router.push("/login")
+        })
 
 
-          this.fav = false
-        }
+        this.fav = false
       }
-    },
-    created() {
-      TreasureService.getById(this.id).then((response) => {
-            this.treasure = response.data
-            document.getElementById("rating").setAttribute("src", require(`../assets/rating/rating_${this.treasure.score}.png`))
+    }
+  },
+  created() {
+    TreasureService.getById(this.id).then((response) => {
+      this.treasure = response.data
+      document.getElementById("rating").setAttribute("src", require(`../assets/rating/rating_${this.treasure.score}.png`))
 
-            UserService.getCurrentUsername().then((response) => {
-              UserService.getByNickname(response.data).then((response) => {
-                const user = response.data
-                FavService.getFav(user.idUser, this.treasure.idTreasure).then((response) => {
-                  this.fav = response.data
-                }).catch((error) => {
-                  console.log(error)
-                  this.fav = false
-                })
-              }).catch((error) => {
-                console.log(error)
-              })
-            }).catch((error) => {
-              console.log(error)
-            })
-          }
-      ).catch((error) => {
-        console.log(error)
+      UserService.getCurrentUsername().then((response) => {
+        UserService.getByNickname(response.data).then((response) => {
+          const user = response.data
+          FavService.getFav(user.idUser, this.treasure.idTreasure).then((response) => {
+            this.fav = response.data
+          }).catch(() => {
+          })
+        }).catch(() => {
+        })
+      }).catch(() => {
+        localStorage.removeItem('token')
+        this.$router.push("/login")
       })
-    },
+    }).catch(() => {
+    })
+  },
 
 
-  }
+}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

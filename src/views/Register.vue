@@ -84,8 +84,9 @@ export default {
                 this.$router.push("/login")
               }
           ).catch(
-              (error) => {
-                console.log(error)
+              () => {
+                localStorage.setItem('error', JSON.stringify("Error when logging in"))
+                this.$router.push("/error")
               }
           )
         }

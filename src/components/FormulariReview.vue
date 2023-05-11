@@ -104,7 +104,10 @@ export default {
       ReviewService.createNew(this.review.idTreasure, formData).then(() => {
         this.$router.push(`/treasure/${this.review.idTreasure}`)
       }).catch((error) => {
-        console.log(error)
+        if (error.response.status === 401) {
+          localStorage.setItem('error', JSON.stringify("Unauthorized action"))
+          this.$router.push("/error")
+        }
       })
 
     },
@@ -130,12 +133,13 @@ export default {
 
           ReviewService.update(this.review.idTreasure, this.review.idReview, formData).then(() => {
             this.$router.push(`/treasure/${this.review.idTreasure}`)
-          }).catch((error) => {
-            console.log(error)
+          }).catch(() => {
+            localStorage.setItem('error', JSON.stringify("Error when updating review"))
+            this.$router.push("/error")
           });
-
-        }).catch((error) => {
-          console.log(error)
+        }).catch(() => {
+          localStorage.setItem('error', JSON.stringify("Error when getting review picture"))
+          this.$router.push("/error")
         });
       } else {
 
@@ -145,8 +149,9 @@ export default {
 
         ReviewService.update(this.review.idTreasure, this.review.idReview, formData).then(() => {
           this.$router.push(`/treasure/${this.review.idTreasure}`)
-        }).catch((error) => {
-          console.log(error)
+        }).catch(() => {
+          localStorage.setItem('error', JSON.stringify("Error when updating review"))
+          this.$router.push("/error")
         });
 
       }
@@ -154,6 +159,9 @@ export default {
     deleteReview() {
       ReviewService.deleteByTreasure(this.$route.params.idTreasure, this.$route.params.idReview).then(() => {
         window.location.href = "/profile"
+      }).catch(() => {
+        localStorage.setItem('error', JSON.stringify("Error when deleting review"))
+        this.$router.push("/error")
       })
 
     },
@@ -179,25 +187,33 @@ export default {
               localStorage.setItem('error', JSON.stringify("You have been a very bad boy"))
               this.$router.push("/error")
             }
-          }).catch((error) => {
-            console.log(error)
-          })
-        }).catch((error) => {
-          console.log(error())
-        })
-      }).catch(() => {
-        localStorage.setItem('error',JSON.stringify("Review not found"))
-        this.$router.push("/error")
-      })
-    } else {
-      this.$router.push(`/treasure/${this.$route.params.idTreasure}`)
+          }).catch(() => {
 
+          });
+        }).catch(() => {
+          localStorage.removeItem('token')
+          this.$router.push("/login")
+        });
+      }).catch(() => {
+        localStorage.setItem('error', JSON.stringify("Error when finding treasure"))
+        this.$router.push("/error")
+
+      });
+    } else {
+      this.$router.push(`/treasure/${this.$route.params.idTreasure}`);
     }
 
     TreasureService.getById(this.$route.params.idTreasure).then((response) => {
       this.treasure = response.data
     }).catch((error) => {
-      console.log(error)
+      if (error.response.status === 401) {
+        localStorage.setItem('error', JSON.stringify("Unauthorized action"))
+        this.$router.push("/error")
+      }
+      if (error.response.status === 404) {
+        localStorage.setItem('error', JSON.stringify("Treasure not found"))
+        this.$router.push("/error")
+      }
     });
   }
 }

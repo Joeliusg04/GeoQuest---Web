@@ -50,8 +50,9 @@ export default {
   created() {
     TreasureService.getStats(this.$route.params.idTreasure).then((response)=>{
       this.stats = response.data
-    }).catch((error)=> {
-      console.log(error)
+    }).catch(()=> {
+      localStorage.setItem('error', JSON.stringify("Error when getting treasure stats"))
+      this.$router.push("/error")
     })
   }
 }

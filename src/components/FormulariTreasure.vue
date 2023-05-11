@@ -130,11 +130,15 @@ export default {
 
       TreasureService.createNew(formData).then(() => {
         this.$router.push(`/map`)
-      }).catch(
-          (error) => {
-            console.log(error)
+      }).catch((error) => {
+            if (error.response.status === 401) {
+              localStorage.setItem('error', JSON.stringify("Unauthorized action"))
+              this.$router.push("/error")
+            }
+            localStorage.setItem('error', JSON.stringify("Error when creating new treasure"))
+            this.$router.push("/error")
           }
-      )
+      );
 
     },
 
@@ -158,13 +162,19 @@ export default {
           formData.append('body', JSON.stringify(this.treasure))
           TreasureService.update(formData, this.id).then(() => {
             this.$router.push(`/treasure/${this.id}`)
-          }).catch(
-              (error) => {
-                console.log(error)
-              }
-          )
+          }).catch(() => {
+            localStorage.setItem('error', JSON.stringify("Error when updating treasure"))
+            this.$router.push("/error")
+          })
         }).catch((error) => {
-          console.log(error)
+          if (error.response.status === 404) {
+            localStorage.setItem('error', JSON.stringify("Picture not found"))
+            this.$router.push("/error")
+          } else {
+            localStorage.setItem('error', JSON.stringify("Error when getting treasure picture"))
+            this.$router.push("/error")
+          }
+
         })
       } else {
         const formData = new FormData()
@@ -172,11 +182,10 @@ export default {
         formData.append('body', JSON.stringify(this.treasure))
         TreasureService.update(formData, this.id).then(() => {
           this.$router.push(`/treasure/${this.id}`)
-        }).catch(
-            (error) => {
-              console.log(error)
-            }
-        )
+        }).catch(() => {
+          localStorage.setItem('error', JSON.stringify("Error when updating treasure"))
+          this.$router.push("/error")
+        })
       }
 
 
@@ -191,15 +200,16 @@ export default {
             TreasureService.delete(this.id).then((response) => {
               alert(response.data)
               this.$router.push("/management")
-            }).catch((error) => {
-              console.log(error)
+            }).catch(() => {
+              localStorage.setItem('error', JSON.stringify("Error when deleting treasure"))
+              this.$router.push("/error")
             })
           }
-        }).catch((error) => {
-          console.log(error)
+        }).catch(() => {
         })
-      }).catch((error) => {
-        console.log(error)
+      }).catch(() => {
+        localStorage.removeItem('token')
+        this.$router.push("/login")
       })
 
     }

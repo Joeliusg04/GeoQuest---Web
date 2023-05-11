@@ -45,15 +45,16 @@ export default {
         const id = response.data.idUser
         UserService.getStats(id).then((response) => {
           this.userStats = response.data
-        }).catch((error) => {
-          console.log(error)
+        }).catch(() => {
+          localStorage.setItem('error', JSON.stringify("Error when getting treasure stats"))
+          this.$router.push("/error")
         });
-      }).catch((error) => {
-        console.log(error)
+      }).catch(() => {
       });
-    }).catch((error) => {
-      console.log(error)
-    })
+    }).catch(() => {
+      localStorage.removeItem('token')
+      this.$router.push("/login")
+    });
   }
 }
 </script>
