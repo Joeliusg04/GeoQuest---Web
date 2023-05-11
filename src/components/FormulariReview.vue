@@ -193,20 +193,13 @@ export default {
         }).catch((error) => {
           console.log(error())
         })
-      }).catch((error) => {
-        console.log(error)
+      }).catch(() => {
+        localStorage.setItem('error',JSON.stringify("Review not found"))
+        this.$router.push("/error")
       })
     } else {
-      document.getElementById('image').setAttribute('required', '')
-      UserService.getCurrentUsername().then((response) => {
-        UserService.getByNickname(response.data).then((response) => {
-          this.review.idUser = response.data.idUser
-        }).catch((error) => {
-          console.log(error)
-        })
-      }).catch((error) => {
-        console.log(error)
-      })
+      this.$router.push(`/treasure/${this.$route.params.idTreasure}`)
+
     }
 
     TreasureService.getById(this.$route.params.idTreasure).then((response) => {

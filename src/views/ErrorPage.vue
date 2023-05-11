@@ -54,7 +54,7 @@ export default {
 
 <style scoped>
 div {
-  padding: 5rem;
+  padding: 10rem 5rem 10rem 5rem;
 }
 
 .errImg {
