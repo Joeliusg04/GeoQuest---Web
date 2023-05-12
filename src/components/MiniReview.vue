@@ -25,7 +25,7 @@ export default {
     UserService.getById(this.review.idUser).then((response) => {
 
       this.user = response.data
-      document.getElementById(this.review.idReview).setAttribute('src', require(`../assets/rating/rating_${this.review.rating}.png`))
+
     }).catch(() => {
       localStorage.setItem('error', JSON.stringify("Error when loading resources"))
       this.$router.push("/error")

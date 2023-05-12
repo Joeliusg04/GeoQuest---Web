@@ -5,8 +5,7 @@
       <h3 class="title">{{ treasure.name }}</h3>
       <div class="flex">
         <div class="rating">
-          <span v-for="index in maxStars" :key="index" class="star"
-                :class="{ filled: index <= treasure.score }">&#9733;</span>
+          <star-rating :rating="treasure.score" :read-only="true" :increment="0.01"/>
         </div>
         <h4 class="difficulty">Difficulty: {{ treasure.difficulty }}</h4>
       </div>
@@ -24,8 +23,11 @@
 <script>
 import TreasureService from "@/services/treasure.service";
 import UserService from "@/services/user.service";
-
+import StarRating from "vue-star-rating"
 export default {
+  components: {
+    StarRating
+  },
   name: 'TreasureMap',
   data() {
     return {
