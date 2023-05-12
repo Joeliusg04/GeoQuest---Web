@@ -72,9 +72,9 @@ export default {
 
 .title {
   align-items: center;
-  background-color: #a0deb1;
+  background-color: #48603D;
   padding: 10px;
-}
+} 
 
 .header h1 {
   margin: 0;
@@ -93,7 +93,7 @@ export default {
 .content {
   display: flex;
   flex-wrap: wrap;
-  background-color: #84b893;
+  background-color: #8c996A;
   padding: 20px;
 }
 

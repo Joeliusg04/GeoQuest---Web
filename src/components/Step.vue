@@ -14,7 +14,7 @@ export default {
   }
 }
 </script>
-<style>
+<style scoped>
 h3 {
   color: #3d5443;
 }

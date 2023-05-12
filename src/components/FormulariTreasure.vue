@@ -286,7 +286,7 @@ export default {
 
 .form-submit {
   margin-top: 1rem;
-  background-color: #4CAF50;
+  background-color: #68795b;
   color: white;
   border: none;
   border-radius: 5px;
@@ -295,7 +295,7 @@ export default {
 }
 
 .form-submit:hover {
-  background-color: #3e8e41;
+  background-color: #48603d;
 }
 
 div {
@@ -316,7 +316,7 @@ textarea {
   margin-top: 5px;
   padding: 5px;
   border-radius: 5px;
-  border: 1px solid #84b893;
+  border: 1px solid #68795b;
   font-size: 16px;
 }
 
@@ -325,7 +325,7 @@ textarea {
   height: 30px;
   margin-top: 20px;
   resize: none;
-  background-color: #a0deb1;
+  background-color: #68795b;
   border: none;
 }
 
@@ -341,7 +341,7 @@ input,
 select {
   padding: 10px;
   border-radius: 5px;
-  background-color: #a0deb1;
+  background-color: #68795b;
   color: black;
   font-size: 16px;
   border: none;
@@ -349,7 +349,7 @@ select {
 }
 
 input:hover {
-  background-color: #84b893;
+  background-color: #48603d;
 }
 
 .treasure-image img {
@@ -363,8 +363,10 @@ input:hover {
 }
 
 .image-treasure img {
-  border: 1px solid #4CAF50;
+  border: 1px solid #68795b;
   border-radius: 20px;
+  width: 250px;
+  height: 250px;
 }
 
 .buttons {

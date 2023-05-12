@@ -195,6 +195,11 @@ export default {
   margin-bottom: 8rem;
 }
 
+#profile-pic{
+  width: 250px;
+  height: 250px;
+}
+
 .image-username {
   display: flex;
   flex-direction: column;
@@ -203,7 +208,7 @@ export default {
 }
 
 .user {
-  border: 4px solid #84b893;
+  border: 4px solid #48603d;
   border-radius: 50%;
 }
 
@@ -234,7 +239,7 @@ textarea {
   margin-top: 5px;
   padding: 5px;
   border-radius: 5px;
-  border: 1px solid #84b893;
+  border: 1px solid #48603d;
   font-size: 16px;
 }
 
@@ -244,7 +249,7 @@ input {
   color: black;
   font-size: 16px;
   cursor: pointer;
-  border: 1px solid #84b893;
+  border: 1px solid #48603d;
 }
 
 
