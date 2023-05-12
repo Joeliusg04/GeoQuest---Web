@@ -32,14 +32,15 @@ export default {
     if (this.error !== null) {
       this.msg = this.error
 
+      setTimeout(function () {
+        localStorage.removeItem('error')
+      }, 5000);
     } else {
       this.msg = "There has been an undefined error"
     }
 
   },
-  beforeUnmount() {
-    localStorage.removeItem('error')
-  },
+
   computed: {
     error(){
       return JSON.parse(localStorage.getItem('error'))
