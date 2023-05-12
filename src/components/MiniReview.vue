@@ -66,12 +66,13 @@ img {
 td {
   display: flex;
   justify-content: center;
-  background-color: #8c996A;
+  background-color: #4e6a55;
+  color: white;
 }
 
 .name {
-  background-color: #48603D;
-  color: white;
+  background-color: #b7dcc0;
+  color: black;
 }
 
 .edit {

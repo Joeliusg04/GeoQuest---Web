@@ -135,7 +135,7 @@ export default {
 
 <style scoped>
 .popup-button {
-  background-color: #48603d;
+  background-color: #4e6a55;
   color: white;
   padding: 10px 20px;
   text-align: center;
@@ -149,7 +149,7 @@ export default {
 }
 
 .popup-button:hover {
-  background-color: #8c996a;
+  background-color: #84d893;
 }
 
 .favorite-icon {
@@ -208,7 +208,7 @@ ul {
   list-style-type: none;
   font-weight: bold;
   padding: 20px;
-  background-color: #8c996a;
+  background-color: #4e6a55;
 }
 
 li {
@@ -252,7 +252,7 @@ table {
 
 .bg-green {
   padding: 10px;
-  background-color: #a0deb1;
+  background-color: #b7dcc0;
 }
 </style>
 

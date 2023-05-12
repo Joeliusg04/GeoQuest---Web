@@ -22,7 +22,7 @@ export default {
 
 <style scoped>
 nav {
-  background-color: #8c996a;
+  background-color: #4e6a55;
   display: flex;
   justify-content: space-between;
   position: sticky;
@@ -38,7 +38,7 @@ nav {
 }
 
 .navegacio, a {
-  color: black;
+  color: white;
   text-decoration: none;
   padding: 10px;
   display: flex;
@@ -49,7 +49,7 @@ h1 {
   float: left;
   display: flex;
   align-items: center;
-  color: black;
+  color: white;
   margin: 0;
   font-size: 50px;
 }

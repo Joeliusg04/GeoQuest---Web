@@ -146,7 +146,7 @@ export default {
 .treasure2 {
   display: flex;
   flex-direction: column;
-  background: #a4975b;
+  background: #b7dcc0;
   width: 100%;
   height: 100%;
   text-align: center;
@@ -229,7 +229,7 @@ h3 {
 }
 
 .popup-button {
-  background-color: #48603d;
+  background-color: #4e6a55;
   color: white;
   text-align: center;
   text-decoration: none;
@@ -254,6 +254,6 @@ h3 {
 }
 
 .popup-button:hover {
-  background-color: #8c996a;
+  background-color: #84d893;
 }</style>
   

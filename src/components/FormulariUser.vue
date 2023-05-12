@@ -208,7 +208,7 @@ export default {
 }
 
 .user {
-  border: 4px solid #48603d;
+  border: 4px solid #4e6a55;
   border-radius: 50%;
 }
 
@@ -224,6 +224,7 @@ export default {
 }
 
 .button img {
+  cursor: pointer;
   width: 50px;
   height: 50px;
 }
@@ -239,7 +240,7 @@ textarea {
   margin-top: 5px;
   padding: 5px;
   border-radius: 5px;
-  border: 1px solid #48603d;
+  border: 1px solid #4e6a55;
   font-size: 16px;
 }
 
@@ -249,7 +250,7 @@ input {
   color: black;
   font-size: 16px;
   cursor: pointer;
-  border: 1px solid #48603d;
+  border: 1px solid #4e6a55;
 }
 
 
@@ -273,7 +274,7 @@ input {
 
 .create {
   color: white;
-  background-color: #48603d;
+  background-color: #4e6a55;
 }
 
 .create:hover {
@@ -296,7 +297,7 @@ input {
 }
 
 button{
-  background-color: #48603d;
+  background-color: #4e6a55;
 }
 </style>
   

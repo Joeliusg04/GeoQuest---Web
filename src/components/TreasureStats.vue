@@ -71,7 +71,7 @@ export default {
 
 .title {
   align-items: center;
-  background-color: #48603D;
+  background-color: #4e6a55;
   padding: 10px;
 }
 
@@ -92,7 +92,7 @@ export default {
 .content {
   display: flex;
   flex-wrap: wrap;
-  background-color: #8c996A;
+  background-color: #b7dcc0;
   padding: 20px;
 }
 

@@ -115,7 +115,7 @@ export default {
 
 .form-submit {
   margin-top: 1rem;
-  background-color: #4CAF50;
+  background-color: #3e8e41;
   color: white;
   border: none;
   border-radius: 5px;
@@ -124,7 +124,7 @@ export default {
 }
 
 .form-submit:hover {
-  background-color: #3e8e41;
+  background-color: #4e6a55;
 }
 
 .error {

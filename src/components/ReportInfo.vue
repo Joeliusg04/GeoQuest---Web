@@ -58,7 +58,7 @@ export default {
 }
 .report {
   display: flex;
-  background-color: #8c996a;
+  background-color: #4e6a55;
   border: 4px solid black;
   width: 45%;
   margin: auto;

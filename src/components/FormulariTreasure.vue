@@ -37,7 +37,7 @@
         </div>
         <div class="select">
           <label for="status">Status</label>
-          <select id="status" name="status" form="form" required v-model="treasure.status">
+          <select id="status" class="sss" name="status" form="form" required v-model="treasure.status">
             <option value="Excellent">Excellent</option>
             <option value="Good">Good</option>
             <option value="Poor">Poor</option>
@@ -45,7 +45,7 @@
         </div>
         <div class="select">
           <label for="difficulty">Difficulty</label>
-          <select id="difficulty" name="difficulty" form="form" required v-model="treasure.difficulty">
+          <select id="difficulty" class="sss" name="difficulty" form="form" required v-model="treasure.difficulty">
             <option value="Noob">Noob</option>
             <option value="Normal">Normal</option>
             <option value="Hard">Hard</option>
@@ -285,10 +285,12 @@ export default {
   margin-left: 10rem;
   ;
 }
-
+.sss:hover{
+  background-color: #84d893;
+}
 .form-submit {
   margin-top: 1rem;
-  background-color: #68795b;
+  background-color: #4e6a55;
   color: white;
   border: none;
   border-radius: 5px;
@@ -297,7 +299,7 @@ export default {
 }
 
 .form-submit:hover {
-  background-color: #48603d;
+  background-color: #84d893;
 }
 
 div {
@@ -318,7 +320,7 @@ textarea {
   margin-top: 5px;
   padding: 5px;
   border-radius: 5px;
-  border: 1px solid #68795b;
+  border: 1px solid #4e6a55;
   font-size: 16px;
 }
 
@@ -327,12 +329,13 @@ textarea {
   height: 30px;
   margin-top: 20px;
   resize: none;
-  background-color: #68795b;
+  background-color: #4e6a55;
   border: none;
 }
 
-textarea :hover {
+textarea:hover {
   size: 200px;
+  background-color: #84d893;
 }
 
 .select {
@@ -343,15 +346,15 @@ input,
 select {
   padding: 10px;
   border-radius: 5px;
-  background-color: #68795b;
-  color: black;
+  background-color: #4e6a55;
+  color: white;
   font-size: 16px;
   border: none;
   cursor: pointer;
 }
 
 input:hover {
-  background-color: #48603d;
+  background-color: #84d893;
 }
 
 .treasure-image img {
@@ -363,9 +366,11 @@ input:hover {
   display: flex;
 
 }
-
+textarea{
+  color: white;
+}
 .image-treasure img {
-  border: 1px solid #68795b;
+  border: 1px solid #4e6a55;
   border-radius: 20px;
   width: 250px;
   height: 250px;

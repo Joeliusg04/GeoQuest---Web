@@ -72,7 +72,7 @@ export default {
 .treasure {
   display: flex;
   align-items: center;
-  background: #a4975b;
+  background: #b7dcc0;
   border-radius: 20px;
   margin-left: 2rem;
   margin-right: 2rem;
@@ -109,7 +109,7 @@ export default {
 }
 
 .rating {
-  color: #ffffff;
+  color: black;
   height: 90%;
   width: 90%;
 }
@@ -149,7 +149,7 @@ export default {
 button,
 a {
   display: inline-block;
-  background-color: #5a4a37;
+  background-color: #4e6a55;
   color: white;
   font-size: 1rem;
   font-weight: bold;
@@ -164,7 +164,7 @@ a {
 
 button:hover,
 a:hover {
-  background-color: black;
+  background-color: #2b3a2f;
 }
 
 </style>

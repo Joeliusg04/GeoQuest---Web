@@ -191,8 +191,8 @@ input,
 select {
   padding: 10px;
   border-radius: 5px;
-  background-color: #8c997a;
-  color: black;
+  background-color: #4e6a55;
+  color: white;
   font-size: 16px;
   border: none;
   cursor: pointer;
@@ -200,12 +200,15 @@ select {
 }
 
 input:hover {
-  background-color: #48603d;
+  background-color: #84d893;
 }
 
 #submit{
-  background-color: #48603d;
+  background-color: #4e6a55;
   color: white
+}
+#submit:hover{
+  background-color: #84d893;
 }
 #treasure-info {
   display: flex;
