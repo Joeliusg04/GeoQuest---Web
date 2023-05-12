@@ -9,7 +9,7 @@
         </div>
       </div>
       <div class="data">
-        <div class="rate">
+        <!-- <div class="rate">
           <input type="radio" id="star5" name="rate" value="5"/>
           <label for="star5" title="5">5 stars</label>
           <input type="radio" id="star4" name="rate" value="4"/>
@@ -20,7 +20,8 @@
           <label for="star2" title="2">2 stars</label>
           <input type="radio" id="star1" name="rate" value="1"/>
           <label for="star1" title="1">1 star</label>
-        </div>
+        </div> -->
+        <star-rating v-model:rating="review.rating"/>
         <div class="opinion">
           <label class="title" for="opinion">Opinion </label>
           <textarea id="opinion" name="opinion" required v-model="review.opinion"></textarea>
@@ -44,6 +45,7 @@
 import ReviewService from "@/services/review.service";
 import UserService from "@/services/user.service";
 import TreasureService from "@/services/treasure.service";
+import StarRating from 'vue-star-rating';
 
 export default {
   name: "FormulariReview",
@@ -65,6 +67,9 @@ export default {
   props: {
     idReview: String,
     idTreasure: String
+  },
+  components: {
+    StarRating
   },
   computed: {
     newReview() {
@@ -114,7 +119,6 @@ export default {
 
     updateReview() {
 
-      this.getRating()
 
       if (this.FILE === null) {
         ReviewService.getPicture(this.review.idTreasure, this.review.idReview).then((response) => {
@@ -164,14 +168,6 @@ export default {
         this.$router.push("/error")
       })
 
-    },
-    getRating() {
-      let radioButtons = document.getElementsByName('rate');
-      for (let radio of radioButtons) {
-        if (radio.checked) {
-          this.review.rating = radio.value
-        }
-      }
     }
   },
   mounted() {
