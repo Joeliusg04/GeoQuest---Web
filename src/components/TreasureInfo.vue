@@ -1,26 +1,26 @@
 <template>
   <div class="treasure2">
+    <h3>{{ treasure.name }}</h3>
     <div class="image-rating">
-      <h3>{{ treasure.name }}</h3>
       <img class="rating" id="rating" alt="rating-icon">
-
       <b>Difficulty: {{ treasure.difficulty }}</b>
       <b>Location: {{ treasure.location }}</b>
       <img class="fav" v-show="fav" src="../assets/icons/fav.png" @click="addOrRemoveFav">
       <img class="fav" v-show="!fav" src="../assets/icons/nofav.png" @click="addOrRemoveFav">
     </div>
-    <hr>
-    <p>{{ treasure.description }}</p>
+    <p class="desc">{{ treasure.description }}</p>
     <div class="flex">
-      <img @click="displayClue" src="../assets/icons/vista.png" class="clue">
+      <img v-if="!showCluePopup" @click="displayClue" src="../assets/icons/vista.png" class="clue">
+      <img v-if="showCluePopup" @click="displayClue" src="../assets/icons/visibilidad.png" class="clue">
       <div v-if="showCluePopup" class="popup">
         <button class="close-button" @click="displayClue">&times;</button>
         <p class="clue-text">{{ treasure.clue }}</p>
       </div>
-      <button class="popup-button" @click="displayTreasureStats">Show TreasureStats</button>
+      <button v-if="!showStatsPopup" class="popup-button" @click="displayTreasureStats">Show treasure stats</button>
+      <button v-if="showStatsPopup" class="popup-button" @click="displayTreasureStats">Hide treasure stats</button>
       <div v-if="showStatsPopup" class="popup">
         <button class="close-button" @click="displayTreasureStats">&times;</button>
-        <TreasureStats/>
+        <TreasureStats />
       </div>
     </div>
   </div>
@@ -36,7 +36,7 @@ import UserService from "@/services/user.service";
 
 export default {
   name: 'TreasureInfo',
-  components: {TreasureStats},
+  components: { TreasureStats },
   props: {
     id: String,
   },
@@ -132,38 +132,60 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.popup-button {
-  background-color: #a0deb1;
-  color: black;
-  padding: 10px 20px;
-  text-align: center;
-  text-decoration: none;
-  font-size: 16px;
-  margin: 10px;
-  cursor: pointer;
-  border-radius: 4px;
-  border: 1px solid #84b893;
-  width: 100%;
+*{
+  color: blacK;
 }
-
-#hintDiv {
+.treasure2 {
   display: flex;
+  flex-direction: column;
+  background: #a0deb1;
+  width: 70%;
+  height: 100%;
+  margin: 1rem auto auto;
+  text-align: center;
+
 }
 
-.clue {
+.image-rating {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin: 0rem 1rem 1rem 1rem;
+}
+
+h3 {
+  width: 100%;
+  font-size: 50px;
+  color: black;
+}
+
+#rating {
   height: 50px;
-  width: 50px;
-  cursor: pointer;
-}
-
-.popup-button:hover {
-  background-color: #84b893;
+  width: 250px;
 }
 
 .fav {
   height: 20px;
   width: 20px;
 
+}
+
+.desc {
+  text-align: center;
+  margin: 2rem;
+}
+
+.flex {
+  display: flex;
+  margin: 0rem 1rem 1rem 1rem;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.clue {
+  height: 50px;
+  width: 50px;
+  cursor: pointer;
 }
 
 .popup {
@@ -179,6 +201,27 @@ export default {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2)
 }
 
+.clue-text {
+  background-color: #a0deb1;
+  text-align: center;
+  padding: 10px;
+  margin: 0;
+}
+
+.popup-button {
+  background-color: #a0deb1;
+  color: black;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 4px;
+  border: 1px solid black;
+  width: 15%;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
 .close-button {
   position: absolute;
   top: 10px;
@@ -190,44 +233,7 @@ export default {
   cursor: pointer;
 }
 
-.treasure2 h3 {
-  font-size: 50px;
-}
-
-.treasure2 {
-  display: flex;
-  flex-direction: column;
-  background: #a0deb1;
-  border: 4px solid #84b893;
-  width: 70%;
-  height: 100%;
-  margin: 1rem auto auto;
-  text-align: center;
-  border-radius: 25px;
-}
-
-.rating {
-  height: 50px;
-  width: 40%;
-}
-
-.image-rating {
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-}
-
-.flex {
-  display: flex;
-  margin-left: 1rem;
-}
-
-.clue-text {
-  background-color: #a0deb1;
-  text-align: center;
-  padding: 10px;
-  margin: 0;
-}
-
-</style>
+.popup-button:hover {
+  background-color: #84b893;
+}</style>
   
