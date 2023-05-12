@@ -37,7 +37,6 @@ export default {
 </script>
 
 <style scoped>
-
 h3 {
   color: white;
 }
@@ -52,7 +51,9 @@ footer {
   display: flex;
   justify-content: space-around
 }
-
+.container div{
+  width: 40%;
+}
 ul {
   list-style: none;
   margin: 0;
@@ -73,5 +74,6 @@ a, img {
   height: 50px;
   width: 50px;
   padding: 5px;
+  cursor: pointer;
 }
 </style>
