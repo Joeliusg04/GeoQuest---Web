@@ -1,6 +1,21 @@
 # GeoQuest - Project Web Page
 This is the README file for the GeoQuest web page, which is part of a larger project. The web page has been developed using the Vue.js framework and provides an interactive platform for exploring and discovering hidden treasures in different locations. GeoQuest supports two types of users: Admin and Player, each with specific functionalities.
 
+
+## Authors
+
+[Alejandro Arcas Leon](https://gitlab.com/Xalexx)
+
+[Martí Gustamante Clavell](https://gitlab.com/marti.gustamante.7e6)
+
+[Ivan Martinez Cañero](https://gitlab.com/ivan.martinez.7e6)
+
+[Asier Barranco Barbudo](https://gitlab.com/asier.barranco.7e6)
+
+[Joel Garcia Galiano](https://gitlab.com/joel.garcia.7e6)
+
+[Raul Argemi](https://gitlab.com/raul.argemi.7e6)
+
 ## Features
 ### Admin
  - Treasure Creation: Administrators can create new treasures and add detailed information such as name, description, location, and  clues.
