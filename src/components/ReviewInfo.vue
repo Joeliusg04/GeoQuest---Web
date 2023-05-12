@@ -4,6 +4,7 @@
       <div class="review-content">
         <div class="username-rating">
           <div class="username">
+            <img :id="getIdFoto" class="userfoto">
             <h4>{{ user.nickName }}</h4>
           </div>
           <div class="rating">
@@ -42,7 +43,7 @@ export default {
 
         this.user = response.data
         document.getElementById(`${this.review.idUser}$${this.review.idReview}`).setAttribute('src', ReviewService.getPicturePath(this.review.idTreasure, this.review.idReview))
-
+        document.getElementById(`${this.review.idReview}$${this.review.idUser}`).setAttribute('src', UserService.getPicturePath(this.review.idUser))
         if (this.user.nickName === currentUser) {
           this.link = `/treasure/${this.review.idTreasure}/review/${this.review.idReview}`
         }
@@ -58,6 +59,9 @@ export default {
   computed: {
     getId() {
       return this.review.idUser + "$" + this.review.idReview
+    },
+    getIdFoto(){
+      return this.review.idReview + "$" + this.review.idUser
     }
   }
 }
@@ -86,7 +90,12 @@ export default {
   width: 250px;
   height: 250px;
 }
-
+.userfoto{
+  height: 50px;
+  width: 50px;
+  border-radius: 2rem;
+  margin-right: 1rem;
+}
 .username-rating {
   display: flex;
   justify-content: space-around;
@@ -96,6 +105,8 @@ export default {
 }
 
 .username {
+  display: flex;
+  align-items: center;
   margin-right: 20px;
 }
 
