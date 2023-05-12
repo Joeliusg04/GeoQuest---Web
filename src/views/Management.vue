@@ -2,7 +2,7 @@
   <nav-bar/>
   <div class="flex"><router-link class="link" v-show="this.$route.params.idTreasure !== ''" to="/management"><img class="add" src="../assets/icons/add.png"><p>Add new treasure</p></router-link></div>
   <FormulariTreasure v-bind:id="this.$route.params.idTreasure"/>
-  <div v-if="this.$route.params.idTreasure!==''">
+  <div class="report" v-if="this.$route.params.idTreasure!==''">
     <ReportInfo v-for="(report, index) of reports" v-bind:key="index" v-bind:report="report"/>
     <h3 v-if="reports===''">This treasure has not been reported</h3>
   </div>
@@ -55,6 +55,9 @@ export default {
 justify-content: center;
 align-items: center;
 margin-top: 0.5rem;
+}
+.report{
+  margin-bottom: 1rem;
 }
 
 .add{

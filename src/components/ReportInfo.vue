@@ -10,10 +10,8 @@
         <button class="delete" @click="deleteReport"><img class="delete-image" src="../assets/icons/borrar.png"></button>
       </div>
       <div class="report-text">
-        <p v-if="report.reportInfo.length > 300">{{ report.reportInfo }}</p>
-        <p v-else class="report-text-normal">{{ report.reportInfo }}</p>
+        <p>{{ report.reportInfo }}</p>
       </div>
-      <!--      <p>{{ review.path }}</p>-->
     </div>
   </div>
 </template>
@@ -55,15 +53,20 @@ export default {
 </script>
 
 <style scoped>
+*{
+  color: black;
+}
 .report {
   display: flex;
-  background: #a0deb1;
-  border: 4px solid #84b893;
+  background-color: #8c996a;
+  border: 4px solid black;
   width: 45%;
   margin: auto;
   border-radius: 25px;
 }
-
+h4{
+  font-weight: bold;
+}
 
 .report2 {
   width: 100%;
@@ -93,15 +96,10 @@ export default {
 .delete-image {
   height: 20px;
   width: 20px;
+  cursor: pointer;
 }
-
-
-.username-rating h4 {
-  margin-right: 10px;
-  font-weight: bold;
-  width: 200px;
-  text-align: left;
-
+.delete-image:hover{
+  background-color: lightgray;
 }
 
 button {
@@ -110,12 +108,6 @@ button {
 
 .report-text {
   max-height: 200px;
-  margin-left: 6rem;
-}
-
-.report-text-normal {
-  margin: 0;
-  margin-left: 10rem;
 }
 
 </style>

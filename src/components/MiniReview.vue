@@ -1,7 +1,7 @@
 <template>
   <tr>
     <td class="name">{{ treasure.name }}</td>
-    <td><star-rating :star-size="20" :rating="treasure.score" :read-only="true" :increment="0.01"/><img class="edit" @click="editReview" src="../assets/icons/edit.png"></td>
+    <td><star-rating :star-size="20" :rating="review.rating" :read-only="true" :increment="0.01"/><img class="edit" @click="editReview" src="../assets/icons/edit.png"></td>
   </tr>
 </template>
 
@@ -25,7 +25,7 @@ export default {
     StarRating
   },
   mounted() {
-
+    console.log(this.review)
     UserService.getById(this.review.idUser).then((response) => {
 
       this.user = response.data

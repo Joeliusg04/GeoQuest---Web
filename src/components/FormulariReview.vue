@@ -223,7 +223,10 @@ template {
   margin: 0;
   padding: 0;
 }
-
+#preview{
+  height: 200px;
+  width: 200px;
+}
 .flex-column {
   display: flex;
   margin: 4rem 5rem 10rem 5rem;
