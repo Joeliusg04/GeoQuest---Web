@@ -84,9 +84,14 @@ export default {
                 this.$router.push("/login")
               }
           ).catch(
-              () => {
-                localStorage.setItem('error', JSON.stringify("Error when logging in"))
-                this.$router.push("/error")
+              (error) => {
+
+                if (error.response.data === 409){
+                  this.error = true
+                  this.errorMsg = "This username already exists"
+                }
+
+
               }
           )
         }
