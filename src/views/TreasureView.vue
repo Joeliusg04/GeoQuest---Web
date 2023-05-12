@@ -7,7 +7,7 @@
           <img id="imagen">
           <map-component class="map-component" v-bind:id="this.$route.params.idTreasure" v-bind:size="size" />
         </div>
-        <treasure-info v-bind:id="this.$route.params.idTreasure" />
+        <treasure-info class="treasure" v-bind:id="this.$route.params.idTreasure" />
       </div>
       <h1 v-if="hasReviews">REVIEWS</h1>
       <div v-if="hasReviews" class="flex">
@@ -61,17 +61,19 @@ export default {
 #container {
   display: flex;
   flex-direction: row;
+  margin: 0;
+  align-items: center;
+  justify-content: center;
 }
-
+.treasure{
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+}
 #container img {
-  width: 20%;
+  width: 40%;
   height: 300px;
-}
-
-.pagew {
-  margin-left: 1%;
-  margin-right: 1%;
-  margin-bottom: 1%;
+  border-right: 1px solid black;
+  border-top: 1px solid black;
 }
 
 .flex {
@@ -81,7 +83,6 @@ export default {
   flex-direction: row;
   flex-wrap: wrap;
 }
-
 .review {
   margin-top: 1rem;
   margin-bottom: 2rem;
@@ -89,5 +90,6 @@ export default {
 
 .map-component {
   z-index: 0;
+  border-top: 1px solid black;
 }
 </style>

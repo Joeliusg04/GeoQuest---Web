@@ -1,6 +1,5 @@
 <template>
   <div class="review">
-    <div class="review2">
       <img :id="getId" alt="review-picture" class="review-image">
       <div class="review-content">
         <div class="username-rating">
@@ -15,10 +14,9 @@
           <p v-if="review.opinion.length > 300" class="review-text-scroll">{{ review.opinion }}</p>
           <p v-else class="review-text-normal">{{ review.opinion }}</p>
         </div>
+        <router-link v-show="link !== ''" v-bind:to="link">Editar</router-link>
       </div>
-      <router-link v-show="link !== ''" v-bind:to="link">Editar</router-link>
     </div>
-  </div>
 </template>
 <script>
 import UserService from "@/services/user.service";
@@ -73,33 +71,25 @@ export default {
 }
 
 .review {
-  display: flex;
-  background: #a0deb1;
-  border: 4px solid #84b893;
-  width: 45%;
-  margin: auto;
-  border-radius: 25px;
-}
+  display: flex;  
+  align-items: center;  
+  width: 48%;
+  margin: 1rem;
+  bordeR: 1px solid black;
+  background-color: #e6e6e6;
 
+}
+.review-content{
+  width: 100%;
+}
 .review-image {
-  width: 150px;
-  height: 150px;
-  padding: 20px;
-}
-
-.review2 {
-  display: flex;
-  align-items: center;
-}
-
-.review-content {
-  flex-grow: 1;
-  margin-left: 6rem;
+  width: 250px;
+  height: 250px;
 }
 
 .username-rating {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
   margin-bottom: 10px;
   margin-right: 5rem;
@@ -124,7 +114,7 @@ export default {
 }
 
 .filled {
-  color: #ffee00;
+  color: #f1e100;
 }
 
 .review-text {

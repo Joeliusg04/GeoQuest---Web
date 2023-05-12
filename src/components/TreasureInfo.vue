@@ -2,7 +2,10 @@
   <div class="treasure2">
     <h3>{{ treasure.name }}</h3>
     <div class="image-rating">
+      <div class="score">
       <img class="rating" id="rating" alt="rating-icon">
+      <P>{{ treasure.score }}</P>
+    </div>
       <b>Difficulty: {{ treasure.difficulty }}</b>
       <b>Location: {{ treasure.location }}</b>
       <img class="fav" v-show="fav" src="../assets/icons/fav.png" @click="addOrRemoveFav">
@@ -138,11 +141,11 @@ export default {
 .treasure2 {
   display: flex;
   flex-direction: column;
-  background: #a0deb1;
-  width: 70%;
+  background: #a4975b;
+  width: 100%;
   height: 100%;
-  margin: 1rem auto auto;
   text-align: center;
+  margin: 0rem auto 0rem auto;
 
 }
 
@@ -152,7 +155,10 @@ export default {
   align-items: center;
   margin: 0rem 1rem 1rem 1rem;
 }
-
+.score{
+  display: flex;
+  align-items: center;
+}
 h3 {
   width: 100%;
   font-size: 50px;
@@ -162,6 +168,7 @@ h3 {
 #rating {
   height: 50px;
   width: 250px;
+  margin-right: 1rem;
 }
 
 .fav {
@@ -209,8 +216,8 @@ h3 {
 }
 
 .popup-button {
-  background-color: #a0deb1;
-  color: black;
+  background-color: #48603d;
+  color: white;
   text-align: center;
   text-decoration: none;
   font-size: 16px;
@@ -234,6 +241,6 @@ h3 {
 }
 
 .popup-button:hover {
-  background-color: #84b893;
+  background-color: #8c996a;
 }</style>
   
