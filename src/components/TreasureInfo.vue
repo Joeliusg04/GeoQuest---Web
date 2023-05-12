@@ -110,7 +110,6 @@ export default {
   created() {
     TreasureService.getById(this.id).then((response) => {
       this.treasure = response.data
-      document.getElementById("rating").setAttribute("src", require(`../assets/rating/rating_${this.treasure.score}.png`))
 
       UserService.getCurrentUsername().then((response) => {
         UserService.getByNickname(response.data).then((response) => {
