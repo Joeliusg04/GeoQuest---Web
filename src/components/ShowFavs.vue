@@ -20,10 +20,12 @@ export default {
   name: "ShowFavs",
   components: {},
   data() {
-    return {}
+    return {
+
+    }
   },
   props: {
-    favorite: Object
+    favorite: Object,
   },
   methods: {
     displayFavs() {
@@ -48,12 +50,6 @@ export default {
         this.$router.push("/login")
       })
     },
-    computed: {
-      favoriteLink() {
-        return `${window.location.origin}/treasure/${this.favorite.idTreasure}`
-      }
-    }
-
   }
 }
 </script>

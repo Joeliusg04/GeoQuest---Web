@@ -40,6 +40,7 @@ import FavService from "@/services/fav.service";
 import MiniReview from "@/components/MiniReview.vue"
 import reviewService from "@/services/review.service";
 import ShowFavs from "@/components/ShowFavs.vue";
+import TreasureService from "@/services/treasure.service";
 
 
 export default {
@@ -91,17 +92,25 @@ export default {
   },
 
 
-  mounted() {
+  created() {
     UserService.getCurrentUsername().then((response) => {
       UserService.getByNickname(response.data).then((response) => {
         const user = response.data;
 
         FavService.getAllFavs(user.idUser)
             .then((response) => {
-              this.favs = response.data.map((favorite) => ({
-                ...favorite,
-                favoriteLink: `${window.location.origin}/treasure/${favorite.idTreasure}`
-              }));
+              const favList = response.data
+
+              for (let fav of favList) {
+                TreasureService.getById(fav.idTreasure).then((response) => {
+                  const treasure = response.data
+                  treasure["favoriteLink"]=`${window.location.origin}/treasure/${treasure.idTreasure}`
+                  this.favs.push(treasure)
+                }).catch(()=>{
+
+                })
+              }
+
             })
             .catch(() => {
             });
