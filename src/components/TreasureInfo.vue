@@ -9,6 +9,7 @@
       <b>Location: {{ treasure.location }}</b>
       <img class="fav" v-show="fav" src="../assets/icons/fav.png" @click="addOrRemoveFav">
       <img class="fav" v-show="!fav" src="../assets/icons/nofav.png" @click="addOrRemoveFav">
+      <img @click="redirectAdmin" v-if="Admin" class="config" src="../assets/icons/config.png">
     </div>
     <p class="desc">{{ treasure.description }}</p>
     <div class="flex">
@@ -48,7 +49,8 @@ export default {
       treasure: "",
       showCluePopup: false,
       showStatsPopup: false,
-      fav: false
+      fav: false,
+      Admin: true
     };
   },
   methods: {
@@ -105,6 +107,9 @@ export default {
 
         this.fav = false
       }
+    }, 
+    redirectAdmin() {
+      window.location.href = '/management/' + this.treasure.idTreasure;
     }
   },
   created() {
@@ -180,7 +185,15 @@ h3 {
   text-align: center;
   margin: 2rem;
 }
-
+.config{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 20px;
+  width: 20px;
+  cursor: pointer;
+  margin-left: 2rem;
+}
 .flex {
   display: flex;
   margin: 0rem 1rem 1rem 1rem;

@@ -1,13 +1,14 @@
 <template>
   <tr>
     <td class="name">{{ treasure.name }}</td>
-    <td><img :id="review.idReview"><img class="edit" @click="editReview" src="../assets/icons/edit.png"></td>
+    <td><star-rating :star-size="20" :rating="treasure.score" :read-only="true" :increment="0.01"/><img class="edit" @click="editReview" src="../assets/icons/edit.png"></td>
   </tr>
 </template>
 
 <script>
 import UserService from "@/services/user.service";
 import TreasureService from "@/services/treasure.service";
+import StarRating from "vue-star-rating"
 
 export default {
   name: 'MiniReview',
@@ -19,6 +20,9 @@ export default {
   },
   props: {
     review: Object,
+  },
+  components: {
+    StarRating
   },
   mounted() {
 
@@ -74,6 +78,6 @@ td {
   height: 25px;
   width: 25px;
   cursor: pointer;
-
+  margin-left: 1rem;
 }
 </style>
