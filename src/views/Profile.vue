@@ -6,7 +6,7 @@
     <button class="popup-button" @click="displayFavs">
       <img src="../assets/icons/favorito.png" class="favorite-icon">
     </button>
-    <button class="popup-button" @click="displayReviews"><img src="../assets/icons/like.png"
+    <button class="popup-button" @click="displayReviews"><img src="../assets/icons/customer-review.png"
                                                               class="reviews-icon"></button>
     <div v-if="showUserStats" class="popup">
       <button class="close-button" @click="displayUserStats">&times;</button>
@@ -126,8 +126,8 @@ export default {
 
 <style scoped>
 .popup-button {
-  background-color: #a0deb1;
-  color: black;
+  background-color: #48603d;
+  color: white;
   padding: 10px 20px;
   text-align: center;
   text-decoration: none;
@@ -140,7 +140,7 @@ export default {
 }
 
 .popup-button:hover {
-  background-color: #84b893;
+  background-color: #8c996a;
 }
 
 .favorite-icon {
@@ -199,7 +199,7 @@ ul {
   list-style-type: none;
   font-weight: bold;
   padding: 20px;
-  background-color: #84b893;
+  background-color: #8c996a;
 }
 
 li {

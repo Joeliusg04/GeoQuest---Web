@@ -267,7 +267,8 @@ input {
 }
 
 .create {
-  background-color: #a0deb1;
+  color: white;
+  background-color: #48603d;
 }
 
 .create:hover {
@@ -287,6 +288,10 @@ input {
 
 .delete:hover {
   background-color: #A30000;
+}
+
+button{
+  background-color: #48603d;
 }
 </style>
   
