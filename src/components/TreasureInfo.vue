@@ -87,7 +87,7 @@ export default {
           UserService.getByNickname(response.data).then((response) => {
             const user = response.data
             FavService.deleteFav(user.idUser, this.treasure.idTreasure).then(() => {
-              this.fav = true
+              this.fav = false
             }).catch(() => {
               localStorage.setItem('error', JSON.stringify("Error when removing treasure from favorites"))
               this.$router.push("/error")
