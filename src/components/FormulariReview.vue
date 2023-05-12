@@ -178,8 +178,7 @@ export default {
     if (this.$route.params.idReview !== '') {
       ReviewService.getOneByTreasure(this.$route.params.idTreasure, this.$route.params.idReview).then((response) => {
         this.review = response.data
-        console.log(response.data)
-
+        this.getImage(response.data)
 
         UserService.getCurrentUsername().then((response) => {
           UserService.getByNickname(response.data).then((response) => {
