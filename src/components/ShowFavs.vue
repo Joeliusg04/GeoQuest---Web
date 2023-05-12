@@ -62,7 +62,7 @@ export default {
 }
 
 .bg-green {
-  background-color: rgb(153, 226, 153);
+  background-color: #8c996A;
 }
 
 .flex {
