@@ -3,8 +3,7 @@
     <h3>{{ treasure.name }}</h3>
     <div class="image-rating">
       <div class="score">
-      <img class="rating" id="rating" alt="rating-icon">
-      <P>{{ treasure.score }}</P>
+        <star-rating :rating="treasure.score" :read-only="true" :increment="0.01"/>
     </div>
       <b>Difficulty: {{ treasure.difficulty }}</b>
       <b>Location: {{ treasure.location }}</b>
@@ -36,10 +35,11 @@ import TreasureService from "@/services/treasure.service";
 import TreasureStats from "@/components/TreasureStats.vue";
 import FavService from "@/services/fav.service";
 import UserService from "@/services/user.service";
+import StarRating from "vue-star-rating";
 
 export default {
   name: 'TreasureInfo',
-  components: { TreasureStats },
+  components: { TreasureStats, StarRating },
   props: {
     id: String,
   },
