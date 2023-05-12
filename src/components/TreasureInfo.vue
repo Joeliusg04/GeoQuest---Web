@@ -119,6 +119,7 @@ export default {
       UserService.getCurrentUsername().then((response) => {
         UserService.getByNickname(response.data).then((response) => {
           const user = response.data
+          this.Admin = response.data.role === "Admin"
           FavService.getFav(user.idUser, this.treasure.idTreasure).then((response) => {
             this.fav = response.data
           }).catch(() => {
