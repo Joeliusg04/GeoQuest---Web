@@ -46,11 +46,13 @@ Requirements: Make sure you have the latest stable version of Node.js and NPM in
     API_URL=<API_server_URL>
     ```
 
-Compiling and Running: To compile and run the project on a local server, use the following command:
+Compiling and Running: To compile and run the project on a local server, use the following command: 
 
-    ```bash
-    npm run serve
-    ```
+```bash
+npm run serve
+```
+
+
 
 The project will be compiled and run on the local server. Open your web browser and access the following URL: http://localhost:8080 to view the GeoQuest web page.
 
